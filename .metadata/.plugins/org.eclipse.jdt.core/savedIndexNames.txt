@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+/home/snail/桌面/eggsnake/.metadata/.plugins/org.eclipse.jdt.core
+4024772105.index
+2455072540.index
+262539327.index
+111463002.index
