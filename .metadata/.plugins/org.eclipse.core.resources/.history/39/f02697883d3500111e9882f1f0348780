@@ -1,0 +1,10 @@
+package com.maple.eggsnake;
+
+import com.badlogic.gdx.backends.jogl.JoglApplication;
+
+public class Game {
+	public static void main(String args[]){
+		new JoglApplication(new Game(),"EggSnake",480,320,true);
+	}
+
+}

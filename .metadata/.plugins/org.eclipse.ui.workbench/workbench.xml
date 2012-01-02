@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="19" version="2.0">
+<workbench progressCount="20" version="2.0">
 <workbenchAdvisor/>
-<window height="766" maximized="true" width="1030" x="197" y="2">
+<window height="766" maximized="true" width="1038" x="217" y="0">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -41,29 +41,39 @@
 </folder>
 </info>
 </editorArea>
-<editor id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" partName="eggsnake Manifest" path="/home/snail/桌面/eggsnake/eggsnake/AndroidManifest.xml" title="eggsnake Manifest" tooltip="eggsnake/AndroidManifest.xml" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake/AndroidManifest.xml"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AndroidGame.java" partName="AndroidGame.java" path="/home/snail/桌面/eggsnake/eggsnake/src/com/maple/eggsnake/AndroidGame.java" title="AndroidGame.java" tooltip="eggsnake/src/com/maple/eggsnake/AndroidGame.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake/src/com/maple/eggsnake/AndroidGame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="11" selectionOffset="177" selectionTopPixel="0"/>
-</editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" partName="Game.java" path="/home/snail/桌面/eggsnake/eggsnake/src/com/maple/eggsnake/Game.java" title="Game.java" tooltip="eggsnake/src/com/maple/eggsnake/Game.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake/src/com/maple/eggsnake/Game.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="393" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="34" selectionOffset="69" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameListener.java" partName="GameListener.java" path="/home/snail/桌面/eggsnake/eggsnake/src/com/maple/eggsnake/GameListener.java" title="GameListener.java" tooltip="eggsnake/src/com/maple/eggsnake/GameListener.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake/src/com/maple/eggsnake/GameListener.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="623" selectionTopPixel="437"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" partName="Game.java" path="/home/snail/桌面/eggsnake/eggsnake_android/src/com/maple/eggsnake/android/Game.java" title="Game.java" tooltip="eggsnake_android/src/com/maple/eggsnake/android/Game.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake_android/src/com/maple/eggsnake/android/Game.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="290" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" partName="R.java" path="/home/snail/桌面/eggsnake/eggsnake_android/gen/com/maple/eggsnake/R.java" title="R.java" tooltip="eggsnake_android/gen/com/maple/eggsnake/R.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/eggsnake_android/gen/com/maple/eggsnake/R.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="276" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
+<view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
+<viewState CommonNavigator.LINKING_ENABLED="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+</view>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView" partName="LogCat">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.views.ProgressView" partName="Progress">
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Errors (1 item)"/>
 <category IMemento.internal.id="Errors"/>
 </expanded>
-<columnWidths org.eclipse.ui.ide.locationField="120" org.eclipse.ui.ide.markerType="120" org.eclipse.ui.ide.pathField="160" org.eclipse.ui.ide.resourceField="120" org.eclipse.ui.ide.severityAndDescriptionField="400"/>
+<columnWidths org.eclipse.ui.ide.locationField="120" org.eclipse.ui.ide.markerType="120" org.eclipse.ui.ide.pathField="160" org.eclipse.ui.ide.resourceField="120" org.eclipse.ui.ide.severityAndDescriptionField="437"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
@@ -106,7 +116,9 @@
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
-<view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
+<view id="org.eclipse.jdt.ui.SourceView" partName="Declaration">
+<viewState/>
+</view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc">
 <viewState/>
 </view>
@@ -172,11 +184,13 @@
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <view id="org.eclipse.jdt.ui.PackageExplorer"/>
+<view id="org.eclipse.ui.navigator.ProjectExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView"/>
+<view id="org.eclipse.ui.views.ProgressView"/>
 <fastViewBars>
 <fastViewBar fastViewLocation="131072" id="right" orientation="512" selectedTabId="org.eclipse.ui.views.ContentOutline" style="0">
 <fastViews>
@@ -189,12 +203,13 @@
 <info folder="true" part="left">
 <folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
+<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
-<page content="org.eclipse.ui.navigator.ProjectExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
@@ -206,23 +221,24 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.24615385" ratioLeft="304" ratioRight="931" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.6086956" ratioLeft="392" ratioRight="252" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.jdt.ui.JavadocView" appearance="2" expanded="2">
+<info part="org.eclipse.ui.editorss" ratio="0.21376519" ratioLeft="264" ratioRight="971" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.84782606" ratioLeft="546" ratioRight="98" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="com.android.ide.eclipse.ddms.views.LogCatView" label="LogCat"/>
+<page content="org.eclipse.ui.views.ProgressView" label="Progress"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
-<page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -241,151 +257,160 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake/src/com/maple/eggsnake/EggSnakeActivity.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake/src/com/maple/eggsnake/Game.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake_android/src/com/maple/eggsnake/android/Game.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake_android/src/com/maple/eggsnake/android/AndroidGame.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake/src/com/maple/eggsnake/GameListener.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/eggsnake/AndroidManifest.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/androdi/AndroidManifest.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake/src/com/maple/eggsnake/AndroidGame.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/eggsnake_android/gen/com/maple/eggsnake/R.java"/>
 </editors>
-<item historyLabel="EggSnakeActivity.java" index="0">
-<position info="not_deleted" x="357" y="0"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="73" y="0"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="78" y="0"/>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="100" y="0"/>
 </item>
-<item historyLabel="EggSnakeActivity.java" index="0">
-<position info="not_deleted" x="357" y="0"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="173" y="4"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="78" y="0"/>
+<item historyLabel="AndroidGame.java" index="2">
+<position info="not_deleted" x="400" y="0"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="387" y="0"/>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="100" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="21" y="0"/>
+</item>
+<item historyLabel="AndroidGame.java" index="2">
+<position info="not_deleted" x="400" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
 <position info="not_deleted" x="394" y="0"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="395" y="0"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="200" y="4"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="391" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="293" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="391" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="443" y="0"/>
+<position info="not_deleted" x="111" y="0"/>
+</item>
+<item historyLabel="eggsnake Manifest" index="4"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="4" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="672" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="450" y="0"/>
+<position info="not_deleted" x="394" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="866" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="549" y="0"/>
+<position info="not_deleted" x="391" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="573" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="556" y="0"/>
+<position info="not_deleted" x="376" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="672" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="600" y="0"/>
+<position info="not_deleted" x="212" y="0"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="613" y="0"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
 </item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="630" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="637" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="638" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="660" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="668" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="675" y="0"/>
-</item>
-<item historyLabel="EggSnakeActivity.java" index="0">
-<position info="not_deleted" x="357" y="0"/>
-</item>
-<item historyLabel="eggsnake Manifest" index="2"/>
-<item historyLabel="EggSnakeActivity.java" index="0">
-<position info="not_deleted" x="357" y="0"/>
-</item>
-<item historyLabel="eggsnake Manifest" index="2"/>
-<item historyLabel="EggSnakeActivity.java" index="0">
-<position info="not_deleted" x="349" y="0"/>
-</item>
-<item historyLabel="androdi Manifest" index="3"/>
-<item historyLabel="eggsnake Manifest" index="2"/>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="74" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="295" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="329" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="32" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="69" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="339" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="363" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="69" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="69" y="0"/>
-</item>
-<item historyLabel="eggsnake Manifest" index="2"/>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="309" y="0"/>
-</item>
-<item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="418" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="309" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="343" y="0"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="177" y="11"/>
-</item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="230" y="8"/>
-</item>
-<item historyLabel="Game.java" index="1">
+<item historyLabel="GameListener.java" index="3">
 <position/>
 </item>
 <item historyLabel="Game.java" index="1">
+<position info="not_deleted" x="378" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
+</item>
+<item historyLabel="Game.java" index="1">
+<position info="not_deleted" x="250" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="573" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="169" y="1"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="573" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="293" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="573" y="0"/>
+</item>
+<item historyLabel="R.java" index="5">
+<position info="not_deleted" x="276" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
 <position/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="528" y="0"/>
+<position info="not_deleted" x="332" y="0"/>
 </item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="177" y="11"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="179" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="578" y="0"/>
 </item>
 <item historyLabel="Game.java" index="1">
-<position info="not_deleted" x="568" y="0"/>
+<position info="not_deleted" x="377" y="0"/>
 </item>
-<item historyLabel="AndroidGame.java" index="4">
-<position info="not_deleted" x="177" y="11"/>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="179" y="0"/>
 </item>
-<item active="true" historyLabel="Game.java" index="1">
-<position info="not_deleted" x="568" y="0"/>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="623" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="179" y="0"/>
+</item>
+<item historyLabel="Game.java" index="1">
+<position info="not_deleted" x="377" y="0"/>
+</item>
+<item historyLabel="Game.java" index="0">
+<position info="not_deleted" x="179" y="0"/>
+</item>
+<item historyLabel="Game.java" index="1">
+<position info="not_deleted" x="290" y="0"/>
+</item>
+<item historyLabel="GameListener.java" index="3">
+<position info="not_deleted" x="623" y="0"/>
+</item>
+<item active="true" historyLabel="Game.java" index="0">
+<position info="not_deleted" x="179" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -393,8 +418,12 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
 <trimArea IMemento.internal.id="131072">
 <trimItem IMemento.internal.id="right"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
 </trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
@@ -408,8 +437,17 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="texture.png" tooltip="eggsnake/res/drawable/texture.png">
-<persistable path="/eggsnake/res/drawable/texture.png"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="R.java" tooltip="eggsnake_android/gen/com/maple/eggsnake/R.java">
+<persistable path="/eggsnake_android/gen/com/maple/eggsnake/R.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="test01.png" tooltip="eggsnake_android/assets/assets/images/test01.png">
+<persistable path="/eggsnake_android/assets/assets/images/test01.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" tooltip="eggsnake_android/src/com/maple/eggsnake/android/Game.java">
+<persistable path="/eggsnake_android/src/com/maple/eggsnake/android/Game.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameListener.java" tooltip="eggsnake/src/com/maple/eggsnake/GameListener.java">
+<persistable path="/eggsnake/src/com/maple/eggsnake/GameListener.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Game.java" tooltip="eggsnake/src/com/maple/eggsnake/Game.java">
 <persistable path="/eggsnake/src/com/maple/eggsnake/Game.java"/>
@@ -417,11 +455,14 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AndroidGame.java" tooltip="eggsnake/src/com/maple/eggsnake/AndroidGame.java">
 <persistable path="/eggsnake/src/com/maple/eggsnake/AndroidGame.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="androdi/AndroidManifest.xml">
-<persistable path="/androdi/AndroidManifest.xml"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="eggsnake/AndroidManifest.xml">
 <persistable path="/eggsnake/AndroidManifest.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="texture.png" tooltip="eggsnake/res/drawable/texture.png">
+<persistable path="/eggsnake/res/drawable/texture.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="androdi/AndroidManifest.xml">
+<persistable path="/androdi/AndroidManifest.xml"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="EggSnakeActivity.java" tooltip="EggSnake/src/com/maple/eggsnake/EggSnakeActivity.java">
 <persistable path="/EggSnake/src/com/maple/eggsnake/EggSnakeActivity.java"/>

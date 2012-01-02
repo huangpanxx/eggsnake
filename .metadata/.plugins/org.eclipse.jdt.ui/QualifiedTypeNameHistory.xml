@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.badlogic.gdx.ApplicationListener"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplication"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.SpriteBatch"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.GL10"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.Stage"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Button"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.TextureRef"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Skin"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.World"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.OrthographicCamera"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.Box2DDebugRenderer"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.math.Vector2"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.BodyDef.BodyType"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.BodyDef"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.Body"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.physics.box2d.CircleShape"/>
+<fullyQualifiedTypeName name="javax.microedition.khronos.opengles.GL10"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.GL10"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.backends.jogl.JoglApplication"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.ApplicationListener"/>
+<fullyQualifiedTypeName name="com.maple.eggsnake.GameListener"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.Sprite"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.TextureDict"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.files.FileHandle"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture"/>
 </qualifiedTypeNameHistroy>

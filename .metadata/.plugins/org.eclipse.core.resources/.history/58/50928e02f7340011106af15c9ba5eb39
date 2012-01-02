@@ -1,0 +1,45 @@
+/* 
+ * Description	: GameListener
+ * Author		: 黄攀
+ * Created		: 2012-1-2
+ */
+
+package com.maple.eggsnake;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureDict;
+import com.badlogic.gdx.graphics.TextureRef;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+
+public class Game implements ApplicationListener {
+	Stage stage;
+	public void create() {
+		stage = new Stage(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),false);
+		TextureRef ref = TextureDict.loadTexture("drawable/badlogic.jpg");
+		Button btn = new Button("btn1",ref.get(){
+			public boolean touchDown(float x,float y,int pointer){
+				super.touchDown(x,y,pointer);
+			}
+		});
+	}
+	
+	public void render() {
+		
+	}
+	public void resize(int width,int height) {
+		
+	}
+	public void  pause() {
+		
+	}
+	public void  resume() {
+		
+	}
+	public void dispose() {
+		
+	}
+}

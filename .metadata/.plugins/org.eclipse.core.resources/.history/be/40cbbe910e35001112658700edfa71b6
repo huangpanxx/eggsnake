@@ -1,0 +1,63 @@
+/* 
+ * Description	: GameListener
+ * Author		: 黄攀
+ * Created		: 2012-1-2
+ */
+
+package com.maple.eggsnake;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.World;
+
+public class Game implements ApplicationListener {
+	private World world;
+	protected OrthographicCamera camera;
+	protected Box2DDebugRenderer renderer;
+	
+	public void create() {
+		camera = new OrthographicCamera(48,32);
+		camera.position.set(0,15,0);
+		renderer = new Box2DDebugRenderer();
+		
+		world = new World(new Vector2(0,1f),true);
+		BodyDef bd = new BodyDef();
+		bd.position.set(2f,2f);
+		bd.type = BodyType.DynamicBody;
+		Body b = world.createBody(bd);
+		CircleShape c= new CircleShape();
+		c.setRadius(1f);
+		b.createFixture(c,1f);
+	}
+	
+	public void render() {
+		world.step(Gdx.app.getGraphics().getDeltaTime(), 3, 3);
+		GL10 gl = Gdx.app.getGraphics().getGL10();
+		gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		camera.update();
+		camera.apply(gl);
+		renderer.render(world, camera.combined);
+		
+	}
+	
+	public void resize(int width,int height) {
+		
+	}
+	public void  pause() {
+		
+	}
+	public void  resume() {
+		
+	}
+	public void dispose() {
+		
+	}
+}

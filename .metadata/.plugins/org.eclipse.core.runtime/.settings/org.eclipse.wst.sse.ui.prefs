@@ -1,5 +1,6 @@
-#Mon Jan 02 10:43:52 CST 2012
+#Mon Jan 02 15:14:15 CST 2012
 useAnnotationsPrefPage=true
 eclipse.preferences.version=1
-content_assist_number_of_computers=2
+hoverModifiers=combinationHover|true|0;problemHover|false|0;documentationHover|false|0;annotationHover|true|Shift;
 useQuickDiffPrefPage=true
+content_assist_number_of_computers=2
