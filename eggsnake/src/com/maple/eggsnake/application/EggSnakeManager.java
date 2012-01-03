@@ -10,6 +10,9 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
+import com.maple.eggsnake.localization.Language;
+import com.maple.eggsnake.logger.DefaultLogger;
+import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.StartScreen;
 
 public class EggSnakeManager implements ApplicationListener, ScreenManageable {
@@ -25,8 +28,13 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 		return instance;
 	}
 
+	Loggable logger;
+
 	// Private constructor
 	private EggSnakeManager() {
+		// Here for local test!
+		logger = DefaultLogger.getDefaultLogger();
+		logger.log(-1, Language.translate("eggsnake"));
 	}
 
 	@Override
@@ -36,34 +44,45 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
 	@Override
 	public void dispose() {
-		this.screen.dispose();
+		if (screen != null)
+			this.screen.dispose();
 	}
 
 	@Override
 	public void pause() {
-		this.screen.pause();
+
+		if (screen != null)
+			this.screen.pause();
 	}
 
 	@Override
 	public void render() {
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		float dt = Gdx.graphics.getDeltaTime();
-		this.screen.render(dt);
+
+		if (screen != null) {
+			Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+			float dt = Gdx.graphics.getDeltaTime();
+			this.screen.render(dt);
+		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		this.screen.resize(width, height);
+
+		if (screen != null)
+			this.screen.resize(width, height);
 	}
 
 	@Override
 	public void resume() {
-		this.screen.resume();
+
+		if (screen != null)
+			this.screen.resume();
 	}
 
 	@Override
 	public void navigate(Screen screen) {
 		this.screen = screen;
-		screen.show();
+		if (screen != null)
+			screen.show();
 	}
 }

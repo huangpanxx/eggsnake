@@ -6,10 +6,12 @@
 
 package com.maple.eggsnake.desktop;
 
+
 import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.maple.eggsnake.application.EggSnakeManager;
 import com.maple.eggsnake.logger.ConsoleLogger;
 import com.maple.eggsnake.logger.DefaultLogger;
+import com.maple.eggsnake.logger.Loggable;
 
 public class DesktopGameStarter {
 	/**
@@ -20,8 +22,11 @@ public class DesktopGameStarter {
 	public static void main(String args[]) {
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
-		// 开始启动
-		DefaultLogger.getDefaultLogger().log("Enter from desktop");
+		
+		// 标记启动
+		Loggable logger = DefaultLogger.getDefaultLogger();
+		logger.log("Enter from desktop");
+		
 		// 获得管理器
 		EggSnakeManager manager = EggSnakeManager.getInstance();
 		// 启动管理器

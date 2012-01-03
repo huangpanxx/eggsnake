@@ -9920,3 +9920,27 @@ org.eclipse.core.commands.NotEnabledException: Trying to execute the disabled co
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:622)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:577)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-01-03 16:41:00.838
+!MESSAGE Invalid ZIP archive: message_zh_CN.properties [in eggsnake]
+
+!ENTRY org.eclipse.jdt.core 4 0 2012-01-03 16:41:25.761
+!MESSAGE Invalid ZIP archive: message_zh_CN.properties [in eggsnake]
+!SESSION 2012-01-03 16:45:43.300 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_20
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=zh_CN
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-01-03 16:46:05.880
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-01-03 16:52:50.542 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_20
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=zh_CN
+Command-line arguments:  -os linux -ws gtk -arch x86 -data /home/snail/桌面/eggsnake
+
+!ENTRY org.eclipse.ui 4 4 2012-01-03 16:53:12.809
+!MESSAGE Invalid preference page path: XML Syntax

@@ -1,0 +1,13 @@
+package com.maple.eggsnake.localization;
+
+import java.util.
+
+public class Res_zh_CN extends ListResourceBundle{
+
+	@Override
+	protected Object[][] getContents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

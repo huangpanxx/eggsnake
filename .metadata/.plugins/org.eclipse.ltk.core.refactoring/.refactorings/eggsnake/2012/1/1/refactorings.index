@@ -31,3 +31,13 @@
 1325572761664	Rename method 'RequestExit'
 1325576457108	Delete element
 1325577429697	Rename field 'currentScreen'
+1325579270065	Delete element
+1325579521466	Delete element
+1325579908464	Delete element
+1325580012726	Rename resource 'message_zh_cn.properties'
+1325580164321	Rename resource 'message_zh_CN.properties'
+1325580224203	Rename resource 'message_zh.properties'
+1325580231638	Move file
+1325580287517	Move file
+1325580291574	Move file
+1325580321812	Rename resource 'message_en.properties'

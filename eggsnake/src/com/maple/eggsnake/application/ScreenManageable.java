@@ -11,5 +11,4 @@ import com.badlogic.gdx.Screen;
 public interface ScreenManageable {
 
 	void navigate(Screen screen);
-	
 }
