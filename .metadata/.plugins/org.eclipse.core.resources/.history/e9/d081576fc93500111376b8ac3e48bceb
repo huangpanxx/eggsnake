@@ -1,0 +1,22 @@
+/* 
+ * Description	: Android Game Starter
+ * Author		: 黄攀
+ * Created		: 2012-1-2
+ */
+
+package com.maple.eggsnake.android;
+
+import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.maple.eggsnake.Application.EggSnake;
+
+public class AndroidEggSnakeStarter extends AndroidApplication {
+	public void onCreate(android.os.Bundle savedInstance) {
+		super.onCreate(savedInstance);
+		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		config.useAccelerometer = false;
+		config.useCompass = false;
+		config.useWakelock = true;
+		initialize(EggSnake.getInstance(), config);
+	}
+}

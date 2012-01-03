@@ -1,0 +1,14 @@
+/* 
+ * Description	: The base class for screen
+ * Author		: 黄攀
+ * Created		: 2012-1-3
+ */
+
+
+package com.maple.eggsnake.screen;
+
+import com.badlogic.gdx.Screen;
+
+public abstract class ScreenBase implements Screen {
+	
+}

@@ -1,0 +1,5 @@
+package com.maple.eggsnake.screens;
+
+public class ScreenBase {
+
+}

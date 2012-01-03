@@ -1,0 +1,103 @@
+/* 
+ * Description	: Game Manager, Singleton mode
+ * Author		: 黄攀
+ * Created		: 2012-1-2
+ */
+
+package com.maple.eggsnake.application;
+
+import java.util.Stack;
+
+import com.badlogic.gdx.ApplicationListener;
+import com.maple.eggsnake.screen.ScreenBase;
+import com.maple.eggsnake.screen.StartScreen;
+
+public class EggSnakeManager implements ApplicationListener, ScreenManageable {
+
+	// The only instance
+	private static EggSnakeManager instance = null;
+
+	public static EggSnakeManager getInstance() {
+		synchronized (instance) {
+			if (instance == null)
+				instance = new EggSnakeManager();
+		}
+		return instance;
+	}
+
+	private ScreenBase currentScreen = null;
+	private Stack<ScreenBase> Screens = new Stack<ScreenBase>();
+
+	// Singleton Mode
+	private EggSnakeManager() {
+
+	}
+
+	@Override
+	public void create() {
+		this.RequestNavigate(new StartScreen());
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void render() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resize(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void EnterScreenFinished(ScreenBase screen) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void ExitScreenFinished(ScreenBase screen) {
+		if (this.Screens.empty()) {
+			this.currentScreen = null;
+		} else {
+			this.currentScreen = this.Screens.pop();
+		}
+	}
+
+	@Override
+	public void RequestNavigate(ScreenBase screen) {
+		if (this.currentScreen != null) {
+			ExitScreen(this.currentScreen);// there is still screen running,
+											// waiting finish
+		} else {
+			EnterScreen(screen);// this is no screen running , directly navigate
+		}
+	}
+
+	private void EnterScreen(ScreenBase screen) {
+		this.currentScreen = screen;
+		screen.RequestEnter(this);
+	}
+
+	private void ExitScreen(ScreenBase screen) {
+		screen.RequestExit(this);
+	}
+}

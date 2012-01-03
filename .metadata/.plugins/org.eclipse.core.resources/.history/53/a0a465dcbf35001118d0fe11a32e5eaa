@@ -1,0 +1,8 @@
+package com.maple.eggsnake.screen;
+
+import com.maple.eggsnake.screen.ScreenBase;
+
+public interface ScreenListenable {
+	void BeginScreenFinished(ScreenBase Screen);
+	void ExitScreenFinished(ScreenBase Screen);
+}

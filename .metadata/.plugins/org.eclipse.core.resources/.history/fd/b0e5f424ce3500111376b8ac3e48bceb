@@ -1,0 +1,10 @@
+
+
+
+package com.maple.eggsnake.screen;
+
+import com.badlogic.gdx.Screen;
+
+public abstract class ScreenBase implements Screen {
+	
+}

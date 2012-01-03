@@ -1,0 +1,16 @@
+/* 
+ * Description	: Desktop GameStarter
+ * Author		: 黄攀
+ * Created		: 2012-1-2
+ */
+
+package com.maple.eggsnake.desktop;
+
+import com.badlogic.gdx.backends.jogl.JoglApplication;
+import com.maple.eggsnake.Application.EggSnake;
+
+public class DesktopGameStarter {
+	public static void main(String args[]) {
+		new JoglApplication(EggSnake.getInstance(), "EggSnake", 480, 320, true);
+	}
+}
