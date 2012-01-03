@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplication"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.SpriteBatch"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.Stage"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Button"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.TextureRef"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.ui.Skin"/>
@@ -18,11 +17,18 @@
 <fullyQualifiedTypeName name="javax.microedition.khronos.opengles.GL10"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.GL10"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.backends.jogl.JoglApplication"/>
-<fullyQualifiedTypeName name="com.badlogic.gdx.ApplicationListener"/>
 <fullyQualifiedTypeName name="com.maple.eggsnake.GameListener"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.g2d.Sprite"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.TextureDict"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.Gdx"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.files.FileHandle"/>
 <fullyQualifiedTypeName name="com.badlogic.gdx.graphics.Texture"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.scenes.scene2d.Stage"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Game"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.Screen"/>
+<fullyQualifiedTypeName name="com.maple.eggsnake.screens.StartScreen"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.backends.android.AndroidApplicationConfiguration"/>
+<fullyQualifiedTypeName name="com.badlogic.gdx.ApplicationListener"/>
+<fullyQualifiedTypeName name="com.sun.opengl.impl.Debug"/>
+<fullyQualifiedTypeName name="com.maple.eggsnake.EggSnake"/>
 </qualifiedTypeNameHistroy>

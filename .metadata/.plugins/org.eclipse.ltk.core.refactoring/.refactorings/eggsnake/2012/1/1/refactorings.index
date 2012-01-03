@@ -4,3 +4,28 @@
 1325510770678	Delete element
 1325510898977	Delete element
 1325511051899	Rename resource 'assets'
+1325557034104	Rename type 'Game'
+1325557079842	Delete element
+1325557304332	Rename type 'StartMenu'
+1325561463575	Rename package 'com.maple.eggsnake.screens'
+1325562584194	Rename type 'logable'
+1325563016826	Rename type 'PrintLogger'
+1325563134306	Rename type 'EggSnakeStarter'
+1325563186109	Rename type 'EggSnakeDesktopStarter'
+1325563378466	Copy compilation unit
+1325563395061	Move compilation unit
+1325563403997	Delete element
+1325563546667	Rename type 'ScreenListenable'
+1325567426871	Move compilation unit
+1325567484134	Rename package 'com.maple.eggsnake'
+1325567507205	Rename package 'com.maple.eggsnake.Application'
+1325568069495	Delete element
+1325568166724	Rename type 'EggSnake'
+1325569119986	Rename type 'EggSnakeApplicationListener'
+1325571932427	Change method 'EnterScreen'
+1325571954848	Rename method 'ExitScreen'
+1325571966366	Rename method 'RequestNavigate'
+1325571987219	Rename method 'ExitScreenFinished'
+1325571996272	Rename method 'EnterScreenFinished'
+1325572756412	Rename method 'RequestEnter'
+1325572761664	Rename method 'RequestExit'
