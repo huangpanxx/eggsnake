@@ -6,10 +6,10 @@
 
 package com.maple.eggsnake.application;
 
+import java.util.Stack;
+
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL10;
 import com.maple.eggsnake.screen.StartScreen;
 
 public class EggSnakeManager implements ApplicationListener, ScreenManageable {
@@ -17,7 +17,7 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	// The only instance
 	private static EggSnakeManager instance = null;
 
-	private Screen screen = null;
+	private Screen currentScreen = null;
 
 	public static EggSnakeManager getInstance() {
 		if (instance == null)
@@ -25,8 +25,9 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 		return instance;
 	}
 
-	// Private constructor
+	// Singleton Mode
 	private EggSnakeManager() {
+
 	}
 
 	@Override
@@ -36,34 +37,42 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
 	@Override
 	public void dispose() {
-		this.screen.dispose();
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void pause() {
-		this.screen.pause();
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void render() {
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		float dt = Gdx.graphics.getDeltaTime();
-		this.screen.render(dt);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void resize(int width, int height) {
-		this.screen.resize(width, height);
+	public void resize(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void resume() {
-		this.screen.resume();
+		// TODO Auto-generated method stub
+
 	}
 
+	/**
+	 * 切换场景
+	 * 
+	 * @see com.maple.eggsnake.application.ScreenManageable#requestNavigate(com.maple
+	 *      .eggsnake.screen.Screen)
+	 */
 	@Override
 	public void navigate(Screen screen) {
-		this.screen = screen;
-		screen.show();
+		this.currentScreen = screen;
 	}
 }

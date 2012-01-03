@@ -64,6 +64,5 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	@Override
 	public void navigate(Screen screen) {
 		this.screen = screen;
-		screen.show();
 	}
 }

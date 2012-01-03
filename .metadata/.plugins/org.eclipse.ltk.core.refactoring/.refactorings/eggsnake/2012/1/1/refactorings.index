@@ -29,3 +29,5 @@
 1325571996272	Rename method 'EnterScreenFinished'
 1325572756412	Rename method 'RequestEnter'
 1325572761664	Rename method 'RequestExit'
+1325576457108	Delete element
+1325577429697	Rename field 'currentScreen'
