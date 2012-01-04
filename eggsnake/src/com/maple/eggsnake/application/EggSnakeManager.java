@@ -39,17 +39,20 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
 	@Override
 	public void create() {
+		logger.log("EggSnakeManager:create");
 		this.navigate(new StartScreen(this));
 	}
 
 	@Override
 	public void dispose() {
+		logger.log("EggSnakeManager:dispose");
 		if (screen != null)
 			this.screen.dispose();
 	}
 
 	@Override
 	public void pause() {
+		logger.log("EggSnakeManager: pause");
 
 		if (screen != null)
 			this.screen.pause();

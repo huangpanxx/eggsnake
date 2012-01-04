@@ -18,7 +18,6 @@ public class AnimateImage extends Image{
 	private Texture rotateTexture;			//旋转控件的图片
 	private float rotateDuration = 4f;      //旋转间隔
 	private RotateDirection rotateDirection;//旋转方向
-	//private MyGame myGame;                    //游戏主控
 	private boolean EnabledSwitchSreen;     //是否允许切换场景
 	
 	private float startX; //玩家触控起的始点横坐标

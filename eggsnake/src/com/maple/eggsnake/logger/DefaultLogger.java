@@ -10,9 +10,9 @@ public class DefaultLogger implements Loggable {
 
 	private static DefaultLogger defaultLogger;
 	private static boolean enable = true;
-	
+
 	public static Loggable getDefaultLogger() {
-		if (defaultLogger == null){
+		if (defaultLogger == null) {
 			defaultLogger = new DefaultLogger();
 			setInnerLogger(new ConsoleLogger());
 			setEnable(true);
@@ -29,7 +29,6 @@ public class DefaultLogger implements Loggable {
 	public static void setInnerLogger(Loggable logger) {
 		innerLogger = logger;
 	}
-	
 
 	private DefaultLogger() {
 

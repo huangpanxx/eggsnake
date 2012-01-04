@@ -22,6 +22,7 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 
 		// 设置横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+		
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
 		DefaultLogger.setEnable(true);
