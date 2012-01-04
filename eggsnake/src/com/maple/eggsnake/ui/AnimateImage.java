@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.actors.Image;
 /**
  * @author zhiwei.wang
  * @version 0.0
- * @deprecated 这是一个旋转控件（可以理解为按钮）
  * @created 03-一月-2012 17:34:18
  */
 
