@@ -9,10 +9,14 @@ package com.maple.eggsnake.logger;
 public class DefaultLogger implements Loggable {
 
 	private static DefaultLogger defaultLogger;
-
+	private static boolean enable = true;
+	
 	public static Loggable getDefaultLogger() {
-		if (defaultLogger == null)
+		if (defaultLogger == null){
 			defaultLogger = new DefaultLogger();
+			setInnerLogger(new ConsoleLogger());
+			setEnable(true);
+		}
 		return defaultLogger;
 	}
 
@@ -25,6 +29,7 @@ public class DefaultLogger implements Loggable {
 	public static void setInnerLogger(Loggable logger) {
 		innerLogger = logger;
 	}
+	
 
 	private DefaultLogger() {
 
@@ -33,14 +38,14 @@ public class DefaultLogger implements Loggable {
 	@Override
 	public void log(String patten, Object... args) {
 		Loggable logger = DefaultLogger.getInnerLogger();
-		if (logger != null)
+		if (logger != null && DefaultLogger.isEnable())
 			logger.log(patten, args);
 	}
 
 	@Override
 	public void log(int level, String patten, Object... args) {
 		Loggable logger = DefaultLogger.getInnerLogger();
-		if (logger != null)
+		if (logger != null && DefaultLogger.isEnable())
 			logger.log(level, patten, args);
 	}
 
@@ -48,5 +53,13 @@ public class DefaultLogger implements Loggable {
 		Loggable logger = DefaultLogger.getInnerLogger();
 		if (logger != null)
 			logger.log(msg);
+	}
+
+	public static boolean isEnable() {
+		return enable;
+	}
+
+	public static void setEnable(boolean enable) {
+		DefaultLogger.enable = enable;
 	}
 }

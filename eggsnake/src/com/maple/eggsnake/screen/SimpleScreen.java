@@ -1,3 +1,9 @@
+/* 
+ * Description	: the base screen to implement some common functions
+ * Author		: 黄攀
+ * Created		: 2012-1-4
+ */
+
 package com.maple.eggsnake.screen;
 
 import com.badlogic.gdx.Gdx;
@@ -5,15 +11,20 @@ import com.badlogic.gdx.Screen;
 
 public abstract class SimpleScreen implements Screen {
 
-	int getWidth() {
-		return Gdx.graphics.getWidth();
+	private float width = 0;
+	private float height = 0;
+
+	public float getWidth() {
+		return width;
 	}
 
-	int getHeight() {
-		return Gdx.graphics.getHeight();
+	public float getHeight() {
+		return height;
 	}
 
 	public SimpleScreen() {
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 	}
 
 	@Override

@@ -22,6 +22,7 @@ public class DesktopGameStarter {
 	public static void main(String args[]) {
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
+		DefaultLogger.setEnable(true);
 		
 		// 标记启动
 		Loggable logger = DefaultLogger.getDefaultLogger();
