@@ -14,14 +14,14 @@ import com.maple.eggsnake.actor.ui.AnimateImageListener;
 import com.maple.eggsnake.actor.ui.RotateDirection;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.screen.ScreenBase;
+import com.maple.eggsnake.screen.ScreenLayer;
 
 public class StartMenuStage extends Stage {
 	final Loggable logger;
 	AnimateImage btnStart;
-	ScreenBase screen;
+	ScreenLayer screen;
 
-	public StartMenuStage(ScreenBase _screen, float width, float height,
+	public StartMenuStage(ScreenLayer _screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();

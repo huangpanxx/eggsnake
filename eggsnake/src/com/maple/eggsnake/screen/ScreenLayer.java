@@ -1,45 +1,33 @@
 /** 
- * @description	: the base screen to implement some common functions
+ * @description	: one of the layer of a screen
  * @author		: 黄攀
  * @created		: 2012-1-4
  */
 
 package com.maple.eggsnake.screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 
-public abstract class ScreenBase implements Screen {
+public class ScreenLayer extends InputProxyScreen {
 
-	private float width = 0;
-	private float height = 0;
 	protected Stage stage;
 	protected Loggable logger;
-	Camera camera;
+	protected Camera camera;
 
-	public float getWidth() {
-		return width;
-	}
-
-	public float getHeight() {
-		return height;
-	}
-
-	public ScreenBase() {
+	public ScreenLayer() {
 		logger = DefaultLogger.getDefaultLogger();
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
+		camera = new OrthographicCamera(getWidth(), getHeight());
 	}
 
 	public void Navigate(Stage _stage) {
 		logger.log("%1$s:Navigate", this.getClass().getName());
 		this.stage = _stage;
-		Gdx.input.setInputProcessor(stage);
+		this.stage.setCamera(camera);
+		this.setProcessor(this.stage);
 	}
 
 	@Override
@@ -54,7 +42,8 @@ public abstract class ScreenBase implements Screen {
 
 	@Override
 	public void dispose() {
-		stage.dispose();
+		if (stage != null)
+			stage.dispose();
 	}
 
 	@Override
@@ -63,19 +52,21 @@ public abstract class ScreenBase implements Screen {
 
 	@Override
 	public void render(float dt) {
-		if (stage != null)
+		if (stage != null) {
 			stage.act(dt);
-		stage.draw();
+			stage.draw();
+		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		if (camera == null)
 			camera = new OrthographicCamera(width, height);
-		camera.viewportHeight = height;
-		camera.viewportWidth = width;
+		else {
+			camera.viewportHeight = height;
+			camera.viewportWidth = width;
+		}
 		camera.position.set(width / 2, height / 2, 1);
-		stage.setCamera(camera);
 		logger.log("StartScreen: resize:%1$d,%2$d", width, height);
 	}
 
