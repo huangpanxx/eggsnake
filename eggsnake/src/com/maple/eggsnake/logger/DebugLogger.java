@@ -21,5 +21,4 @@ public class DebugLogger implements Loggable {
 		String out = String.format("Level %1$d\t:%2$s", level, msg);
 		Debug.debug(out);
 	}
-
 }
