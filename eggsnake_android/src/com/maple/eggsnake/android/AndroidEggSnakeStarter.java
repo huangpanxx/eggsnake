@@ -6,6 +6,7 @@
 
 package com.maple.eggsnake.android;
 
+import android.content.pm.ActivityInfo;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
@@ -19,9 +20,13 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 		// 父类初始化
 		super.onCreate(savedInstance);
 
+		// 设置横屏
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+		
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
-		
+		DefaultLogger.setEnable(true);
+
 		// 开始启动
 		Loggable logger = DefaultLogger.getDefaultLogger();
 		logger.log("Enter from Android");

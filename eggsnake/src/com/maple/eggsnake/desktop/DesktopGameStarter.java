@@ -7,6 +7,7 @@
 package com.maple.eggsnake.desktop;
 
 
+
 import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.maple.eggsnake.application.EggSnakeManager;
 import com.maple.eggsnake.logger.ConsoleLogger;
@@ -18,10 +19,12 @@ public class DesktopGameStarter {
 	 * 桌面程序启动器
 	 * 
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
+		DefaultLogger.setEnable(true);
 		
 		// 标记启动
 		Loggable logger = DefaultLogger.getDefaultLogger();

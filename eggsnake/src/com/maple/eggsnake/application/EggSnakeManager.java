@@ -34,22 +34,25 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	private EggSnakeManager() {
 		// Here for local test!
 		logger = DefaultLogger.getDefaultLogger();
-		logger.log(-1, Language.translate("eggsnake"));
+		logger.log(1, "语言测试:" + Language.translate("eggsnake"));
 	}
 
 	@Override
 	public void create() {
+		logger.log("EggSnakeManager:create");
 		this.navigate(new StartScreen(this));
 	}
 
 	@Override
 	public void dispose() {
+		logger.log("EggSnakeManager:dispose");
 		if (screen != null)
 			this.screen.dispose();
 	}
 
 	@Override
 	public void pause() {
+		logger.log("EggSnakeManager: pause");
 
 		if (screen != null)
 			this.screen.pause();

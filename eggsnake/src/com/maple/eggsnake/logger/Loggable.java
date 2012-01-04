@@ -11,4 +11,5 @@ public interface Loggable {
 	void log(String patten, Object... args);
 
 	void log(int level, String patten, Object... args);
+
 }
