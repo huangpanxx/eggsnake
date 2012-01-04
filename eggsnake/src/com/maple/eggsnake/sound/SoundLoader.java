@@ -47,7 +47,7 @@ public class SoundLoader {
 	 *            
 	 * @return 文件所在位置
 	 */
-	public static String findPath(String name) {
+	private static String findPath(String name) {
 
 		String path = "";
 		for (Iterator<String> i = soundList.iterator(); i.hasNext();) {
@@ -68,7 +68,7 @@ public class SoundLoader {
 	 * @param name 文件名
 	 * @return
 	 */
-	public static void listFile(File file, String name) {
+	private static void listFile(File file, String name) {
 
 		if (file.isFile()) {
 			// 是完整的文件夹内文件的路径
