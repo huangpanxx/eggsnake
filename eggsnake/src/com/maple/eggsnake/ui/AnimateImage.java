@@ -4,12 +4,8 @@
  * @created 03-一月-2012 17:34:18
  */
 
-package com.badlogic.gdx.helloworld;
+package com.maple.eggsnake.ui;
 
-import java.util.Vector;
-
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Forever;
@@ -21,7 +17,6 @@ public class AnimateImage extends Image{
 	private Texture rotateTexture;			//旋转控件的图片
 	private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
 	private RotateDirection rotateDirection;//旋转方向
-	private boolean EnabledSwitchSreen;     //是否允许切换场景
 	private AnimateImageListener listener;  //添加监听器
 
 	public AnimateImage(String name, Texture texture, float duration,
