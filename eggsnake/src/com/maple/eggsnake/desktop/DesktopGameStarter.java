@@ -6,8 +6,6 @@
 
 package com.maple.eggsnake.desktop;
 
-
-
 import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.maple.eggsnake.application.EggSnakeManager;
 import com.maple.eggsnake.logger.ConsoleLogger;
@@ -34,5 +32,6 @@ public class DesktopGameStarter {
 		EggSnakeManager manager = EggSnakeManager.getInstance();
 		// 启动管理器
 		new JoglApplication(manager, "EggSnake", 480, 320, true);
+		
 	}
 }
