@@ -4,8 +4,11 @@ import com.badlogic.gdx.audio.Sound;
 
 public class SoundManager {
 
-	float volume;
+	private float volume;
 	
+	public SoundManager(){
+		volume = 1f;
+	}
 	public void setVolume(float v){
 		volume = v;
 	}
@@ -17,5 +20,7 @@ public class SoundManager {
 	public void play(Sound sound){
 		sound.play(volume);
 	}
-	
+	public void stop(Sound sound){
+		sound.stop();
+	}
 }
