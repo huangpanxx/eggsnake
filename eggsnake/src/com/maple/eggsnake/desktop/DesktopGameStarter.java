@@ -1,7 +1,7 @@
-/* 
- * Description	: desktop GameStarter
- * Author		: 黄攀
- * Created		: 2012-1-2
+/** 
+ * @description	: desktop GameStarter
+ * @author		: 黄攀
+ * @created		: 2012-1-2
  */
 
 package com.maple.eggsnake.desktop;

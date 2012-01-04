@@ -1,7 +1,7 @@
-/* 
- * Description	: Game Manager, Singleton mode
- * Author		: 黄攀
- * Created		: 2012-1-2
+/** 
+ * @description	: Game Manager, Singleton mode
+ * @author		: 黄攀
+ * @created		: 2012-1-2
  */
 
 package com.maple.eggsnake.application;

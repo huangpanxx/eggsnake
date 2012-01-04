@@ -1,7 +1,7 @@
-/* 
- * Description	: the base screen to implement some common functions
- * Author		: 黄攀
- * Created		: 2012-1-4
+/** 
+ * @description	: the base screen to implement some common functions
+ * @author		: 黄攀
+ * @created		: 2012-1-4
  */
 
 package com.maple.eggsnake.screen;
