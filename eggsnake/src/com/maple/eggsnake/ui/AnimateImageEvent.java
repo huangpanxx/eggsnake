@@ -4,12 +4,16 @@
  * @created 03-一月-2012 17:34:18
  */
 
-package com.badlogic.gdx.helloworld;
+package com.maple.eggsnake.ui;
 
 import java.util.EventObject;
 
 public class AnimateImageEvent extends EventObject{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Object obj;
 	
 	public AnimateImageEvent(Object source) {
