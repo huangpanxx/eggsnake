@@ -4,7 +4,7 @@
  * @created 03-一月-2012 17:34:18
  */
 
-package com.maple.eggsnake.ui;
+package com.maple.eggsnake.actor.ui;
 
 import java.util.EventObject;
 

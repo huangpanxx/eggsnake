@@ -1,4 +1,4 @@
-package com.maple.eggsnake.ui;
+package com.maple.eggsnake.actor.ui;
 
 /**
  * @author zhiwei.wang
