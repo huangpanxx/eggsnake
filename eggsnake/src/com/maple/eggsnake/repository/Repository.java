@@ -1,3 +1,9 @@
+/* 
+ * Description	: This class provides static methods to persist an object of a class
+ * Author		: 黄攀
+ * Created		: 2012-1-4
+ */
+
 package com.maple.eggsnake.repository;
 
 import java.io.File;
@@ -7,6 +13,12 @@ import org.simpleframework.xml.core.Persister;
 import com.maple.eggsnake.logger.DefaultLogger;
 
 public class Repository {
+	/**
+	 * 如果读取失败则返回默认构造函数构造的实例,如果构造失败则抛出异常
+	 * @param cls
+	 * @return
+	 * @throws Exception
+	 */
 	public static <T> T fetch(Class<? extends T> cls) throws Exception {
 		String className = cls.getName();
 		File f = new File(className);
@@ -30,6 +42,11 @@ public class Repository {
 		return obj;
 	}
 
+	/**
+	 * 根据类名进行保存
+	 * @param obj
+	 * @throws Exception
+	 */
 	public static void save(Object obj) throws Exception {
 		String fileName = obj.getClass().getName();
 		File f = new File(fileName);

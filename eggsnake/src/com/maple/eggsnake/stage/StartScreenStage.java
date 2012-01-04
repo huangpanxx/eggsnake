@@ -1,3 +1,9 @@
+/* 
+ * Description	: This contains the start menu logical and ui
+ * Author		: 黄攀
+ * Created		: 2012-1-4
+ */
+
 package com.maple.eggsnake.stage;
 
 import com.badlogic.gdx.graphics.Texture;
