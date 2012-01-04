@@ -1,69 +1,71 @@
-package com.maple.eggsnake.ui;
-
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Forever;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
-import com.badlogic.gdx.scenes.scene2d.actors.Image;
-
 /**
  * @author zhiwei.wang
  * @version 0.0
  * @created 03-一月-2012 17:34:18
  */
 
+package com.maple.eggsnake.actor.ui;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Forever;
+import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
+
 public class AnimateImage extends Image{
 	
 	private Texture rotateTexture;			//旋转控件的图片
-	private float rotateDuration = 4f;      //旋转间隔
+	private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
 	private RotateDirection rotateDirection;//旋转方向
-	private boolean EnabledSwitchSreen;     //是否允许切换场景
-	
-	private float startX; //玩家触控起的始点横坐标
-	private float startY; //玩家触控的起始点纵坐标
+	private AnimateImageListener listener;  //添加监听器
 
 	public AnimateImage(String name, Texture texture, float duration,
 			RotateDirection direction) {
 		super(name, texture);
-		// TODO Auto-generated constructor stub
 		this.rotateTexture = texture;
 		this.touchable = true;
 		this.rotateDuration = duration;
 		this.rotateDirection = direction;
+		this.listener = new AnimateImageListener();
 		this.initActions();
 	}
 	
 	@Override
 	public boolean touchDown(float x, float y, int pointer) {
-		this.startX = x;
-		this.startY = y;
-		System.out.println("startX: " + x + " startY: " + y + " pointer: " + pointer);
+		this.listener.onTouchDown(new AnimateImageEvent(this));	
 		return touchable;	
 	}
 	
 	@Override
 	public void touchDragged(float x, float y, int pointer){
-		System.out.println("This image is being dragged!");
+		this.listener.onTouchDragged(new AnimateImageEvent(this));
 	}
 	
 	@Override
 	public void touchUp(float x, float y, int pointer){
-		System.out.println("upX: " + x + " upY: " + y + " pointer:" + pointer);
-		if((10f <= (x - startX)) && (10f <= (y - startY)))
-			;
+		this.listener.onTouchUp(new AnimateImageEvent(this));
 	}
 
-	/*初始化该控件的旋转动作*/
+	/**
+	 * @description  初始化旋转动作
+	 */
 	private void initActions(){
 		Action rotateAction;
 		if(RotateDirection.CLOCKWISE == this.rotateDirection)
-			rotateAction = RotateBy.$(360, this.rotateDuration);
+			rotateAction = RotateBy.$(180f, 4f);
 		else
-			rotateAction = RotateBy.$(-360, this.rotateDuration);
+			rotateAction = RotateBy.$(-180f, 4f);;
 		this.action(Forever.$(rotateAction));	
 	}
-
+	
+	/**
+	 * @Description 添加监听器
+	 * @param listener
+	 */
+	public void addActionListener(AnimateImageListener listener){
+		this.listener = listener;
+	}
+	
 	/**
 	 * @return the rotateTexture
 	 */

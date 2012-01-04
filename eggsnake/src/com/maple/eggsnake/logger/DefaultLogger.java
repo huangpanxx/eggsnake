@@ -1,7 +1,7 @@
-/* 
- * Description	: default logger getter and setter, thread not safety!
- * Author		: 黄攀
- * Created		: 2012-1-3
+/** 
+ * @description	: default logger getter and setter, thread not safety!
+ * @author		: 黄攀
+ * @created		: 2012-1-3
  */
 
 package com.maple.eggsnake.logger;

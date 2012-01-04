@@ -1,7 +1,7 @@
-/* 
- * Description	: This class provides static methods to persist an object of a class
- * Author		: 黄攀
- * Created		: 2012-1-4
+/** 
+ * @description	: This class provides static methods to persist an object of a class
+ * @author		: 黄攀
+ * @created		: 2012-1-4
  */
 
 package com.maple.eggsnake.repository;

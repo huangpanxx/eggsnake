@@ -1,3 +1,10 @@
+/** 
+ * @description	: this is used as a dictionary for localization
+ * @author		: 黄攀
+ * @created		: 2012-1-3
+ */
+
+
 package com.maple.eggsnake.localization;
 
 import java.util.Locale;

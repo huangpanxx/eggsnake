@@ -1,7 +1,7 @@
-/* 
- * Description	: Game Manager, Singleton mode
- * Author		: 黄攀
- * Created		: 2012-1-2
+/** 
+ * @description	: Game Manager, Singleton mode
+ * @author		: 黄攀
+ * @created		: 2012-1-2
  */
 
 package com.maple.eggsnake.application;
@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.maple.eggsnake.localization.Language;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.screen.StartScreen;
+import com.maple.eggsnake.screen.MainScreen;
 
 public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
@@ -41,7 +41,7 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	@Override
 	public void create() {
 		logger.log("EggSnakeManager:create");
-		this.navigate(new StartScreen(this));
+		this.navigate(new MainScreen(this));
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.maple.eggsnake.ui;
+package com.maple.eggsnake.actor.ui;
 
 /**
  * @author zhiwei.wang
@@ -6,6 +6,6 @@ package com.maple.eggsnake.ui;
  * @created 03-一月-2012 17:34:18
  */
 public enum RotateDirection {
-	CLOCKWISE,          //顺时针 
-	ANTICLOCKWISE       //逆时针
+	CLOCKWISE, 
+	ANTICLOCKWISE
 }
