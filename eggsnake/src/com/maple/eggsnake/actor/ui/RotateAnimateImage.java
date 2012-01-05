@@ -12,14 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.actions.Forever;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
 
-public class AnimateImage extends Image{
+public class RotateAnimateImage extends Image{
 	
-	private Texture rotateTexture;			//旋转控件的图片
-	private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
-	private RotateDirection rotateDirection;//旋转方向
+    private float clockWiseAngles = 180f; //顺时针180度
+    private float anclockWiseAngles = -180f; //逆时针180度
+    private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
+    private RotateDirection rotateDirection;//旋转方向
+    
+	private Texture rotateTexture;			//控件的图片	
 	private AnimateImageListener listener;  //添加监听器
 
-	public AnimateImage(String name, Texture texture, float duration,
+	public RotateAnimateImage(String name, Texture texture, float duration,
 			RotateDirection direction) {
 		super(name, texture);
 		this.rotateTexture = texture;
@@ -28,6 +31,11 @@ public class AnimateImage extends Image{
 		this.rotateDirection = direction;
 		this.listener = new AnimateImageListener();
 		this.initActions();
+	}
+	
+	public RotateAnimateImage(String name, Texture texture){
+		super(name, texture);
+		this.rotateTexture = texture;
 	}
 	
 	@Override
@@ -52,9 +60,9 @@ public class AnimateImage extends Image{
 	private void initActions(){
 		Action rotateAction;
 		if(RotateDirection.CLOCKWISE == this.rotateDirection)
-			rotateAction = RotateBy.$(180f, 4f);
+			rotateAction = RotateBy.$(this.clockWiseAngles, this.rotateDuration);
 		else
-			rotateAction = RotateBy.$(-180f, 4f);;
+			rotateAction = RotateBy.$(this.anclockWiseAngles, this.rotateDuration);
 		this.action(Forever.$(rotateAction));	
 	}
 	
@@ -106,5 +114,33 @@ public class AnimateImage extends Image{
 	 */
 	public void setRotateDirection(RotateDirection rotateDirection) {
 		this.rotateDirection = rotateDirection;
+	}
+
+	/**
+	 * @return the clockWiseAngles
+	 */
+	public float getClockWiseAngles() {
+		return clockWiseAngles;
+	}
+
+	/**
+	 * @param clockWiseAngles the clockWiseAngles to set
+	 */
+	public void setClockWiseAngles(float clockWiseAngles) {
+		this.clockWiseAngles = clockWiseAngles;
+	}
+
+	/**
+	 * @return the anClockWiseAngles
+	 */
+	public float getAnClockWiseAngles() {
+		return anclockWiseAngles;
+	}
+
+	/**
+	 * @param anClockWiseAngles the anClockWiseAngles to set
+	 */
+	public void setAnClockWiseAngles(float anClockWiseAngles) {
+		this.anclockWiseAngles = anClockWiseAngles;
 	}
 }

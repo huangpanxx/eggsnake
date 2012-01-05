@@ -13,7 +13,7 @@ public class AnimateImageEvent extends EventObject{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -490127094220892085L;
 	Object obj;
 	
 	public AnimateImageEvent(Object source) {
