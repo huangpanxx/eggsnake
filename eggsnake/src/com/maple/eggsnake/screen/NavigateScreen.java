@@ -30,7 +30,7 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	private void initialize(int layer) {
 		logger = DefaultLogger.getDefaultLogger();
-		camera = new OrthographicCamera(getWidth(), getHeight());
+		// camera = new OrthographicCamera(getWidth(), getHeight());
 		this.layer = ScreenLayer.CONTENT;
 	}
 
@@ -56,12 +56,14 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	protected BaseStage stage;
 	protected Loggable logger;
-	protected Camera camera;
+
+	// protected Camera camera;
 
 	public void Navigate(BaseStage _stage) {
 		logger.log("%1$s:Navigate", this.getClass().getName());
 		this.stage = _stage;
-		this.stage.setCamera(camera);
+		// this.stage.setCamera(camera);
+		this.stage.setViewport(this.getWidth(), this.getHeight(), true);
 		this.setProcessor(this.stage);
 	}
 
@@ -93,13 +95,16 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	@Override
 	public void resize(int width, int height) {
-		if (camera == null)
-			camera = new OrthographicCamera(width, height);
-		else {
-			camera.viewportHeight = height;
-			camera.viewportWidth = width;
-		}
-		camera.position.set(width / 2, height / 2, 1);
+		// if (camera == null)
+		// camera = new OrthographicCamera(width, height);
+		// else {
+		// camera.viewportHeight = height;
+		// camera.viewportWidth = width;
+		// }
+		// camera.position.set(width / 2, height / 2, 1);
+		// this.stage.setViewport(width, height, false);
+		if (this.stage != null)
+			this.stage.resize(width, height);
 		logger.log("StartScreen: resize:%1$d,%2$d", width, height);
 	}
 

@@ -32,7 +32,7 @@ public class ForegroundStage extends BaseStage {
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
-		this.particle.setPosition(x, y);
+		this.particle.setPosition(x, Gdx.graphics.getHeight() - y);
 		this.particle.start();
 		return false;
 	}

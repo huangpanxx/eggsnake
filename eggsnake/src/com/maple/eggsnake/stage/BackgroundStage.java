@@ -21,7 +21,8 @@ public class BackgroundStage extends BaseStage {
 	}
 
 	private void loadBackground() {
-		FileHandle fileHandle = Gdx.files.internal("data/images/background.png");
+		FileHandle fileHandle = Gdx.files
+				.internal("data/images/background.png");
 		ActorRegister.singleRegister(this, new Texture(fileHandle), 0, 0);
 	}
 
