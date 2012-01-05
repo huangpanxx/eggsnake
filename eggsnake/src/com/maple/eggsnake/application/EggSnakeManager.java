@@ -8,19 +8,19 @@ package com.maple.eggsnake.application;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.maple.eggsnake.localization.Language;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.screen.ScreenLayer;
+import com.maple.eggsnake.screen.LayeredScreen;
+import com.maple.eggsnake.screen.ProcessableScreen;
 
 public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
 	// The only instance
 	private static EggSnakeManager instance = null;
 
-	private Screen screen = null;
+	private ProcessableScreen screen = null;
 
 	public static EggSnakeManager getInstance() {
 		if (instance == null)
@@ -40,7 +40,7 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	@Override
 	public void create() {
 		logger.log("EggSnakeManager:create");
-		this.navigate(new ScreenLayer());
+		this.navigate(new LayeredScreen(this));
 	}
 
 	@Override
@@ -83,8 +83,9 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	}
 
 	@Override
-	public void navigate(Screen screen) {
+	public void navigate(ProcessableScreen screen) {
 		this.screen = screen;
+		Gdx.input.setInputProcessor(screen);
 		if (screen != null)
 			screen.show();
 	}

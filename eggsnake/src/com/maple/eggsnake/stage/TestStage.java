@@ -6,6 +6,7 @@
 
 package com.maple.eggsnake.stage;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.maple.eggsnake.actor.ui.AnimateImage;
@@ -14,18 +15,17 @@ import com.maple.eggsnake.actor.ui.AnimateImageListener;
 import com.maple.eggsnake.actor.ui.RotateDirection;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.screen.ScreenLayer;
+import com.maple.eggsnake.screen.NavigateScreen;
 
-public class StartMenuStage extends Stage {
+public class TestStage extends Stage {
 	final Loggable logger;
 	AnimateImage btnStart;
-	ScreenLayer screen;
+	NavigateScreen screen;
 
-	public StartMenuStage(ScreenLayer _screen, float width, float height,
+	public TestStage(Screen _screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();
-		this.screen = screen;
 		createButtons();
 	}
 

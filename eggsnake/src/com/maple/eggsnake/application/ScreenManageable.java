@@ -6,9 +6,9 @@
 
 package com.maple.eggsnake.application;
 
-import com.badlogic.gdx.Screen;
+import com.maple.eggsnake.screen.ProcessableScreen;
 
 public interface ScreenManageable {
 
-	void navigate(Screen screen);
+	void navigate(ProcessableScreen screen);
 }
