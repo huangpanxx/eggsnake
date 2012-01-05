@@ -2,7 +2,6 @@ package com.maple.eggsnake.stage.foreground;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.maple.eggsnake.logger.DefaultLogger;
@@ -15,8 +14,13 @@ public class ForegroundStage extends BaseStage {
 	ParticleEffect particle;
 	Loggable logger;
 
+	float w;
+	float h;
+
 	public ForegroundStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
+		this.w = width;
+		this.h = height;
 		initialize();
 	}
 
@@ -33,7 +37,7 @@ public class ForegroundStage extends BaseStage {
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
-		this.particle.setPosition(x, Gdx.graphics.getHeight() - y);
+		this.particle.setPosition(x * w / width(), h - y * h / height());
 		this.particle.start();
 		return false;
 	}
@@ -47,18 +51,18 @@ public class ForegroundStage extends BaseStage {
 
 	@Override
 	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		this.particle.setPosition(arg0, Gdx.graphics.getHeight() - arg1);
+		this.particle.setPosition(arg0 * w / width(), h - arg1 * h / height());
 		this.particle.start();
 		return false;
 	}
 
 	@Override
 	public void draw() {
-		super.draw();
 		spriteBatch.begin();
-		spriteBatch.setColor(Color.WHITE);
 		particle.draw(spriteBatch, Gdx.graphics.getDeltaTime());
 		spriteBatch.end();
+
+		super.draw();
 	}
 
 	@Override
@@ -76,6 +80,8 @@ public class ForegroundStage extends BaseStage {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
+		this.height = height;
+		this.width = width;
 
 	}
 
