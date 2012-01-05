@@ -4,9 +4,10 @@
  * @created		: 2012-1-4
  */
 
-package com.maple.eggsnake.stage;
+package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.Screen;
+import com.maple.eggsnake.stage.BaseStage;
 
 public class ContentStageTest extends BaseStage {
 

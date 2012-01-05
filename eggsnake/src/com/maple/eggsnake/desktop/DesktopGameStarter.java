@@ -7,12 +7,10 @@
 package com.maple.eggsnake.desktop;
 
 import com.badlogic.gdx.backends.jogl.JoglApplication;
+import com.maple.eggsnake.application.EggSnakeManager;
 import com.maple.eggsnake.logger.ConsoleLogger;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.mytest.TestAboutUs;
-import com.maple.eggsnake.mytest.TestStart;
-import com.maple.eggsnake.stage.content.StartMenuStage;
 
 public class DesktopGameStarter {
 	/**
@@ -21,7 +19,7 @@ public class DesktopGameStarter {
 	 * @param args
 	 * @throws Exception 
 	 */
-	public static void main(String args[]) throws Exception {
+	public static void main(String args[]){
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
 		DefaultLogger.setEnable(true);
@@ -31,7 +29,7 @@ public class DesktopGameStarter {
 		logger.log("Enter from desktop");
 		
 		// 获得管理器
-		TestStart manager = new TestStart();
+		EggSnakeManager manager = EggSnakeManager.getInstance();
 		// 启动管理器
 		new JoglApplication(manager, "EggSnake", 480, 320, true);
 		

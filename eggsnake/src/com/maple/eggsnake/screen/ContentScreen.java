@@ -8,7 +8,7 @@
 
 package com.maple.eggsnake.screen;
 
-import com.maple.eggsnake.stage.ContentStageTest;
+import com.maple.eggsnake.stage.content.ContentStageTest;
 
 public class ContentScreen extends NavigateScreen{
 

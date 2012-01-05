@@ -1,6 +1,6 @@
 package com.maple.eggsnake.screen;
 
-import com.maple.eggsnake.stage.ForegroundStage;
+import com.maple.eggsnake.stage.foreground.ForegroundStage;
 
 public class ForegroundScreen extends NavigateScreen{
 	public ForegroundScreen(){

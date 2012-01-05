@@ -1,4 +1,4 @@
-package com.maple.eggsnake.stage;
+package com.maple.eggsnake.stage.background;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -7,6 +7,7 @@ import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.NavigateScreen;
+import com.maple.eggsnake.stage.BaseStage;
 
 public class BackgroundStage extends BaseStage {
 
