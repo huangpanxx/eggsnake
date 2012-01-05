@@ -10,9 +10,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.stage.BaseStage;
 
 public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 		Layerable {
@@ -44,20 +44,21 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	@Override
 	public void pause() {
-
+		if (this.stage != null)
+			stage.pause();
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
+		if (this.stage != null)
+			stage.resume();
 	}
 
-	protected Stage stage;
+	protected BaseStage stage;
 	protected Loggable logger;
 	protected Camera camera;
 
-	public void Navigate(Stage _stage) {
+	public void Navigate(BaseStage _stage) {
 		logger.log("%1$s:Navigate", this.getClass().getName());
 		this.stage = _stage;
 		this.stage.setCamera(camera);
@@ -66,12 +67,14 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		if (stage != null)
+			this.stage.hide();
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		if (stage != null)
+			stage.show();
 	}
 
 	@Override
