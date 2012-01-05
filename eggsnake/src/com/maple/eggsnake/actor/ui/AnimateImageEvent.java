@@ -1,7 +1,7 @@
-/**
- * @author zhiwei.wang
- * @version 0.0
- * @created 03-一月-2012 17:34:18
+/** 
+ * @description	: 动态Actor事件
+ * @author		: 王志伟
+ * @created		: 2012-1-3
  */
 
 package com.maple.eggsnake.actor.ui;

@@ -1,10 +1,16 @@
+/** 
+ * @description	: GameStage继承自BaseStage
+ * @author		: 王志伟
+ * @created		: 2012-1-6
+ */
+
 package com.maple.eggsnake.stage.content;
 
 import com.maple.eggsnake.stage.BaseStage;
 
-public class EnjoyGameStage extends BaseStage{
+public class GameStage extends BaseStage{
 
-	public EnjoyGameStage(float width, float height, boolean stretch) {
+	public GameStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		// TODO Auto-generated constructor stub
 	}

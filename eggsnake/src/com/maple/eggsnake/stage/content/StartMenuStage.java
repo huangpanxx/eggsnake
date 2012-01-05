@@ -1,7 +1,7 @@
-/**
- * @author zhiwei.wang
- * @version 0.0
- * @created 05-一月-2012 16:14:18
+/** 
+ * @description	: StartMenuStage继承自BaseStage
+ * @author		: 王志伟
+ * @created		: 2012-1-6
  */
 
 package com.maple.eggsnake.stage.content;
@@ -74,15 +74,15 @@ public class StartMenuStage extends BaseStage {
 	 */
 	private void initTextures() {
 		titileTexture = new Texture(
-				Gdx.files.internal("data/images/fontEggSnake_512_128.png"));
+				Gdx.files.internal("data/images/fonteggsnake_512_128.png"));
 		wheelTexture = new Texture(
 				Gdx.files.internal("data/images/wheel_128_128.png"));
 		wheelSnakeTexture = new Texture(
-				Gdx.files.internal("data/images/halfEggSnake_128_128.png"));
+				Gdx.files.internal("data/images/halfeggsnake_128_128.png"));
 		wheelMouseTexture = new Texture(
-				Gdx.files.internal("data/images/oneEyeMice_64_64.png"));
+				Gdx.files.internal("data/images/oneeyemouse_64_64.png"));
 		quitTexture = new Texture(
-				Gdx.files.internal("data/images/quitBtn_128_64.png"));
+				Gdx.files.internal("data/images/quitbutton_128_64.png"));
 	}
 
 	@Override
