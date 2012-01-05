@@ -1,8 +1,0 @@
-package com.maple.eggsnake;
-
-import com.maple.eggsnake.screen.ScreenBase;
-
-public interface ScreenManageable {
-	void BeginScreenFinished(ScreenBase Screen);
-	void ExitScreenFinished(ScreenBase Screen);
-}

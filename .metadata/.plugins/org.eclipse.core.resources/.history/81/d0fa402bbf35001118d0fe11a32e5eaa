@@ -1,9 +1,0 @@
-package com.maple.eggsnake;
-
-import com.badlogic.gdx.backends.jogl.JoglApplication;
-
-public class EggSnakeStarter {
-	public static void main(String args[]) {
-		new JoglApplication(EggSnake.getInstance(), "EggSnake", 480, 320, true);
-	}
-}
