@@ -21,7 +21,7 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 	ScreenManageable manager;
 	List<NavigateScreen> screens;
 	InputMultiplexer processPlexer;
-	
+
 	public LayeredScreen(ScreenManageable _manager) {
 		this.manager = _manager;
 		this.processPlexer = new InputMultiplexer();
@@ -30,17 +30,14 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 	}
 
 	private void loadScreens() {
-		
 		this.addScreen(new ForegroundScreen());
 		this.addScreen(new ContentScreen());
-		
 		this.addScreen(new BackgroundScreen());
-		
 	}
 
 	public void addScreen(NavigateScreen screen) {
 		screens.add(screen);
-		Collections.sort(screens,new Comparator<NavigateScreen>() {
+		Collections.sort(screens, new Comparator<NavigateScreen>() {
 			public int compare(NavigateScreen o1, NavigateScreen o2) {
 				return o1.getLayer() - o2.getLayer();
 			}
@@ -80,7 +77,7 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 
 	@Override
 	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		return processPlexer.touchDragged(arg0,arg1,arg2);
+		return processPlexer.touchDragged(arg0, arg1, arg2);
 	}
 
 	@Override
@@ -135,7 +132,7 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 		Iterator<NavigateScreen> it = screens.iterator();
 		while (it.hasNext()) {
 			NavigateScreen screen = it.next();
-			DefaultLogger.getDefaultLogger().log("%1$d",screen.getLayer());
+			DefaultLogger.getDefaultLogger().log("%1$d", screen.getLayer());
 			screen.resize(width, height);
 		}
 	}

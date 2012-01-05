@@ -2,3 +2,8 @@
 *~
 *.swp
 *.log
+eggsnake_android/assets/*
+eggsnake_android\assets\*
+eggsnake_android/assets/*/
+eggsnake_android\assets\*\
+
