@@ -23,15 +23,23 @@ public class ForegroundStage extends BaseStage {
 		logger = DefaultLogger.getDefaultLogger();
 		spriteBatch = new SpriteBatch();
 		particle = new ParticleEffect();
-		FileHandle description = Gdx.files.internal("data/particles/particle.p");
+		FileHandle description = Gdx.files
+				.internal("data/particles/particle.p");
 		FileHandle textureDir = Gdx.files.internal("data/images/");
 		particle.load(description, textureDir);
 		particle.setPosition(-100, -100);
 	}
-	
+
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
 		this.particle.setPosition(x, y);
+		this.particle.start();
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int x, int y, int pointer, int button) {
+		this.particle.setPosition(-100, -100);
 		this.particle.start();
 		return false;
 	}
@@ -55,30 +63,30 @@ public class ForegroundStage extends BaseStage {
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
