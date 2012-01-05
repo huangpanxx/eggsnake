@@ -29,7 +29,7 @@ public class ActorRegister{
 		}
 		else{
 			lastImage.x = x + 10f;
-			lastImage.y = y + 10f;
+			lastImage.y = y;
 		}
 		stage.addActor(firstImage);
 		stage.addActor(lastImage);
@@ -41,8 +41,8 @@ public class ActorRegister{
 		firstImage.x = x;
 		firstImage.y = y;
 		lastImage = new Image("last", last);
-		lastImage.x = x - 46;
-		lastImage.y = y + 20;
+		lastImage.x = x - 46f;
+		lastImage.y = y + 20f;
 		stage.addActor(firstImage);
 		stage.addActor(lastImage);
 	}

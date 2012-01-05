@@ -10,7 +10,9 @@ import com.badlogic.gdx.backends.jogl.JoglApplication;
 import com.maple.eggsnake.logger.ConsoleLogger;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.mytest.TestImageGame;
+import com.maple.eggsnake.mytest.TestAboutUs;
+import com.maple.eggsnake.mytest.TestStart;
+import com.maple.eggsnake.stage.content.StartMenuStage;
 
 public class DesktopGameStarter {
 	/**
@@ -29,7 +31,7 @@ public class DesktopGameStarter {
 		logger.log("Enter from desktop");
 		
 		// 获得管理器
-		TestImageGame manager = new TestImageGame();
+		TestStart manager = new TestStart();
 		// 启动管理器
 		new JoglApplication(manager, "EggSnake", 480, 320, true);
 		

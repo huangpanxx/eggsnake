@@ -6,16 +6,13 @@
 
 package com.maple.eggsnake.stage.content;
 
-import java.awt.event.ActionListener;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.stage.BaseStage;
 
-public class AboutUsStage extends Stage {
+public class AboutUsStage extends BaseStage {
 
 	private Texture titileTexture;// 标题纹理
 	private Texture snakeImageTexture;// 蛇图纹理
@@ -66,15 +63,15 @@ public class AboutUsStage extends Stage {
 		ActorRegister.singleRegister(this, new TextureRegion(snakeFontTexture),
 				(this.width - this.titileTexture.getWidth()) / 2 - 10, 0);
 	}
-	
+
 	/**
 	 * @author zhiwei.wang
 	 */
-	private void loadQuitImage(){
+	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
 		generalTextureHeight = this.quitTexture.getHeight();
-		ActorRegister.singleRegister(this, quitTexture,
-				this.width - generalTextureWidth, 0);
+		ActorRegister.singleRegister(this, quitTexture, this.width
+				- generalTextureWidth, 0);
 	}
 
 	/**
@@ -87,6 +84,93 @@ public class AboutUsStage extends Stage {
 				Gdx.files.internal("data/images/picSnake_128_128.png"));
 		snakeFontTexture = new Texture(
 				Gdx.files.internal("data/images/titleEggSnake_128_32.png"));
-		quitTexture = new Texture(Gdx.files.internal("data/images/quitBtn_128_64.png"));
+		quitTexture = new Texture(
+				Gdx.files.internal("data/images/quitBtn_128_64.png"));
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * @return the titileTexture
+	 */
+	public Texture getTitileTexture() {
+		return titileTexture;
+	}
+
+	/**
+	 * @param titileTexture the titileTexture to set
+	 */
+	public void setTitileTexture(Texture titileTexture) {
+		this.titileTexture = titileTexture;
+	}
+
+	/**
+	 * @return the snakeImageTexture
+	 */
+	public Texture getSnakeImageTexture() {
+		return snakeImageTexture;
+	}
+
+	/**
+	 * @param snakeImageTexture the snakeImageTexture to set
+	 */
+	public void setSnakeImageTexture(Texture snakeImageTexture) {
+		this.snakeImageTexture = snakeImageTexture;
+	}
+
+	/**
+	 * @return the snakeFontTexture
+	 */
+	public Texture getSnakeFontTexture() {
+		return snakeFontTexture;
+	}
+
+	/**
+	 * @param snakeFontTexture the snakeFontTexture to set
+	 */
+	public void setSnakeFontTexture(Texture snakeFontTexture) {
+		this.snakeFontTexture = snakeFontTexture;
+	}
+
+	/**
+	 * @return the quitTexture
+	 */
+	public Texture getQuitTexture() {
+		return quitTexture;
+	}
+
+	/**
+	 * @param quitTexture the quitTexture to set
+	 */
+	public void setQuitTexture(Texture quitTexture) {
+		this.quitTexture = quitTexture;
 	}
 }
