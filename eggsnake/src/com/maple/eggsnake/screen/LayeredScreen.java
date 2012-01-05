@@ -12,7 +12,6 @@ import java.util.PriorityQueue;
 
 import com.badlogic.gdx.InputMultiplexer;
 import com.maple.eggsnake.application.ScreenManageable;
-import com.maple.eggsnake.stage.TestStage;
 
 public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 
@@ -31,10 +30,12 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 						return o1.getLayer() - o2.getLayer();
 					}
 				});
-		NavigateScreen screen = new NavigateScreen();
-		screen.Navigate(new TestStage(screen, getWidth(), getHeight(),
-				false));
-		this.addScreen(screen);
+		loadScreens();
+	}
+
+	private void loadScreens() {
+		this.addScreen(new ContentScreen());
+		this.addScreen(new BackgroundScreen());
 	}
 
 	public void addScreen(NavigateScreen screen) {

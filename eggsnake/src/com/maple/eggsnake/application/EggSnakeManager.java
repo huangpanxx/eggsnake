@@ -8,11 +8,6 @@ package com.maple.eggsnake.application;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-<<<<<<< HEAD
-=======
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
->>>>>>> 59519bacd049f4d193c5582f0fe856bd8fb40fc5
 import com.badlogic.gdx.graphics.GL10;
 import com.maple.eggsnake.localization.Language;
 import com.maple.eggsnake.logger.DefaultLogger;

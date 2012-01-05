@@ -17,12 +17,12 @@ import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.NavigateScreen;
 
-public class TestStage extends Stage {
+public class ContentStageTest extends Stage {
 	final Loggable logger;
 	AnimateImage btnStart;
 	NavigateScreen screen;
 
-	public TestStage(Screen _screen, float width, float height,
+	public ContentStageTest(Screen _screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();
@@ -38,6 +38,8 @@ public class TestStage extends Stage {
 				logger.log("Btn dragged");
 			}
 		});
+		logger.log("Content Stage called");
 		this.addActor(btnStart);
+		
 	}
 }

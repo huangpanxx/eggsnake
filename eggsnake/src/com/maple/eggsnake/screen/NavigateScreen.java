@@ -13,17 +13,25 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.stage.TestStage;
 
-public class NavigateScreen extends SimpleScreen implements ProcessableScreen, Layerable {
+public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
+		Layerable {
 
 	private int layer;
 
 	public NavigateScreen() {
+		this.initialize(ScreenLayer.CONTENT);
+
+	}
+
+	public NavigateScreen(int layer) {
+		initialize(layer);
+	}
+
+	private void initialize(int layer) {
 		logger = DefaultLogger.getDefaultLogger();
 		camera = new OrthographicCamera(getWidth(), getHeight());
-		this.Navigate(new TestStage(this, getWidth(), getHeight(), false));
-
+		this.layer = ScreenLayer.CONTENT;
 	}
 
 	public int getWidth() {
@@ -36,7 +44,6 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen, L
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -52,7 +59,6 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen, L
 
 	public void Navigate(Stage _stage) {
 		logger.log("%1$s:Navigate", this.getClass().getName());
-		this.layer = 1;
 		this.stage = _stage;
 		this.stage.setCamera(camera);
 		this.setProcessor(this.stage);
