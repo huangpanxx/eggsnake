@@ -6,40 +6,45 @@
 
 package com.maple.eggsnake.screen;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.PriorityQueue;
+import java.util.List;
 
 import com.badlogic.gdx.InputMultiplexer;
 import com.maple.eggsnake.application.ScreenManageable;
+import com.maple.eggsnake.logger.DefaultLogger;
 
 public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 
 	ScreenManageable manager;
-	PriorityQueue<NavigateScreen> screens;
+	List<NavigateScreen> screens;
 	InputMultiplexer processPlexer;
 	
 	public LayeredScreen(ScreenManageable _manager) {
 		this.manager = _manager;
 		this.processPlexer = new InputMultiplexer();
-		// 使用字典模拟附加属性,进行排序
-		screens = new PriorityQueue<NavigateScreen>(3,
-				new Comparator<NavigateScreen>() {
-					@Override
-					public int compare(NavigateScreen o1, NavigateScreen o2) {
-						return o1.getLayer() - o2.getLayer();
-					}
-				});
+		screens = new ArrayList<NavigateScreen>();
 		loadScreens();
 	}
 
 	private void loadScreens() {
+		
+		this.addScreen(new ForegroundScreen());
 		this.addScreen(new ContentScreen());
+		
 		this.addScreen(new BackgroundScreen());
+		
 	}
 
 	public void addScreen(NavigateScreen screen) {
-		this.screens.add(screen);
+		screens.add(screen);
+		Collections.sort(screens,new Comparator<NavigateScreen>() {
+			public int compare(NavigateScreen o1, NavigateScreen o2) {
+				return o1.getLayer() - o2.getLayer();
+			}
+		});
 		this.processPlexer.addProcessor(screen);
 	}
 
@@ -130,6 +135,7 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 		Iterator<NavigateScreen> it = screens.iterator();
 		while (it.hasNext()) {
 			NavigateScreen screen = it.next();
+			DefaultLogger.getDefaultLogger().log("%1$d",screen.getLayer());
 			screen.resize(width, height);
 		}
 	}

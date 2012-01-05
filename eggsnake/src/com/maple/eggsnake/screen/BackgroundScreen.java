@@ -1,11 +1,11 @@
 package com.maple.eggsnake.screen;
 
-import com.maple.eggsnake.stage.BackgroundStageTest;
+import com.maple.eggsnake.stage.BackgroundStage;
 
 public class BackgroundScreen extends NavigateScreen {
 	public BackgroundScreen() {
 		this.setLayer(ScreenLayer.BACKGROUDN);
-		this.Navigate(new BackgroundStageTest(this, getWidth(), getHeight(),
+		this.Navigate(new BackgroundStage(this, getWidth(), getHeight(),
 				false));
 	}
 }
