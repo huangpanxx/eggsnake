@@ -93,17 +93,17 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	@Override
 	public void resize(int width, int height) {
-		// if (camera == null)
-		// camera = new OrthographicCamera(width, height);
-		// else {
-		// camera.viewportHeight = height;
-		// camera.viewportWidth = width;
-		// }
-		// camera.position.set(width / 2, height / 2, 1);
-		// this.stage.setViewport(width, height, false);
+//		 if (camera == null)
+//		 camera = new OrthographicCamera(width, height);
+//		 else {
+//		 camera.viewportHeight = height;
+//		 camera.viewportWidth = width;
+//		 }
+//		 camera.position.set(width / 2, height / 2, 1);
+//		 this.stage.setViewport(width, height, false);
 		if (this.stage != null)
 			this.stage.resize(width, height);
-		logger.log("StartScreen: resize:%1$d,%2$d", width, height);
+//		logger.log("StartScreen: resize:%1$d,%2$d", width, height);
 	}
 
 	private InputProcessor processor;

@@ -14,7 +14,6 @@ import java.util.List;
 
 import com.badlogic.gdx.InputMultiplexer;
 import com.maple.eggsnake.application.ScreenManageable;
-import com.maple.eggsnake.logger.DefaultLogger;
 
 public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 
@@ -132,7 +131,6 @@ public class LayeredScreen extends SimpleScreen implements ProcessableScreen {
 		Iterator<NavigateScreen> it = screens.iterator();
 		while (it.hasNext()) {
 			NavigateScreen screen = it.next();
-			DefaultLogger.getDefaultLogger().log("%1$d", screen.getLayer());
 			screen.resize(width, height);
 		}
 	}

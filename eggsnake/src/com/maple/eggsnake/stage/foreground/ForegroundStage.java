@@ -1,11 +1,11 @@
 package com.maple.eggsnake.stage.foreground;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class ForegroundStage extends BaseStage {
@@ -27,11 +27,7 @@ public class ForegroundStage extends BaseStage {
 	private void initialize() {
 		logger = DefaultLogger.getDefaultLogger();
 		spriteBatch = new SpriteBatch();
-		particle = new ParticleEffect();
-		FileHandle description = Gdx.files
-				.internal("data/particles/particle.p");
-		FileHandle textureDir = Gdx.files.internal("data/images/");
-		particle.load(description, textureDir);
+		particle = ResourceLoader.loadParticle("default.p", "");
 		particle.setPosition(-100, -100);
 	}
 

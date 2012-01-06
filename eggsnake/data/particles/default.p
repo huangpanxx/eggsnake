@@ -123,4 +123,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-particle.png
+default.png
