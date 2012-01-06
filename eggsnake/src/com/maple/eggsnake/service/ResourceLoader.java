@@ -18,8 +18,8 @@ public class ResourceLoader {
 	public static final String DEFAULT_MUSIC_NAME = "default.ogg";
 
 	public static final String Font_DIR = "data/fonts";
-	public static final String DEFAULT_FONT_FILE = "default.fnt";
-	public static final String DEFAULT_FONT_BITMAP = "default.png";
+	public static final String DEFAULT_FONT_FILE = "Segoe.fnt";
+	public static final String DEFAULT_FONT_BITMAP = "Segoe.png";
 
 	public static final String PARTICLE_DIR = "data/particles";
 	public static final String DEFAULT_PARTICLE_FILE = "default.p";

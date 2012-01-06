@@ -25,7 +25,7 @@ class SoundLoader {
 		}
 		this.map = new HashMap<String, Sound>();
 		logger = DefaultLogger.getDefaultLogger();
-		this.defaultSound = Gdx.audio.newSound(Gdx.files.internal(dirPath
+		this.defaultSound = Gdx.audio.newSound(Gdx.files.internal(this.dirPath
 				+ defaultSound));
 	}
 

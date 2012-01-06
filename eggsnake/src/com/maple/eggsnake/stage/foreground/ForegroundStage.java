@@ -1,6 +1,7 @@
 package com.maple.eggsnake.stage.foreground;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.maple.eggsnake.logger.DefaultLogger;
@@ -13,26 +14,37 @@ public class ForegroundStage extends BaseStage {
 	SpriteBatch spriteBatch;
 	ParticleEffect particle;
 	Loggable logger;
-
+	Sound slipSound;
+	float soundDelta;
 	float w;
 	float h;
+	final float minSoundDelta = 0.3f;
 
 	public ForegroundStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		this.w = width;
 		this.h = height;
+		this.soundDelta = 0;
 		initialize();
 	}
 
+	private void playSlipSound(){
+		if (this.soundDelta > this.minSoundDelta) {
+			this.slipSound.play();
+			this.soundDelta = 0;
+		}
+	}
 	private void initialize() {
 		logger = DefaultLogger.getDefaultLogger();
 		spriteBatch = new SpriteBatch();
 		particle = ResourceLoader.loadParticle("default.p", "");
 		particle.setPosition(-100, -100);
+		this.slipSound = ResourceLoader.loadSound("slip.ogg");
 	}
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
+		this.soundDelta = this.minSoundDelta;
 		this.particle.setPosition(x * w / width(), h - y * h / height());
 		this.particle.start();
 		return false;
@@ -49,15 +61,17 @@ public class ForegroundStage extends BaseStage {
 	public boolean touchDragged(int arg0, int arg1, int arg2) {
 		this.particle.setPosition(arg0 * w / width(), h - arg1 * h / height());
 		this.particle.start();
+		this.playSlipSound();
 		return false;
 	}
 
 	@Override
 	public void draw() {
+		float dt = Gdx.graphics.getDeltaTime();
 		spriteBatch.begin();
-		particle.draw(spriteBatch, Gdx.graphics.getDeltaTime());
+		particle.draw(spriteBatch, dt);
 		spriteBatch.end();
-
+		this.soundDelta += dt;
 		super.draw();
 	}
 
