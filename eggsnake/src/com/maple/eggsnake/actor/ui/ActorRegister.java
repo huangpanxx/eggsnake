@@ -8,8 +8,9 @@ package com.maple.eggsnake.actor.ui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.maple.eggsnake.screen.ContentScreen;
+import com.maple.eggsnake.stage.BaseStage;
 
 public class ActorRegister{
 	
@@ -17,15 +18,15 @@ public class ActorRegister{
 	private static Image lastImage;
 	private static Image generalImage;
 	
-	public static void combineRegister(Stage stage, Texture first, Texture last,
+	public static void combineRegister(BaseStage stage, Texture first, Texture last,
 			float x, float y, boolean isSnake){
 		firstImage = new RotateAnimateImage("first", first, 4f, RotateDirection.CLOCKWISE);
 		firstImage.x = x;
 		firstImage.y = y;
 		lastImage = new Image("last", last);
 		if(!isSnake){
-			lastImage.x = x + lastImage.width / 2;
-			lastImage.y = y + lastImage.height / 2;
+			lastImage.x = x + 5f;
+			lastImage.y = y;
 		}
 		else{
 			lastImage.x = x + 10f;
@@ -35,7 +36,7 @@ public class ActorRegister{
 		stage.addActor(lastImage);
 	}
 	
-	public static void combineRegister(Stage stage, Texture first, Texture last,
+	public static void combineRegister(BaseStage stage, Texture first, Texture last,
 			float x, float y){
 		firstImage = new RotateAnimateImage("first", first);
 		firstImage.x = x;
@@ -47,7 +48,7 @@ public class ActorRegister{
 		stage.addActor(lastImage);
 	}
 	
-	public static void singleRegister(Stage stage, Texture texture, 
+	public static void singleRegister(BaseStage stage, Texture texture, 
 			float x, float y){
 		generalImage = new Image("Quit", texture);
 		generalImage.x = x;
@@ -55,11 +56,20 @@ public class ActorRegister{
 		stage.addActor(generalImage);
 	}	
 	
-	public static void singleRegister(Stage stage, TextureRegion region,
+	public static void singleRegister(BaseStage stage, TextureRegion region,
 			float x, float y){
 		generalImage = new Image("Quit", region);
 		generalImage.x = x;
 		generalImage.y = y;
 		stage.addActor(generalImage);
 	}
+	
+
+	public static void navigateRegister(ContentScreen screen, BaseStage sourcStage,
+			BaseStage destStage, Texture texture, float x, float y){
+		generalImage = new ImageActor(screen, destStage ,"default", texture);
+		generalImage.x = x;
+		generalImage.y = y;
+		sourcStage.addActor(generalImage);
+	} 
 }

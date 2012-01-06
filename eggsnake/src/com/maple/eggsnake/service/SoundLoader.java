@@ -25,8 +25,10 @@ class SoundLoader {
 		}
 		this.map = new HashMap<String, Sound>();
 		logger = DefaultLogger.getDefaultLogger();
+
 		this.defaultSound = Gdx.audio.newSound(Gdx.files.internal(this.dirPath
-				+ defaultSound));
+
+		+ defaultSound));
 	}
 
 	public Sound loadSound(String soundPath) {
@@ -41,8 +43,10 @@ class SoundLoader {
 				map.put(soundPath, sound);
 			}
 		} catch (Exception ex) {
+
 			logger.log("SoundManager loadSound:加载:%1$s失败(%2$s)", soundPath,
 					ex.getMessage());
+
 			sound = this.defaultSound;
 		}
 		return sound;

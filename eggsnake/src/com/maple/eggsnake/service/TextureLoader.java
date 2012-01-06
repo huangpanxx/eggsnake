@@ -8,7 +8,6 @@ import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 
 class TextureLoader {
-
 	private String dirPath;
 	Map<String, Texture> map;
 	Loggable logger;
@@ -23,7 +22,7 @@ class TextureLoader {
 		}
 		this.map = new HashMap<String, Texture>();
 		logger = DefaultLogger.getDefaultLogger();
-		this.defaultTexture = new Texture(dirPath + defaultTexture);
+		this.defaultTexture = new Texture(this.dirPath + defaultTexture);
 	}
 
 	public Texture loadTexture(String texturePath) {
