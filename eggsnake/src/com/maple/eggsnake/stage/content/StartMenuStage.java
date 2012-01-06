@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class StartMenuStage extends BaseStage {
@@ -19,13 +20,16 @@ public class StartMenuStage extends BaseStage {
 	private Texture wheelMouseTexture;// 旋转轮子上的小老鼠纹理
 	private Texture quitTexture;// quit纹理
 	private Texture wheelTexture;// 旋转轮子纹理
+	private ContentScreen contentScreen;// 中间层的Screen
 
 	private float generalTextureWidth; // 作为临时变量，保存任意纹理宽度
 	private float generalTextureHeight; // 作为临时变量，保存任意纹理高度
 	private TextureRegion generalTextureRegion;// 保存纹理的部分区域
 
-	public StartMenuStage(float width, float height, boolean stretch) {
+	public StartMenuStage(ContentScreen screen, float width, float height,
+			boolean stretch) {
 		super(width, height, stretch);
+		this.contentScreen = screen;
 		this.initTextures();
 		this.loadTitleImage();
 		this.loadRMouseWheelImage();
@@ -40,8 +44,8 @@ public class StartMenuStage extends BaseStage {
 		generalTextureWidth = this.titileTexture.getWidth();
 		generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
 				480f, 128f);
-		ActorRegister.singleRegister(this, generalTextureRegion, 0f, this.height
-				- generalTextureHeight);
+		ActorRegister.singleRegister(this, generalTextureRegion, 0f,
+				this.height - generalTextureHeight);
 	}
 
 	/**
@@ -123,7 +127,8 @@ public class StartMenuStage extends BaseStage {
 	}
 
 	/**
-	 * @param titileTexture the titileTexture to set
+	 * @param titileTexture
+	 *            the titileTexture to set
 	 */
 	public void setTitileTexture(Texture titileTexture) {
 		this.titileTexture = titileTexture;
@@ -137,7 +142,8 @@ public class StartMenuStage extends BaseStage {
 	}
 
 	/**
-	 * @param wheelSnakeTexture the wheelSnakeTexture to set
+	 * @param wheelSnakeTexture
+	 *            the wheelSnakeTexture to set
 	 */
 	public void setWheelSnakeTexture(Texture wheelSnakeTexture) {
 		this.wheelSnakeTexture = wheelSnakeTexture;
@@ -151,7 +157,8 @@ public class StartMenuStage extends BaseStage {
 	}
 
 	/**
-	 * @param wheelMouseTexture the wheelMouseTexture to set
+	 * @param wheelMouseTexture
+	 *            the wheelMouseTexture to set
 	 */
 	public void setWheelMouseTexture(Texture wheelMouseTexture) {
 		this.wheelMouseTexture = wheelMouseTexture;
@@ -165,7 +172,8 @@ public class StartMenuStage extends BaseStage {
 	}
 
 	/**
-	 * @param quitTexture the quitTexture to set
+	 * @param quitTexture
+	 *            the quitTexture to set
 	 */
 	public void setQuitTexture(Texture quitTexture) {
 		this.quitTexture = quitTexture;
@@ -179,7 +187,8 @@ public class StartMenuStage extends BaseStage {
 	}
 
 	/**
-	 * @param wheelTexture the wheelTexture to set
+	 * @param wheelTexture
+	 *            the wheelTexture to set
 	 */
 	public void setWheelTexture(Texture wheelTexture) {
 		this.wheelTexture = wheelTexture;
