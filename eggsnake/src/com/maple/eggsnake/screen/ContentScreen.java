@@ -8,12 +8,10 @@
 
 package com.maple.eggsnake.screen;
 
-import com.maple.eggsnake.stage.content.AboutUsStage;
-
 public class ContentScreen extends NavigateScreen{
 
 	public ContentScreen(){
 		this.setLayer(ScreenLayer.CONTENT);
-		this.Navigate(new AboutUsStage(getWidth(), getHeight(), true));
+		//this.Navigate(new AboutUsStage(getWidth(), getHeight(), true));
 	}
 }
