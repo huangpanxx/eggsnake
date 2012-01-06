@@ -29,7 +29,6 @@ class ParticleLoader {
 		if ((!base.endsWith("/") && (!base.endsWith("\\")))) {
 			base = base + "/";
 		}
-		logger.log(base + relativePath);
 		return base + relativePath;
 	}
 

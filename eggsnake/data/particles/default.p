@@ -61,10 +61,12 @@ lowMax: 0.0
 highMin: 32.0
 highMax: 32.0
 relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
+scalingCount: 2
+scaling0: 0.6938776
+scaling1: 0.3469388
+timelineCount: 2
 timeline0: 0.0
+timeline1: 0.3561644
 - Velocity - 
 active: true
 lowMin: 0.0
@@ -123,4 +125,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-default.png
+/home/snail/桌面/eggsnake/eggsnake/data/particles/default.png

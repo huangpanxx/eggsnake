@@ -41,7 +41,8 @@ class MusicLoader {
 				map.put(musicPath, music);
 			}
 		} catch (Exception ex) {
-			logger.log("MusicManager loadMusic:加载:%1$s失败", musicPath);
+			logger.log("MusicManager loadMusic:加载:%1$s失败(%2$s)", musicPath,
+					ex.getMessage());
 			music = this.defaultMusic;
 		}
 		return music;

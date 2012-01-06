@@ -7,6 +7,7 @@ import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.NavigateScreen;
+import com.maple.eggsnake.service.MusicManager;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class BackgroundStage extends BaseStage {
@@ -19,6 +20,8 @@ public class BackgroundStage extends BaseStage {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();
 		loadBackground();
+		MusicManager.setBackgroundMusic("background.ogg");//aganzo_boss.ogg")
+		MusicManager.play(true);
 	}
 
 	private void loadBackground() {

@@ -41,7 +41,8 @@ class SoundLoader {
 				map.put(soundPath, sound);
 			}
 		} catch (Exception ex) {
-			logger.log("SoundManager loadSound:加载:%1$s失败", soundPath);
+			logger.log("SoundManager loadSound:加载:%1$s失败(%2$s)", soundPath,
+					ex.getMessage());
 			sound = this.defaultSound;
 		}
 		return sound;

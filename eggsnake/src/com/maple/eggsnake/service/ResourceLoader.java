@@ -49,8 +49,8 @@ public class ResourceLoader {
 
 	public static Music loadMusic(String relativePath) {
 		if (ResourceLoader.musicLoader == null) {
-			ResourceLoader.musicLoader = new MusicLoader(SOUND_DIR,
-					DEFAULT_SOUND_NAME);
+			ResourceLoader.musicLoader = new MusicLoader(MUSIC_DIR,
+					DEFAULT_MUSIC_NAME);
 		}
 		return ResourceLoader.musicLoader.loadMusic(relativePath);
 	}
