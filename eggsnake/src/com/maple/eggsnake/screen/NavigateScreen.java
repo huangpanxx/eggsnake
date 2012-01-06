@@ -57,7 +57,7 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 
 	// protected Camera camera;
 
-	public void Navigate(BaseStage _stage) {
+	public void navigate(BaseStage _stage) {
 		logger.log("%1$s:Navigate", this.getClass().getName());
 		this.stage = _stage;
 		// this.stage.setCamera(camera);

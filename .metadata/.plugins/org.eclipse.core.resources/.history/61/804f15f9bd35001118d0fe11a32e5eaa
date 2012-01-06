@@ -1,7 +1,0 @@
-package com.maple.eggsnake.logger;
-
-public interface logable {
-	void Log(String patten, Object... args);
-
-	void Log(int level, String patten, Object... args);
-}

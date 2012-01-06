@@ -1,5 +1,0 @@
-package com.maple.eggsnake.logger;
-
-public class DefaultLoggerFactory {
-
-}

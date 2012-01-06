@@ -6,4 +6,4 @@ eggsnake_android/assets/*
 eggsnake_android\assets\*
 eggsnake_android/assets/*/
 eggsnake_android\assets\*\
-
+.metadata
