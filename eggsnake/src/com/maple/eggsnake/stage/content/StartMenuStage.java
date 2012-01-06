@@ -20,74 +20,49 @@ public class StartMenuStage extends BaseStage {
 	private Texture wheelMouseTexture;// 旋转轮子上的小老鼠纹理
 	private Texture quitTexture;// quit纹理
 	private Texture wheelTexture;// 旋转轮子纹理
-	private ContentScreen contentScreen;// 中间层的Screen
+	private Texture newGameTexture;// new game文字纹理
+	private Texture settingTexture;// setting文字纹理
+	private Texture aboutUsTexture;// aboutUs文字纹理
 
-	private float generalTextureWidth; // 作为临时变量，保存任意纹理宽度
-	private float generalTextureHeight; // 作为临时变量，保存任意纹理高度
+	private ContentScreen contentScreen;// 中间层的Screen
+	private int contentScreenWidth;// 中间层的Screen的宽度
+	private int contentScreenHeight;// 中间层的Screen的高度
+
+	private float generalTextureWidth; // 保存任意纹理宽度
+	private float generalTextureHeight; // 保存任意纹理高度
 	private TextureRegion generalTextureRegion;// 保存纹理的部分区域
+	private BaseStage generalDestStage;// 保存目标BaseStage
 
 	public StartMenuStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
+		this.initContent(screen);
+		this.load();
+	}
+
+	/**
+	 * 
+	 */
+	private void initContent(ContentScreen screen) {
 		this.contentScreen = screen;
-		this.initTextures();
+		this.contentScreenWidth = this.contentScreen.getWidth();
+		this.contentScreenHeight = this.contentScreen.getHeight();
+	}
+	
+	/**
+	 * 
+	 */
+	private void load() {
+		this.loadTextures();
 		this.loadTitleImage();
 		this.loadRMouseWheelImage();
 		this.loadLSnakeWheelImage();
+		this.loadNewGameImage();
+		this.loadSettingImage();
+		this.loadAboutUsImage();
 		this.loadQuitImage();
 	}
-
-	/**
-	 * @description 加载标题"EggSnake"
-	 */
-	private void loadTitleImage() {
-		generalTextureWidth = this.titileTexture.getWidth();
-		generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
-				480f, 128f);
-		ActorRegister.singleRegister(this, generalTextureRegion, 0f,
-				this.height - generalTextureHeight);
-	}
-
-	/**
-	 * @description 加载左边旋转轮子特效
-	 */
-	private void loadLSnakeWheelImage() {
-		ActorRegister.combineRegister(this, this.wheelTexture,
-				this.wheelSnakeTexture, 0f, 96f, true);
-	}
-
-	/**
-	 * @description 加载右边旋转轮子
-	 */
-	private void loadRMouseWheelImage() {
-		ActorRegister.combineRegister(this, this.wheelTexture,
-				this.wheelMouseTexture, 352f, 100f, false);
-	}
-
-	/**
-	 * @description 加载退出按钮
-	 */
-	private void loadQuitImage() {
-		generalTextureWidth = this.quitTexture.getWidth();
-		ActorRegister.singleRegister(this, quitTexture, this.width
-				- generalTextureWidth + 10f, 0);
-	}
-
-	/**
-	 * @description 初始化相关纹理
-	 */
-	private void initTextures() {
-		titileTexture = new Texture(
-				Gdx.files.internal("data/images/fonteggsnake_512_128.png"));
-		wheelTexture = new Texture(
-				Gdx.files.internal("data/images/wheel_128_128.png"));
-		wheelSnakeTexture = new Texture(
-				Gdx.files.internal("data/images/halfeggsnake_128_128.png"));
-		wheelMouseTexture = new Texture(
-				Gdx.files.internal("data/images/oneeyemouse_64_64.png"));
-		quitTexture = new Texture(
-				Gdx.files.internal("data/images/quitbutton_128_64.png"));
-	}
+	
 
 	@Override
 	public void hide() {
@@ -116,81 +91,98 @@ public class StartMenuStage extends BaseStage {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
+	}
+	
+	/**
+	 * @description 加载标题"EggSnake"
+	 */
+	private void loadTitleImage() {
+		generalTextureHeight = this.titileTexture.getHeight();
+		generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
+				480f, 128f);
+		ActorRegister.singleRegister(this, generalTextureRegion, 0f,
+				this.height - generalTextureHeight);
 	}
 
 	/**
-	 * @return the titileTexture
+	 * @description 加载左边旋转轮子特效
 	 */
-	public Texture getTitileTexture() {
-		return titileTexture;
+	private void loadLSnakeWheelImage() {
+		ActorRegister.combineRegister(this, this.wheelTexture,
+				this.wheelSnakeTexture, 0f, 96f, true);
 	}
 
 	/**
-	 * @param titileTexture
-	 *            the titileTexture to set
+	 * @description 加载右边旋转轮子
 	 */
-	public void setTitileTexture(Texture titileTexture) {
-		this.titileTexture = titileTexture;
+	private void loadRMouseWheelImage() {
+		ActorRegister.combineRegister(this, this.wheelTexture,
+				this.wheelMouseTexture, 352f, 100f, false);
 	}
 
 	/**
-	 * @return the wheelSnakeTexture
+	 * @description 加载退出按钮
 	 */
-	public Texture getWheelSnakeTexture() {
-		return wheelSnakeTexture;
+	private void loadQuitImage() {
+		generalTextureWidth = this.quitTexture.getWidth();
+		/*
+		 * generalDestStage = new AboutUsStage(this.contentScreen,
+		 * this.contentScreenWidth, this.contentScreenHeight, true);
+		 * ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
+		 * quitTexture, this.width - generalTextureWidth + 10f, 0);
+		 */
 	}
 
 	/**
-	 * @param wheelSnakeTexture
-	 *            the wheelSnakeTexture to set
+	 * @description 加载new game
 	 */
-	public void setWheelSnakeTexture(Texture wheelSnakeTexture) {
-		this.wheelSnakeTexture = wheelSnakeTexture;
+	private void loadNewGameImage() {
+		generalDestStage = new GameStage(contentScreen,
+				this.contentScreenWidth, this.contentScreenHeight, true);
+		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
+				newGameTexture, 112f, 183f);
 	}
 
 	/**
-	 * @return the wheelMouseTexture
+	 * @description 加载Setting
 	 */
-	public Texture getWheelMouseTexture() {
-		return wheelMouseTexture;
+	private void loadSettingImage() {
+		generalDestStage = new SettingStage(this.contentScreen,
+				this.contentScreenWidth, this.contentScreenHeight, true);
+		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
+				settingTexture, 112f, 128f);
 	}
 
 	/**
-	 * @param wheelMouseTexture
-	 *            the wheelMouseTexture to set
+	 * @description 加载aboutus
 	 */
-	public void setWheelMouseTexture(Texture wheelMouseTexture) {
-		this.wheelMouseTexture = wheelMouseTexture;
+	private void loadAboutUsImage() {
+		generalDestStage = new AboutUsStage(contentScreen,
+				this.contentScreenWidth, this.contentScreenHeight, true);
+		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
+				aboutUsTexture, 112f, 73f);
 	}
 
 	/**
-	 * @return the quitTexture
+	 * @description 初始化相关纹理
 	 */
-	public Texture getQuitTexture() {
-		return quitTexture;
+	private void loadTextures() {
+		titileTexture = new Texture(
+				Gdx.files.internal("data/images/fonteggsnake_512_128.png"));
+		wheelTexture = new Texture(
+				Gdx.files.internal("data/images/wheel_128_128.png"));
+		wheelSnakeTexture = new Texture(
+				Gdx.files.internal("data/images/halfeggsnake_128_128.png"));
+		wheelMouseTexture = new Texture(
+				Gdx.files.internal("data/images/mousequeue_128_128.png"));
+		quitTexture = new Texture(
+				Gdx.files.internal("data/images/quitbutton_128_64.png"));
+		newGameTexture = new Texture(
+				Gdx.files.internal("data/images/newgamebtn256_64.png"));
+		settingTexture = new Texture(
+				Gdx.files.internal("data/images/settingsbtn256_64.png"));
+		aboutUsTexture = new Texture(
+				Gdx.files.internal("data/images/aboutusbtn256_64.png"));
 	}
 
-	/**
-	 * @param quitTexture
-	 *            the quitTexture to set
-	 */
-	public void setQuitTexture(Texture quitTexture) {
-		this.quitTexture = quitTexture;
-	}
-
-	/**
-	 * @return the wheelTexture
-	 */
-	public Texture getWheelTexture() {
-		return wheelTexture;
-	}
-
-	/**
-	 * @param wheelTexture
-	 *            the wheelTexture to set
-	 */
-	public void setWheelTexture(Texture wheelTexture) {
-		this.wheelTexture = wheelTexture;
-	}
 }
