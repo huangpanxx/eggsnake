@@ -9,6 +9,7 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -114,6 +115,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void show() {
+		DefaultLogger.getDefaultLogger().log(0, this.toString(), ":show");
 	}
 
 	@Override
@@ -205,8 +207,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * 
 	 * 
 	 */
-//	private void loadTwoEyeMouseImage(){
-//		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
-//	}
+	/*private void loadTwoEyeMouseImage(){
+		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
+	}*/
 
 }

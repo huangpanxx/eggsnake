@@ -9,6 +9,7 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -19,6 +20,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 	private Texture snakeImageTexture;// 蛇图纹理
 	private Texture snakeFontTexture;// 蛋蛋蛇问字纹理
 	private Texture quitTexture;// quit纹理
+	private Texture aboutUsInfor;//aboutus信息
 
 	private ContentScreen contentScreen;// 中间层的Screen
 
@@ -48,6 +50,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		titileTexture = ResourceLoader.loadTexture("aboutusstage_256_64.png");
 		snakeImageTexture = ResourceLoader.loadTexture("wholesnake_128_128.png");
 		snakeFontTexture = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
+		aboutUsInfor = ResourceLoader.loadTexture("aboutUS_info_512_256.png");
 		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 	
@@ -59,6 +62,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		this.loadTitleImage();
 		this.loadSnakeImage();
 		this.loadSnakeFontImage();
+		this.loadAboutUsInforImage();
 		this.loadQuitImage();
 	}
 
@@ -88,7 +92,6 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		generalTextureHeight = this.titileTexture.getHeight();
 		ActorRegister.singleRegister(this, new TextureRegion(titileTexture),
 				(this.width - generalTextureWidth) / 2 - 10f, this.height
-						- generalTextureHeight);
+						- generalTextureHeight - 10f);
 	}
 
 	/**
@@ -110,8 +113,8 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		generalTextureHeight = this.snakeImageTexture.getHeight();
 		ActorRegister.singleRegister(this,
 				new TextureRegion(snakeImageTexture), this.width
-						- generalTextureWidth, this.height
-						- generalTextureHeight - 50);
+						- generalTextureWidth + 20f, this.height
+						- generalTextureHeight - 10f);
 	}
 
 	/**
@@ -122,7 +125,15 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		generalTextureWidth = this.snakeFontTexture.getWidth();
 		generalTextureHeight = this.snakeFontTexture.getHeight();
 		ActorRegister.singleRegister(this, new TextureRegion(snakeFontTexture),
-				(this.width - this.titileTexture.getWidth()) / 2 - 10f, 0);
+				(this.width - this.titileTexture.getWidth()) / 2 - 10f, 10f);
+	}
+	
+	/**
+	 * @description 
+	 */
+	private void loadAboutUsInforImage(){
+		ActorRegister.singleRegister(this, new TextureRegion(this.aboutUsInfor),
+				-30f, 10f);
 	}
 
 	/**
