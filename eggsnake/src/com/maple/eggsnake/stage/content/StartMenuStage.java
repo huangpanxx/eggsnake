@@ -6,6 +6,7 @@
 
 package com.maple.eggsnake.stage.content;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
@@ -69,8 +70,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		/*newGameTexture = new Texture(Gdx.files.internal("data/images/newgamebtn256_64.png"));
 		settingTexture = new Texture(Gdx.files.internal("data/images/settingsbtn256_64.png"));
 		aboutUsTexture = new Texture(Gdx.files.internal("data/images/aboutusbtn256_64.png"));
-		startEggTexture = new Texture(Gdx.files.internal("data/imges/startegg_64_64.png"));
-		oneEyeMouseTexture = new Texture(Gdx.files.internal("data/images/oneeyemouse_64_64.png"));*/
+		startEggTexture = new Texture(Gdx.files.internal("data/images/startegg_64_64.png"));*/
+		oneEyeMouseTexture = new Texture(Gdx.files.internal("data/images/oneeyemouse_64_64.png"));
 //		twoEyeMouseTexture = ResourceLoader.loadTexture("twoeyesmouse_64_64.png");
 	}
 
