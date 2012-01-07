@@ -6,14 +6,14 @@
 
 package com.maple.eggsnake.stage.content;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.screen.ContentScreen;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class AboutUsStage extends BaseStage {
+public class AboutUsStage extends BaseStage implements ActorLoader{
 
 	private Texture titileTexture;// 标题纹理
 	private Texture snakeImageTexture;// 蛇图纹理
@@ -21,32 +21,40 @@ public class AboutUsStage extends BaseStage {
 	private Texture quitTexture;// quit纹理
 
 	private ContentScreen contentScreen;// 中间层的Screen
-	private int contentScreenWidth;// 中间层的Screen的宽度
-	private int contentScreenHeight;// 中间层的Screen的高度
 
 	private float generalTextureWidth; // 作为临时变量，保存任意纹理宽度
 	private float generalTextureHeight; // 作为临时变量，保存任意纹理高度
+	@SuppressWarnings("unused")
 	private BaseStage generalDestStage;// 保存目标stage
 
 	public AboutUsStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
+		this.load();
 	}
 
 	/**
 	 * 
 	 */
-	private void initContent(ContentScreen screen) {
+	public void initContent(ContentScreen screen) {
 		this.contentScreen = screen;
-		this.contentScreenWidth = this.contentScreen.getWidth();
-		this.contentScreenHeight = this.contentScreen.getHeight();
+	}
+	
+	/**
+	 * @author zhiwei.wang
+	 */
+	public void loadTextures() {
+		titileTexture = ResourceLoader.loadTexture("aboutusstage_256_64.png");
+		snakeImageTexture = ResourceLoader.loadTexture("wholesnake_128_128.png");
+		snakeFontTexture = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
+		quitTexture = ResourceLoader.loadTexture("aboutquitbutton_128_64.png");
 	}
 	
 	/**
 	 * 
 	 */
-	private void load() {
+	public void load() {
 		this.loadTextures();
 		this.loadTitleImage();
 		this.loadSnakeImage();
@@ -81,7 +89,6 @@ public class AboutUsStage extends BaseStage {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		this.load();
 	}
 
 	/**
@@ -115,7 +122,7 @@ public class AboutUsStage extends BaseStage {
 		generalTextureWidth = this.snakeFontTexture.getWidth();
 		generalTextureHeight = this.snakeFontTexture.getHeight();
 		ActorRegister.singleRegister(this, new TextureRegion(snakeFontTexture),
-				(this.width - this.titileTexture.getWidth()) / 2 - 10, 0);
+				(this.width - this.titileTexture.getWidth()) / 2 - 10f, 0);
 	}
 
 	/**
@@ -123,24 +130,8 @@ public class AboutUsStage extends BaseStage {
 	 */
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
-		generalDestStage = new StartMenuStage(contentScreen,
-				contentScreenWidth, contentScreenHeight, true);
-		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
+		ActorRegister.navigateRegister(contentScreen, this, EnumStage.STARTMENUSTAGE,
 				quitTexture, this.width - generalTextureWidth, 0);
-	}
-
-	/**
-	 * @author zhiwei.wang
-	 */
-	private void loadTextures() {
-		titileTexture = new Texture(
-				Gdx.files.internal("data/images/aboutusstage_256_64.png"));
-		snakeImageTexture = new Texture(
-				Gdx.files.internal("data/images/wholesnake_128_128.png"));
-		snakeFontTexture = new Texture(
-				Gdx.files.internal("data/images/titleeggsnake_128_32.png"));
-		quitTexture = new Texture(
-				Gdx.files.internal("data/images/aboutquitbutton_128_64.png"));
 	}
 
 }

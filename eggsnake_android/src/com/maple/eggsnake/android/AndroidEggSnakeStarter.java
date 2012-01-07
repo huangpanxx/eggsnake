@@ -30,7 +30,7 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 		// 开始启动
 		Loggable logger = DefaultLogger.getDefaultLogger();
 		logger.log("Enter from Android");
-
+		
 		// 配置环境
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;

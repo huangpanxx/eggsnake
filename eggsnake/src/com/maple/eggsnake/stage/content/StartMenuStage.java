@@ -6,14 +6,14 @@
 
 package com.maple.eggsnake.stage.content;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.screen.ContentScreen;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class StartMenuStage extends BaseStage {
+public class StartMenuStage extends BaseStage implements ActorLoader {
 
 	private Texture titileTexture;// 标题纹理
 	private Texture wheelSnakeTexture;// 旋转轮子上的蛇图纹理
@@ -23,15 +23,17 @@ public class StartMenuStage extends BaseStage {
 	private Texture newGameTexture;// new game文字纹理
 	private Texture settingTexture;// setting文字纹理
 	private Texture aboutUsTexture;// aboutUs文字纹理
+	private Texture startEggTexture;//
+	private Texture oneEyeMouseTexture;
+	private Texture twoEyeMouseTexture;
 
 	private ContentScreen contentScreen;// 中间层的Screen
-	private int contentScreenWidth;// 中间层的Screen的宽度
-	private int contentScreenHeight;// 中间层的Screen的高度
 
 	private float generalTextureWidth; // 保存任意纹理宽度
+	@SuppressWarnings("unused")
 	private float generalTextureHeight; // 保存任意纹理高度
+	@SuppressWarnings("unused")
 	private TextureRegion generalTextureRegion;// 保存纹理的部分区域
-	private BaseStage generalDestStage;// 保存目标BaseStage
 
 	public StartMenuStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
@@ -43,16 +45,36 @@ public class StartMenuStage extends BaseStage {
 	/**
 	 * 
 	 */
-	private void initContent(ContentScreen screen) {
+	@Override
+	public void initContent(ContentScreen screen) {
 		this.contentScreen = screen;
-		this.contentScreenWidth = this.contentScreen.getWidth();
-		this.contentScreenHeight = this.contentScreen.getHeight();
 	}
-	
+
+	/**
+	 * @description 初始化相关纹理
+	 */
+	@Override
+	public void loadTextures() {
+		titileTexture = ResourceLoader.loadTexture("fonteggsnake_512_128.png");
+		wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
+		wheelSnakeTexture = ResourceLoader
+				.loadTexture("halfeggsnake_128_128.png");
+		wheelMouseTexture = ResourceLoader
+				.loadTexture("mousequeue_128_128.png");
+		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
+		newGameTexture = ResourceLoader.loadTexture("newgamebtn256_64.png");
+		settingTexture = ResourceLoader.loadTexture("settingsbtn256_64.png");
+		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn256_64.png");
+		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
+		oneEyeMouseTexture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
+		twoEyeMouseTexture = ResourceLoader.loadTexture("two_eyes_mouse_64_64.png");
+	}
+
 	/**
 	 * 
 	 */
-	private void load() {
+	@Override
+	public void load() {
 		this.loadTextures();
 		this.loadTitleImage();
 		this.loadRMouseWheelImage();
@@ -60,9 +82,11 @@ public class StartMenuStage extends BaseStage {
 		this.loadNewGameImage();
 		this.loadSettingImage();
 		this.loadAboutUsImage();
+		this.loadStartEggImage();
+		this.loadOneEyeMouseImage();
+		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
 	}
-	
 
 	@Override
 	public void hide() {
@@ -90,18 +114,30 @@ public class StartMenuStage extends BaseStage {
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 	}
-	
+
+	@Override
+	public void dispose() {
+		this.newGameTexture.dispose();
+		this.settingTexture.dispose();
+		this.aboutUsTexture.dispose();
+		this.wheelMouseTexture.dispose();
+		this.wheelSnakeTexture.dispose();
+		this.wheelTexture.dispose();
+		super.dispose();
+	}
+
 	/**
 	 * @description 加载标题"EggSnake"
 	 */
 	private void loadTitleImage() {
 		generalTextureHeight = this.titileTexture.getHeight();
-		generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
+		/*generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
 				480f, 128f);
 		ActorRegister.singleRegister(this, generalTextureRegion, 0f,
-				this.height - generalTextureHeight);
+				this.height - generalTextureHeight);*/
+		ActorRegister.singleRegister(this, titileTexture, 0f,
+				0.68f * this.height());//待重构
 	}
 
 	/**
@@ -125,64 +161,56 @@ public class StartMenuStage extends BaseStage {
 	 */
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
-		/*
-		 * generalDestStage = new AboutUsStage(this.contentScreen,
-		 * this.contentScreenWidth, this.contentScreenHeight, true);
-		 * ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
-		 * quitTexture, this.width - generalTextureWidth + 10f, 0);
-		 */
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumStage.ABOUTUSSTAGE, quitTexture, this.width
+						- generalTextureWidth + 10f, 0);
 	}
 
 	/**
 	 * @description 加载new game
 	 */
 	private void loadNewGameImage() {
-		generalDestStage = new GameStage(contentScreen,
-				this.contentScreenWidth, this.contentScreenHeight, true);
-		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
-				newGameTexture, 112f, 183f);
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumStage.GAMESTAGE, newGameTexture, 105f, 180f);
 	}
 
 	/**
 	 * @description 加载Setting
 	 */
 	private void loadSettingImage() {
-		generalDestStage = new SettingStage(this.contentScreen,
-				this.contentScreenWidth, this.contentScreenHeight, true);
-		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
-				settingTexture, 112f, 128f);
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumStage.SETTINGSTAGE, settingTexture, 112f, 128f);
 	}
 
 	/**
 	 * @description 加载aboutus
 	 */
 	private void loadAboutUsImage() {
-		generalDestStage = new AboutUsStage(contentScreen,
-				this.contentScreenWidth, this.contentScreenHeight, true);
-		ActorRegister.navigateRegister(contentScreen, this, generalDestStage,
-				aboutUsTexture, 112f, 73f);
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
 	}
-
+	
 	/**
-	 * @description 初始化相关纹理
+	 * @description 加载StartEgg
 	 */
-	private void loadTextures() {
-		titileTexture = new Texture(
-				Gdx.files.internal("data/images/fonteggsnake_512_128.png"));
-		wheelTexture = new Texture(
-				Gdx.files.internal("data/images/wheel_128_128.png"));
-		wheelSnakeTexture = new Texture(
-				Gdx.files.internal("data/images/halfeggsnake_128_128.png"));
-		wheelMouseTexture = new Texture(
-				Gdx.files.internal("data/images/mousequeue_128_128.png"));
-		quitTexture = new Texture(
-				Gdx.files.internal("data/images/quitbutton_128_64.png"));
-		newGameTexture = new Texture(
-				Gdx.files.internal("data/images/newgamebtn256_64.png"));
-		settingTexture = new Texture(
-				Gdx.files.internal("data/images/settingsbtn256_64.png"));
-		aboutUsTexture = new Texture(
-				Gdx.files.internal("data/images/aboutusbtn256_64.png"));
+	private void loadStartEggImage(){
+		ActorRegister.singleRegister(this, this.startEggTexture, 0f, 0f);
+	}
+	
+	/**
+	 * 
+	 * 
+	 */
+	private void loadOneEyeMouseImage(){
+		ActorRegister.singleRegister(this, this.oneEyeMouseTexture, 128f, 0f);
+	}
+	
+	/**
+	 * 
+	 * 
+	 */
+	private void loadTwoEyeMouseImage(){
+		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
 	}
 
 }
