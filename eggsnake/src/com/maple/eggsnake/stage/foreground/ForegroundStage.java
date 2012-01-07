@@ -47,6 +47,8 @@ public class ForegroundStage extends BaseStage {
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
+		this.startX = x;
+		this.startY = y;
 		this.soundDelta = this.minSoundDelta;
 		this.particle.setPosition(x * w / width(), h - y * h / height());
 		this.particle.start();
@@ -61,11 +63,23 @@ public class ForegroundStage extends BaseStage {
 	}
 
 	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		this.particle.setPosition(arg0 * w / width(), h - arg1 * h / height());
+	public boolean touchDragged(int x, int y, int keyType) {
+		this.particle.setPosition(x * w / width(), h - y * h / height());
 		this.particle.start();
-		this.playSlipSound();
+		if (isMoved(x, y)) {
+			this.playSlipSound();
+			this.startX = x;
+			this.startY = y;
+		}
 		return false;
+	}
+
+	private boolean isMoved(int x, int y) {
+		return this.getDistance(this.startX, this.startY, x, y) > 30;
+	}
+
+	private float getDistance(float x1, float y1, float x2, float y2) {
+		return (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 	}
 
 	@Override
