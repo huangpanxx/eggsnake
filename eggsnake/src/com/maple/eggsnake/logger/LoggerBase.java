@@ -1,6 +1,12 @@
+/** 
+ * @description	: LoggerBase for simplify the devolopment of loggers
+ * @author		: 黄攀
+ * @created		: 2012-1-3
+ */
+
 package com.maple.eggsnake.logger;
 
-abstract class LoggerBase implements Loggable {
+public abstract class LoggerBase implements Loggable {
 
 	@Override
 	public void log(String patten, Object... args) {

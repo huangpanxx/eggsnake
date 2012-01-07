@@ -29,10 +29,12 @@ class TextureLoader {
 		Texture texture = null;
 		try {
 			if (map.containsKey(texturePath)) {
+				logger.logWithSignature(this, "命中资源%1$s", texturePath);
 				texture = map.get(texturePath);
 			} else {
 				String absPath = this.dirPath + texturePath;
 				texture = new Texture(absPath);
+				logger.logWithSignature(this, "加载资源%1$s", texturePath);
 				map.put(texturePath, texture);
 			}
 		} catch (Exception ex) {
