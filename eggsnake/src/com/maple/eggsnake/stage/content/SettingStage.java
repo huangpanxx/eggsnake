@@ -10,10 +10,13 @@ public class SettingStage extends BaseStage implements ActorLoader{
 
 	private ContentScreen contentScreen;
 	private Texture quitTexture;// quit纹理
+	@SuppressWarnings("unused")
+	private Texture titleTexture;//title纹理
 	
 	private float generalTextureWidth; // 保存任意纹理宽度
 	@SuppressWarnings("unused")
 	private float generalTextureHeight; // 保存任意纹理高度
+//	private Texture titileTexture;
 
 	public SettingStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
@@ -59,14 +62,25 @@ public class SettingStage extends BaseStage implements ActorLoader{
 
 	@Override
 	public void loadTextures() {
-		quitTexture = ResourceLoader.loadTexture("aboutquitbutton_128_64.png");
+//		titleTexture = ResourceLoader.loadTexture("titlesettings_256_64.png");
+		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 
 	@Override
 	public void load() {
 		this.loadTextures();
+//		this.loadTitleImage();
 		this.loadQuitImage();
 	}
+	
+	/**
+	 * @description 加载setting标题
+	 */
+	/*private void loadTitleImage(){
+		ActorRegister.singleRegister(this, titileTexture, 112f,
+				64f);
+	}*/
+	
 	
 	/**
 	 * @description 加载退出按钮

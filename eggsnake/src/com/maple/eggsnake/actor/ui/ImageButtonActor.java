@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.screen.ContentScreen;
+import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.DestinationStage;
 import com.maple.eggsnake.stage.content.EnumStage;
@@ -72,7 +73,9 @@ public class ImageButtonActor extends Image {
 			this.contentScreen.navigate(DestinationStage.getDestnationStage(
 					contentScreen, destSatge));
 		else
-			this.sourceStage.dispose();
+		{
+			ApplicationService.exitGame();
+		}
 	}
 	
 }

@@ -158,7 +158,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.ABOUTUSSTAGE, quitTexture, this.width
+				EnumStage.DISPOSESTAGE, quitTexture, this.width
 						- generalTextureWidth + 10f, 0);
 	}
 
