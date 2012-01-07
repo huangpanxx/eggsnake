@@ -7,7 +7,6 @@
 
 package com.maple.eggsnake.screen;
 
-import com.maple.eggsnake.stage.content.AboutUsStage;
 import com.maple.eggsnake.stage.content.StartMenuStage;
 
 public class ContentScreen extends NavigateScreen{

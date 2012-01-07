@@ -9,7 +9,7 @@ import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.DestinationStage;
 import com.maple.eggsnake.stage.content.EnumStage;
 
-public class ImageActor extends Image {
+public class ImageButtonActor extends Image {
 
 	private ContentScreen contentScreen; // 中间层屏幕
 	private EnumStage destSatge; // 跳转的目标Stage枚举
@@ -19,7 +19,7 @@ public class ImageActor extends Image {
 	private final float clockwiseAngles = 360f;// 顺时针旋转360度
 	private final float duration = 2f;// 间隔
 
-	public ImageActor(ContentScreen screen, EnumStage destStage, String name,
+	public ImageButtonActor(ContentScreen screen, EnumStage destStage, String name,
 			TextureRegion region) {
 		super(name, region);
 		this.contentScreen = screen;
@@ -27,11 +27,11 @@ public class ImageActor extends Image {
 		this.touchable = true;
 	}
 
-	public ImageActor(String name, TextureRegion region) {
+	public ImageButtonActor(String name, TextureRegion region) {
 		super(name, region);
 	}
 
-	public ImageActor(ContentScreen screen, EnumStage destStage, String name,
+	public ImageButtonActor(ContentScreen screen, EnumStage destStage, String name,
 			Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
@@ -39,7 +39,7 @@ public class ImageActor extends Image {
 		this.touchable = true;
 	}
 
-	public ImageActor(ContentScreen screen, BaseStage source,
+	public ImageButtonActor(ContentScreen screen, BaseStage source,
 			EnumStage destStage, String name, Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
@@ -48,7 +48,7 @@ public class ImageActor extends Image {
 		this.touchable = true;
 	}
 
-	public ImageActor(String name, Texture texture) {
+	public ImageButtonActor(String name, Texture texture) {
 		super(name, texture);
 	}
 
@@ -74,4 +74,5 @@ public class ImageActor extends Image {
 		else
 			this.sourceStage.dispose();
 	}
+	
 }
