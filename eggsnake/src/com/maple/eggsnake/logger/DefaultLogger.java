@@ -14,7 +14,7 @@ public class DefaultLogger implements Loggable {
 	public static Loggable getDefaultLogger() {
 		if (defaultLogger == null) {
 			defaultLogger = new DefaultLogger();
-			setInnerLogger(new ConsoleLogger());
+			setInnerLogger(DefaultLogger.getInnerLogger());
 			setEnable(true);
 		}
 		return defaultLogger;

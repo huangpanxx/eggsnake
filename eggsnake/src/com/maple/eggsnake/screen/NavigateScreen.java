@@ -64,6 +64,8 @@ public class NavigateScreen extends SimpleScreen implements ProcessableScreen,
 	public void navigate(BaseStage _stage) {
 		logger.logWithSignature(this, "Navigate(%1$s)", _stage.getClass()
 				.getSimpleName());
+		if (this.stage != null) // for Test
+			this.stage.dispose();
 		this.stage = _stage;
 		this.stage.setCamera(camera);
 		this.setProcessor(this.stage);

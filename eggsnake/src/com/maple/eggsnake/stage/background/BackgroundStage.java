@@ -1,13 +1,12 @@
 package com.maple.eggsnake.stage.background;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.NavigateScreen;
 import com.maple.eggsnake.service.MusicManager;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class BackgroundStage extends BaseStage {
@@ -25,9 +24,8 @@ public class BackgroundStage extends BaseStage {
 	}
 
 	private void loadBackground() {
-		FileHandle fileHandle = Gdx.files
-				.internal("data/images/background_512_512.png");
-		ActorRegister.singleRegister(this, new Texture(fileHandle), 0, 0);
+		Texture texture = ResourceLoader.loadTexture("background_512_512.png");
+		ActorRegister.singleRegister(this, texture, 0, 0);
 	}
 
 	public void hide() {
@@ -50,7 +48,6 @@ public class BackgroundStage extends BaseStage {
 	}
 
 	public void show() {
-		// TODO Auto-generated method stub
 
 	}
 
