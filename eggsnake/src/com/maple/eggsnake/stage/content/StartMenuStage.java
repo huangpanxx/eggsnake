@@ -25,7 +25,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private Texture aboutUsTexture;// aboutUs文字纹理
 	private Texture startEggTexture;//
 	private Texture oneEyeMouseTexture;
-	private Texture twoEyeMouseTexture;
+//	private Texture twoEyeMouseTexture;
 
 	private ContentScreen contentScreen;// 中间层的Screen
 
@@ -67,7 +67,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn256_64.png");
 		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
 		oneEyeMouseTexture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
-		twoEyeMouseTexture = ResourceLoader.loadTexture("two_eyes_mouse_64_64.png");
+//		twoEyeMouseTexture = ResourceLoader.loadTexture("twoeyesmouse_64_64.png");
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		this.loadAboutUsImage();
 		this.loadStartEggImage();
 		this.loadOneEyeMouseImage();
-		this.loadTwoEyeMouseImage();
+//		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
 	}
 
@@ -132,10 +132,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadTitleImage() {
 		generalTextureHeight = this.titileTexture.getHeight();
-		/*generalTextureRegion = new TextureRegion(this.titileTexture, 16f, 0f,
-				480f, 128f);
-		ActorRegister.singleRegister(this, generalTextureRegion, 0f,
-				this.height - generalTextureHeight);*/
 		ActorRegister.singleRegister(this, titileTexture, 0f,
 				0.68f * this.height());//待重构
 	}
@@ -209,8 +205,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * 
 	 * 
 	 */
-	private void loadTwoEyeMouseImage(){
-		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
-	}
+//	private void loadTwoEyeMouseImage(){
+//		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
+//	}
 
 }

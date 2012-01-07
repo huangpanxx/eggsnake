@@ -68,7 +68,7 @@ public class ActorRegister{
 
 	public static void navigateRegister(ContentScreen screen, BaseStage sourceStage,
 			EnumStage destStage, Texture texture, float x, float y){
-		generalImage = new ImageActor(screen, destStage ,"default", texture);
+		generalImage = new ImageButtonActor(screen, destStage ,"default", texture);
 		generalImage.x = x;
 		generalImage.y = y;
 		sourceStage.addActor(generalImage);
