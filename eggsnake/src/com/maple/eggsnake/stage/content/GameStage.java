@@ -65,7 +65,7 @@ public class GameStage extends BaseStage implements ActorLoader{
 
 	@Override
 	public void loadTextures() {
-		quitTexture = ResourceLoader.loadTexture("aboutquitbutton_128_64.png");
+		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 		titileTexture = ResourceLoader.loadTexture("aboutusstage_256_64.png");
 		snakeImageTexture = ResourceLoader.loadTexture("wholesnake_128_128.png");
 		snakeFontTexture = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
-		quitTexture = ResourceLoader.loadTexture("aboutquitbutton_128_64.png");
+		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 	
 	/**
