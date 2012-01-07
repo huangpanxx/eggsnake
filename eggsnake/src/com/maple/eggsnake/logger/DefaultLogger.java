@@ -34,31 +34,45 @@ public class DefaultLogger implements Loggable {
 
 	}
 
-	@Override
-	public void log(String patten, Object... args) {
-		Loggable logger = DefaultLogger.getInnerLogger();
-		if (logger != null && DefaultLogger.isEnable())
-			logger.log(patten, args);
-	}
-
-	@Override
-	public void log(int level, String patten, Object... args) {
-		Loggable logger = DefaultLogger.getInnerLogger();
-		if (logger != null && DefaultLogger.isEnable())
-			logger.log(level, patten, args);
-	}
-
-	public void log(String msg) {
-		Loggable logger = DefaultLogger.getInnerLogger();
-		if (logger != null)
-			logger.log(msg);
-	}
-
 	public static boolean isEnable() {
 		return enable;
 	}
 
 	public static void setEnable(boolean enable) {
 		DefaultLogger.enable = enable;
+	}
+
+	@Override
+	public void log(String patten, Object... args) {
+		if (DefaultLogger.isEnable() && DefaultLogger.getInnerLogger() != null) {
+			DefaultLogger.getInnerLogger().log(patten, args);
+		}
+	}
+
+	@Override
+	public void log(int level, String patten, Object... args) {
+		if (DefaultLogger.isEnable() && DefaultLogger.getInnerLogger() != null) {
+			DefaultLogger.getInnerLogger().log(level, patten, args);
+		}
+
+	}
+
+	@Override
+	public void logWithSignature(Object sender, int level, String patten,
+			Object... args) {
+		if (DefaultLogger.isEnable() && DefaultLogger.getInnerLogger() != null) {
+			DefaultLogger.getInnerLogger().logWithSignature(sender, patten,
+					level, args);
+		}
+
+	}
+
+	@Override
+	public void logWithSignature(Object sender, String patten, Object... args) {
+		if (DefaultLogger.isEnable() && DefaultLogger.getInnerLogger() != null) {
+			DefaultLogger.getInnerLogger().logWithSignature(sender, patten,
+					args);
+
+		}
 	}
 }

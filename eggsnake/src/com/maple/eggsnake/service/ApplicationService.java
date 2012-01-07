@@ -5,7 +5,8 @@ import com.maple.eggsnake.logger.DefaultLogger;
 
 public class ApplicationService {
 	public static void exitGame() {
-		DefaultLogger.getDefaultLogger().log("ApplicationService:exit");
+		DefaultLogger.getDefaultLogger().logWithSignature("ApplicationService",
+				"exit");
 		Gdx.app.exit();
 	}
 }
