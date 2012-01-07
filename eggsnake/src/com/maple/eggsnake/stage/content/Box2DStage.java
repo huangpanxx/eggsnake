@@ -56,6 +56,7 @@ public class Box2DStage extends BaseStage {
         fixtureDef.friction = 1.0f;
         fixtureDef.density = 1.0f;
         rectb.createFixture(fixtureDef);
+
 	}
 
 	@Override
