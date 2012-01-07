@@ -34,25 +34,26 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	private EggSnakeManager() {
 		// Here for local test!
 		logger = DefaultLogger.getDefaultLogger();
-		logger.log(1, "语言测试:" + Language.translate("eggsnake"));
+		logger.logWithSignature(this, "语言测试:%1$s",
+				Language.translate("eggsnake"));
 	}
 
 	@Override
 	public void create() {
-		logger.log("EggSnakeManager:create");
+		logger.logWithSignature(this, "create");
 		this.navigate(new LayeredScreen(this));
 	}
 
 	@Override
 	public void dispose() {
-		logger.log("EggSnakeManager:dispose");
+		logger.logWithSignature(this, "dispose");
 		if (screen != null)
 			this.screen.dispose();
 	}
 
 	@Override
 	public void pause() {
-		logger.log("EggSnakeManager: pause");
+		logger.logWithSignature(this, "pause");
 
 		if (screen != null)
 			this.screen.pause();
@@ -70,20 +71,23 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
 	@Override
 	public void resize(int width, int height) {
-
+		logger.logWithSignature(this, "resize(%1$d,%2$d)",
+				width, height);
 		if (screen != null)
 			this.screen.resize(width, height);
 	}
 
 	@Override
 	public void resume() {
-
+		logger.logWithSignature(this, "resume");
 		if (screen != null)
 			this.screen.resume();
 	}
 
 	@Override
 	public void navigate(ProcessableScreen screen) {
+		logger.logWithSignature(this, "navigate(%1$s)", screen
+				.getClass().getSimpleName());
 		this.screen = screen;
 		Gdx.input.setInputProcessor(screen);
 		if (screen != null)

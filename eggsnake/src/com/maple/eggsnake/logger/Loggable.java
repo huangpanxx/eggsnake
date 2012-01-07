@@ -12,4 +12,7 @@ public interface Loggable {
 
 	void log(int level, String patten, Object... args);
 
+	void logWithSignature(Object sender,int level, String patten, Object... args);
+	
+	void logWithSignature(Object sender,String patten, Object... args);
 }

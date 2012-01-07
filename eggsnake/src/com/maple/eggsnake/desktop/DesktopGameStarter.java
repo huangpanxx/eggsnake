@@ -26,7 +26,7 @@ public class DesktopGameStarter {
 
 		// 标记启动
 		Loggable logger = DefaultLogger.getDefaultLogger();
-		logger.log("Enter from desktop");
+		logger.logWithSignature("DesktopStarter", "Enter from desktop");
 
 		try {
 			// 获得管理器
@@ -34,7 +34,8 @@ public class DesktopGameStarter {
 			// 启动管理器
 			new JoglApplication(manager, "EggSnake", 480, 320, true);
 		} catch (Exception e) {
-			logger.log(1, "程序运行出错:%1$s", e.getMessage());
+			logger.logWithSignature("DesktopStarter", 1, "程序运行出错:%1$s",
+					e.getMessage());
 		}
 	}
 }

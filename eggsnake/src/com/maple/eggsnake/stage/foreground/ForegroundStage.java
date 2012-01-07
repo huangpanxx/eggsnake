@@ -19,6 +19,8 @@ public class ForegroundStage extends BaseStage {
 	float w;
 	float h;
 	final float minSoundDelta = 0.3f;
+	private int startX = 0;
+	private int startY = 0;
 
 	public ForegroundStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
@@ -28,12 +30,13 @@ public class ForegroundStage extends BaseStage {
 		initialize();
 	}
 
-	private void playSlipSound(){
+	private void playSlipSound() {
 		if (this.soundDelta > this.minSoundDelta) {
 			this.slipSound.play();
 			this.soundDelta = 0;
 		}
 	}
+
 	private void initialize() {
 		logger = DefaultLogger.getDefaultLogger();
 		spriteBatch = new SpriteBatch();
