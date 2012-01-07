@@ -7,6 +7,6 @@
 package com.maple.eggsnake.actor.ui;
 
 public enum RotateDirection {
-	CLOCKWISE,         //顺时针
-	ANTICLOCKWISE      //逆时针
+	CLOCKWISE,       //顺时针
+	ANTICLOCKWISE    //逆时针
 }

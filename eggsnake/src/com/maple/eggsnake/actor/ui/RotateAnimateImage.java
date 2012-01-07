@@ -19,6 +19,7 @@ public class RotateAnimateImage extends Image{
     private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
     private RotateDirection rotateDirection;//旋转方向
     
+	@SuppressWarnings("unused")
 	private Texture rotateTexture;			//控件的图片	
 	private AnimateImageListener listener;  //添加监听器
 
@@ -73,74 +74,5 @@ public class RotateAnimateImage extends Image{
 	public void addActionListener(AnimateImageListener listener){
 		this.listener = listener;
 	}
-	
-	/**
-	 * @return the rotateTexture
-	 */
-	public Texture getRotateTexture() {
-		return rotateTexture;
-	}
 
-	/**
-	 * @param rotateTexture the rotateTexture to set
-	 */
-	public void setRotateTexture(Texture rotateTexture) {
-		this.rotateTexture = rotateTexture;
-	}
-
-	/**
-	 * @return the rotateDuration
-	 */
-	public float getRotateDuration() {
-		return rotateDuration;
-	}
-
-	/**
-	 * @param rotateDuration the rotateDuration to set
-	 */
-	public void setRotateDuration(float rotateDuration) {
-		this.rotateDuration = rotateDuration;
-	}
-
-	/**
-	 * @return the rotateDirection
-	 */
-	public RotateDirection getRotateDirection() {
-		return rotateDirection;
-	}
-
-	/**
-	 * @param rotateDirection the rotateDirection to set
-	 */
-	public void setRotateDirection(RotateDirection rotateDirection) {
-		this.rotateDirection = rotateDirection;
-	}
-
-	/**
-	 * @return the clockWiseAngles
-	 */
-	public float getClockWiseAngles() {
-		return clockWiseAngles;
-	}
-
-	/**
-	 * @param clockWiseAngles the clockWiseAngles to set
-	 */
-	public void setClockWiseAngles(float clockWiseAngles) {
-		this.clockWiseAngles = clockWiseAngles;
-	}
-
-	/**
-	 * @return the anClockWiseAngles
-	 */
-	public float getAnClockWiseAngles() {
-		return anclockWiseAngles;
-	}
-
-	/**
-	 * @param anClockWiseAngles the anClockWiseAngles to set
-	 */
-	public void setAnClockWiseAngles(float anClockWiseAngles) {
-		this.anclockWiseAngles = anClockWiseAngles;
-	}
 }
