@@ -25,7 +25,6 @@ public class GameStage extends BaseStage implements ActorLoader{
 			boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
-		this.load();
 }
 
 	@Override
@@ -55,7 +54,7 @@ public class GameStage extends BaseStage implements ActorLoader{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
+		this.load();
 	}
 
 	@Override

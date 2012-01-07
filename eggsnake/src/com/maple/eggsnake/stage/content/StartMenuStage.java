@@ -40,7 +40,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 			boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
-		this.load();
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void show() {
-		DefaultLogger.getDefaultLogger().log(0, this.toString(), ":show");
+		this.load();
 	}
 
 	@Override
