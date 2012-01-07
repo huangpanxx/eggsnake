@@ -1,12 +1,12 @@
 package com.maple.eggsnake.service;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
-import com.maple.eggsnake.logger.DefaultLogger;
+//import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 
 class SoundLoader {
@@ -23,34 +23,39 @@ class SoundLoader {
 		} else {
 			this.dirPath = dirPath;
 		}
-		this.map = new HashMap<String, Sound>();
-		logger = DefaultLogger.getDefaultLogger();
-
-		this.defaultSound = Gdx.audio.newSound(Gdx.files.internal(this.dirPath
-
-		+ defaultSound));
+		// this.map = new HashMap<String, Sound>();
+		// logger = DefaultLogger.getDefaultLogger();
+		//
+		// this.defaultSound =
+		// Gdx.audio.newSound(Gdx.files.internal(this.dirPath
+		//
+		// + defaultSound));
 	}
 
 	public Sound loadSound(String soundPath) {
-		Sound sound = null;
-		try {
-			if (map.containsKey(soundPath)) {
-				sound = map.get(soundPath);
-			} else {
-				String absPath = this.dirPath + soundPath;
-				FileHandle file = Gdx.files.internal(absPath);
-				sound = Gdx.audio.newSound(file);
-				map.put(soundPath, sound);
-			}
-		} catch (Exception ex) {
-
-			logger.log("SoundManager loadSound:加载:%1$s失败(%2$s)", soundPath,
-					ex.getMessage());
-
-			sound = this.defaultSound;
-		}
-		return sound;
-
+		// Sound sound = null;
+		// try {
+		// if (map.containsKey(soundPath)) {
+		// sound = map.get(soundPath);
+		// } else {
+		// String absPath = this.dirPath + soundPath;
+		// FileHandle file = Gdx.files.internal(absPath);
+		// sound = Gdx.audio.newSound(file);
+		// map.put(soundPath, sound);
+		// }
+		// } catch (Exception ex) {
+		//
+		// logger.log("SoundManager loadSound:加载:%1$s失败(%2$s)", soundPath,
+		// ex.getMessage());
+		//
+		// sound = this.defaultSound;
+		// }
+		// return sound;
+		//
+		 String absPath = this.dirPath + soundPath;
+		 FileHandle file = Gdx.files.internal(absPath);
+		 Sound sound = Gdx.audio.newSound(file);
+		 return sound;
 	}
 
 }

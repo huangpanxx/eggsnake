@@ -10,9 +10,11 @@ import android.content.pm.ActivityInfo;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.maple.eggsnake.android.logger.AndroidFileLogger;
 import com.maple.eggsnake.application.EggSnakeManager;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.service.ApplicationService;
 
 public class AndroidEggSnakeStarter extends AndroidApplication {
 	public void onCreate(android.os.Bundle savedInstance) {
@@ -35,6 +37,9 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useWakelock = false;
+		//设置Application
+		com.maple.eggsnake.service.Application app =  new com.maple.eggsnake.android.service.AndroidApplication(this);
+		ApplicationService.setApplication(app);
 
 		// 获得管理器
 		EggSnakeManager manager = EggSnakeManager.getInstance();

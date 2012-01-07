@@ -4,7 +4,7 @@
  * @created		: 2012-1-3
  */
 
-package com.maple.eggsnake.android;
+package com.maple.eggsnake.android.logger;
 
 import java.io.FileOutputStream;
 
