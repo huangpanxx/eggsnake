@@ -1,12 +1,26 @@
 package com.maple.eggsnake.service;
 
-import com.badlogic.gdx.Gdx;
 import com.maple.eggsnake.logger.DefaultLogger;
 
 public class ApplicationService {
-	public static void exitGame() {
+	
+	static Application application = null;
+	static ApplicationService service = null;
+	
+	public static ApplicationService getInstance(){
+		if(application == null)
+			application = new DesktopApplication();
+		if(service == null)
+			service = new ApplicationService();
+		return service;
+	}
+	
+	public void exitGame() {
 		DefaultLogger.getDefaultLogger().logWithSignature("ApplicationService",
 				"exit");
-		Gdx.app.exit();
+		ApplicationService.application.exit();
+	}
+	public static void setApplication(com.maple.eggsnake.service.Application application){
+		ApplicationService.application = application;
 	}
 }

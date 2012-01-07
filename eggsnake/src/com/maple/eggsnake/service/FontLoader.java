@@ -1,6 +1,6 @@
 package com.maple.eggsnake.service;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
@@ -19,8 +19,8 @@ class FontLoader {
 	public FontLoader(String baseDir, String defaultFont, String defaultBitmap) {
 		this.baseDir = baseDir;
 		logger = DefaultLogger.getDefaultLogger();
-		map = new HashMap<String, Map<String, BitmapFont>>();
-		this.defaultFont = this.directLoadFont(defaultFont, defaultBitmap);
+//		map = new HashMap<String, Map<String, BitmapFont>>();
+//		this.defaultFont = this.directLoadFont(defaultFont, defaultBitmap);
 	}
 
 	private String combinePath(String base, String relativePath) {
@@ -31,27 +31,28 @@ class FontLoader {
 	}
 
 	public BitmapFont loadFont(String fileName, String bitmapName) {
-		BitmapFont font = null;
-		try {
-			if (map.containsKey(fileName)) {
-				Map<String, BitmapFont> m = map.get(fileName);
-				if (m.containsKey(bitmapName)) {
-					font = m.get(bitmapName);
-				} else {
-					font = directLoadFont(fileName, bitmapName);
-					m.put(bitmapName, font);
-				}
-			} else {
-				font = directLoadFont(fileName, bitmapName);
-				Map<String, BitmapFont> mNew = new HashMap<String, BitmapFont>();
-				mNew.put(bitmapName, font);
-				map.put(fileName, mNew);
-			}
-		} catch (Exception ex) {
-			logger.log("FontLoader loadFont 加载字体失败:$1%s", ex.getMessage());
-			font = this.defaultFont;
-		}
-		return font;
+//		BitmapFont font = null;
+//		try {
+//			if (map.containsKey(fileName)) {
+//				Map<String, BitmapFont> m = map.get(fileName);
+//				if (m.containsKey(bitmapName)) {
+//					font = m.get(bitmapName);
+//				} else {
+//					font = directLoadFont(fileName, bitmapName);
+//					m.put(bitmapName, font);
+//				}
+//			} else {
+//				font = directLoadFont(fileName, bitmapName);
+//				Map<String, BitmapFont> mNew = new HashMap<String, BitmapFont>();
+//				mNew.put(bitmapName, font);
+//				map.put(fileName, mNew);
+//			}
+//		} catch (Exception ex) {
+//			logger.log("FontLoader loadFont 加载字体失败:$1%s", ex.getMessage());
+//			font = this.defaultFont;
+//		}
+//		return font;
+		return directLoadFont(fileName, bitmapName);
 	}
 
 	public BitmapFont directLoadFont(String fileName, String bitmapName) {

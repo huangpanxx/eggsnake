@@ -74,7 +74,7 @@ public class ImageButtonActor extends Image {
 					contentScreen, destSatge));
 		else
 		{
-			ApplicationService.exitGame();
+			ApplicationService.getInstance().exitGame();
 		}
 	}
 	
