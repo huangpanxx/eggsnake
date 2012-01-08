@@ -16,5 +16,4 @@ public class AndroidApplication implements Application{
 		Gdx.app.exit();
 		this.activity.finish();
 	}
-
 }

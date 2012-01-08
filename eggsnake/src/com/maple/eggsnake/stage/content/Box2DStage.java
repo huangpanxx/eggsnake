@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.physics.B2WorldFactory;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage {
@@ -25,14 +25,12 @@ public class Box2DStage extends BaseStage {
 		super(width, height, stretch);
 		this.logger = DefaultLogger.getDefaultLogger();
 
-
-
 		render = new Box2DDebugRenderer();
 
 		try {
-			world = B2WorldFactory.loadWorld("data/maps/snapshot.json");
-			logger.log("%1$d",world.getBodyCount());
-			logger.log("%1$d",world.getJointCount());
+			world = ResourceLoader.worldLoader("rube.json");
+			logger.logWithSignature(this, "Body:%1$d", world.getBodyCount());
+			logger.logWithSignature(this, "Joint:%1$d", world.getJointCount());
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载世界失败(%1$s)", e.getMessage());
 		}
@@ -64,15 +62,14 @@ public class Box2DStage extends BaseStage {
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		viewportWidth = this.camera.viewportWidth;
 		viewportHeight = this.camera.viewportHeight;
 		this.position_x = this.camera.position.x;
 		this.position_y = this.camera.position.y;
 
-		this.camera.viewportWidth = 48 * 4;
-		this.camera.viewportHeight = 32 * 4;
-		this.camera.position.set(0, 24 * 4, 1);
+		this.camera.viewportWidth = 48 * 2;
+		this.camera.viewportHeight = 32 * 2;
+		this.camera.position.set(0, 20, 1);
 	}
 
 	@Override
@@ -90,7 +87,7 @@ public class Box2DStage extends BaseStage {
 		this.camera.viewportWidth = this.viewportWidth;
 		this.camera.position.set(this.position_x, this.position_y,
 				this.camera.position.z);
-		if(world!=null)
+		if (world != null)
 			world.dispose();
 		super.dispose();
 	}

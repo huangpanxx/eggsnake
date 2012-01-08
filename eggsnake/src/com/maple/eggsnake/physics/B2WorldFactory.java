@@ -21,6 +21,8 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
+import com.badlogic.gdx.physics.box2d.joints.GearJointDef;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
 import com.badlogic.gdx.physics.box2d.joints.PulleyJointDef;
@@ -76,7 +78,8 @@ public class B2WorldFactory {
 
 		// 构造物理世界
 		Vector2 gravity = w.gravity.toVector2();
-		logger.log("物理世界重力:%1$f,%2$f", gravity.x, gravity.y);
+		logger.logWithSignature("B2WorldFactory", "物理世界重力:%1$f,%2$f",
+				gravity.x, gravity.y);
 		World world = new World(gravity, false);
 		world.setAutoClearForces(w.autoClearForces);
 		world.setWarmStarting(w.warmStarting);
@@ -113,6 +116,7 @@ public class B2WorldFactory {
 				bd.type = BodyDef.BodyType.KinematicBody;
 			}
 			Body body = world.createBody(bd);
+			bodys.add(body);
 			if (b.name != null)
 				body.setUserData(b.name);
 			if (b.fixture != null) {
@@ -193,28 +197,29 @@ public class B2WorldFactory {
 		if (w.body != null && w.joint != null) {
 			for (B2Joint def : w.joint) {
 				if (def.type != "gear")
-					createJoint(def, bodys, joints);
+					createJoint(def, bodys, joints, world);
 			}
 			for (B2Joint def : w.joint) {
 				if (def.type == "gear")
-					createJoint(def, bodys, joints);
+					createJoint(def, bodys, joints, world);
 			}
 		}
 		return world;
 
 	}
 
-	public static Joint createJoint(B2Joint jd, ArrayList<Body> bodys,
-			ArrayList<Joint> joints) {
+	static Joint createJoint(B2Joint jd, ArrayList<Body> bodys,
+			ArrayList<Joint> joints, World world) {
 		int bodyIndexA = jd.bodyA;
 		int bodyIndexB = jd.bodyB;
 		int bodySize = bodys.size();
 		if (bodyIndexA > bodySize || bodyIndexB > bodySize) {
 			return null;
 		}
-		
-		JointDef joint = null;
-		if (jd.type == "revolute") {
+
+		JointDef jointDef = null;
+
+		if (jd.type.equals("revolute")) {
 			RevoluteJointDef revoluteDef = new RevoluteJointDef();
 			revoluteDef.localAnchorA.set(jd.anchorA.toVector2());
 			revoluteDef.localAnchorB.set(jd.anchorB.toVector2());
@@ -225,8 +230,8 @@ public class B2WorldFactory {
 			revoluteDef.enableMotor = jd.enableMotor;
 			revoluteDef.motorSpeed = jd.motorSpeed.toFloat();
 			revoluteDef.maxMotorTorque = jd.maxMotorTorque.toFloat();
-			joint = revoluteDef;
-		} else if (jd.type == "prismatic") {
+			jointDef = revoluteDef;
+		} else if (jd.type.equals("prismatic")) {
 			PrismaticJointDef prismaticDef = new PrismaticJointDef();
 			prismaticDef.localAnchorA.set(jd.anchorA.toVector2());
 			prismaticDef.localAnchorB.set(jd.anchorB.toVector2());
@@ -241,16 +246,16 @@ public class B2WorldFactory {
 			prismaticDef.enableMotor = jd.enableMotor;
 			prismaticDef.motorSpeed = jd.motorSpeed.toFloat();
 			prismaticDef.maxMotorForce = jd.maxMotorForce.toFloat();
-			joint = prismaticDef;
-		} else if (jd.type == "distance") {
+			jointDef = prismaticDef;
+		} else if (jd.type.equals("distance")) {
 			DistanceJointDef distanceDef = new DistanceJointDef();
 			distanceDef.localAnchorA.set(jd.anchorA.toVector2());
 			distanceDef.localAnchorB.set(jd.anchorB.toVector2());
 			distanceDef.length = jd.length.toFloat();
 			distanceDef.frequencyHz = jd.frequency.toFloat();
 			distanceDef.dampingRatio = jd.dampingRatio.toFloat();
-			joint = distanceDef;
-		} else if (jd.type == "pulley") {
+			jointDef = distanceDef;
+		} else if (jd.type.equals("pulley")) {
 			PulleyJointDef pulleyDef = new PulleyJointDef();
 			pulleyDef.groundAnchorA.set(jd.groundAnchorA.toVector2());
 			pulleyDef.groundAnchorB.set(jd.groundAnchorB.toVector2());
@@ -259,17 +264,22 @@ public class B2WorldFactory {
 			pulleyDef.lengthA = jd.lengthA.toFloat();
 			pulleyDef.lengthB = jd.lengthB.toFloat();
 			pulleyDef.ratio = jd.ratio.toFloat();
-			joint = pulleyDef;
-		} else if (jd.type == "mouse") {
+			jointDef = pulleyDef;
+		} else if (jd.type.equals("mouse")) {
 			MouseJointDef mouseDef = new MouseJointDef();
 			mouseDef.target.set(jd.target.toVector2());
 			mouseDef.maxForce = jd.maxForce.toFloat();
 			mouseDef.frequencyHz = jd.frequency.toFloat();
 			mouseDef.dampingRatio = jd.dampingRatio.toFloat();
-			joint = mouseDef;
-		} else if (jd.type == "gear") {
-			// waiting
-		} else if (jd.type == "wheel") {
+			jointDef = mouseDef;
+		} else if (jd.type.equals("gear")) {
+			GearJointDef gearDef = new GearJointDef();
+			int jointIndex1 = jd.joint1;
+			int jointIndex2 = jd.joint2;
+			gearDef.joint1 = joints.get(jointIndex1);
+			gearDef.joint2 = joints.get(jointIndex2);
+			gearDef.ratio = jd.ratio.toFloat();
+		} else if (jd.type.equals("wheel")) {
 			WheelJointDef wheelDef = new WheelJointDef();
 			wheelDef.localAnchorA.set(jd.anchorA.toVector2());
 			wheelDef.localAnchorB.set(jd.anchorB.toVector2());
@@ -279,27 +289,45 @@ public class B2WorldFactory {
 			wheelDef.maxMotorTorque = jd.maxMotorTorque.toFloat();
 			wheelDef.frequencyHz = jd.springFrequency.toFloat();
 			wheelDef.dampingRatio = jd.springDampingRatio.toFloat();
-			joint = wheelDef;
-		} else if (jd.type == "weld") {
+			jointDef = wheelDef;
+		} else if (jd.type.equals("weld")) {
 			WeldJointDef weldDef = new WeldJointDef();
 			weldDef.localAnchorA.set(jd.anchorA.toVector2());
 			weldDef.localAnchorB.set(jd.anchorB.toVector2());
 			weldDef.referenceAngle = 0;
-			joint = weldDef;
-		} else if (jd.type == "friction") {
+			jointDef = weldDef;
+		} else if (jd.type.equals("friction")) {
 			FrictionJointDef frictionDef = new FrictionJointDef();
 			frictionDef.localAnchorA.set(jd.anchorA.toVector2());
 			frictionDef.localAnchorB.set(jd.anchorB.toVector2());
 			frictionDef.maxForce = jd.maxForce.toFloat();
 			frictionDef.maxTorque = jd.maxTorque.toFloat();
-			joint = frictionDef;
-		} else if (jd.type == "rope") {
+			jointDef = frictionDef;
+		} else if (jd.type.equals("rope")) {
 			RopeJointDef ropeDef = new RopeJointDef();
 			ropeDef.localAnchorA.set(jd.anchorA.toVector2());
 			ropeDef.localAnchorB.set(jd.anchorB.toVector2());
 			ropeDef.maxLength = jd.maxLength.toFloat();
-			joint = ropeDef;
+			jointDef = ropeDef;
 		}
-		return null;
+
+		Joint joint = null;
+		if (jointDef != null) {
+
+			jointDef.bodyA = bodys.get(bodyIndexA);
+			jointDef.bodyB = bodys.get(bodyIndexB);
+			jointDef.collideConnected = jd.collideConnected;
+
+			joint = world.createJoint(jointDef);
+			joints.add(joint);
+			if (jd.type.equals("mouse")) {
+				((MouseJoint) joint).setTarget(jd.target.toVector2());
+			}
+			if (jd.name != null) {
+				// null
+			}
+
+		}
+		return joint;
 	}
 }

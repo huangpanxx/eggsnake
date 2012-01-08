@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class ResourceLoader {
 
@@ -25,13 +26,16 @@ public class ResourceLoader {
 	public static final String DEFAULT_PARTICLE_FILE = "default.p";
 	public static final String DEFAULT_PARTICLE_DIR = "";
 
+	public static final String MAP_DIR = "data/maps";
+
 	private static TextureLoader textureLoader = null;
 	private static SoundLoader soundLoader = null;
 	private static MusicLoader musicLoader = null;
 	private static FontLoader fontLoader = null;
 	private static ParticleLoader particleLoader = null;
+	private static WorldLoader worldLoader = null;
 
-	public  static Texture loadTexture(String relativePath) {
+	public static Texture loadTexture(String relativePath) {
 		if (ResourceLoader.textureLoader == null) {
 			ResourceLoader.textureLoader = new TextureLoader(TEXTURE_DIR,
 					DEFAULT_TEXTURE_NAME);
@@ -62,11 +66,18 @@ public class ResourceLoader {
 		return ResourceLoader.fontLoader.loadFont(fileName, bitmapName);
 	}
 
-	public static ParticleEffect loadParticle(String fileName, String particleDir) {
+	public static ParticleEffect loadParticle(String fileName,
+			String particleDir) {
 		if (ResourceLoader.particleLoader == null)
 			ResourceLoader.particleLoader = new ParticleLoader(PARTICLE_DIR,
 					DEFAULT_PARTICLE_FILE, DEFAULT_PARTICLE_DIR);
 		return ResourceLoader.particleLoader
 				.loadParticle(fileName, particleDir);
+	}
+
+	public static World worldLoader(String mapPath) {
+		if (ResourceLoader.worldLoader == null)
+			ResourceLoader.worldLoader = new WorldLoader(MAP_DIR);
+		return ResourceLoader.worldLoader.loadWorld(mapPath);
 	}
 }
