@@ -19,7 +19,7 @@ public class WorldLoader {
 			return B2WorldFactory.loadWorld(absPath);
 		} catch (Exception e) {
 			DefaultLogger.getDefaultLogger().logWithSignature(this,
-					"加载地图%1$s失败:%1$s", mapPath, e.getMessage());
+					"加载地图%1$s失败:%2$s", mapPath, e.getMessage());
 			return null;
 
 		}

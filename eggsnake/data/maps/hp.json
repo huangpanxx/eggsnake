@@ -35,7 +35,7 @@
                      "y" : "BD6DBCBA"
                   }
                },
-               "restitution" : 1
+               "restitution" : 0.3
             }
          ],
          "linearVelocity" : 0,
@@ -65,7 +65,7 @@
                      "y" : [ "C081EF95", "40669769", "40669769", "C081EF98" ]
                   }
                },
-               "restitution" : 1
+               "restitution" : 0.3
             }
          ],
          "gravityScale" : "411CCCCD",
@@ -105,7 +105,7 @@
                      "y" : "BD7431C0"
                   }
                },
-               "restitution" : 1
+               "restitution" : 0.3
             }
          ],
          "linearVelocity" : 0,
@@ -138,7 +138,7 @@
                      "y" : "BD8DAC40"
                   }
                },
-               "restitution" : 1
+               "restitution" : 0.3
             }
          ],
          "linearVelocity" : 0,
@@ -171,7 +171,7 @@
                      "y" : "BD8DAC40"
                   }
                },
-               "restitution" : 1
+               "restitution" : 0.3
             }
          ],
          "linearVelocity" : 0,
@@ -187,7 +187,7 @@
    "gravity" : 
    {
       "x" : 0,
-      "y" : "C1200000"
+      "y" : -9.8 //"C1200000"
    },
    "subStepping" : false,
    "warmStarting" : true

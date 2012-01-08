@@ -103,8 +103,11 @@ public class Box2DStage extends BaseStage {
 		viewportHeight = this.camera.viewportHeight;
 		this.position_x = this.camera.position.x;
 		this.position_y = this.camera.position.y;
-		this.camera.viewportWidth = this.width() / B2Const.CONVERTRATIO;
-		this.camera.viewportHeight = this.height() / B2Const.CONVERTRATIO;
+		this.camera.viewportWidth = 480 / B2Const.CONVERTRATIO;// this.width() /
+																// B2Const.CONVERTRATIO;
+		this.camera.viewportHeight = 320 / B2Const.CONVERTRATIO;// this.height()
+																// /
+																// B2Const.CONVERTRATIO;
 		this.camera.position.set(0, 0, 1);
 	}
 
@@ -136,7 +139,8 @@ public class Box2DStage extends BaseStage {
 				this.hitPoint.y - 0.0001f, this.hitPoint.x + 0.0001f,
 				this.hitPoint.y + 0.0001f);
 
-		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody) {
+		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
+				&& ground != null) {
 			MouseJointDef def = new MouseJointDef();
 			def.bodyA = ground;// groundBody
 			def.bodyB = hitBody;
@@ -152,9 +156,8 @@ public class Box2DStage extends BaseStage {
 	@Override
 	public boolean touchDragged(int x, int y, int pointer) {
 		if (mouseJoint != null) {
-			camera.unproject(this.hitPoint.set(x, y, 0));
-			mouseJoint.setTarget(this.target.set(this.hitPoint.x,
-					this.hitPoint.y));
+			logger.logWithSignature(this, "%1$f,%2$f",
+					this.hitBody.getPosition().x, this.hitBody.getPosition().y);
 		}
 		return false;
 	}
@@ -164,6 +167,13 @@ public class Box2DStage extends BaseStage {
 		if (mouseJoint != null) {
 			world.destroyJoint(mouseJoint);
 			mouseJoint = null;
+			Vector3 mousePos = new Vector3(x, y, 0);
+			camera.unproject(mousePos);
+			Vector3 bodyPos = this.hitPoint;
+			Vector2 v = new Vector2(mousePos.x - bodyPos.x, mousePos.y
+					- bodyPos.y);
+			float mass = this.hitBody.getMass() / 100;
+			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
 		}
 		return false;
 	}
