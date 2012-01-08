@@ -6,10 +6,10 @@
 
 package com.maple.eggsnake.stage.content;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -26,7 +26,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private Texture aboutUsTexture;// aboutUs文字纹理
 	private Texture startEggTexture;//
 	private Texture oneEyeMouseTexture;
-//	private Texture twoEyeMouseTexture;
+	private Texture twoEyeMouseTexture;
 
 	private ContentScreen contentScreen;// 中间层的Screen
 
@@ -40,7 +40,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 			boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
-//		this.load();
 	}
 
 	/**
@@ -67,12 +66,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		settingTexture = ResourceLoader.loadTexture("settingsbtn256_64.png");
 		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn256_64.png");
 		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
-		/*newGameTexture = new Texture(Gdx.files.internal("data/images/newgamebtn256_64.png"));
-		settingTexture = new Texture(Gdx.files.internal("data/images/settingsbtn256_64.png"));
-		aboutUsTexture = new Texture(Gdx.files.internal("data/images/aboutusbtn256_64.png"));
-		startEggTexture = new Texture(Gdx.files.internal("data/images/startegg_64_64.png"));*/
-		oneEyeMouseTexture = new Texture(Gdx.files.internal("data/images/oneeyemouse_64_64.png"));
-//		twoEyeMouseTexture = ResourceLoader.loadTexture("twoeyesmouse_64_64.png");
+		oneEyeMouseTexture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
+		twoEyeMouseTexture = ResourceLoader.loadTexture("twoeyesmouse_64_64.png");
 	}
 
 	/**
@@ -89,7 +84,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		this.loadAboutUsImage();
 		this.loadStartEggImage();
 		this.loadOneEyeMouseImage();
-//		this.loadTwoEyeMouseImage();
+		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
 	}
 
@@ -108,7 +103,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -211,8 +205,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * 
 	 * 
 	 */
-	/*private void loadTwoEyeMouseImage(){
+	private void loadTwoEyeMouseImage(){
 		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
-	}*/
+	}
 
 }
