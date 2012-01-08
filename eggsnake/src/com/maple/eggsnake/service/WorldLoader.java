@@ -3,7 +3,7 @@ package com.maple.eggsnake.service;
 import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.physics.B2WorldFactory;
-import com.maple.eggsnake.util.Path;
+import com.maple.eggsnake.util.PathHelper;
 
 public class WorldLoader {
 	
@@ -14,7 +14,7 @@ public class WorldLoader {
 
 	public World loadWorld(String mapPath) {
 		try {
-			String absPath = Path.combine(basePath, mapPath);
+			String absPath = PathHelper.combine(basePath, mapPath);
 			return B2WorldFactory.loadWorld(absPath);
 		} catch (Exception e) {
 			DefaultLogger.getDefaultLogger().logWithSignature(this,
