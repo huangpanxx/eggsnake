@@ -10,8 +10,9 @@ import android.content.pm.ActivityInfo;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.maple.eggsnake.android.logger.AndroidFileLogger;
+//import com.maple.eggsnake.android.logger.AndroidFileLogger;
 import com.maple.eggsnake.application.EggSnakeManager;
+import com.maple.eggsnake.logger.ConsoleLogger;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.service.ApplicationService;
@@ -25,7 +26,7 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
 		// 设置日志方式
-		DefaultLogger.setInnerLogger(new AndroidFileLogger(this));
+		DefaultLogger.setInnerLogger(new ConsoleLogger());
 		DefaultLogger.setEnable(true);
 
 		// 开始启动

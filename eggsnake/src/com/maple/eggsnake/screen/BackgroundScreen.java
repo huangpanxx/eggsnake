@@ -5,7 +5,11 @@ import com.maple.eggsnake.stage.background.BackgroundStage;
 public class BackgroundScreen extends NavigateScreen {
 	public BackgroundScreen() {
 		this.setLayer(ScreenLayer.BACKGROUDN);
-		this.navigate(new BackgroundStage(this, getWidth(), getHeight(),
-				false));
+	}
+
+	@Override
+	public void show() {
+		super.show();
+		this.navigate(new BackgroundStage(this, getWidth(), getHeight(), false));
 	}
 }
