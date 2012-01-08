@@ -6,8 +6,9 @@ import com.maple.eggsnake.physics.B2WorldFactory;
 import com.maple.eggsnake.util.PathHelper;
 
 public class WorldLoader {
-	
+
 	String basePath = null;
+
 	public WorldLoader(String dirPath) {
 		this.basePath = dirPath;
 	}
@@ -18,7 +19,7 @@ public class WorldLoader {
 			return B2WorldFactory.loadWorld(absPath);
 		} catch (Exception e) {
 			DefaultLogger.getDefaultLogger().logWithSignature(this,
-					"加载地图%1$s失败", mapPath);
+					"加载地图%1$s失败:%1$s", mapPath, e.getMessage());
 			return null;
 
 		}

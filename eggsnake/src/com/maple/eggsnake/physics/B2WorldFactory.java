@@ -1,11 +1,10 @@
 package com.maple.eggsnake.physics;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -46,17 +45,20 @@ public class B2WorldFactory {
 		Loggable logger = DefaultLogger.getDefaultLogger();
 
 		// 读入json地图
-		File f = new File(path);
-		FileReader fr = new FileReader(f);
-		BufferedReader br = new BufferedReader(fr);
-		StringBuffer sb = new StringBuffer();
-		String s = new String();
-		while ((s = br.readLine()) != null) {
-			sb.append(s);
-			sb.append('\n');
-		}
-		String text = sb.toString();
-
+//		File f = new File(path);
+//		FileReader fr = new FileReader(f);
+//		BufferedReader br = new BufferedReader(fr);
+//		StringBuffer sb = new StringBuffer();
+//		String s = new String();
+//		while ((s = br.readLine()) != null) {
+//			sb.append(s);
+//			sb.append('\n');
+//		}
+//		String text = sb.toString();
+//
+//		String text = FileHelper.readAll(path);
+		FileHandle handle = Gdx.files.internal(path);
+		String text = handle.readString();
 		// 规范化命名
 		String jsonWorld = text.replace("massData-mass", "massData_mass")
 				.replace("massData-center", "massData_center")
@@ -65,7 +67,6 @@ public class B2WorldFactory {
 				.replace("filter-maskBits", "filter_maskBits")
 				.replace("filter-groupIndex", "filter_groupIndex");
 
-		fr.close();
 
 		// 反序列化
 		StringReader reader = new StringReader(jsonWorld);
