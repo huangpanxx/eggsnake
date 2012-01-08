@@ -18,7 +18,8 @@ public class ForegroundStage extends BaseStage {
 	float soundDelta;
 	float w;
 	float h;
-	final float minSoundDelta = 0.3f;
+	final float minSoundDelta = 0.5f;
+	final float minDistance = 50;
 	private int startX = 0;
 	private int startY = 0;
 
@@ -75,7 +76,7 @@ public class ForegroundStage extends BaseStage {
 	}
 
 	private boolean isMoved(int x, int y) {
-		return this.getDistance(this.startX, this.startY, x, y) > 30;
+		return this.getDistance(this.startX, this.startY, x, y) > this.minDistance;
 	}
 
 	private float getDistance(float x1, float y1, float x2, float y2) {

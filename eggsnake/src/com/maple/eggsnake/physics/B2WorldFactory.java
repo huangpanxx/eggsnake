@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.StringReader;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -12,15 +14,31 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Joint;
+import com.badlogic.gdx.physics.box2d.JointDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
+import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
+import com.badlogic.gdx.physics.box2d.joints.PrismaticJointDef;
+import com.badlogic.gdx.physics.box2d.joints.PulleyJointDef;
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef;
+import com.badlogic.gdx.physics.box2d.joints.RopeJointDef;
+import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
+import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 
 public class B2WorldFactory {
+
+	private B2WorldFactory() {
+
+	}
+
 	public static World loadWorld(String path) throws Exception {
 
 		Loggable logger = DefaultLogger.getDefaultLogger();
@@ -63,6 +81,11 @@ public class B2WorldFactory {
 		world.setAutoClearForces(w.autoClearForces);
 		world.setWarmStarting(w.warmStarting);
 		world.setContinuousPhysics(w.continuousPhysics);
+
+		// 容器
+		ArrayList<Body> bodys = new ArrayList<Body>();
+		ArrayList<Joint> joints = new ArrayList<Joint>();
+
 		// 添加Body
 		for (B2Body b : w.body) {
 			BodyDef bd = new BodyDef();
@@ -165,9 +188,118 @@ public class B2WorldFactory {
 				}
 			}
 		}
-		
-		//添加 Joints
-		
+
+		// 添加 Joints
+		if (w.body != null && w.joint != null) {
+			for (B2Joint def : w.joint) {
+				if (def.type != "gear")
+					createJoint(def, bodys, joints);
+			}
+			for (B2Joint def : w.joint) {
+				if (def.type == "gear")
+					createJoint(def, bodys, joints);
+			}
+		}
 		return world;
+
+	}
+
+	public static Joint createJoint(B2Joint jd, ArrayList<Body> bodys,
+			ArrayList<Joint> joints) {
+		int bodyIndexA = jd.bodyA;
+		int bodyIndexB = jd.bodyB;
+		int bodySize = bodys.size();
+		if (bodyIndexA > bodySize || bodyIndexB > bodySize) {
+			return null;
+		}
+		
+		JointDef joint = null;
+		if (jd.type == "revolute") {
+			RevoluteJointDef revoluteDef = new RevoluteJointDef();
+			revoluteDef.localAnchorA.set(jd.anchorA.toVector2());
+			revoluteDef.localAnchorB.set(jd.anchorB.toVector2());
+			revoluteDef.referenceAngle = jd.refAngle.toFloat();
+			revoluteDef.enableLimit = jd.enableLimit;
+			revoluteDef.lowerAngle = jd.lowerLimit.toFloat();
+			revoluteDef.upperAngle = jd.upperLimit.toFloat();
+			revoluteDef.enableMotor = jd.enableMotor;
+			revoluteDef.motorSpeed = jd.motorSpeed.toFloat();
+			revoluteDef.maxMotorTorque = jd.maxMotorTorque.toFloat();
+			joint = revoluteDef;
+		} else if (jd.type == "prismatic") {
+			PrismaticJointDef prismaticDef = new PrismaticJointDef();
+			prismaticDef.localAnchorA.set(jd.anchorA.toVector2());
+			prismaticDef.localAnchorB.set(jd.anchorB.toVector2());
+			if (jd.localAxisA != null)
+				prismaticDef.localAxisA.set(jd.localAxisA.toVector2());
+			else
+				prismaticDef.localAxisA.set(jd.localAxis1.toVector2());
+			prismaticDef.referenceAngle = jd.refAngle.toFloat();
+			prismaticDef.enableLimit = jd.enableLimit;
+			prismaticDef.lowerTranslation = jd.lowerLimit.toFloat();
+			prismaticDef.upperTranslation = jd.upperLimit.toFloat();
+			prismaticDef.enableMotor = jd.enableMotor;
+			prismaticDef.motorSpeed = jd.motorSpeed.toFloat();
+			prismaticDef.maxMotorForce = jd.maxMotorForce.toFloat();
+			joint = prismaticDef;
+		} else if (jd.type == "distance") {
+			DistanceJointDef distanceDef = new DistanceJointDef();
+			distanceDef.localAnchorA.set(jd.anchorA.toVector2());
+			distanceDef.localAnchorB.set(jd.anchorB.toVector2());
+			distanceDef.length = jd.length.toFloat();
+			distanceDef.frequencyHz = jd.frequency.toFloat();
+			distanceDef.dampingRatio = jd.dampingRatio.toFloat();
+			joint = distanceDef;
+		} else if (jd.type == "pulley") {
+			PulleyJointDef pulleyDef = new PulleyJointDef();
+			pulleyDef.groundAnchorA.set(jd.groundAnchorA.toVector2());
+			pulleyDef.groundAnchorB.set(jd.groundAnchorB.toVector2());
+			pulleyDef.localAnchorA.set(jd.anchorA.toVector2());
+			pulleyDef.localAnchorB.set(jd.anchorB.toVector2());
+			pulleyDef.lengthA = jd.lengthA.toFloat();
+			pulleyDef.lengthB = jd.lengthB.toFloat();
+			pulleyDef.ratio = jd.ratio.toFloat();
+			joint = pulleyDef;
+		} else if (jd.type == "mouse") {
+			MouseJointDef mouseDef = new MouseJointDef();
+			mouseDef.target.set(jd.target.toVector2());
+			mouseDef.maxForce = jd.maxForce.toFloat();
+			mouseDef.frequencyHz = jd.frequency.toFloat();
+			mouseDef.dampingRatio = jd.dampingRatio.toFloat();
+			joint = mouseDef;
+		} else if (jd.type == "gear") {
+			// waiting
+		} else if (jd.type == "wheel") {
+			WheelJointDef wheelDef = new WheelJointDef();
+			wheelDef.localAnchorA.set(jd.anchorA.toVector2());
+			wheelDef.localAnchorB.set(jd.anchorB.toVector2());
+			wheelDef.localAxisA.set(jd.localAxisA.toVector2());
+			wheelDef.enableMotor = jd.enableMotor;
+			wheelDef.motorSpeed = jd.motorSpeed.toFloat();
+			wheelDef.maxMotorTorque = jd.maxMotorTorque.toFloat();
+			wheelDef.frequencyHz = jd.springFrequency.toFloat();
+			wheelDef.dampingRatio = jd.springDampingRatio.toFloat();
+			joint = wheelDef;
+		} else if (jd.type == "weld") {
+			WeldJointDef weldDef = new WeldJointDef();
+			weldDef.localAnchorA.set(jd.anchorA.toVector2());
+			weldDef.localAnchorB.set(jd.anchorB.toVector2());
+			weldDef.referenceAngle = 0;
+			joint = weldDef;
+		} else if (jd.type == "friction") {
+			FrictionJointDef frictionDef = new FrictionJointDef();
+			frictionDef.localAnchorA.set(jd.anchorA.toVector2());
+			frictionDef.localAnchorB.set(jd.anchorB.toVector2());
+			frictionDef.maxForce = jd.maxForce.toFloat();
+			frictionDef.maxTorque = jd.maxTorque.toFloat();
+			joint = frictionDef;
+		} else if (jd.type == "rope") {
+			RopeJointDef ropeDef = new RopeJointDef();
+			ropeDef.localAnchorA.set(jd.anchorA.toVector2());
+			ropeDef.localAnchorB.set(jd.anchorB.toVector2());
+			ropeDef.maxLength = jd.maxLength.toFloat();
+			joint = ropeDef;
+		}
+		return null;
 	}
 }

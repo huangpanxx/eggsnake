@@ -2,19 +2,11 @@ package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.maple.eggsnake.logger.DefaultLogger;
+import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.physics.B2WorldFactory;
-import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage {
@@ -22,52 +14,28 @@ public class Box2DStage extends BaseStage {
 	World world;
 	Box2DDebugRenderer render;
 	Camera debugCamera;
+	Loggable logger = null;
+
+	float viewportWidth;
+	float viewportHeight;
+	float position_x;
+	float position_y;
+
 	public Box2DStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
-		debugCamera = new OrthographicCamera(48,32);
-		this.debugCamera.viewportWidth = 48;
-		this.debugCamera.viewportHeight = 32;
-		this.debugCamera.position.set(0f, 0, 1);
-		
+		this.logger = DefaultLogger.getDefaultLogger();
+
+
+
 		render = new Box2DDebugRenderer();
+
 		try {
 			world = B2WorldFactory.loadWorld("data/maps/snapshot.json");
+			logger.log("%1$d",world.getBodyCount());
+			logger.log("%1$d",world.getJointCount());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.logWithSignature(this, "加载世界失败(%1$s)", e.getMessage());
 		}
-	}
-
-	private void createBody() {
-
-		BodyDef bd = new BodyDef(); // 声明物体定义
-		bd.position.set(24f, 16f);
-		bd.type = BodyType.DynamicBody;
-		Body b = world.createBody(bd); // 通过world创建一个物体
-		CircleShape c = new CircleShape(); // 创建一个形状（圆）
-		c.setRadius(1f); // 设置半径
-		FixtureDef fd = new FixtureDef();
-		fd.shape = c;
-		fd.density = 1.0f;
-		fd.friction = 1.0f;
-		fd.restitution = 1.0f;
-		Fixture f = b.createFixture(fd); // 将形状和密度赋给物体
-		b.setUserData("Ball");
-		f.setUserData("BallFixture");
-
-		BodyDef rectbd = new BodyDef();
-		rectbd.position.set(0, 0);
-		rectbd.type = BodyType.StaticBody;
-		Body rectb = world.createBody(rectbd);
-		EdgeShape rectShape = new EdgeShape();
-		rectShape.set(0, 0, 48, 0);
-		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.shape = rectShape;
-		fixtureDef.restitution = 1.0f;
-		fixtureDef.friction = 1.0f;
-		fixtureDef.density = 1.0f;
-		rectb.createFixture(fixtureDef);
-
 	}
 
 	@Override
@@ -97,23 +65,33 @@ public class Box2DStage extends BaseStage {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		viewportWidth = this.camera.viewportWidth;
+		viewportHeight = this.camera.viewportHeight;
+		this.position_x = this.camera.position.x;
+		this.position_y = this.camera.position.y;
 
+		this.camera.viewportWidth = 48 * 4;
+		this.camera.viewportHeight = 32 * 4;
+		this.camera.position.set(0, 24 * 4, 1);
 	}
 
 	@Override
 	public void draw() {
 		super.draw();
-		this.camera.viewportWidth = 48;
-		this.camera.viewportHeight = 32;
-		this.camera.position.set(0,24,1);
-		world.step(Gdx.graphics.getDeltaTime(), 10, 10);
-		render.render(world, this.camera.combined);
-
+		if (world != null) {
+			world.step(Gdx.graphics.getDeltaTime(), 10, 10);
+			render.render(world, this.camera.combined);
+		}
 	}
 
 	@Override
 	public void dispose() {
+		this.camera.viewportHeight = this.viewportHeight;
+		this.camera.viewportWidth = this.viewportWidth;
+		this.camera.position.set(this.position_x, this.position_y,
+				this.camera.position.z);
+		if(world!=null)
+			world.dispose();
 		super.dispose();
-//		world.dispose();
 	}
 }
