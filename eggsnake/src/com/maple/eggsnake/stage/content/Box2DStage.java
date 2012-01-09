@@ -63,6 +63,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	@Override
 	public void show() {
+		logger.logWithSignature(this, "show");
 		viewportWidth = this.camera.viewportWidth;
 		viewportHeight = this.camera.viewportHeight;
 		this.pos_camera = new Vector3(this.camera.position);
@@ -100,11 +101,13 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		return controller.touchDown(hitPoint);
 	}
 
-	@Override
-	public boolean touchDragged(int x, int y, int pointer) {
-		Vector2 hitPoint = convertToWorld(x, y);
-		return controller.touchDragged(hitPoint);
-	}
+//	@Override
+//	public boolean touchDragged(int x, int y, int pointer) {
+//		logger.logWithSignature(this, "touchDragged");
+//		Vector2 hitPoint = convertToWorld(x, y);
+//		logger.logWithSignature(this, "touchDragged");
+//		return controller.touchDragged(hitPoint);
+//	}
 
 	@Override
 	public boolean touchUp(int x, int y, int pointer, int button) {
