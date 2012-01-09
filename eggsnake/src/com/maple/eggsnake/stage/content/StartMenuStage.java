@@ -205,7 +205,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * 
 	 */
 	private void loadTwoEyeMouseImage(){
-		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, -10f);
+		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, 0f);
 	}
 
 }
