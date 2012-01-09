@@ -33,111 +33,18 @@
       },
       
       {
-         "angle" : "407CE5BE",
-         "angularVelocity" : "3B989A17",
-         "awake" : true,
-         "fixedRotation" : true,
-         "fixture" : 
-         [
-            
-            {
-               "circle" : 
-               {
-                  "center" : 
-                  {
-                     "x" : "BE8C69A1",
-                     "y" : "BFAE598C"
-                  },
-                  "radius" : "41D87ADD"
-               },
-               "density" : "3BAAEEDA",
-               "friction" : "3E99999A",
-               "restitution" : "3F333333"
-            }
-         ],
-         "linearVelocity" : 
-         {
-            "x" : "BE01084C",
-            "y" : "3670C8A1"
-         },
-         "massData-I" : "41B9551E",
-         "massData-center" : 
-         {
-            "x" : "BE8C69A1",
-            "y" : "BFAE598C"
-         },
-         "massData-mass" : "413FFFFF",
-         "position" : 
-         {
-            "x" : "3F81A8AE",
-            "y" : "42B5E1E2"
-         },
-         "type" : 2 //dynamic
-      },
-      
-      {
-         "angle" : "BE9D8F8E",
-         "angularVelocity" : 0,
-         "awake" : true,
-         "linearVelocity" : 
-         {
-            "x" : 0,
-            "y" : "C2EFFFFF"
-         },
-         "massData-mass" : 1,
-         "position" : 
-         {
-            "x" : "C1C38D9A",
-            "y" : "C5FAA2C5"
-         },
-         "type" : 2 //dynamic
-      },
-      
-      {
          "angle" : 0,
          "angularVelocity" : 0,
          "awake" : true,
-         "fixture" : 
-         [
-            
-            {
-               "density" : "3F4CCCCD",
-               "friction" : "3F000000",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "414F0EA7", "414F0EA0", "C14F0EA1", "C14F0EA0" ],
-                     "y" : [ "C14F0E9D", "414F0EA1", "414F0EA1", "C14F0EA3" ]
-                  }
-               },
-               "restitution" : "3E4CCCCD"
-            },
-            
-            {
-               "friction" : "3E4CCCCD",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "3F000003", "3EFFFFFF", "BF000000", "BEFFFFFD" ],
-                     "y" : [ "BEFFFFFA", "3F000000", "3F000000", "BF000001" ]
-                  }
-               }
-            }
-         ],
          "linearVelocity" : 0,
-         "position" : 
-         {
-            "x" : "BF89ADDA",
-            "y" : "C1B832A2"
-         },
+         "position" : 0,
          "type" : 0 //static
       },
       
       {
-         "angle" : 0,
+         "angle" : "3FA3F0FD",
          "angularVelocity" : 0,
+         "awake" : true,
          "fixture" : 
          [
             
@@ -146,181 +53,299 @@
                {
                   "vertex1" : 
                   {
-                     "x" : "C340E5E7",
-                     "y" : "3F6617D9"
+                     "x" : "40D0C866",
+                     "y" : "40AD6384"
                   },
                   "vertex2" : 
                   {
-                     "x" : "43431A1E",
-                     "y" : "3F6617D9"
+                     "x" : "403DA523",
+                     "y" : "4067FD8D"
                   }
                },
-               "friction" : "3E4CCCCD"
+               "friction" : "3E99999A",
+               "restitution" : "3F19999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "4109B8A8",
+                     "y" : "BFAFA952"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "4107BB15",
+                     "y" : "C0244FFE"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "40B66CD6",
+                     "y" : "40C9D9E6"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "40D0B988",
+                     "y" : "40ADCE46"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "408E2084",
+                     "y" : "BFA2CBFD"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "403E7A7E",
+                     "y" : "4068B6C7"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C0D05407",
+                     "y" : "BF2DF1C7"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "C0BE1FE0",
+                     "y" : "C025F9F3"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "41093676",
+                     "y" : "BFA9BF2A"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "409280F7",
+                     "y" : "BFAB8EF8"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C0CD7EB4",
+                     "y" : "BF2DA192"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "40B56469",
+                     "y" : "40C86AC7"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
+            },
+            
+            {
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C0BCC815",
+                     "y" : "C024E208"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "41068F4C",
+                     "y" : "C024A608"
+                  }
+               },
+               "friction" : "3F19999A",
+               "restitution" : "3E99999A"
             }
          ],
+         "gravityScale" : "411CCCCD",
          "linearVelocity" : 0,
          "position" : 
          {
-            "x" : "BF09ADD8",
-            "y" : "C2BF75C4"
+            "x" : "BCD6F200",
+            "y" : "BDBBB380"
          },
          "type" : 0 //static
       },
       
       {
-         "angle" : "B7ED141F",
-         "angularVelocity" : "2F93EE27",
+         "angle" : "3FC90FDB",
+         "angularVelocity" : 0,
          "awake" : true,
          "fixture" : 
          [
             
             {
-               "density" : "3BD06086",
-               "friction" : "3F333333",
-               "polygon" : 
+               "density" : "41200000",
+               "edge" : 
                {
-                  "vertices" : 
+                  "vertex1" : 
                   {
-                     "x" : [ "41B9E026", "41B9E021", "C1AE7BCC", "C1AE7BCA" ],
-                     "y" : [ "C1B1D1AD", "41B68A3D", "41B68A3D", "C1B1D1B2" ]
+                     "x" : "C17FB944",
+                     "y" : "BD8DAC40"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "417F12D4",
+                     "y" : "BD8DAC40"
                   }
                },
-               "restitution" : "3E99999A"
-            },
-            
-            {
-               "density" : "3D193226",
-               "friction" : "3E4CCCCD",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "41114D59", "41114D55", "C131036B", "C1310363" ],
-                     "y" : [ "C2510F77", "C2007B47", "C2007B47", "C2510F77" ]
-                  }
-               }
-            },
-            
-            {
-               "density" : "3D2C586A",
-               "friction" : "3E4CCCCD",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "4161DB50", "4161DB50", "C18163DF", "C18163D4" ],
-                     "y" : [ "C1F6FEF6", "C1B02136", "C1B02136", "C1F6FEF6" ]
-                  }
-               }
-            },
-            
-            {
-               "friction" : "3E4CCCCD",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "C1AF2372", "C1AF2372", "C1FD4FC2", "C1FD4FBE" ],
-                     "y" : [ "409CD08A", "416AC0E1", "416AC0E1", "409CD08A" ]
-                  }
-               }
-            },
-            
-            {
-               "density" : "39DFEFAB",
-               "friction" : "3F333333",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "C1B3ED16", "C1B3ED16", "C2010CB3", "C2010CB1" ],
-                     "y" : [ "4157AE39", "41BA036B", "41BA036B", "4157AE39" ]
-                  }
-               },
-               "restitution" : "3E99999A"
-            },
-            
-            {
-               "density" : "39DFEFAB",
-               "friction" : "3F333333",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "42051B5E", "42051B5E", "41BC0A6C", "41BC0A6C" ],
-                     "y" : [ "406E0D96", "4157DC01", "4157DC01", "406E0D96" ]
-                  }
-               },
-               "restitution" : "3E99999A"
-            },
-            
-            {
-               "density" : "39DFEFAB",
-               "friction" : "3F333333",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "42051B5C", "42051B5C", "41BC0A68", "41BC0A6C" ],
-                     "y" : [ "4157AE41", "41BA036F", "41BA036F", "4157AE41" ]
-                  }
-               },
-               "restitution" : "3E99999A"
-            },
-            
-            {
-               "density" : "39DFEFAB",
-               "friction" : "3F333333",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "C14B5B2E", "C24497A5", "C255D5E6", "C1882A2A" ],
-                     "y" : [ "C2480F25", "425B81CB", "424BFC57", "C2579499" ]
-                  }
-               },
-               "restitution" : "3E99999A"
-            },
-            
-            {
-               "density" : "39E38A7E",
-               "friction" : "3F333333",
-               "polygon" : 
-               {
-                  "vertices" : 
-                  {
-                     "x" : [ "4270EF7C", "4259BCBC", "4121251B", "417DF01F" ],
-                     "y" : [ "42469DF1", "4246E7E2", "C25044BA", "C2508EAB" ]
-                  }
-               },
-               "restitution" : "3E99999A"
+               "friction" : "3E99999A",
+               "restitution" : "3F333333"
             }
          ],
-         "linearVelocity" : 
-         {
-            "x" : "B4C7E648",
-            "y" : "B166E170"
-         },
-         "massData-I" : "472620C0",
-         "massData-center" : 
-         {
-            "x" : "BEC7B086",
-            "y" : "C1BAAD9D"
-         },
-         "massData-mass" : "4220042E",
+         "linearVelocity" : 0,
          "position" : 
          {
-            "x" : "3F77F9A7",
-            "y" : "4228C95F"
+            "x" : "41BF998F",
+            "y" : "3D9038B4"
          },
-         "type" : 2 //dynamic
+         "type" : 0 //static
       },
       
       {
-         "angle" : "3E26B4C6",
+         "angle" : "3FC90FDB",
          "angularVelocity" : 0,
-         "bullet" : true,
-         "fixedRotation" : true,
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "density" : "41200000",
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C17FB944",
+                     "y" : "BD8DAC40"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "417F12D4",
+                     "y" : "BD8DAC40"
+                  }
+               },
+               "friction" : "3E99999A",
+               "restitution" : "3F333333"
+            }
+         ],
+         "linearVelocity" : 0,
+         "position" : 
+         {
+            "x" : "C1C0392D",
+            "y" : "3D9038B4"
+         },
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "density" : "41200000",
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C1BFEBFB",
+                     "y" : "BD7431C0"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "41BFD5B8",
+                     "y" : "BD7431C0"
+                  }
+               },
+               "friction" : "3E99999A",
+               "restitution" : "3F333333"
+            }
+         ],
+         "linearVelocity" : 0,
+         "position" : 
+         {
+            "x" : "3CFB03E8",
+            "y" : "41807DD5"
+         },
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "density" : "41200000",
+               "edge" : 
+               {
+                  "vertex1" : 
+                  {
+                     "x" : "C1BFE42D",
+                     "y" : "BD6DBCBA"
+                  },
+                  "vertex2" : 
+                  {
+                     "x" : "41BFCDC6",
+                     "y" : "BD6DBCBA"
+                  }
+               },
+               "friction" : "3E99999A",
+               "restitution" : "3F333333"
+            }
+         ],
+         "linearVelocity" : 0,
+         "position" : 
+         {
+            "x" : "3C0BF7D0",
+            "y" : "C17D90B2"
+         },
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : "43110D1F",
+         "angularVelocity" : "BFB22645",
+         "awake" : true,
          "fixture" : 
          [
             
@@ -329,28 +354,34 @@
                {
                   "center" : 
                   {
-                     "x" : "3F5F0AF8",
-                     "y" : "BE97EE18"
+                     "x" : "3C913200",
+                     "y" : "BCABFD00"
                   },
-                  "radius" : "41D87ADD"
+                  "radius" : "3FF3D854"
                },
-               "density" : "3C003324",
+               "density" : "3FCA14A5",
                "friction" : "3E99999A",
                "restitution" : "3F4CCCCD"
             }
          ],
-         "linearVelocity" : 0,
-         "massData-I" : "4173FAA5",
+         "gravityScale" : "411CCCCD",
+         "linearVelocity" : 
+         {
+            "x" : "402996FA",
+            "y" : "223B8190"
+         },
+         "massData-I" : "4202B464",
          "massData-center" : 
          {
-            "x" : "3F5F0AF8",
-            "y" : "BE97EE18"
+            "x" : "3C913200",
+            "y" : "BCABFD00"
          },
          "massData-mass" : "41900000",
+         "name" : "snake",
          "position" : 
          {
-            "x" : "C3105945",
-            "y" : "C2873906"
+            "x" : "3F7E58B9",
+            "y" : "C15FBF15"
          },
          "type" : 2 //dynamic
       },
@@ -359,18 +390,72 @@
          "angle" : 0,
          "angularVelocity" : 0,
          "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "friction" : "3E4CCCCD",
+               "polygon" : 
+               {
+                  "vertices" : 
+                  {
+                     "x" : [ "3F80A4DF", "3F80A4DB", "BF80A4DC", "BF80A4DA" ],
+                     "y" : [ "BF85E515", "3F76C940", "3F76C940", "BF85E519" ]
+                  }
+               }
+            }
+         ],
          "linearVelocity" : 0,
-         "position" : 0,
+         "position" : 
+         {
+            "x" : "BE82AC00",
+            "y" : "C0F14FE9"
+         },
          "type" : 0 //static
       },
       
       {
-         "angle" : 0,
-         "angularVelocity" : 0,
+         "angle" : "C41EB350",
+         "angularVelocity" : "BE8480DF",
          "awake" : true,
-         "linearVelocity" : 0,
-         "position" : 0,
-         "type" : 0 //static
+         "fixture" : 
+         [
+            
+            {
+               "circle" : 
+               {
+                  "center" : 
+                  {
+                     "x" : "3C913200",
+                     "y" : "BCABFD00"
+                  },
+                  "radius" : "3FF3D854"
+               },
+               "density" : "3F86B86E",
+               "friction" : "3E99999A",
+               "restitution" : "3F4CCCCD"
+            }
+         ],
+         "gravityScale" : "411CCCCD",
+         "linearVelocity" : 
+         {
+            "x" : "3EFBF5D8",
+            "y" : "3FC8B610"
+         },
+         "massData-I" : "41AE45DA",
+         "massData-center" : 
+         {
+            "x" : "3C913200",
+            "y" : "BCABFD00"
+         },
+         "massData-mass" : "41400000",
+         "name" : "mouse",
+         "position" : 
+         {
+            "x" : "BF1F95A0",
+            "y" : "40B7922A"
+         },
+         "type" : 2 //dynamic
       },
       
       {

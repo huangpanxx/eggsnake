@@ -1,11 +1,11 @@
 package com.maple.eggsnake.stage.content;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -16,6 +16,8 @@ import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.physics.B2Const;
@@ -39,6 +41,10 @@ public class ZhujianxinStage extends BaseStage {
 	Vector2 target = new Vector2();
 	Body hitBody = null;
 	Body ground = null;
+	
+	TextureRegion region = new TextureRegion(ResourceLoader.loadTexture("me.png"), 
+			0, 0, 32, 32);
+	Image rat = new Image("rat", region);
 
 	QueryCallback callback = new QueryCallback() {
 		@Override
@@ -58,14 +64,22 @@ public class ZhujianxinStage extends BaseStage {
 		render = new Box2DDebugRenderer();
 
 		try {
-			world = ResourceLoader.worldLoader("hp.json");
+			world = ResourceLoader.worldLoader("maptest.json");
 			logger.logWithSignature(this, "Body:%1$d", world.getBodyCount());
 			logger.logWithSignature(this, "Joint:%1$d", world.getJointCount());
 			Iterator<Body> it = world.getBodies();
 			while (it.hasNext()) {
 				Body body = it.next();
 				String name = (String) body.getUserData();
-				if (name != null && "ground".equals(name)) {
+				if (name != null && "snake".equals(name)) {
+					Vector3 vector3 = new Vector3(body.getPosition().x, 
+							body.getPosition().y, 0);
+					camera.project(vector3);
+					rat.x = vector3.x;
+					rat.y = vector3.y / 20f;
+					System.out.println("constructor x: " + rat.x + 
+							" construtor y: " + rat.y);
+					this.addActor(rat);
 					this.ground = body;
 					break;
 				}
@@ -118,10 +132,10 @@ public class ZhujianxinStage extends BaseStage {
 		super.draw();
 		this.camera.viewportWidth = 48;
 		this.camera.viewportHeight = 32;
-		this.camera.position.set(0,24,1);
+		this.camera.position.set(0,20,1);
 		world.step(Gdx.graphics.getDeltaTime(), 10, 10);
 		render.render(world, this.camera.combined);
-
+		this.attachTexture(world);
 	}
 
 	@Override
@@ -180,5 +194,26 @@ public class ZhujianxinStage extends BaseStage {
 			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
 		}
 		return false;
+	}
+	
+	private void attachTexture(World world){
+		Iterator<Body> iterator;
+		Vector3 bodyVector3;
+		Body body;
+		iterator = world.getBodies();
+		String userData;
+		while(iterator.hasNext()){
+			body = iterator.next();
+			userData = (String)body.getUserData();
+			if("snake".equals(userData)){
+				bodyVector3 = new Vector3(body.getPosition().x, body.getPosition().y, 0f);
+				camera.project(bodyVector3);
+				System.out.println("X: " + bodyVector3.x + " Y:" + 
+				bodyVector3.y);
+				rat.x = bodyVector3.x;
+				rat.y = bodyVector3.y;
+				this.addActor(rat);
+			}
+		}
 	}
 }
