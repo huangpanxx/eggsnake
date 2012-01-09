@@ -25,7 +25,7 @@ public class DestinationStage {
 			break;
 		}
 		case GAMESTAGE: {
-			destStage = new ZhujianxinStage( screen.getWidth(),
+			destStage = new Box2DStage( screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
