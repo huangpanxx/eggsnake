@@ -109,9 +109,9 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关成功啦");
 		try {
-			this.controller.reloadWorld("rube.json");
+			this.controller.reloadWorld("map4.json");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.logWithSignature(this, e.getMessage());
 		}
 	}
 }

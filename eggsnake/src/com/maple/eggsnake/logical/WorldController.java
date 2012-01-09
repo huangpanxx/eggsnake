@@ -32,8 +32,10 @@ public class WorldController {
 
 		@Override
 		public Object doWork(World world) {
-			world.destroyBody(body);
-			judge.killOne();
+			if (world != null)
+				world.destroyBody(body);
+			if (judge != null)
+				judge.killOne();
 			return null;
 		}
 
@@ -102,7 +104,8 @@ public class WorldController {
 		}
 	};
 
-	public WorldController(World world, LogicalGameListener listener) {
+	public WorldController(World world, LogicalGameListener listener)
+			throws Exception {
 		this.initialize(world, listener);
 	}
 
@@ -115,7 +118,7 @@ public class WorldController {
 		this.initialize(loadWorld(map), null);
 	}
 
-	public WorldController(World world) {
+	public WorldController(World world) throws Exception {
 		this.initialize(world, null);
 
 	}
@@ -126,10 +129,10 @@ public class WorldController {
 
 	}
 
-	public void addTask(Task<Object,World> task){
+	public void addTask(Task<Object, World> task) {
 		this.tasks.push(task);
 	}
-	
+
 	public void pause() {
 		this.pause = true;
 	}
@@ -142,18 +145,30 @@ public class WorldController {
 		return this.pause;
 	}
 
-	private void initialize(World world, LogicalGameListener listener) {
-		if (tasks != null)
+	private void initialize(World world, LogicalGameListener listener)
+			throws Exception {
+		if (world == null) {
+			throw new Exception("world is null");
+		}
+		if (tasks != null) {
 			tasks.clear();
+		} else {
+			tasks = new TaskQueueContainer<Task<Object, World>>();
+		}
 		if (this.world != null) {
 			this.world.dispose();
 			this.world = null;
 		}
-		tasks = new TaskQueueContainer<Task<Object, World>>();
 		logger = DefaultLogger.getDefaultLogger();
 		hitPoint = new Vector2(0, 0);
-		this.setWorld(world);
-		this.loadJugde();
+		try {
+			this.setWorld(world);
+			this.loadJugde();
+		} catch (Exception e) {
+			this.world = null;
+			throw e;
+		}
+
 		this.setGameLogicalListener(listener);
 	}
 
@@ -190,7 +205,7 @@ public class WorldController {
 	}
 
 	public void update(float dt) {
-		if (!pause) {
+		if (!pause && world != null) {
 			world.step(dt, 10, 10);
 			while (!tasks.isEmpty()) {
 				Task<Object, World> task = tasks.pop();
