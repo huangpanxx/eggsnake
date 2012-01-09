@@ -1,6 +1,6 @@
 package com.maple.eggsnake.eggenum;
 
-public enum EnumStage {
+public enum EnumMainStage {
 	STARTMENUSTAGE, // 开始菜单
 	ABOUTUSSTAGE, // 关于
 	SETTINGSTAGE, // 设置

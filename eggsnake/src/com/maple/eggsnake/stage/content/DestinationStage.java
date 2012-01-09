@@ -1,13 +1,13 @@
 package com.maple.eggsnake.stage.content;
 
-import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumMainStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class DestinationStage {
 
 	public static BaseStage getDestnationStage(ContentScreen screen,
-			EnumStage stage) {
+			EnumMainStage stage) {
 		BaseStage destStage;
 		switch (stage) {
 		case STARTMENUSTAGE: {

@@ -13,11 +13,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class LoveYouStage extends BaseStage {
+public class LoveYouStage extends BaseStage implements LogicalGameListener{
 
 	Loggable logger;
 	WorldController controller;
@@ -49,7 +50,7 @@ public class LoveYouStage extends BaseStage {
 
 	private void loadWorld() {
 		try {
-			this.controller = new WorldController("levelone.json");
+			this.controller = new WorldController("levelone.json", this);
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
@@ -115,6 +116,7 @@ public class LoveYouStage extends BaseStage {
 		Vector3 bodyVector3;
 		Body body;
 		iterator = controller.getWorld().getBodies();
+		
 		String userData;
 		while(iterator.hasNext()){
 			body = iterator.next();
@@ -184,5 +186,11 @@ public class LoveYouStage extends BaseStage {
 		Vector2 hitPoint = convertToWorld(x, y);
 		controller.touchUp(hitPoint);
 		return false;
+	}
+
+	@Override
+	public void onAllMouseKilled() {
+		// TODO Auto-generated method stub
+		logger.logWithSignature(this, "过关了");
 	}
 }

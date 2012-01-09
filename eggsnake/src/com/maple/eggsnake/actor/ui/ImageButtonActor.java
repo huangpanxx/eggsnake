@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumLevel;
+import com.maple.eggsnake.eggenum.EnumMainStage;
+import com.maple.eggsnake.eggenum.EnumPass;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
@@ -13,18 +15,21 @@ import com.maple.eggsnake.stage.content.DestinationStage;
 public class ImageButtonActor extends Image {
 
 	private ContentScreen contentScreen; // 中间层屏幕
-	private EnumStage destSatge; // 跳转的目标Stage枚举
+	
+	private EnumMainStage mainStage; // 跳转的目标Stage枚举
+	private EnumPass passStage;//玩家过关时弹出的stage
+	private EnumLevel levelStage;//第几关卡
 	private BaseStage sourceStage;
 
 	private final float scaleSize = 10f;// 缩放幅度
 	private final float clockwiseAngles = 360f;// 顺时针旋转360度
 	private final float duration = 2f;// 间隔
 
-	public ImageButtonActor(ContentScreen screen, EnumStage destStage, String name,
+	public ImageButtonActor(ContentScreen screen, EnumMainStage destStage, String name,
 			TextureRegion region) {
 		super(name, region);
 		this.contentScreen = screen;
-		this.destSatge = destStage;
+		this.mainStage = destStage;
 		this.touchable = true;
 	}
 
@@ -36,7 +41,7 @@ public class ImageButtonActor extends Image {
 			Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
-		this.destSatge = destStage;
+		this.mainSatge = destStage;
 		this.touchable = true;
 	}
 
@@ -45,7 +50,7 @@ public class ImageButtonActor extends Image {
 		super(name, texture);
 		this.contentScreen = screen;
 		this.sourceStage = source;
-		this.destSatge = destStage;
+		this.mainSatge = destStage;
 		this.touchable = true;
 	}
 
@@ -69,13 +74,15 @@ public class ImageButtonActor extends Image {
 
 	@Override
 	public void touchDragged(float x, float y, int pointer) {
-		if (!(EnumStage.DISPOSESTAGE == this.destSatge))
+		if (!(EnumMainStage.DISPOSESTAGE == this.mainSatge))
 			this.contentScreen.navigate(DestinationStage.getDestnationStage(
-					contentScreen, destSatge));
+					contentScreen, mainSatge));
 		else
 		{
 			ApplicationService.getInstance().exitGame();
 		}
 	}
+	
+	//private void navigate( )
 	
 }

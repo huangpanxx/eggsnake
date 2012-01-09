@@ -8,7 +8,7 @@ package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.maple.eggsnake.actor.ui.ActorRegister;
-import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumMainStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -43,12 +43,12 @@ public class HighScoresStage extends BaseStage implements ActorLoader{
 	}
 	
 	private void loadMenuImage(){
-		ActorRegister.navigateRegister(contentScreen, this, EnumStage.STARTMENUSTAGE,
+		ActorRegister.navigateRegister(contentScreen, this, EnumMainStage.STARTMENUSTAGE,
 				menuTexture, 75f, 20f);
 	}
 	
 	private void loadReplayImage(){
-		ActorRegister.navigateRegister(contentScreen, this, EnumStage.GAMESTAGE,
+		ActorRegister.navigateRegister(contentScreen, this, EnumMainStage.GAMESTAGE,
 				replayTexture, 155f, 10f);
 	}
 	

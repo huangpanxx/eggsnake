@@ -264,7 +264,8 @@ public class WorldController {
 				this.hitPoint.y + 0.0001f);
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
-
+			String name = (String)this.hitBody.getUserData();
+			if(name!=null && name.equals("snake")){
 			logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
 					this.hitBody.getLinearVelocity().x,
 					this.hitBody.getLinearVelocity().y);
@@ -278,6 +279,7 @@ public class WorldController {
 			def.maxForce = 1000.f * hitBody.getMass();
 			mouseJoint = (MouseJoint) world.createJoint(def);
 			hitBody.setAwake(true);
+			}
 		}
 		return false;
 

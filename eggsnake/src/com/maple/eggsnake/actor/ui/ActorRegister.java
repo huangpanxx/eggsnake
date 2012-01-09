@@ -9,7 +9,7 @@ package com.maple.eggsnake.actor.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumMainStage;
 import com.maple.eggsnake.eggenum.EnumRotateDirection;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
@@ -68,7 +68,7 @@ public class ActorRegister{
 	
 
 	public static void navigateRegister(ContentScreen screen, BaseStage sourceStage,
-			EnumStage destStage, Texture texture, float x, float y){
+			EnumMainStage destStage, Texture texture, float x, float y){
 		generalImage = new ImageButtonActor(screen, destStage ,"default", texture);
 		generalImage.x = x;
 		generalImage.y = y;

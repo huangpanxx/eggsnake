@@ -9,7 +9,7 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
-import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumMainStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -158,7 +158,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.DISPOSESTAGE, quitTexture, this.width
+				EnumMainStage.DISPOSESTAGE, quitTexture, this.width
 						- generalTextureWidth + 10f, 0);
 	}
 
@@ -167,7 +167,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadNewGameImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.GAMESTAGE, newGameTexture, 105f, 180f);
+				EnumMainStage.GAMESTAGE, newGameTexture, 105f, 180f);
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadSettingImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.SETTINGSTAGE, settingTexture, 112f, 128f);
+				EnumMainStage.SETTINGSTAGE, settingTexture, 112f, 128f);
 	}
 
 	/**
@@ -183,7 +183,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadAboutUsImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
+				EnumMainStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
 	}
 	
 	/**
