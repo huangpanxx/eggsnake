@@ -14,6 +14,7 @@ import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.screen.LayeredScreen;
 import com.maple.eggsnake.screen.ProcessableScreen;
+import com.maple.eggsnake.service.MusicManager;
 
 public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 
@@ -41,6 +42,8 @@ public class EggSnakeManager implements ApplicationListener, ScreenManageable {
 	@Override
 	public void create() {
 		logger.logWithSignature(this, "create");
+		MusicManager.setBackgroundMusic("background.ogg");
+		MusicManager.play(true);
 		this.navigate(new LayeredScreen(this));
 	}
 

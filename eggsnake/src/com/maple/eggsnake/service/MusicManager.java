@@ -18,4 +18,5 @@ public class MusicManager {
 	public static void stop() {
 		backgroundMusic.stop();
 	}
+	
 }
