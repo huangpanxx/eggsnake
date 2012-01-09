@@ -4,16 +4,17 @@ import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class LevelThreeStage extends BaseStage implements ActorLoader {
+	
+	private ContentScreen contentScreen;
 
-	public LevelThreeStage(float width, float height, boolean stretch) {
+	public LevelThreeStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
-		// TODO Auto-generated constructor stub
+		this.initContent(screen);
 	}
 
 	@Override
 	public void initContent(ContentScreen screen) {
-		// TODO Auto-generated method stub
-
+		this.contentScreen = screen;
 	}
 
 	@Override

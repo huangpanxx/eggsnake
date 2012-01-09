@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumLevel;
+import com.maple.eggsnake.eggenum.EnumLevelStage;
 import com.maple.eggsnake.eggenum.EnumMainStage;
-import com.maple.eggsnake.eggenum.EnumPass;
+import com.maple.eggsnake.eggenum.EnumPassStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
@@ -17,8 +17,9 @@ public class ImageButtonActor extends Image {
 	private ContentScreen contentScreen; // 中间层屏幕
 	
 	private EnumMainStage mainStage; // 跳转的目标Stage枚举
-	private EnumPass passStage;//玩家过关时弹出的stage
-	private EnumLevel levelStage;//第几关卡
+	private EnumPassStage passStage;//玩家过关时弹出的stage
+	private EnumLevelStage levelStage;//第几关卡
+	
 	private BaseStage sourceStage;
 
 	private final float scaleSize = 10f;// 缩放幅度
@@ -32,25 +33,75 @@ public class ImageButtonActor extends Image {
 		this.mainStage = destStage;
 		this.touchable = true;
 	}
+	
+	public ImageButtonActor(ContentScreen screen, EnumLevelStage destStage, String name,
+			TextureRegion region) {
+		super(name, region);
+		this.contentScreen = screen;
+		this.levelStage = destStage;
+		this.touchable = true;
+	}
+	
+	public ImageButtonActor(ContentScreen screen, EnumPassStage destStage, String name,
+			TextureRegion region) {
+		super(name, region);
+		this.contentScreen = screen;
+		this.passStage = destStage;
+		this.touchable = true;
+	}
 
 	public ImageButtonActor(String name, TextureRegion region) {
 		super(name, region);
 	}
 
-	public ImageButtonActor(ContentScreen screen, EnumStage destStage, String name,
+	public ImageButtonActor(ContentScreen screen, EnumMainStage destStage, String name,
 			Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
-		this.mainSatge = destStage;
+		this.mainStage = destStage;
+		this.touchable = true;
+	}
+	
+	public ImageButtonActor(ContentScreen screen, EnumLevelStage destStage, String name,
+			Texture texture) {
+		super(name, texture);
+		this.contentScreen = screen;
+		this.levelStage = destStage;
+		this.touchable = true;
+	}
+	
+	public ImageButtonActor(ContentScreen screen, EnumPassStage destStage, String name,
+			Texture texture) {
+		super(name, texture);
+		this.contentScreen = screen;
+		this.passStage = destStage;
 		this.touchable = true;
 	}
 
 	public ImageButtonActor(ContentScreen screen, BaseStage source,
-			EnumStage destStage, String name, Texture texture) {
+			EnumMainStage destStage, String name, Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
 		this.sourceStage = source;
-		this.mainSatge = destStage;
+		this.mainStage = destStage;
+		this.touchable = true;
+	}
+	
+	public ImageButtonActor(ContentScreen screen, BaseStage source,
+			EnumLevelStage destStage, String name, Texture texture) {
+		super(name, texture);
+		this.contentScreen = screen;
+		this.sourceStage = source;
+		this.levelStage = destStage;
+		this.touchable = true;
+	}
+	
+	public ImageButtonActor(ContentScreen screen, BaseStage source,
+			EnumPassStage destStage, String name, Texture texture) {
+		super(name, texture);
+		this.contentScreen = screen;
+		this.sourceStage = source;
+		this.passStage = destStage;
 		this.touchable = true;
 	}
 
@@ -74,15 +125,19 @@ public class ImageButtonActor extends Image {
 
 	@Override
 	public void touchDragged(float x, float y, int pointer) {
-		if (!(EnumMainStage.DISPOSESTAGE == this.mainSatge))
+		
+	}
+	
+	private void navigate(EnumMainStage destStage){
+		if (!(EnumMainStage.DISPOSESTAGE == this.mainStage))
 			this.contentScreen.navigate(DestinationStage.getDestnationStage(
-					contentScreen, mainSatge));
+					contentScreen, mainStage));
 		else
 		{
 			ApplicationService.getInstance().exitGame();
 		}
 	}
 	
-	//private void navigate( )
+	
 	
 }

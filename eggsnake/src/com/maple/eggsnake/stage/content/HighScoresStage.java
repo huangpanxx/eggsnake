@@ -25,9 +25,14 @@ public class HighScoresStage extends BaseStage implements ActorLoader{
 
 	private float generalTextureWidth; // 作为临时变量，保存任意纹理宽度
 	private float generalTextureHeight; // 作为临时变量，保存任意纹理高度
+	
+	private boolean isPassed;
 
-	public HighScoresStage(float width, float height, boolean stretch) {
+	public HighScoresStage(ContentScreen screen, boolean isPassed, float width, 
+			float height, boolean stretch) {
 		super(width, height, stretch);
+		this.initContent(screen);
+		this.isPassed = isPassed;
 	}
 
 	@Override

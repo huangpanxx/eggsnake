@@ -10,11 +10,13 @@ import com.maple.eggsnake.stage.BaseStage;
  * @author Administrator
  *
  */
-public class SelectHurdleStage extends BaseStage implements ActorLoader {
+public class SelectLevelStage extends BaseStage implements ActorLoader {
+	
+	private ContentScreen contentScreen;
 
-	public SelectHurdleStage(float width, float height, boolean stretch) {
+	public SelectLevelStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
-		// TODO Auto-generated constructor stub
+		this.initContent(screen);
 	}
 
 	/* (non-Javadoc)
@@ -22,8 +24,7 @@ public class SelectHurdleStage extends BaseStage implements ActorLoader {
 	 */
 	@Override
 	public void initContent(ContentScreen screen) {
-		// TODO Auto-generated method stub
-
+		this.contentScreen = screen;
 	}
 
 	/* (non-Javadoc)
