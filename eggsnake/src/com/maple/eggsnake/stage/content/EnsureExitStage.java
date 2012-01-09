@@ -1,5 +1,7 @@
-/**
- * 
+/** 
+ * @description	: EnsureExitStage确认是否退出
+ * @author		: 王志伟
+ * @created		: 2012-1-9
  */
 package com.maple.eggsnake.stage.content;
 

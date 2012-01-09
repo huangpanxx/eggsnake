@@ -1,5 +1,5 @@
 /** 
- * @description	: GameStage继承自BaseStage
+ * @description	: GameStage游戏界面
  * @author		: 王志伟
  * @created		: 2012-1-6
  */

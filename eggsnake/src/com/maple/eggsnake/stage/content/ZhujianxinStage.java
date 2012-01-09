@@ -5,6 +5,8 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -17,7 +19,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.physics.B2Const;
@@ -42,9 +43,18 @@ public class ZhujianxinStage extends BaseStage {
 	Body hitBody = null;
 	Body ground = null;
 	
-	TextureRegion region = new TextureRegion(ResourceLoader.loadTexture("me.png"), 
-			0, 0, 32, 32);
-	Image rat = new Image("rat", region);
+	
+	/////////////////////////////////////////////////////////////////////
+	/*private static final int FRAME_COLS = 2;
+    private static final int FRAME_ROWS = 2;
+	
+    Animation                       walkAnimation;          // #3
+    Texture                         walkSheet;              // #4
+    TextureRegion[]                 walkFrames;             // #5
+    SpriteBatch                     spriteBatch;            // #6
+    TextureRegion                   currentFrame;           // #7
+    float stateTime;                                        // #8*/
+	/////////////////////////////////////////////////////////////////////
 
 	QueryCallback callback = new QueryCallback() {
 		@Override
@@ -64,7 +74,7 @@ public class ZhujianxinStage extends BaseStage {
 		render = new Box2DDebugRenderer();
 
 		try {
-			world = ResourceLoader.loadWorld("maptest.json");
+			world = ResourceLoader.loadWorld("map111.json");
 			logger.logWithSignature(this, "Body:%1$d", world.getBodyCount());
 			logger.logWithSignature(this, "Joint:%1$d", world.getJointCount());
 			Iterator<Body> it = world.getBodies();
@@ -72,18 +82,11 @@ public class ZhujianxinStage extends BaseStage {
 				Body body = it.next();
 				String name = (String) body.getUserData();
 				if (name != null && "snake".equals(name)) {
-					Vector3 vector3 = new Vector3(body.getPosition().x, 
-							body.getPosition().y, 0);
-					camera.project(vector3);
-					rat.x = vector3.x;
-					rat.y = vector3.y / 20f;
-					System.out.println("constructor x: " + rat.x + 
-							" construtor y: " + rat.y);
-					this.addActor(rat);
 					this.ground = body;
 					break;
 				}
 			}
+			//this.initTexture();
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载世界失败(%1$s)", e.getMessage());
 		}
@@ -119,23 +122,20 @@ public class ZhujianxinStage extends BaseStage {
 		viewportHeight = this.camera.viewportHeight;
 		this.position_x = this.camera.position.x;
 		this.position_y = this.camera.position.y;
-		this.camera.viewportWidth = 480 / B2Const.CONVERTRATIO;// this.width() /
-																// B2Const.CONVERTRATIO;
-		this.camera.viewportHeight = 320 / B2Const.CONVERTRATIO;// this.height()
-																// /
-																// B2Const.CONVERTRATIO;
+		this.camera.viewportWidth = 480 / B2Const.CONVERTRATIO;																
+		this.camera.viewportHeight = 320 / B2Const.CONVERTRATIO;																														
 		this.camera.position.set(0, 0, 1);
 	}
 
 	@Override
 	public void draw() {
-		super.draw();
-		this.camera.viewportWidth = 48;
-		this.camera.viewportHeight = 32;
-		this.camera.position.set(0,20,1);
+		super.draw();		
+		this.configCamera();
 		world.step(Gdx.graphics.getDeltaTime(), 10, 10);
 		render.render(world, this.camera.combined);
-		this.attachTexture(world);
+		//this.configPosition(world);
+		//this.attachTexture();
+		
 	}
 
 	@Override
@@ -196,7 +196,7 @@ public class ZhujianxinStage extends BaseStage {
 		return false;
 	}
 	
-	private void attachTexture(World world){
+	private void configPosition(World world){
 		Iterator<Body> iterator;
 		Vector3 bodyVector3;
 		Body body;
@@ -206,14 +206,65 @@ public class ZhujianxinStage extends BaseStage {
 			body = iterator.next();
 			userData = (String)body.getUserData();
 			if("snake".equals(userData)){
-				bodyVector3 = new Vector3(body.getPosition().x, body.getPosition().y, 0f);
+				bodyVector3 = new Vector3(body.getPosition().x, 
+						body.getPosition().y, 0f);
 				camera.project(bodyVector3);
-				System.out.println("X: " + bodyVector3.x + " Y:" + 
-				bodyVector3.y);
-				rat.x = bodyVector3.x;
-				rat.y = bodyVector3.y;
-				this.addActor(rat);
+				BodyPosition.getBodyPositionInstance().setPosition(bodyVector3.x,
+						bodyVector3.y);
+				System.out.println("X: " + BodyPosition.getBodyPositionInstance().getPosition().x + 
+						" y: " + BodyPosition.getBodyPositionInstance().getPosition().y);
 			}
 		}
+	}
+	
+	/**
+	 * @description 配置照相机
+	 */
+	private void configCamera(){
+		this.camera.viewportWidth = 48;
+		this.camera.viewportHeight = 32;
+		this.camera.position.set(0,20,1);
+	}
+	
+	/**
+	 * @description 根据body的位置给body贴纹理
+	 */
+	private void attachTexture(){
+        //stateTime += Gdx.graphics.getDeltaTime();                       // #15
+        //float temp = stateTime;
+        //currentFrame = walkAnimation.getKeyFrame(temp, true);      // #16
+        /*spriteBatch.begin();
+        spriteBatch.draw(currentFrame, BodyPosition.getBodyPositionInstance().getPosition().x, 
+        		BodyPosition.getBodyPositionInstance().getPosition().y);                         // #17
+        spriteBatch.end();*/
+		/*Image image = new Image("test", currentFrame);
+		image.x = BodyPosition.getBodyPositionInstance().getPosition().x;
+		image.y = BodyPosition.getBodyPositionInstance().getPosition().y;
+		if(null == this.findActor("test"))
+			this.addActor(image);
+		else
+			this.removeActor(this.findActor("test"));*/
+	}
+	
+	/**
+	 * @description 初始化纹理
+	 */
+	private void initTexture(){
+		//walkSheet = new Texture(Gdx.files.internal("data/images/test.png"));     // #9
+        /*TextureRegion[][] tmp = TextureRegion.split(walkSheet, 
+        		walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
+        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+                for (int j = 0; j < FRAME_COLS; j++) {
+                	tmp[i][j].setRegionWidth(tmp[i][j].getRegionWidth());
+                	tmp[i][j].setRegionHeight(tmp[i][j].getRegionHeight());
+                        walkFrames[index++] = tmp[i][j];
+                }
+        }
+        walkAnimation = new Animation(0.025f, walkFrames);*/              // #11
+		//currentFrame = new TextureRegion(walkSheet, 0, 0, 32, 32);
+       // spriteBatch = new SpriteBatch();                                // #12
+//        stateTime = 0f; 
 	}
 }

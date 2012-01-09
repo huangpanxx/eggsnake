@@ -1,3 +1,9 @@
+/** 
+ * @description	: HighScoresStage高分榜界面
+ * @author		: 王志伟
+ * @created		: 2012-1-9
+ */
+
 package com.maple.eggsnake.stage.content;
 
 import com.maple.eggsnake.screen.ContentScreen;

@@ -17,6 +17,5 @@ public abstract class BaseStage extends Stage {
 	public abstract void resume();
 
 	public abstract void show();
-
 }
 
