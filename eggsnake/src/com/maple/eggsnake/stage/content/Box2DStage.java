@@ -6,11 +6,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class Box2DStage extends BaseStage {
+public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	Loggable logger;
 	WorldController controller;
@@ -24,12 +25,12 @@ public class Box2DStage extends BaseStage {
 	public Box2DStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();
-		this.loadWorld();
+		this.initController();
 	}
 
-	private void loadWorld() {
+	private void initController() {
 		try {
-			this.controller = new WorldController("std_map.json");
+			this.controller = new WorldController("std_map.json", this);
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
@@ -102,5 +103,15 @@ public class Box2DStage extends BaseStage {
 		Vector2 hitPoint = convertToWorld(x, y);
 		controller.touchUp(hitPoint);
 		return false;
+	}
+
+	@Override
+	public void onAllMouseKilled() {
+		logger.logWithSignature(this, "过关成功啦");
+		try {
+			this.controller.reloadWorld("rube.json");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

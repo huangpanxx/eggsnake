@@ -33,6 +33,7 @@ public class WorldController {
 		@Override
 		public Object doWork(World world) {
 			world.destroyBody(body);
+			judge.killOne();
 			return null;
 		}
 
@@ -52,10 +53,10 @@ public class WorldController {
 					String nameB = (String) bodyB.getUserData();
 					if (nameA != null && nameB != null) {
 						if (nameB.equals("mouse") && nameA.equals("snake")) {
-							tasks.push(new DeleteBodyTask(bodyB));
+							addTask(new DeleteBodyTask(bodyB));
 						} else if (nameA.equals("mouse")
 								&& nameB.equals("snake")) {
-							tasks.push(new DeleteBodyTask(bodyA));
+							addTask(new DeleteBodyTask(bodyA));
 						}
 					}
 				}
@@ -87,6 +88,9 @@ public class WorldController {
 	TaskContainer<Task<Object, World>> tasks;
 	MouseJoint mouseJoint = null;
 	Loggable logger;
+	GateJudge judge = null;
+	boolean pause = false;
+
 	QueryCallback callback = new QueryCallback() {
 		@Override
 		public boolean reportFixture(Fixture fixture) {
@@ -98,19 +102,67 @@ public class WorldController {
 		}
 	};
 
-	public WorldController(World world) {
-		this.initialize();
-		this.setWorld(world);
-
+	public WorldController(World world, LogicalGameListener listener) {
+		this.initialize(world, listener);
 	}
-	
-	public void setGameLogicalListener(){
-		
+
+	public WorldController(String world, LogicalGameListener listener)
+			throws Exception {
+		this.initialize(loadWorld(world), listener);
 	}
 
 	public WorldController(String map) throws Exception {
-		this.initialize();
-		this.setWorld(loadWorld(map));
+		this.initialize(loadWorld(map), null);
+	}
+
+	public WorldController(World world) {
+		this.initialize(world, null);
+
+	}
+
+	public void reloadWorld(String map) throws Exception {
+		World world = loadWorld(map);
+		this.initialize(world, this.judge.getListener());
+
+	}
+
+	public void addTask(Task<Object,World> task){
+		this.tasks.push(task);
+	}
+	
+	public void pause() {
+		this.pause = true;
+	}
+
+	public void resume() {
+		this.pause = false;
+	}
+
+	public boolean isPause() {
+		return this.pause;
+	}
+
+	private void initialize(World world, LogicalGameListener listener) {
+		if (tasks != null)
+			tasks.clear();
+		if (this.world != null) {
+			this.world.dispose();
+			this.world = null;
+		}
+		tasks = new TaskQueueContainer<Task<Object, World>>();
+		logger = DefaultLogger.getDefaultLogger();
+		hitPoint = new Vector2(0, 0);
+		this.setWorld(world);
+		this.loadJugde();
+		this.setGameLogicalListener(listener);
+	}
+
+	private void loadJugde() {
+		this.judge = new GateJudge(world);
+	}
+
+	public void setGameLogicalListener(LogicalGameListener listener) {
+		this.judge.setListener(listener);
 	}
 
 	private World loadWorld(String map) throws Exception {
@@ -133,21 +185,17 @@ public class WorldController {
 		World.setVelocityThreshold(15f);
 	}
 
-	private void initialize() {
-		tasks = new TaskQueueContainer<Task<Object, World>>();
-		logger = DefaultLogger.getDefaultLogger();
-		hitPoint = new Vector2(0, 0);
-	}
-
 	public World getWorld() {
 		return this.world;
 	}
 
 	public void update(float dt) {
-		world.step(dt, 10, 10);
-		while (!tasks.isEmpty()) {
-			Task<Object, World> task = tasks.pop();
-			task.doWork(world);
+		if (!pause) {
+			world.step(dt, 10, 10);
+			while (!tasks.isEmpty()) {
+				Task<Object, World> task = tasks.pop();
+				task.doWork(world);
+			}
 		}
 	}
 

@@ -38,6 +38,10 @@ public class GateJudge {
 	public void setListener(LogicalGameListener listener) {
 		this.listener = listener;
 	}
+	
+	public LogicalGameListener getListener(){
+		return this.listener;
+	}
 
 	public void killOne() {
 		this.mouseCounter--;
