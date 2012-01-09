@@ -126,7 +126,10 @@ public class WorldController {
 	public void reloadWorld(String map) throws Exception {
 		World world = loadWorld(map);
 		this.initialize(world, this.judge.getListener());
+	}
 
+	public void reloadWorld(World world) throws Exception {
+		this.initialize(world, this.judge.getListener());
 	}
 
 	public void addTask(Task<Object, World> task) {

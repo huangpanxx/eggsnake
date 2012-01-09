@@ -28,6 +28,8 @@ public class ResourceLoader {
 	public static final String DEFAULT_PARTICLE_DIR = "";
 
 	public static final String MAP_DIR = "data/maps";
+	
+	public static final String MAP_DICTIONARY_FILE = "index.json";
 
 	private static TextureLoader textureLoader = null;
 	private static SoundLoader soundLoader = null;
@@ -35,7 +37,8 @@ public class ResourceLoader {
 	private static FontLoader fontLoader = null;
 	private static ParticleLoader particleLoader = null;
 	private static MapLoader worldLoader = null;
-
+	private static GateLoader gateLoader = null;
+	
 	public static Texture loadTexture(String relativePath) {
 		if (ResourceLoader.textureLoader == null) {
 			ResourceLoader.textureLoader = new TextureLoader(TEXTURE_DIR,
@@ -81,11 +84,16 @@ public class ResourceLoader {
 			ResourceLoader.worldLoader = new MapLoader(MAP_DIR);
 		return ResourceLoader.worldLoader.loadWorld(mapPath);
 	}
-	
-	public static Body loadBody(String mapPath,World world) {
+
+	public static Body loadBody(String mapPath, World world) {
 		if (ResourceLoader.worldLoader == null)
 			ResourceLoader.worldLoader = new MapLoader(MAP_DIR);
 		return ResourceLoader.worldLoader.loadBody(mapPath, world);
 	}
-}
 	
+	public static World loadGate(int index) throws Exception{
+		if(ResourceLoader.gateLoader==null)
+			ResourceLoader.gateLoader = new GateLoader(MAP_DIR,MAP_DICTIONARY_FILE);
+		return ResourceLoader.gateLoader.loadGate(index);
+	}
+}

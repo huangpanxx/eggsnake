@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
@@ -109,7 +111,8 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关成功啦");
 		try {
-			this.controller.reloadWorld("map4.json");
+			World world = ResourceLoader.loadGate(0);
+			this.controller.reloadWorld(world);
 		} catch (Exception e) {
 			logger.logWithSignature(this, e.getMessage());
 		}
