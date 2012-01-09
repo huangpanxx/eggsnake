@@ -5,13 +5,15 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
 //import com.maple.eggsnake.logger.DefaultLogger;
+import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.util.PathHelper;
 
 class TextureLoader {
 	private String dirPath;
 	Map<String, Texture> map;
 	Loggable logger;
-	Texture defaultTexture;
+	String defaultTexture;
 
 	public TextureLoader(String dirPath, String defaultTexture) {
 		int ch = dirPath.lastIndexOf(0);
@@ -20,9 +22,10 @@ class TextureLoader {
 		} else {
 			this.dirPath = dirPath;
 		}
-//		this.map = new HashMap<String, Texture>();
-//		logger = DefaultLogger.getDefaultLogger();
-//		this.defaultTexture = new Texture(this.dirPath + defaultTexture);
+		this.defaultTexture = defaultTexture;
+		// this.map = new HashMap<String, Texture>();
+		logger = DefaultLogger.getDefaultLogger();
+		// this.defaultTexture = new Texture(this.dirPath + defaultTexture);
 	}
 
 	public Texture loadTexture(String texturePath) {
@@ -43,9 +46,15 @@ class TextureLoader {
 		// }
 		//
 		// return texture;
-		String absPath = this.dirPath + texturePath;
-		return new Texture(absPath);
-
+		try {
+			String absPath = PathHelper.combine(this.dirPath, texturePath);
+			return new Texture(absPath);
+		} catch (Exception e) {
+			logger.logWithSignature(this, "加载资源%1$s失败:%2$s,使用默认图像", texturePath,
+					e.getMessage());
+			return new Texture(PathHelper.combine(this.dirPath,
+					this.defaultTexture));
+		}
 	}
 
 }
