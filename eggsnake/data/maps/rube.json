@@ -1,0 +1,193 @@
+
+{
+   "allowSleep" : true,
+   "autoClearForces" : true,
+   "body" : 
+   [
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "linearVelocity" : 0,
+         "position" : 0,
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "linearVelocity" : 0,
+         "position" : 0,
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "linearVelocity" : 0,
+         "position" : 0,
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "circle" : 
+               {
+                  "center" : 
+                  {
+                     "x" : "C1200000",
+                     "y" : "41F00000"
+                  },
+                  "radius" : "40000000"
+               },
+               "friction" : "3E4CCCCD"
+            },
+            
+            {
+               "circle" : 
+               {
+                  "center" : 
+                  {
+                     "x" : "41200000",
+                     "y" : "41F00000"
+                  },
+                  "radius" : "40000000"
+               },
+               "friction" : "3E4CCCCD"
+            }
+         ],
+         "linearVelocity" : 0,
+         "position" : 0,
+         "type" : 0 //static
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "density" : "40A00000",
+               "friction" : "3E4CCCCD",
+               "polygon" : 
+               {
+                  "vertices" : 
+                  {
+                     "x" : [ "3F800000", "3F800000", "BF800000", "BF800000" ],
+                     "y" : [ "C0000000", "40000000", "40000000", "C0000000" ]
+                  }
+               }
+            }
+         ],
+         "linearVelocity" : 
+         {
+            "x" : 0,
+            "y" : "C0C32882"
+         },
+         "massData-I" : "42855555",
+         "massData-mass" : "42200000",
+         "position" : 
+         {
+            "x" : "C1200000",
+            "y" : "41865B34"
+         },
+         "type" : 2 //dynamic
+      },
+      
+      {
+         "angle" : "C13A2579",
+         "angularVelocity" : "C01ED113",
+         "awake" : true,
+         "fixture" : 
+         [
+            
+            {
+               "density" : "40A00000",
+               "friction" : "3E4CCCCD",
+               "polygon" : 
+               {
+                  "vertices" : 
+                  {
+                     "x" : [ "3F800000", "3F800000", "BF800000", "BF800000" ],
+                     "y" : [ "C0000000", "40000000", "40000000", "C0000000" ]
+                  }
+               }
+            }
+         ],
+         "linearVelocity" : 
+         {
+            "x" : "3EBF6A0A",
+            "y" : "BE83D189"
+         },
+         "massData-I" : "42855555",
+         "massData-mass" : "42200000",
+         "position" : 
+         {
+            "x" : "412C0257",
+            "y" : "418275A0"
+         },
+         "type" : 2 //dynamic
+      },
+      
+      {
+         "angle" : 0,
+         "angularVelocity" : 0,
+         "awake" : true,
+         "linearVelocity" : 0,
+         "position" : 0,
+         "type" : 0 //static
+      }
+   ],
+   "continuousPhysics" : true,
+   "gravity" : 
+   {
+      "x" : 0,
+      "y" : "C1200000"
+   },
+   "joint" : 
+   [
+      
+      {
+         "anchorA" : 
+         {
+            "x" : 0,
+            "y" : "40000000"
+         },
+         "anchorB" : 
+         {
+            "x" : "35E6DABA",
+            "y" : "40000002"
+         },
+         "bodyA" : 4,
+         "bodyB" : 5,
+         "collideConnected" : true,
+         "groundAnchorA" : 
+         {
+            "x" : "C1200000",
+            "y" : "41F00000"
+         },
+         "groundAnchorB" : 
+         {
+            "x" : "41200000",
+            "y" : "41F00000"
+         },
+         "lengthA" : "41334998",
+         "lengthB" : "4148799B",
+         "ratio" : "3FC00000",
+         "type" : "pulley"
+      }
+   ],
+   "subStepping" : false,
+   "warmStarting" : true
+}

@@ -1,10 +1,12 @@
 package com.maple.eggsnake.physics;
+
 import java.lang.reflect.Type;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.maple.eggsnake.logger.DefaultLogger;
 
 public class B2VectorSerializer implements JsonDeserializer<B2Vector> {
 
@@ -12,6 +14,7 @@ public class B2VectorSerializer implements JsonDeserializer<B2Vector> {
 	public B2Vector deserialize(JsonElement element, Type type,
 			JsonDeserializationContext context) throws JsonParseException {
 		String val = element.toString();
+
 		if (val.matches("\\{.*\\}")) {
 			String[] strs = val.split(",");
 			return new B2Vector(this.toFloat(strs[0]), this.toFloat(strs[1]));
@@ -24,8 +27,13 @@ public class B2VectorSerializer implements JsonDeserializer<B2Vector> {
 
 	private float toFloat(String s) {
 		s = s.split(":")[1].trim();
-		s = s.replace("{", "").replace("}", "").replace("\"", "");
-		return parseFromHex(s);
+		s = s.replace("{", "").replace("}", "");
+		if (s.contains("\"")) {
+			s = s.replace("\"", "");
+			return parseFromHex(s);
+		} else {
+			return Float.parseFloat(s);
+		}
 	}
 
 	private float parseFromHex(String hex) {

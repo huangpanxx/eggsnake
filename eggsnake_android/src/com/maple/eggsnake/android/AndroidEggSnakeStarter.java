@@ -24,7 +24,7 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 
 		// 设置横屏
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		
+
 		// 设置日志方式
 		DefaultLogger.setInnerLogger(new ConsoleLogger());
 		DefaultLogger.setEnable(true);
@@ -32,14 +32,15 @@ public class AndroidEggSnakeStarter extends AndroidApplication {
 		// 开始启动
 		Loggable logger = DefaultLogger.getDefaultLogger();
 		logger.log("Enter from Android");
-		
+
 		// 配置环境
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useAccelerometer = false;
 		config.useCompass = false;
 		config.useWakelock = false;
-		//设置Application
-		com.maple.eggsnake.service.Application app =  new com.maple.eggsnake.android.service.AndroidApplication(this);
+		// 设置Application
+		com.maple.eggsnake.service.Application app = new com.maple.eggsnake.android.service.AndroidApplication(
+				this);
 		ApplicationService.setApplication(app);
 
 		// 获得管理器

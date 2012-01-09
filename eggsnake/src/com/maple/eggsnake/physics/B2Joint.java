@@ -18,7 +18,7 @@ public class B2Joint {
 	//prismatic
 	public B2Vector localAxisA;
 	public B2Vector localAxis1;
-	
+	public B2HexFloat maxMotorForce;
 	//distance
 	public B2HexFloat length;
 	public B2HexFloat frequency;
@@ -29,11 +29,11 @@ public class B2Joint {
 	public B2Vector groundAnchorB;
 	public B2HexFloat lengthA;
 	public B2HexFloat lengthB;
-	public Float ratio;
+	public B2HexFloat ratio;
 	
 	//mouse
 	public B2HexFloat maxForce;
-	
+	public B2Vector target;
 	
 	//gear
 	public int joint1;
