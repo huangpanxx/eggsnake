@@ -1,5 +1,6 @@
 package com.maple.eggsnake.stage.content;
 
+import com.maple.eggsnake.eggenum.EnumStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
@@ -25,7 +26,7 @@ public class DestinationStage {
 			break;
 		}
 		case GAMESTAGE: {
-			destStage = new Box2DStage( screen.getWidth(),
+			destStage = new LoveYouStage( screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}

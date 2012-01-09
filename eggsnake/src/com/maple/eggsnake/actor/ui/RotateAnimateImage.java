@@ -11,20 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Forever;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.maple.eggsnake.eggenum.EnumRotateDirection;
 
 public class RotateAnimateImage extends Image{
 	
     private float clockWiseAngles = 180f; //顺时针180度
     private float anclockWiseAngles = -180f; //逆时针180度
     private float rotateDuration = 4f;      //旋转间隔,默认旋转间隔为4f
-    private RotateDirection rotateDirection;//旋转方向
+    private EnumRotateDirection rotateDirection;//旋转方向
     
 	@SuppressWarnings("unused")
 	private Texture rotateTexture;			//控件的图片	
 	private AnimateImageListener listener;  //添加监听器
 
 	public RotateAnimateImage(String name, Texture texture, float duration,
-			RotateDirection direction) {
+			EnumRotateDirection direction) {
 		super(name, texture);
 		this.rotateTexture = texture;
 		this.touchable = true;
@@ -60,7 +61,7 @@ public class RotateAnimateImage extends Image{
 	 */
 	private void initActions(){
 		Action rotateAction;
-		if(RotateDirection.CLOCKWISE == this.rotateDirection)
+		if(EnumRotateDirection.CLOCKWISE == this.rotateDirection)
 			rotateAction = RotateBy.$(this.clockWiseAngles, this.rotateDuration);
 		else
 			rotateAction = RotateBy.$(this.anclockWiseAngles, this.rotateDuration);

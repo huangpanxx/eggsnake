@@ -9,9 +9,10 @@ package com.maple.eggsnake.actor.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.maple.eggsnake.eggenum.EnumStage;
+import com.maple.eggsnake.eggenum.EnumRotateDirection;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
-import com.maple.eggsnake.stage.content.EnumStage;
 
 public class ActorRegister{
 	
@@ -21,7 +22,7 @@ public class ActorRegister{
 	
 	public static void combineRegister(BaseStage stage, Texture first, Texture last,
 			float x, float y, boolean isSnake){
-		firstImage = new RotateAnimateImage("first", first, 4f, RotateDirection.CLOCKWISE);
+		firstImage = new RotateAnimateImage("first", first, 4f, EnumRotateDirection.CLOCKWISE);
 		firstImage.x = x;
 		firstImage.y = y;
 		lastImage = new Image("last", last);

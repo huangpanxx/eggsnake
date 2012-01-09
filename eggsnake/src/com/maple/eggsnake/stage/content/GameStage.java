@@ -8,6 +8,7 @@ package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.eggenum.EnumStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
