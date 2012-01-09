@@ -1,0 +1,223 @@
+package com.maple.eggsnake.logical;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.physics.box2d.QueryCallback;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
+import com.maple.eggsnake.logger.DefaultLogger;
+import com.maple.eggsnake.logger.Loggable;
+import com.maple.eggsnake.service.ResourceLoader;
+import com.maple.eggsnake.task.Task;
+import com.maple.eggsnake.task.TaskContainer;
+import com.maple.eggsnake.task.TaskQueueContainer;
+
+public class WorldController {
+
+	private class DeleteBodyTask implements Task<Object, World> {
+
+		Body body;
+
+		public DeleteBodyTask(Body body) {
+			this.body = body;
+		}
+
+		@Override
+		public Object doWork(World world) {
+			world.destroyBody(body);
+			return null;
+		}
+
+	}
+
+	private class ContactHander implements ContactListener {
+
+		@Override
+		public void beginContact(Contact contact) {
+			Fixture fixtureA = contact.getFixtureA();
+			Fixture fixtureB = contact.getFixtureB();
+			if (fixtureA != null && fixtureB != null) {
+				Body bodyA = fixtureA.getBody();
+				Body bodyB = fixtureB.getBody();
+				if (bodyA != null && bodyB != null) {
+					String nameA = (String) bodyA.getUserData();
+					String nameB = (String) bodyB.getUserData();
+					if (nameA != null && nameB != null) {
+						if (nameB.equals("mouse") && nameA.equals("snake")) {
+							tasks.push(new DeleteBodyTask(bodyB));
+						} else if (nameA.equals("mouse")
+								&& nameB.equals("snake")) {
+							tasks.push(new DeleteBodyTask(bodyA));
+						}
+					}
+				}
+			}
+		}
+
+		@Override
+		public void endContact(Contact contact) {
+		}
+
+		@Override
+		public void postSolve(Contact contact, ContactImpulse impulse) {
+		}
+
+		@Override
+		public void preSolve(Contact contact, Manifold manifold) {
+		}
+
+	}
+
+	/**
+	 * here start the controller
+	 */
+
+	World world;
+	Body groundBody;
+	Body hitBody;
+	Vector2 hitPoint;
+	TaskContainer<Task<Object, World>> tasks;
+	MouseJoint mouseJoint = null;
+	Loggable logger;
+	QueryCallback callback = new QueryCallback() {
+		@Override
+		public boolean reportFixture(Fixture fixture) {
+			if (fixture.testPoint(hitPoint.x, hitPoint.y)) {
+				hitBody = fixture.getBody();
+				return true;
+			}
+			return false;
+		}
+	};
+
+	public WorldController(World world) {
+		this.initialize();
+		this.setWorld(world);
+
+	}
+	
+	public void setGameLogicalListener(){
+		
+	}
+
+	public WorldController(String map) throws Exception {
+		this.initialize();
+		this.setWorld(loadWorld(map));
+	}
+
+	private World loadWorld(String map) throws Exception {
+		World world = null;
+		try {
+			world = ResourceLoader.loadWorld(map);
+		} catch (Exception e) {
+			String error = String
+					.format("加载世界%1$s失败:%2$s", map, e.getMessage());
+			logger.logWithSignature(this, error);
+			throw new Exception(error);
+		}
+		return world;
+	}
+
+	private void setWorld(World world) {
+		this.world = world;
+		this.groundBody = this.createTinyGround();
+		world.setContactListener(new ContactHander());
+		World.setVelocityThreshold(15f);
+	}
+
+	private void initialize() {
+		tasks = new TaskQueueContainer<Task<Object, World>>();
+		logger = DefaultLogger.getDefaultLogger();
+		hitPoint = new Vector2(0, 0);
+	}
+
+	public World getWorld() {
+		return this.world;
+	}
+
+	public void update(float dt) {
+		world.step(dt, 10, 10);
+		while (!tasks.isEmpty()) {
+			Task<Object, World> task = tasks.pop();
+			task.doWork(world);
+		}
+	}
+
+	private Body createTinyGround() {
+		BodyDef bd = new BodyDef();
+		bd.type = BodyDef.BodyType.StaticBody;
+		Body body = world.createBody(bd);
+		return body;
+	}
+
+	public void dispose() {
+		world.dispose();
+	}
+
+	public boolean touchDown(Vector2 pos) {
+		return this.touchDown(pos.x, pos.y);
+	}
+
+	public boolean touchDown(float x, float y) {
+		this.hitBody = null;
+		this.hitPoint.set(x, y);
+		world.QueryAABB(callback, this.hitPoint.x - 0.0001f,
+				this.hitPoint.y - 0.0001f, this.hitPoint.x + 0.0001f,
+				this.hitPoint.y + 0.0001f);
+		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
+				&& this.groundBody != null) {
+
+			logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
+					this.hitBody.getLinearVelocity().x,
+					this.hitBody.getLinearVelocity().y);
+
+			MouseJointDef def = new MouseJointDef();
+			def.bodyA = this.groundBody;
+			def.bodyB = hitBody;
+			def.collideConnected = true;
+			def.target.set(this.hitBody.getPosition().x,
+					this.hitBody.getPosition().y);
+			def.maxForce = 1000.f * hitBody.getMass();
+			mouseJoint = (MouseJoint) world.createJoint(def);
+			hitBody.setAwake(true);
+		}
+		return false;
+
+	}
+
+	public boolean touchDragged(Vector2 pos) {
+		return this.touchDragged(pos.x, pos.y);
+	}
+
+	public boolean touchDragged(float x, float y) {
+		return false;
+	}
+
+	public boolean touchUp(Vector2 pos) {
+		return this.touchUp(pos.x, pos.y);
+	}
+
+	public boolean touchUp(float x, float y) {
+		if (mouseJoint != null) {
+			world.destroyJoint(mouseJoint);
+			mouseJoint = null;
+
+			Vector2 mousePos = new Vector2(x, y);
+			Vector2 bodyPos = this.hitPoint;
+			;
+			Vector2 v = new Vector2(mousePos.x - bodyPos.x, mousePos.y
+					- bodyPos.y);
+			float mass = 4;
+			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
+		}
+		return false;
+	}
+}
