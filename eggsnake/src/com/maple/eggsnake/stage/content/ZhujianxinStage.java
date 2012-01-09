@@ -64,7 +64,11 @@ public class ZhujianxinStage extends BaseStage {
 		render = new Box2DDebugRenderer();
 
 		try {
+<<<<<<< HEAD
 			world = ResourceLoader.worldLoader("maptest.json");
+=======
+			world = ResourceLoader.loadWorld("hp.json");
+>>>>>>> origin/HEAD
 			logger.logWithSignature(this, "Body:%1$d", world.getBodyCount());
 			logger.logWithSignature(this, "Joint:%1$d", world.getJointCount());
 			Iterator<Body> it = world.getBodies();
