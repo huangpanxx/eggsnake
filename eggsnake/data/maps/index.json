@@ -1,1 +1,6 @@
-{"Maps":["rube.json"]}
+{"Maps": [
+
+"std_map.json", 
+"std_map.json",
+"hp.json"
+]}

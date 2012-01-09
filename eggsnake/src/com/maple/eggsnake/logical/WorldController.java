@@ -123,8 +123,19 @@ public class WorldController {
 
 	}
 
+	public WorldController(int gate, LogicalGameListener listener)
+			throws Exception {
+		World world = this.loadWorld(gate);
+		this.initialize(world, listener);
+	}
+
 	public void reloadWorld(String map) throws Exception {
 		World world = loadWorld(map);
+		this.initialize(world, this.judge.getListener());
+	}
+
+	public void reloadWorld(int gate) throws Exception {
+		World world = ResourceLoader.loadGate(gate);
 		this.initialize(world, this.judge.getListener());
 	}
 
@@ -190,6 +201,19 @@ public class WorldController {
 		} catch (Exception e) {
 			String error = String
 					.format("加载世界%1$s失败:%2$s", map, e.getMessage());
+			logger.logWithSignature(this, error);
+			throw new Exception(error);
+		}
+		return world;
+	}
+
+	private World loadWorld(int gate) throws Exception {
+		World world = null;
+		try {
+			world = ResourceLoader.loadGate(gate);
+		} catch (Exception e) {
+			String error = String.format("加载关卡世界%1$s失败:%2$s", gate,
+					e.getMessage());
 			logger.logWithSignature(this, error);
 			throw new Exception(error);
 		}

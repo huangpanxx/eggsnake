@@ -4,19 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
-import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	Loggable logger;
 	WorldController controller;
+	private int gate = 0;
 
 	Vector3 pos_camera = new Vector3(0, 0, 0);
 	Box2DDebugRenderer render = new Box2DDebugRenderer();
@@ -27,16 +26,21 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	public Box2DStage(float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		logger = DefaultLogger.getDefaultLogger();
+		this.gate = 0;
 		this.initController();
 	}
 
 	private void initController() {
 		try {
-			this.controller = new WorldController("std_map.json", this);
+			this.controller = new WorldController(this.gate,this);
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
 		}
+	}
+	
+	private void gotoGate(int index) throws Exception{
+		this.controller.reloadWorld(index);
 	}
 
 	@Override
@@ -111,8 +115,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关成功啦");
 		try {
-			World world = ResourceLoader.loadGate(0);
-			this.controller.reloadWorld(world);
+			this.gotoGate(++this.gate);
 		} catch (Exception e) {
 			logger.logWithSignature(this, e.getMessage());
 		}
