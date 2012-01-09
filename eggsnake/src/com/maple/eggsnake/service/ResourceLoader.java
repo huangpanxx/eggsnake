@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class ResourceLoader {
@@ -33,7 +34,7 @@ public class ResourceLoader {
 	private static MusicLoader musicLoader = null;
 	private static FontLoader fontLoader = null;
 	private static ParticleLoader particleLoader = null;
-	private static WorldLoader worldLoader = null;
+	private static MapLoader worldLoader = null;
 
 	public static Texture loadTexture(String relativePath) {
 		if (ResourceLoader.textureLoader == null) {
@@ -75,9 +76,16 @@ public class ResourceLoader {
 				.loadParticle(fileName, particleDir);
 	}
 
-	public static World worldLoader(String mapPath) {
+	public static World loadWorld(String mapPath) {
 		if (ResourceLoader.worldLoader == null)
-			ResourceLoader.worldLoader = new WorldLoader(MAP_DIR);
+			ResourceLoader.worldLoader = new MapLoader(MAP_DIR);
 		return ResourceLoader.worldLoader.loadWorld(mapPath);
 	}
+	
+	public static Body loadBody(String mapPath,World world) {
+		if (ResourceLoader.worldLoader == null)
+			ResourceLoader.worldLoader = new MapLoader(MAP_DIR);
+		return ResourceLoader.worldLoader.loadBody(mapPath, world);
+	}
 }
+	

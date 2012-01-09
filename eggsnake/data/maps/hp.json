@@ -49,6 +49,9 @@
       },
       
       {
+      
+		 "linearDamping" : 0.4,
+		 "angularDamping" : 0.4, 				
          "angle" : 0,
          "angularVelocity" : 0,
          "awake" : true,
@@ -71,15 +74,15 @@
          "gravityScale" : "411CCCCD",
          "linearVelocity" : 
          {
-            "x" : "B509C518",
-            "y" : "40AAD278"
+            "x" : 0,
+            "y" : 0 
          },
          "massData-mass" : 1,
          "name" : "snake",
          "position" : 
          {
-            "x" : "3F95031A",
-            "y" : "3FFC5833"
+            "x" : 0, //"3F95031A",
+            "y" : 0 //"3FFC5833"
          },
          "type" : 2 //dynamic
       },
