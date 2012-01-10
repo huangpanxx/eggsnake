@@ -298,9 +298,8 @@ public class WorldController {
 			return false;
 		this.hitBody = null;
 		this.hitPoint.set(x, y);
-		world.QueryAABB(callback, this.hitPoint.x - 1f,
-				this.hitPoint.y - 1f, this.hitPoint.x + 1f,
-				this.hitPoint.y + 1f);
+		world.QueryAABB(callback, this.hitPoint.x - 1f, this.hitPoint.y - 1f,
+				this.hitPoint.x + 1f, this.hitPoint.y + 1f);
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
 			String name = (String) this.hitBody.getUserData();
@@ -332,9 +331,11 @@ public class WorldController {
 
 		if (this.hitBody != null) {
 			if (this.hitBody != this.lastBody) {
-				logger.logWithSignature(this, "发射中");
-				if (this.judge != null)
-					this.judge.onAiming();
+				if ("snake".equals(this.hitBody.getUserData())) {
+					logger.logWithSignature(this, "发射中");
+					if (this.judge != null)
+						this.judge.onAiming();
+				}
 			}
 
 		}
