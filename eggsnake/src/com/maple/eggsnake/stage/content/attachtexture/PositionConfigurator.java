@@ -1,4 +1,10 @@
-package com.maple.eggsnake.stage.content;
+/** 
+ * @description	: PositionConfigurator
+ * @author		: 王志伟
+ * @created		: 2012-1-10
+ */
+
+package com.maple.eggsnake.stage.content.attachtexture;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,18 +49,22 @@ public class PositionConfigurator {
 	 */
 	private static void setIterator(WorldController controller) {
 		iterator = controller.getWorld().getBodies();
+		System.out.println("iterator: " + iterator.toString());
 	}
 
 	private static void setBody() {
 		body = iterator.next();
+		System.out.println("body: " + body.toString());
 	}
 
 	private static void setBodyName() {
 		name = (String) body.getUserData();
+		System.out.println("name: " + name);
 	}
 
 	private static void setFixtures() {
 		fixtures = body.getFixtureList();
+	    System.out.println("fixtures: " + fixtures.toString());
 	}
 
 	private static void setGravityCenter() {

@@ -1,8 +1,8 @@
 package com.maple.eggsnake.stage.content;
 
-import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
+import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
 public class DestinationStage {
 

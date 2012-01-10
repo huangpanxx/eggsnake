@@ -1,4 +1,4 @@
-package com.maple.eggsnake.eggenum;
+package com.maple.eggsnake.stage.content.common;
 
 public enum EnumDestStage {
 	STARTMENUSTAGE, // 开始菜单

@@ -9,10 +9,10 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
-import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
+import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
 public class StartMenuStage extends BaseStage implements ActorLoader {
 
@@ -161,7 +161,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		generalTextureWidth = this.quitTexture.getWidth();
 		ActorRegister.navigateRegister(contentScreen, this,
 				EnumDestStage.DISPOSESTAGE, quitTexture, this.width
-						- generalTextureWidth + 10f, 0);
+						- generalTextureWidth, 0);
 	}
 
 	/**

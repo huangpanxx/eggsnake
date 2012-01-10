@@ -9,10 +9,10 @@ package com.maple.eggsnake.actor.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumDestStage;
-import com.maple.eggsnake.eggenum.EnumRotateDirection;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
+import com.maple.eggsnake.stage.content.common.EnumDestStage;
+import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class ActorRegister{
 	
