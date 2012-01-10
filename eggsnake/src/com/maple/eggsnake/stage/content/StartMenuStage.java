@@ -169,7 +169,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadNewGameImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.LEVELTHREESTAGE, newGameTexture, 105f, 180f);
+				EnumDestStage.SELECTLEVELSTAGE, newGameTexture, 105f, 180f);
 	}
 
 	/**
