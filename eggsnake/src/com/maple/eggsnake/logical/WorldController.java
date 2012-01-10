@@ -37,13 +37,13 @@ public class WorldController {
 			if (world != null) {
 				try {
 					world.destroyBody(body);
+					String name = (String)body.getUserData();
+					if (judge != null)
+						judge.killOne(name);
 				} catch (Exception e) {
 					logger.logWithSignature(this, "摧毁物体失败:%1$s", e.getMessage());
 				}
 			}
-
-			if (judge != null)
-				judge.killOne();
 			return null;
 		}
 
@@ -82,7 +82,7 @@ public class WorldController {
 							mouse = bodyB;
 						}
 						if (mouse != null) {
-							if (speed > 0.5) {
+							if (speed > 5) {
 								logger.logWithSignature(this,
 										"mouse被撞击速度：%1$f m/s", speed);
 								addTask(new DeleteBodyTask(mouse));
@@ -332,7 +332,6 @@ public class WorldController {
 		if (this.hitBody != null) {
 			if (this.hitBody != this.lastBody) {
 				if ("snake".equals(this.hitBody.getUserData())) {
-					logger.logWithSignature(this, "发射中");
 					if (this.judge != null)
 						this.judge.onAiming();
 				}
