@@ -2,7 +2,7 @@ package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.maple.eggsnake.actor.ui.ActorRegister;
-import com.maple.eggsnake.eggenum.EnumMainStage;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -88,7 +88,7 @@ public class SettingStage extends BaseStage implements ActorLoader{
 	 */
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
-		ActorRegister.navigateRegister(contentScreen, this, EnumMainStage.STARTMENUSTAGE,
+		ActorRegister.navigateRegister(contentScreen, this, EnumDestStage.STARTMENUSTAGE,
 				quitTexture, this.width - generalTextureWidth + 10f, 0);
 	}
 

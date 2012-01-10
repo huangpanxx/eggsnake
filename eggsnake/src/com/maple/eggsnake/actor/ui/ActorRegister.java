@@ -9,7 +9,7 @@ package com.maple.eggsnake.actor.ui;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumMainStage;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.eggenum.EnumRotateDirection;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
@@ -20,6 +20,15 @@ public class ActorRegister{
 	private static Image lastImage;
 	private static Image generalImage;
 	
+	/**
+	 * 
+	 * @param stage
+	 * @param first
+	 * @param last
+	 * @param x
+	 * @param y
+	 * @param isSnake
+	 */
 	public static void combineRegister(BaseStage stage, Texture first, Texture last,
 			float x, float y, boolean isSnake){
 		firstImage = new RotateAnimateImage("first", first, 4f, EnumRotateDirection.CLOCKWISE);
@@ -38,6 +47,14 @@ public class ActorRegister{
 		stage.addActor(lastImage);
 	}
 	
+	/**
+	 * 
+	 * @param stage
+	 * @param first
+	 * @param last
+	 * @param x
+	 * @param y
+	 */
 	public static void combineRegister(BaseStage stage, Texture first, Texture last,
 			float x, float y){
 		firstImage = new RotateAnimateImage("first", first);
@@ -50,6 +67,38 @@ public class ActorRegister{
 		stage.addActor(lastImage);
 	}
 	
+	
+	/**
+	 * 
+	 * @param stage
+	 * @param first
+	 * @param last
+	 * @param x
+	 * @param y
+	 * @param displacementX
+	 * @param displacementY
+	 */
+	public static void combineRegister(BaseStage stage, Texture first, Texture last,
+			float x, float y, float displacementX, float displacementY){
+		firstImage = new RotateAnimateImage("first", first, 
+				4f, EnumRotateDirection.CLOCKWISE);
+		firstImage.x = x;
+		firstImage.y = y;
+		lastImage = new Image("last", last);
+		lastImage.x = x + displacementX;
+		lastImage.y = y + displacementY;
+		stage.addActor(firstImage);
+		stage.addActor(lastImage);
+	}
+	
+	
+	/**
+	 * 
+	 * @param stage
+	 * @param texture
+	 * @param x
+	 * @param y
+	 */
 	public static void singleRegister(BaseStage stage, Texture texture, 
 			float x, float y){
 		generalImage = new Image("Quit", texture);
@@ -58,6 +107,14 @@ public class ActorRegister{
 		stage.addActor(generalImage);
 	}	
 	
+	
+	/**
+	 * 
+	 * @param stage
+	 * @param region
+	 * @param x
+	 * @param y
+	 */
 	public static void singleRegister(BaseStage stage, TextureRegion region,
 			float x, float y){
 		generalImage = new Image("Quit", region);
@@ -67,8 +124,17 @@ public class ActorRegister{
 	}
 	
 
+	/**
+	 * 
+	 * @param screen
+	 * @param sourceStage
+	 * @param destStage
+	 * @param texture
+	 * @param x
+	 * @param y
+	 */
 	public static void navigateRegister(ContentScreen screen, BaseStage sourceStage,
-			EnumMainStage destStage, Texture texture, float x, float y){
+			EnumDestStage destStage, Texture texture, float x, float y){
 		generalImage = new ImageButtonActor(screen, destStage ,"default", texture);
 		generalImage.x = x;
 		generalImage.y = y;

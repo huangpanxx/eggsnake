@@ -50,7 +50,7 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 
 	private void loadWorld() {
 		try {
-			this.controller = new WorldController("levelone.json", this);
+			this.controller = new WorldController("levelthree.json", this);
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
@@ -116,19 +116,25 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 		Vector3 bodyVector3;
 		Body body;
 		iterator = controller.getWorld().getBodies();
-		
+		//ArrayList<Fixture> fixtures;
 		String userData;
+		
 		while(iterator.hasNext()){
 			body = iterator.next();
+			//Vector2 vector2 = null;
+			//body.getLocalPoint(vector2);
 			userData = (String)body.getUserData();
-			if("mouse".equals(userData)){
+			//fixtures = body.getFixtureList();
+			if("snake".equals(userData)){
+			//	float radius = fixtures.get(0).getShape().getRadius();
+				
 				bodyVector3 = new Vector3(body.getPosition().x, 
-						body.getPosition().y, 0f);
+						body.getPosition().y, 0);
 				camera.project(bodyVector3);
-				BodyPosition.getBodyPositionInstance().setPosition(bodyVector3.x,
+				BodyPosition.getInstance().setPosition(bodyVector3.x,
 						bodyVector3.y);
-				System.out.println("X: " + BodyPosition.getBodyPositionInstance().getPosition().x + 
-						" y: " + BodyPosition.getBodyPositionInstance().getPosition().y);
+				System.out.println("X: " + BodyPosition.getInstance().getPosition().x + 
+						" y: " + BodyPosition.getInstance().getPosition().y);
 			}
 		}
 	}
@@ -164,8 +170,8 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
         float temp = stateTime;
         currentFrame = walkAnimation.getKeyFrame(temp, true);      // #16
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, BodyPosition.getBodyPositionInstance().getPosition().x, 
-        		BodyPosition.getBodyPositionInstance().getPosition().y);                         // #17
+        spriteBatch.draw(currentFrame, BodyPosition.getInstance().getPosition().x, 
+        		BodyPosition.getInstance().getPosition().y);                         // #17
         spriteBatch.end();
 	}
 

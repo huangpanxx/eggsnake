@@ -1,22 +1,20 @@
 package com.maple.eggsnake.stage.content;
 
-import com.maple.eggsnake.eggenum.EnumLevelStage;
-import com.maple.eggsnake.eggenum.EnumMainStage;
-import com.maple.eggsnake.eggenum.EnumPassStage;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class DestinationStage {
 
 	/**
-	 * @description 获取导航需要的目标主Stage
+	 * @description 获取导航需要的目标Stage
 	 * @param screen
 	 * @param stage
 	 * @return
 	 */
-	public static BaseStage getDestnationStage(ContentScreen screen,
-			EnumMainStage stage) {
-		BaseStage destStage;
+	public static BaseStage getDestnationStage(ContentScreen screen,EnumDestStage stage) 
+	{
+		BaseStage destStage = null;
 		switch (stage) {
 		case STARTMENUSTAGE: {
 			destStage = new StartMenuStage(screen, screen.getWidth(),
@@ -24,94 +22,56 @@ public class DestinationStage {
 			break;
 		}
 		case ABOUTUSSTAGE: {
-			destStage = new AboutUsStage(screen, screen.getWidth(),
+			destStage = new SelectLevelStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
 		case SETTINGSTAGE: {
-			destStage = new SettingStage(screen, screen.getWidth(),
+			destStage = new HighScoresStage(screen, false, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
 		case GAMESTAGE: {
-			destStage = new LoveYouStage( screen.getWidth(),
+			destStage = new LoveYouStage(screen.getWidth(), screen.getHeight(),
+					true);
+			break;
+		}
+		case SELECTLEVELSTAGE:{
+			destStage = new SelectLevelStage(screen, screen.getWidth(), 
 					screen.getHeight(), true);
 			break;
 		}
-		default: {
-			destStage = new StartMenuStage(screen, screen.getWidth(),
-					screen.getHeight(), true);
-			break;
-		}
-		}
-		return destStage;
-	}	
-	
-	/**
-	 * @description 重载函数，获得对应关卡的Stage。
-	 * @param screen
-	 * @param stage
-	 * @return
-	 */
-	public static BaseStage getDestnationStage(ContentScreen screen,
-			EnumLevelStage stage) {
-		BaseStage destStage;
-		switch (stage) {
-		case LEVELONE:
-		{
+		case LEVELONESTAGE: {
 			destStage = new LevelOneStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
-		case LEVELTWO:
-		{
+		case LEVELTWOSTAGE: {
 			destStage = new LevelTwoStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
-		case LEVELTHREE:
-		{
+		case LEVELTHREESTAGE: {
 			destStage = new LevelThreeStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
-		default: {
-			destStage = new StartMenuStage(screen, screen.getWidth(),
-					screen.getHeight(), true);
-			break;
-		}
-		}
-		return destStage;
-	}
-	
-	/**
-	 * description 重载函数，获取显示过关成功与否的Stage
-	 * @param screen
-	 * @param stage
-	 * @return
-	 */
-	public static BaseStage getDestnationStage(ContentScreen screen,
-			EnumPassStage stage) {
-		BaseStage destStage;
-		switch (stage) {
-		case SUCCESS:
-		{
-			destStage = new HighScoresStage(screen, true, screen.getWidth(), 
-					screen.getHeight(), true);
-			break;
-		}
-		case FAILED:
-		{
+
+		case SUCCESSSTAGE: {
 			destStage = new HighScoresStage(screen, true, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
+		case FAILEDSTAGE: {
+			destStage = new HighScoresStage(screen, true, screen.getWidth(),
+					screen.getHeight(), false);
+			break;
+		}
 		default: {
 			destStage = new StartMenuStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
-			break;
 		}
-		}
+	}
 		return destStage;
 	}
 }

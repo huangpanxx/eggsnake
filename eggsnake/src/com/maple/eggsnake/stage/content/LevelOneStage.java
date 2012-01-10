@@ -1,5 +1,6 @@
 package com.maple.eggsnake.stage.content;
 
+import com.badlogic.gdx.Input;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
@@ -10,6 +11,7 @@ public class LevelOneStage extends BaseStage implements ActorLoader {
 	public LevelOneStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
+		CurrentLevel.getInstance().setLevel(1);
 	}
 
 	@Override
@@ -58,5 +60,13 @@ public class LevelOneStage extends BaseStage implements ActorLoader {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	@Override
+	public boolean keyDown(int keycode){
+		if(keycode == Input.Keys.W){
+			this.contentScreen.navigate(new SelectLevelStage(contentScreen,
+					contentScreen.getWidth(), contentScreen.getHeight(), true));
+		}
+		return true;
+	}
 }

@@ -45,24 +45,7 @@ public class WorldController {
 
 		@Override
 		public void beginContact(Contact contact) {
-			Fixture fixtureA = contact.getFixtureA();
-			Fixture fixtureB = contact.getFixtureB();
-			if (fixtureA != null && fixtureB != null) {
-				Body bodyA = fixtureA.getBody();
-				Body bodyB = fixtureB.getBody();
-				if (bodyA != null && bodyB != null) {
-					String nameA = (String) bodyA.getUserData();
-					String nameB = (String) bodyB.getUserData();
-					if (nameA != null && nameB != null) {
-						if (nameB.equals("mouse") && nameA.equals("snake")) {
-							addTask(new DeleteBodyTask(bodyB));
-						} else if (nameA.equals("mouse")
-								&& nameB.equals("snake")) {
-							addTask(new DeleteBodyTask(bodyA));
-						}
-					}
-				}
-			}
+
 		}
 
 		@Override
@@ -71,6 +54,39 @@ public class WorldController {
 
 		@Override
 		public void postSolve(Contact contact, ContactImpulse impulse) {
+			Fixture fixtureA = contact.getFixtureA();
+			Fixture fixtureB = contact.getFixtureB();
+			if (fixtureA != null && fixtureB != null) {
+				Body bodyA = fixtureA.getBody();
+				Body bodyB = fixtureB.getBody();
+				if (bodyA != null && bodyB != null) {
+					String nameA = (String) bodyA.getUserData();
+					String nameB = (String) bodyB.getUserData();
+					double f_x = impulse.getTangentImpulses()[0];
+					double f_y = impulse.getTangentImpulses()[1];
+
+					double f = Math.sqrt(f_x * f_x + f_y * f_y);
+					logger.logWithSignature(this, "%1$f", f);
+					if (f > 0.05f) {
+						if ("mouse".equals(nameA)) {
+							addTask(new DeleteBodyTask(bodyA));
+
+						} else if ("mouse".equals(nameB)) {
+							addTask(new DeleteBodyTask(bodyB));
+
+						}
+					}
+
+					// if (nameA != null && nameB != null) {
+					// if (nameB.equals("mouse") && nameA.equals("snake")) {
+					// addTask(new DeleteBodyTask(bodyB));
+					// } else if (nameA.equals("mouse")
+					// && nameB.equals("snake")) {
+					// addTask(new DeleteBodyTask(bodyA));
+					// }
+					// }
+				}
+			}
 		}
 
 		@Override
@@ -259,26 +275,28 @@ public class WorldController {
 	public boolean touchDown(float x, float y) {
 		this.hitBody = null;
 		this.hitPoint.set(x, y);
-		world.QueryAABB(callback, this.hitPoint.x - 0.0001f,
-				this.hitPoint.y - 0.0001f, this.hitPoint.x + 0.0001f,
-				this.hitPoint.y + 0.0001f);
+		world.QueryAABB(callback, this.hitPoint.x - 0.01f,
+				this.hitPoint.y - 0.01f, this.hitPoint.x + 0.01f,
+				this.hitPoint.y + 0.01f);
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
-			String name = (String)this.hitBody.getUserData();
-			if(name!=null && name.equals("snake")){
-			logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
-					this.hitBody.getLinearVelocity().x,
-					this.hitBody.getLinearVelocity().y);
-
-			MouseJointDef def = new MouseJointDef();
-			def.bodyA = this.groundBody;
-			def.bodyB = hitBody;
-			def.collideConnected = true;
-			def.target.set(this.hitBody.getPosition().x,
-					this.hitBody.getPosition().y);
-			def.maxForce = 1000.f * hitBody.getMass();
-			mouseJoint = (MouseJoint) world.createJoint(def);
-			hitBody.setAwake(true);
+			String name = (String) this.hitBody.getUserData();
+			if (name != null && name.equals("snake")) {
+				Vector2 speed = hitBody.getLinearVelocity();
+				logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
+						this.hitBody.getLinearVelocity().x,
+						this.hitBody.getLinearVelocity().y);
+				if (true) {// speed.x < 0.01f && speed.y < 0.01f) {
+					MouseJointDef def = new MouseJointDef();
+					def.bodyA = this.groundBody;
+					def.bodyB = hitBody;
+					def.collideConnected = true;
+					def.target.set(this.hitBody.getPosition().x,
+							this.hitBody.getPosition().y);
+					def.maxForce = 1000.f * hitBody.getMass();
+					mouseJoint = (MouseJoint) world.createJoint(def);
+					hitBody.setAwake(true);
+				}
 			}
 		}
 		return false;

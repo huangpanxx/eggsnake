@@ -3,7 +3,12 @@
  */
 package com.maple.eggsnake.stage.content;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
 /**
@@ -12,82 +17,105 @@ import com.maple.eggsnake.stage.BaseStage;
  */
 public class SelectLevelStage extends BaseStage implements ActorLoader {
 	
+	private Texture selectTitleTexture;
+	private Texture levelOneTexture;
+	private Texture levelTwoTexture;
+	private Texture levelThreeTexture;
+	private Texture quitTexture;// quit纹理
+	
 	private ContentScreen contentScreen;
 
 	public SelectLevelStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
 		this.initContent(screen);
+		this.load();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#initContent(com.maple.eggsnake.screen.ContentScreen)
-	 */
+
 	@Override
 	public void initContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#loadTextures()
-	 */
+
 	@Override
 	public void loadTextures() {
-		// TODO Auto-generated method stub
-
+		this.selectTitleTexture = ResourceLoader.loadTexture("selectleveltitle_512_64.png");
+		this.levelOneTexture = ResourceLoader.loadTexture("level1_128_256.png");
+		this.levelTwoTexture = ResourceLoader.loadTexture("level2_128_256.png");
+		this.levelThreeTexture = ResourceLoader.loadTexture("level3_128_256.png");
+		this.quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#load()
-	 */
+
+	private void loadSelectTiltleImage(){
+		ActorRegister.singleRegister(this, 
+				new TextureRegion(selectTitleTexture, 16, 0, 480, 64), 0, 256);
+	}
+	
+	
+	private void loadLevelOneImage(){
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumDestStage.LEVELONESTAGE, levelOneTexture, 64, 32);
+	}
+	
+	private void loadLevelTwoImage(){
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumDestStage.LEVELTWOSTAGE, levelTwoTexture, 180, 32);
+	}
+	
+	private void loadLevelThreeImage(){
+		ActorRegister.navigateRegister(contentScreen, this,
+				EnumDestStage.LEVELTHREESTAGE, levelThreeTexture, 296, 32);
+	}
+	
+	private void loadQuitImage() {
+		ActorRegister.navigateRegister(contentScreen, this, EnumDestStage.STARTMENUSTAGE,
+				quitTexture, 366, 0);
+	}
+	
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
-
+		this.loadTextures();
+		this.loadSelectTiltleImage();
+		this.loadLevelOneImage();
+		this.loadLevelTwoImage();
+		this.loadLevelThreeImage();
+		this.loadQuitImage();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#hide()
-	 */
+
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#pause()
-	 */
+	
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#resize(int, int)
-	 */
+	
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#resume()
-	 */
+	
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#show()
-	 */
+	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
 
 	}
-
 }

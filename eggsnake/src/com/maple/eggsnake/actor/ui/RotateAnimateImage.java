@@ -22,7 +22,7 @@ public class RotateAnimateImage extends Image{
     
 	@SuppressWarnings("unused")
 	private Texture rotateTexture;			//控件的图片	
-	private AnimateImageListener listener;  //添加监听器
+//	private AnimateImageListener listener;  //添加监听器
 
 	public RotateAnimateImage(String name, Texture texture, float duration,
 			EnumRotateDirection direction) {
@@ -31,7 +31,7 @@ public class RotateAnimateImage extends Image{
 		this.touchable = true;
 		this.rotateDuration = duration;
 		this.rotateDirection = direction;
-		this.listener = new AnimateImageListener();
+//		this.listener = new AnimateImageListener();
 		this.initActions();
 	}
 	
@@ -42,18 +42,18 @@ public class RotateAnimateImage extends Image{
 	
 	@Override
 	public boolean touchDown(float x, float y, int pointer) {
-		this.listener.onTouchDown(new AnimateImageEvent(this));	
+//		this.listener.onTouchDown(new AnimateImageEvent(this));	
 		return touchable;	
 	}
 	
 	@Override
 	public void touchDragged(float x, float y, int pointer){
-		this.listener.onTouchDragged(new AnimateImageEvent(this));
+//		this.listener.onTouchDragged(new AnimateImageEvent(this));
 	}
 	
 	@Override
 	public void touchUp(float x, float y, int pointer){
-		this.listener.onTouchUp(new AnimateImageEvent(this));
+//		this.listener.onTouchUp(new AnimateImageEvent(this));
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class RotateAnimateImage extends Image{
 	 * @param listener
 	 */
 	public void addActionListener(AnimateImageListener listener){
-		this.listener = listener;
+//		this.listener = listener;
 	}
 
 }

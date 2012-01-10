@@ -12,17 +12,17 @@ import com.badlogic.gdx.math.Vector2;
 public class BodyPosition {
 	
 	private Vector2 position;
-	private static BodyPosition uniqueBodyPositionInstance;
+	private static BodyPosition uniqueInstance;
 	
 	private BodyPosition(){
 			this.position = new Vector2(0, 0);
 	}
 	
-	public static BodyPosition getBodyPositionInstance(){
-		if(null == uniqueBodyPositionInstance){
-			uniqueBodyPositionInstance = new BodyPosition();
+	public static BodyPosition getInstance(){
+		if(null == uniqueInstance){
+			uniqueInstance = new BodyPosition();
 		}
-		return uniqueBodyPositionInstance;
+		return uniqueInstance;
 	}
 	
 	public void setPosition(float x, float y){

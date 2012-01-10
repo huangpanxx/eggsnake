@@ -14,7 +14,9 @@ import com.maple.eggsnake.stage.BaseStage;
  */
 public class EnsureExitStage extends BaseStage implements ActorLoader {
 
+	@SuppressWarnings("unused")
 	private ContentScreen contentScreen;
+	
 	/**
 	 * @param width
 	 * @param height
@@ -25,71 +27,47 @@ public class EnsureExitStage extends BaseStage implements ActorLoader {
 		this.initContent(screen);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#initContent(com.maple.eggsnake.screen.ContentScreen)
-	 */
 	@Override
 	public void initContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#loadTextures()
-	 */
 	@Override
 	public void loadTextures() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.content.ActorLoader#load()
-	 */
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#hide()
-	 */
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#pause()
-	 */
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#resize(int, int)
-	 */
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#resume()
-	 */
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.maple.eggsnake.stage.BaseStage#show()
-	 */
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
