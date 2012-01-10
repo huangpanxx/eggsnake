@@ -8,7 +8,7 @@ import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class LevelTwoStage extends BaseStage implements ActorLoader {
+public class LevelTwoStage extends BaseStage implements ActorLoader{
 
 	private ContentScreen contentScreen;
 	

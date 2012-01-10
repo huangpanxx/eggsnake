@@ -1,7 +1,5 @@
 package com.maple.eggsnake.service;
 
-import javax.annotation.Resource;
-
 import com.badlogic.gdx.audio.Sound;
 
 public class SoundManager {
@@ -10,6 +8,7 @@ public class SoundManager {
 	private static Sound contactSound = null;
 	private static Sound crossGateSound = null;
 	private static Sound killSound = null;
+	private static Sound dragSound = null;
 
 	public static void playFlySound() {
 		if (flySound == null) {
@@ -35,5 +34,12 @@ public class SoundManager {
 		if (killSound == null)
 			killSound = ResourceLoader.loadSound("kill_sound.ogg");
 		killSound.play();
+	}
+
+	public static void playDragSound() {
+		if (dragSound == null) {
+			dragSound = ResourceLoader.loadSound("drag_sound.ogg");
+		}
+		dragSound.play();
 	}
 }

@@ -1,7 +1,5 @@
 package com.maple.eggsnake.stage.content;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -9,11 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.physics.B2Const;
@@ -184,9 +178,14 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 		// TODO Auto-generated method stub
 	}
 	
-	
 	@Override
 	public void onCrossGate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onShotTimeChanged(int hitTime) {
 		// TODO Auto-generated method stub
 		
 	}
