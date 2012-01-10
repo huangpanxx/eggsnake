@@ -1,15 +1,12 @@
 package com.maple.eggsnake.stage.content;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -29,8 +26,6 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 	
 	private ContentScreen contentScreen;
 	
-	private Map<String, Vector2> bodyPointMap= new HashMap<String, Vector2>();
-	
 	Loggable logger;
 	WorldController controller;
 
@@ -41,12 +36,12 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 	float viewportHeight = 0;
 	
 	private Texture snake;
-	private TextureRegion snakeRegion;
+	private Texture wood2;
+	private Texture wood3;
+	
 	private SpriteBatch spriteBach;
 	
-	////////
-	private float radius = 0f;
-	////////
+	private float radius;
 
 	public LevelThreeStage(ContentScreen screen, float width, float height, 
 			boolean stretch) {
@@ -55,7 +50,7 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 		CurrentLevel.getInstance().setLevel(3);
 		this.loadWorld();
 		this.spriteBach = new SpriteBatch();
-		this.loadTextures();
+		this.load();
 	}
 
 	@Override
@@ -66,13 +61,14 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 	@Override
 	public void loadTextures() {
 		this.snake = ResourceLoader.loadTexture("eggSnake_64_128.png");
-		this.snakeRegion = new TextureRegion(snake, 0, 0, 32, 32);
+		this.wood2 = ResourceLoader.loadTexture("lefttwowood_32_256.png");
+		this.wood3 = ResourceLoader.loadTexture("wood3.png");
 	}
 
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
-
+		this.loadTextures();
 	}
 
 	@Override
@@ -107,12 +103,15 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 			controller.update(dt);
 			render.render(controller.getWorld(), this.camera.combined);
 		}
-		this.display();
+		PositionConfigurator.configure(controller);
 		spriteBach.begin();
-		spriteBach.draw(this.snake, BodyPosition.getInstance().getLowerLeft("snake").x -
-BodyPosition.getInstance().getRadius("snake"), 
-				BodyPosition.getInstance().getLowerLeft("snake").y - 
-				BodyPosition.getInstance().getRadius("snake") * 2f);
+		CircleBody temp = CircleBodyPosition.getInstance().getCircleBody("snake");
+		Vector2 wood3 = RectangleBodyPosition.getInstance().getLowerLeft("wood3");
+		spriteBach.draw(this.snake, temp.getX() - temp.getRadius(), 
+				temp.getY() - temp.getRadius() * 2f);
+		spriteBach.draw(this.wood3, wood3.x - 25f, wood3.y - 28f);
+		Vector2 wood2 = RectangleBodyPosition.getInstance().getLowerLeft("wood2");
+		spriteBach.draw(this.wood2, wood2.x - 23, 320 - 236);		
 		spriteBach.end();
 	}
 	
@@ -131,12 +130,15 @@ BodyPosition.getInstance().getRadius("snake"),
 	@Override
 	public void dispose() {
 		this.controller.dispose();
+		this.wood2.dispose();
+		this.wood3.dispose();
+		this.snake.dispose();
 		super.dispose();
 	}
 	
 	private void loadWorld() {
 		try {
-			this.controller = new WorldController(2, this);
+			this.controller = new WorldController(1, this);
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
@@ -182,45 +184,7 @@ BodyPosition.getInstance().getRadius("snake"),
 		// TODO Auto-generated method stub
 	}
 	
-	/**
-	 * 坐标1:10的比例
-	 */
-	private void display(){
-		Iterator<Body> iterator;
-		Body body;
-		iterator = controller.getWorld().getBodies();
-		String userData;
-		while(iterator.hasNext()){
-			body = iterator.next();
-			userData = (String)body.getUserData();
-			Vector2 vector2 = new Vector2(body.getPosition().x, 
-					body.getPosition().y);
-			ArrayList<Fixture> fixtures = body.getFixtureList();
-			
-			body.getWorldPoint(vector2);
-			vector2.x *= 10f;
-			vector2.y *= 10f;	
-			if(!fixtures.isEmpty()){
-				if(fixtures.get(0).getShape().getType() == Shape.Type.Circle){
-					this.radius = fixtures.get(0).getShape().getRadius();
-					BodyPosition.getInstance().setPosition(userData, 
-							vector2, radius * B2Const.CONVERTRATIO);
-				}
-				if(fixtures.get(0).getShape().getType() == Shape.Type.Polygon){
-					PolygonShape polygon = (PolygonShape)fixtures.get(0).getShape();
-					for(int i = 0; i < polygon.getVertexCount(); i++){
-						polygon.getVertex(i, vector2);
-						body.getWorldPoint(vector2);
-						System.out.println("顶点数： " + polygon.getVertexCount() + 
-								"index" + i + ": " + "x: " + vector2.x + " y: " +
-								vector2.y);
-					}
-				}
-			}
-				
-			}
-		}
-
+	
 	@Override
 	public void onCrossGate() {
 		// TODO Auto-generated method stub
