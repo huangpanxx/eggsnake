@@ -33,9 +33,14 @@ public class GateJudge {
 
 	}
 
+	public void onAiming() {
+		SoundManager.playDragSound();
+	}
+
 	public void shot() {
 		if (!this.isCrossed()) {
 			this.shotCounter++;
+			SoundManager.playFlySound();
 			if (this.listener != null)
 				this.listener.onShotTimeChanged(this.shotCounter);
 			logger.logWithSignature(this, "发射次数:%1$d", this.shotCounter);

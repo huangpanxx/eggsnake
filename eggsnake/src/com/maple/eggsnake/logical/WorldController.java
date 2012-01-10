@@ -1,6 +1,5 @@
 package com.maple.eggsnake.logical;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -213,12 +212,6 @@ public class WorldController {
 			throw e;
 		}
 
-		try {
-			this.flySound = ResourceLoader.loadSound("fly_sound.ogg");
-		} catch (Exception e) {
-			logger.logWithSignature(this, "加载fly_sound失败:%1$s", e.getMessage());
-		}
-
 		this.setGameLogicalListener(listener);
 	}
 
@@ -332,11 +325,24 @@ public class WorldController {
 		return this.touchDragged(pos.x, pos.y);
 	}
 
+	private Body lastBody = null;
+
 	public boolean touchDragged(float x, float y) {
+
+		if (this.hitBody != null) {
+			if (this.hitBody != this.lastBody) {
+				logger.logWithSignature(this, "发射中");
+				if (this.judge != null)
+					this.judge.onAiming();
+			}
+
+		}
+		this.lastBody = this.hitBody;
 		return false;
 	}
 
 	public boolean touchUp(Vector2 pos) {
+
 		return this.touchUp(pos.x, pos.y);
 	}
 
@@ -347,22 +353,22 @@ public class WorldController {
 
 			Vector2 mousePos = new Vector2(x, y);
 			Vector2 bodyPos = this.hitPoint;
-			;
+			
 			Vector2 v = new Vector2(mousePos.x - bodyPos.x, mousePos.y
 					- bodyPos.y);
 			float mass = 4;
 			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
-			this.playFlySound();
-			this.judge.shot();
+			
+			if (this.lastBody != null) {
+				logger.logWithSignature(this, "发射完成");
+				if(this.judge!=null)
+					this.judge.shot();
+			}
+			this.lastBody = null;
 		}
-		
+
 		return false;
 	}
 
-	Sound flySound = null;
 
-	void playFlySound() {
-		if (flySound != null)
-			this.flySound.play();
-	}
 }
