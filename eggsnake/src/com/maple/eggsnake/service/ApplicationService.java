@@ -3,6 +3,9 @@ package com.maple.eggsnake.service;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import com.maple.eggsnake.event.EventAggregator;
+import com.maple.eggsnake.event.RequestChangeBackgroundEvent;
+import com.maple.eggsnake.event.RequstChangeBackgroundEventArg;
 import com.maple.eggsnake.logger.DefaultLogger;
 
 public class ApplicationService {
@@ -16,6 +19,18 @@ public class ApplicationService {
 		if (service == null)
 			service = new ApplicationService();
 		return service;
+	}
+
+	public void changeBackground(String path) {
+		try {
+			DefaultLogger.getDefaultLogger().logWithSignature(this, "切换背景:%1$s", path);
+			RequestChangeBackgroundEvent event = EventAggregator.getInstance()
+					.getEvent(RequestChangeBackgroundEvent.class);
+			event.publish(new RequstChangeBackgroundEventArg(path));
+		} catch (Exception e) {
+			DefaultLogger.getDefaultLogger().logWithSignature(
+					"ApplicationService", "切换地图请求失败:%1$s", e.getMessage());
+		}
 	}
 
 	public void exitGame() {

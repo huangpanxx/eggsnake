@@ -10,6 +10,7 @@ import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
+import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
@@ -100,13 +101,11 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		return controller.touchDown(hitPoint);
 	}
 
-//	@Override
-//	public boolean touchDragged(int x, int y, int pointer) {
-//		logger.logWithSignature(this, "touchDragged");
-//		Vector2 hitPoint = convertToWorld(x, y);
-//		logger.logWithSignature(this, "touchDragged");
-//		return controller.touchDragged(hitPoint);
-//	}
+	@Override
+	public boolean touchDragged(int x, int y, int pointer) {
+		Vector2 hitPoint = convertToWorld(x, y);
+		return controller.touchDragged(hitPoint);
+	}
 
 	@Override
 	public boolean touchUp(int x, int y, int pointer, int button) {
@@ -117,7 +116,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	@Override
 	public void onAllMouseKilled() {
-		logger.logWithSignature(this, "过关成功啦");
+		logger.logWithSignature(this, "过关");
 		try {
 			this.gotoGate(++this.gate);
 		} catch (Exception e) {
