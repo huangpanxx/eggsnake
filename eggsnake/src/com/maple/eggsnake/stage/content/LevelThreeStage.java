@@ -212,5 +212,11 @@ LogicalGameListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onMouseKilled(String mouseName) {
+		// TODO Auto-generated method stub
+		
+	}
 	}
 

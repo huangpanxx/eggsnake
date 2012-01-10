@@ -33,8 +33,15 @@ public class GateJudge {
 
 	}
 
+	public void onMouseKilled(String mouseName) {
+		if (this.listener != null && mouseName != null)
+			this.listener.onMouseKilled(mouseName);
+
+	}
+
 	public void onAiming() {
 		SoundManager.playDragSound();
+		logger.logWithSignature(this, "发射中");
 	}
 
 	public void shot() {
@@ -63,7 +70,7 @@ public class GateJudge {
 			ArrayList<Fixture> fixtures = body.getFixtureList();
 			for (Fixture fixture : fixtures) {
 				int index = fixture.getFilterData().groupIndex;
-				if (index == BodyGroup.MOUSES) {
+				if (index == BodyGroup.MICE) {
 					mouseCounter++;
 					break;
 				}
@@ -87,9 +94,12 @@ public class GateJudge {
 		return this.listener;
 	}
 
-	public void killOne() {
+	public void killOne(String mouseName) {
 		this.mouseCounter--;
 		this.playKillSound();
+		if (this.listener != null) {
+			this.listener.onMouseKilled(mouseName);
+		}
 		if (this.mouseCounter == 0 && this.listener != null) {
 			this.setCrossed(true);
 		}
