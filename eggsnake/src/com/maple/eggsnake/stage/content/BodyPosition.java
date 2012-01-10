@@ -6,16 +6,19 @@
 
 package com.maple.eggsnake.stage.content;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.math.Vector2;
 
 
 public class BodyPosition {
 	
-	private Vector2 position;
+	private Map<String, Vector2> positionMap;
 	private static BodyPosition uniqueInstance;
 	
 	private BodyPosition(){
-			this.position = new Vector2(0, 0);
+		this.positionMap = new HashMap<String, Vector2>();
 	}
 	
 	public static BodyPosition getInstance(){
@@ -25,12 +28,16 @@ public class BodyPosition {
 		return uniqueInstance;
 	}
 	
-	public void setPosition(float x, float y){
-		this.position.x = x;
-		this.position.y = y;
+	public void setPosition(String name, Vector2 position){
+		if(this.positionMap.containsKey(name)){
+			this.positionMap.get(name).set(position);
+		}
+		else{
+			this.positionMap.put(name, position);
+		}
 	}
 	
-	public Vector2 getPosition(){
-		return this.position;
+	public Vector2 getPosition(String name){
+		return this.positionMap.get(name);
 	}
 }

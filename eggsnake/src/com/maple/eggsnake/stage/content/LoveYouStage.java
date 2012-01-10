@@ -131,10 +131,10 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 				bodyVector3 = new Vector3(body.getPosition().x, 
 						body.getPosition().y, 0);
 				camera.project(bodyVector3);
-				BodyPosition.getInstance().setPosition(bodyVector3.x,
-						bodyVector3.y);
-				System.out.println("X: " + BodyPosition.getInstance().getPosition().x + 
-						" y: " + BodyPosition.getInstance().getPosition().y);
+//				BodyPosition.getInstance().setPosition(bodyVector3.x,
+//						bodyVector3.y);
+//				System.out.println("X: " + BodyPosition.getInstance().getPosition().x + 
+//						" y: " + BodyPosition.getInstance().getPosition().y);
 			}
 		}
 	}
@@ -170,8 +170,8 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
         float temp = stateTime;
         currentFrame = walkAnimation.getKeyFrame(temp, true);      // #16
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, BodyPosition.getInstance().getPosition().x, 
-        		BodyPosition.getInstance().getPosition().y);                         // #17
+//        spriteBatch.draw(currentFrame, BodyPosition.getInstance().getPosition().x, 
+//        		BodyPosition.getInstance().getPosition().y);                         // #17
         spriteBatch.end();
 	}
 
