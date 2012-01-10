@@ -199,4 +199,10 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 		// TODO Auto-generated method stub
 		logger.logWithSignature(this, "过关了");
 	}
+
+	@Override
+	public void onCrossGate() {
+		// TODO Auto-generated method stub
+		
+	}
 }
