@@ -35,9 +35,9 @@ LogicalGameListener{
 	float viewportHeight = 0;
 	
 	private Texture snakeTexture;
-	private Texture wood1Texture;
-	private Texture wood2Texture;
-	private Texture wood3Texture;
+	private Texture woodOneTexture;
+	private Texture woodTwoTexture;
+	private Texture woodThreeTexture;
 	private Texture woodMouseTexture;
 	
 	private SpriteBatch spriteBach;
@@ -61,9 +61,9 @@ LogicalGameListener{
 	@Override
 	public void loadTextures() {
 		this.snakeTexture = ResourceLoader.loadTexture("eggSnake_64_128.png");
-		this.wood1Texture = ResourceLoader.loadTexture("wood1_32_256.png");
-		this.wood2Texture = ResourceLoader.loadTexture("wood2_32_256.png");
-		this.wood3Texture = ResourceLoader.loadTexture("wood3_32_256.png");
+		this.woodOneTexture = ResourceLoader.loadTexture("wood1_32_256.png");
+		this.woodTwoTexture = ResourceLoader.loadTexture("wood2_32_256.png");
+		this.woodThreeTexture = ResourceLoader.loadTexture("wood3_32_256.png");
 		this.woodMouseTexture = ResourceLoader.loadTexture("woodmouse_64_128");
 	}
 
@@ -123,8 +123,8 @@ LogicalGameListener{
 	@Override
 	public void dispose() {
 		this.controller.dispose();
-		this.wood2Texture.dispose();
-		this.wood3Texture.dispose();
+		this.woodTwoTexture.dispose();
+		this.woodThreeTexture.dispose();
 		this.woodMouseTexture.dispose();
 		this.snakeTexture.dispose();
 		super.dispose();
@@ -142,24 +142,48 @@ LogicalGameListener{
 	private void attachTexture(){
 		PositionManager.setPosition(controller);
 		spriteBach.begin();
-		CircleBody circle = CircleBodyPosition.getInstance().getCircleBody("snake");
-		spriteBach.draw(this.snakeTexture, circle.getX() - circle.getRadius(), 
-				circle.getY() - circle.getRadius() * 2f);
-		
-		Vector2 wood3 = RectangleBodyPosition.getInstance().getLowerLeft("wood3");
-		spriteBach.draw(this.wood3Texture, wood3.x - 25f, wood3.y - 28f);
-		
-		
-		Vector2 wood2 = RectangleBodyPosition.getInstance().getLowerLeft("wood2");
-		spriteBach.draw(this.wood2Texture, wood2.x - 23, 320 - 236);	
-		
-		Vector2 wood1 = RectangleBodyPosition.getInstance().getLowerLeft("wood1");
-		spriteBach.draw(this.wood1Texture, wood1.x, wood1.y);
-		
-		Vector2 woodMouse = RectangleBodyPosition.getInstance().getLowerLeft("mouse");
-		spriteBach.draw(woodMouseTexture, woodMouse.x, woodMouse.y);
-		
+		this.attachCircle();
+		this.attachWoodOne();
+		this.attachWoodTwo();
+		this.attachWoodThree();
+		this.attachMouse();
 		spriteBach.end();
+	}
+	
+	private void attachCircle(){
+		CircleBody circle = CircleBodyPosition.getInstance().getCircleBody("snake");
+		if(circle != null){
+			spriteBach.draw(this.snakeTexture, circle.getX() - circle.getRadius(), 
+					circle.getY() - circle.getRadius() * 2f);
+		}	
+	}
+	
+	private void attachWoodOne(){
+		Vector2 woodOne = RectangleBodyPosition.getInstance().getLowerLeft("wood1");
+		if(woodOne != null){
+			spriteBach.draw(this.woodOneTexture, woodOne.x, woodOne.y);
+		}
+	}
+	
+	private void attachWoodTwo(){
+		Vector2 woodTwo = RectangleBodyPosition.getInstance().getLowerLeft("wood2");
+		if(woodTwo != null){
+			spriteBach.draw(this.woodTwoTexture, woodTwo.x - 23, 320 - 236);
+		}
+	}
+	
+	private void attachWoodThree(){
+		Vector2 woodThree = RectangleBodyPosition.getInstance().getLowerLeft("wood3");
+		if(woodThree != null){
+			spriteBach.draw(this.woodThreeTexture, woodThree.x - 25f, woodThree.y - 28f);
+		}
+	}
+	
+	private void attachMouse(){
+		Vector2 woodMouse = RectangleBodyPosition.getInstance().getLowerLeft("mouse");
+		if(woodMouse != null){
+			spriteBach.draw(woodMouseTexture, woodMouse.x, woodMouse.y);
+		}
 	}
 	
 	@Override

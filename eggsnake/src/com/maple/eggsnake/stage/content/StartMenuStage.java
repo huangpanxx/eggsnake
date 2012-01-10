@@ -62,9 +62,9 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		wheelMouseTexture = ResourceLoader
 				.loadTexture("mousequeue_128_128.png");
 		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
-		newGameTexture = ResourceLoader.loadTexture("newgamebtn256_64.png");
-		settingTexture = ResourceLoader.loadTexture("settingsbtn256_64.png");
-		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn256_64.png");
+		newGameTexture = ResourceLoader.loadTexture("newgamebtn_256_64.png");
+		settingTexture = ResourceLoader.loadTexture("settingsbtn_256_64.png");
+		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn_256_64.png");
 		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
 		oneEyeMouseTexture = ResourceLoader
 				.loadTexture("oneeyemouse_64_64.png");
