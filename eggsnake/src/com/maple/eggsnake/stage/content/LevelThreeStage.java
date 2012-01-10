@@ -15,8 +15,13 @@ import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.stage.BaseStage;
+import com.maple.eggsnake.stage.content.attachtexture.CircleBody;
+import com.maple.eggsnake.stage.content.attachtexture.CircleBodyPosition;
+import com.maple.eggsnake.stage.content.attachtexture.RectangleBodyPosition;
+import com.maple.eggsnake.stage.content.attachtexture.PositionManager;
 
-public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGameListener{
+public class LevelThreeStage extends BaseStage implements ActorLoader, 
+LogicalGameListener{
 	
 	private ContentScreen contentScreen;
 	
@@ -29,13 +34,13 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 	float viewportWidth = 0;
 	float viewportHeight = 0;
 	
-	private Texture snake;
-	private Texture wood2;
-	private Texture wood3;
+	private Texture snakeTexture;
+	private Texture wood1Texture;
+	private Texture wood2Texture;
+	private Texture wood3Texture;
 	
 	private SpriteBatch spriteBach;
 	
-	private float radius;
 
 	public LevelThreeStage(ContentScreen screen, float width, float height, 
 			boolean stretch) {
@@ -54,9 +59,10 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 
 	@Override
 	public void loadTextures() {
-		this.snake = ResourceLoader.loadTexture("eggSnake_64_128.png");
-		this.wood2 = ResourceLoader.loadTexture("lefttwowood_32_256.png");
-		this.wood3 = ResourceLoader.loadTexture("wood3.png");
+		this.snakeTexture = ResourceLoader.loadTexture("eggSnake_64_128.png");
+		this.wood1Texture = ResourceLoader.loadTexture("wood1_32_256.png");
+		this.wood2Texture = ResourceLoader.loadTexture("wood2_32_256.png");
+		this.wood3Texture = ResourceLoader.loadTexture("wood3_32_256.png");
 	}
 
 	@Override
@@ -97,16 +103,7 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 			controller.update(dt);
 			render.render(controller.getWorld(), this.camera.combined);
 		}
-		PositionConfigurator.configure(controller);
-		spriteBach.begin();
-		CircleBody temp = CircleBodyPosition.getInstance().getCircleBody("snake");
-		Vector2 wood3 = RectangleBodyPosition.getInstance().getLowerLeft("wood3");
-		spriteBach.draw(this.snake, temp.getX() - temp.getRadius(), 
-				temp.getY() - temp.getRadius() * 2f);
-		spriteBach.draw(this.wood3, wood3.x - 25f, wood3.y - 28f);
-		Vector2 wood2 = RectangleBodyPosition.getInstance().getLowerLeft("wood2");
-		spriteBach.draw(this.wood2, wood2.x - 23, 320 - 236);		
-		spriteBach.end();
+		this.attachTexture();
 	}
 	
 	@Override
@@ -124,9 +121,9 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 	@Override
 	public void dispose() {
 		this.controller.dispose();
-		this.wood2.dispose();
-		this.wood3.dispose();
-		this.snake.dispose();
+		this.wood2Texture.dispose();
+		this.wood3Texture.dispose();
+		this.snakeTexture.dispose();
 		super.dispose();
 	}
 	
@@ -137,6 +134,25 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
 		}
+	}
+	
+	private void attachTexture(){
+		PositionManager.setPosition(controller);
+		spriteBach.begin();
+		CircleBody circle = CircleBodyPosition.getInstance().getCircleBody("snake");
+		spriteBach.draw(this.snakeTexture, circle.getX() - circle.getRadius(), 
+				circle.getY() - circle.getRadius() * 2f);
+		
+		Vector2 wood3 = RectangleBodyPosition.getInstance().getLowerLeft("wood3");
+		spriteBach.draw(this.wood3Texture, wood3.x - 25f, wood3.y - 28f);
+		
+		
+		Vector2 wood2 = RectangleBodyPosition.getInstance().getLowerLeft("wood2");
+		spriteBach.draw(this.wood2Texture, wood2.x - 23, 320 - 236);	
+		
+		Vector2 wood1 = RectangleBodyPosition.getInstance().getLowerLeft("wood1");
+		spriteBach.draw(this.wood1Texture, wood1.x, wood1.y);
+		spriteBach.end();
 	}
 	
 	@Override

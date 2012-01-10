@@ -1,10 +1,10 @@
 /** 
- * @description	: BodyPosition
+ * @description	: RectangleBodyPosition
  * @author		: 王志伟
  * @created		: 2012-1-9
  */
 
-package com.maple.eggsnake.stage.content;
+package com.maple.eggsnake.stage.content.attachtexture;
 
 import java.util.HashMap;
 import java.util.Map;

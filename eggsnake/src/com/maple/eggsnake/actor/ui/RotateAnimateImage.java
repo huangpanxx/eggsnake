@@ -11,7 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Forever;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateBy;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumRotateDirection;
+import com.maple.eggsnake.actor.event.AnimateImageListener;
+import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class RotateAnimateImage extends Image{
 	

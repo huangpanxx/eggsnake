@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateTo;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
-import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.DestinationStage;
+import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
 public class ImageButtonActor extends Image {
 
@@ -16,6 +16,7 @@ public class ImageButtonActor extends Image {
 	
 	private EnumDestStage destStage; // 跳转的目标Stage枚举
 	
+	@SuppressWarnings("unused")
 	private BaseStage sourceStage;
 
 	private final float scaleSize = 10f;// 缩放幅度

@@ -1,7 +1,14 @@
-package com.maple.eggsnake.stage.content;
+/** 
+ * @description	: CircleBodyPosition
+ * @author		: 王志伟
+ * @created		: 2012-1-10
+ */
+
+package com.maple.eggsnake.stage.content.attachtexture;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class CircleBodyPosition {
 	
