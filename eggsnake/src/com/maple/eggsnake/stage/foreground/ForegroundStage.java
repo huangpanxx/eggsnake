@@ -58,7 +58,7 @@ public class ForegroundStage extends BaseStage{
 		particle = ResourceLoader.loadParticle("default.p", "");
 		particle.setPosition(-100, -100);
 		this.slipSound = ResourceLoader.loadSound("slip.ogg");
-		Texture course = ResourceLoader.loadTexture("hand256_64.png");
+		Texture course = ResourceLoader.loadTexture("hand_256_64.png");
 		this.texClickNormal = new TextureRegion(course, 0, 0, 41, 56);
 		this.texClickDown = new TextureRegion(course, 82, 0, 41, 56);
 		this.texDrag = new TextureRegion(course, 126, 0, 41, 56);

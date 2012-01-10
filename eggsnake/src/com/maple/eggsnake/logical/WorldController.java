@@ -37,9 +37,8 @@ public class WorldController {
 			if (world != null) {
 				try {
 					world.destroyBody(body);
-					String name = (String)body.getUserData();
 					if (judge != null)
-						judge.killOne(name);
+						judge.killOne(body);
 				} catch (Exception e) {
 					logger.logWithSignature(this, "摧毁物体失败:%1$s", e.getMessage());
 				}
@@ -76,19 +75,19 @@ public class WorldController {
 						// 计算速度标量
 						float speed = this.getReletiveSpeed(speedA, speedB);
 						Body mouse = null;
-						if ("mouse".equals(nameA)) {
+						if ("CircleMouse".equals(nameA)) {
 							mouse = bodyA;
-						} else if ("mouse".equals(nameB)) {
+						} else if ("CircleMouse".equals(nameB)) {
 							mouse = bodyB;
 						}
 						if (mouse != null) {
-							if (speed > 5) {
+							if (speed > 2) {
 								logger.logWithSignature(this,
 										"mouse被撞击速度：%1$f m/s", speed);
 								addTask(new DeleteBodyTask(mouse));
 							}
-						} else if ("snake".equals(nameA)
-								|| "snake".equals("nameB")) {
+						} else if ("CircleSnake".equals(nameA)
+								|| "CircleSnake".equals(nameB)) {
 							if (speed > 3) {
 								SoundManager.playContactSound();
 							}
@@ -303,7 +302,7 @@ public class WorldController {
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
 			String name = (String) this.hitBody.getUserData();
-			if (name != null && name.equals("snake")) {
+			if (name != null && name.equals("CircleSnake")) {
 				logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
 						this.hitBody.getLinearVelocity().x,
 						this.hitBody.getLinearVelocity().y);
@@ -331,7 +330,7 @@ public class WorldController {
 
 		if (this.hitBody != null) {
 			if (this.hitBody != this.lastBody) {
-				if ("snake".equals(this.hitBody.getUserData())) {
+				if ("CircleSnake".equals(this.hitBody.getUserData())) {
 					if (this.judge != null)
 						this.judge.onAiming();
 				}

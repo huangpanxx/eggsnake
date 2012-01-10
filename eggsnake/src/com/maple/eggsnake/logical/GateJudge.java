@@ -1,10 +1,8 @@
 package com.maple.eggsnake.logical;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
@@ -33,9 +31,9 @@ public class GateJudge {
 
 	}
 
-	public void onMouseKilled(String mouseName) {
-		if (this.listener != null && mouseName != null)
-			this.listener.onMouseKilled(mouseName);
+	public void onMouseKilled(Body body) {
+		if (this.listener != null)
+			this.listener.onMouseKilled(body);
 
 	}
 
@@ -67,14 +65,18 @@ public class GateJudge {
 		Iterator<Body> it = world.getBodies();
 		while (it.hasNext()) {
 			Body body = it.next();
-			ArrayList<Fixture> fixtures = body.getFixtureList();
-			for (Fixture fixture : fixtures) {
-				int index = fixture.getFilterData().groupIndex;
-				if (index == BodyGroup.MICE) {
-					mouseCounter++;
-					break;
-				}
+			String name = (String) body.getUserData();
+			if("CircleMouse".equals(name)){
+				this.mouseCounter ++;
 			}
+//			ArrayList<Fixture> fixtures = body.getFixtureList();
+//			for (Fixture fixture : fixtures) {
+//				int index = fixture.getFilterData().groupIndex;
+//				if (index == BodyGroup.MICE) {
+//					mouseCounter++;
+//					break;
+//				}
+//			}
 		}
 	}
 
@@ -94,11 +96,11 @@ public class GateJudge {
 		return this.listener;
 	}
 
-	public void killOne(String mouseName) {
+	public void killOne(Body body) {
 		this.mouseCounter--;
 		this.playKillSound();
 		if (this.listener != null) {
-			this.listener.onMouseKilled(mouseName);
+			this.listener.onMouseKilled(body);
 		}
 		if (this.mouseCounter == 0 && this.listener != null) {
 			this.setCrossed(true);

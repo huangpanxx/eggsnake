@@ -13,7 +13,7 @@ import com.maple.eggsnake.physics.B2Const;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.content.Box2DStage;
 
-public class CircleSnakeActor extends BodyAttachedActor {
+public class CircleMouseActor extends BodyAttachedActor {
 
 	Loggable logger = null;
 	CircleShape shape = null;
@@ -22,11 +22,11 @@ public class CircleSnakeActor extends BodyAttachedActor {
 	SpriteBatch batch;
 	Sprite sprite;
 
-	public static boolean isCircleSnake(Body body) {
+	public static boolean isCircleMouse(Body body) {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if ("CircleMouse".equals(name)) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						fixture = f;
@@ -41,7 +41,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 	public CircleShape getCircleShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if ("CircleMouse".equals(name)) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						return (CircleShape) f.getShape();
@@ -52,17 +52,17 @@ public class CircleSnakeActor extends BodyAttachedActor {
 		return null;
 	}
 
-	public CircleSnakeActor(Box2DStage stage, Body body) {
+	public CircleMouseActor(Box2DStage stage, Body body) {
 		super(stage);
 		logger = DefaultLogger.getDefaultLogger();
-		if (!CircleSnakeActor.isCircleSnake(body)) {
-			logger.logWithSignature(this, "不是蛇");
+		if (!CircleMouseActor.isCircleMouse(body)) {
+			logger.logWithSignature(this, "不是老鼠");
 		} else {
 			this.batch = new SpriteBatch();
 
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("eggsnake_64_128.png");
+			this.texture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
 			this.sprite = new Sprite(texture);
 		}
 	}
@@ -70,23 +70,22 @@ public class CircleSnakeActor extends BodyAttachedActor {
 	@Override
 	public void draw(SpriteBatch spriteBacth, float dt) {
 
-		this.batch.begin();
 		try {
-
 			float r = this.shape.getRadius();
 			Vector3 pos = new Vector3(body.getPosition().x - r,
 					body.getPosition().y - r, 0);
-			float angle = this.body.getAngle();
-			this.sprite.setRotation((float) (angle * 180 / 3.14));
-			this.sprite.setPosition(pos.x * B2Const.CONVERTRATIO, pos.y
+
+			this.batch.begin();
+			this.sprite.rotate(this.body.getAngle());
+
+			this.batch.draw(this.sprite, pos.x * B2Const.CONVERTRATIO, pos.y
 					* B2Const.CONVERTRATIO);
-			this.sprite.draw(batch);
+
+			this.batch.end();
 
 		} catch (Exception e) {
 			this.stage.removeActor(this);
 		}
-
-		this.batch.end();
 	}
 
 }
