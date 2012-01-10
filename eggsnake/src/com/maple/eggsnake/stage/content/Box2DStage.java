@@ -1,10 +1,14 @@
 package com.maple.eggsnake.stage.content;
 
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
@@ -34,12 +38,21 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	private void initController() {
 		try {
 			this.controller = new WorldController(this.gate,this);
+			this.initActors(controller.getWorld());
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
 		}
 	}
 	
+	private void initActors(World world) {
+		Iterator<Body> it = world.getBodies();
+		while(it.hasNext()){
+			Body body = it.next();
+		}
+		
+	}
+
 	private void gotoGate(int index) throws Exception{
 		this.controller.reloadWorld(index);
 	}
