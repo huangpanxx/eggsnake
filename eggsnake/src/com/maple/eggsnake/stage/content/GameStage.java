@@ -1,5 +1,5 @@
 /** 
- * @description	: GameStage继承自BaseStage
+ * @description	: GameStage游戏界面
  * @author		: 王志伟
  * @created		: 2012-1-6
  */
@@ -8,6 +8,7 @@ package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -78,7 +79,7 @@ public class GameStage extends BaseStage implements ActorLoader{
 	 */
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
-		ActorRegister.navigateRegister(contentScreen, this, EnumStage.STARTMENUSTAGE,
+		ActorRegister.navigateRegister(contentScreen, this, EnumDestStage.STARTMENUSTAGE,
 				quitTexture, this.width - generalTextureWidth + 10f, 0);
 	}
 

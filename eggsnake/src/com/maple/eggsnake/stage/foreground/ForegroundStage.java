@@ -12,7 +12,7 @@ import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 
-public class ForegroundStage extends BaseStage {
+public class ForegroundStage extends BaseStage{
 
 	SpriteBatch spriteBatch;
 	ParticleEffect particle;
@@ -38,6 +38,7 @@ public class ForegroundStage extends BaseStage {
 		this.w = width;
 		this.h = height;
 		this.soundDelta = 0;
+		
 		initialize();
 	}
 
@@ -156,4 +157,6 @@ public class ForegroundStage extends BaseStage {
 		this.coursePos.set(this.width() *2 /3, this.height() / 2);
 
 	}
+
+	
 }

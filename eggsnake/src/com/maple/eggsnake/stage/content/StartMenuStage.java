@@ -9,6 +9,7 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.eggenum.EnumDestStage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -24,8 +25,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private Texture settingTexture;// setting文字纹理
 	private Texture aboutUsTexture;// aboutUs文字纹理
 	private Texture startEggTexture;//
-	private Texture oneEyeMouseTexture;
-	private Texture twoEyeMouseTexture;
+	private Texture oneEyeMouseTexture;// 单只眼老鼠纹理
+	private Texture twoEyeMouseTexture;// 两只眼老鼠纹理
 
 	private ContentScreen contentScreen;// 中间层的Screen
 
@@ -65,8 +66,10 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		settingTexture = ResourceLoader.loadTexture("settingsbtn256_64.png");
 		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn256_64.png");
 		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
-		oneEyeMouseTexture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
-		twoEyeMouseTexture = ResourceLoader.loadTexture("twoeyesmouse_64_64.png");
+		oneEyeMouseTexture = ResourceLoader
+				.loadTexture("oneeyemouse_64_64.png");
+		twoEyeMouseTexture = ResourceLoader
+				.loadTexture("twoeyesmouse_64_64.png");
 	}
 
 	/**
@@ -132,7 +135,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private void loadTitleImage() {
 		generalTextureHeight = this.titileTexture.getHeight();
 		ActorRegister.singleRegister(this, titileTexture, 0f,
-				0.68f * this.height());//待重构
+				0.68f * this.height());// 待重构
 	}
 
 	/**
@@ -157,7 +160,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private void loadQuitImage() {
 		generalTextureWidth = this.quitTexture.getWidth();
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.DISPOSESTAGE, quitTexture, this.width
+				EnumDestStage.DISPOSESTAGE, quitTexture, this.width
 						- generalTextureWidth + 10f, 0);
 	}
 
@@ -166,7 +169,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadNewGameImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.GAMESTAGE, newGameTexture, 105f, 180f);
+				EnumDestStage.LEVELTHREESTAGE, newGameTexture, 105f, 180f);
 	}
 
 	/**
@@ -174,7 +177,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadSettingImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.SETTINGSTAGE, settingTexture, 112f, 128f);
+				EnumDestStage.SETTINGSTAGE, settingTexture, 112f, 128f);
 	}
 
 	/**
@@ -182,29 +185,29 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	private void loadAboutUsImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
+				EnumDestStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
 	}
-	
+
 	/**
 	 * @description 加载StartEgg
 	 */
-	private void loadStartEggImage(){
+	private void loadStartEggImage() {
 		ActorRegister.singleRegister(this, this.startEggTexture, 0f, 0f);
 	}
-	
+
 	/**
 	 * 
 	 * 
 	 */
-	private void loadOneEyeMouseImage(){
+	private void loadOneEyeMouseImage() {
 		ActorRegister.singleRegister(this, this.oneEyeMouseTexture, 128f, 0f);
 	}
-	
+
 	/**
 	 * 
 	 * 
 	 */
-	private void loadTwoEyeMouseImage(){
+	private void loadTwoEyeMouseImage() {
 		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, 0f);
 	}
 
