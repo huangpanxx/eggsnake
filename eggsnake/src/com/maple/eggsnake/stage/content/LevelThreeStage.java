@@ -10,11 +10,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.physics.B2Const;
@@ -107,10 +111,10 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 		}
 		this.display();
 		spriteBach.begin();
-		/*spriteBach.draw(this.snake, BodyPosition.getInstance().getPosition().x - 30, 
-        		BodyPosition.getInstance().getPosition().y - 50);*/                         // #17
-		spriteBach.draw(this.snake, BodyPosition.getInstance().getPosition("snake").x - this.radius * 10f, 
-				BodyPosition.getInstance().getPosition("snake").y - this.radius*20f);
+		spriteBach.draw(this.snake, BodyPosition.getInstance().getLowerLeft("snake").x -
+BodyPosition.getInstance().getRadius("snake"), 
+				BodyPosition.getInstance().getLowerLeft("snake").y - 
+				BodyPosition.getInstance().getRadius("snake") * 2f);
 		spriteBach.end();
 	}
 	
@@ -197,16 +201,23 @@ public class LevelThreeStage extends BaseStage implements ActorLoader, LogicalGa
 			
 			body.getWorldPoint(vector2);
 			vector2.x *= 10f;
-			vector2.y *= 10f;
-			if("snake".equals(userData)){
-				if(!fixtures.isEmpty()){
-					System.out.println("Fixture type: " + fixtures.get(0).getType().toString());
+			vector2.y *= 10f;	
+			if(!fixtures.isEmpty()){
+				if(fixtures.get(0).getShape().getType() == Shape.Type.Circle){
 					this.radius = fixtures.get(0).getShape().getRadius();
-					System.out.println("Radius: " + fixtures.get(0).getShape().getRadius());
+					BodyPosition.getInstance().setPosition(userData, 
+							vector2, radius * B2Const.CONVERTRATIO);
 				}
-				System.out.println("x: " + body.getTransform().getPosition().x + 
-						"y: " + body.getTransform().getPosition().y);
-			BodyPosition.getInstance().setPosition(userData, vector2);
+				if(fixtures.get(0).getShape().getType() == Shape.Type.Polygon){
+					PolygonShape polygon = (PolygonShape)fixtures.get(0).getShape();
+					for(int i = 0; i < polygon.getVertexCount(); i++){
+						polygon.getVertex(i, vector2);
+						body.getWorldPoint(vector2);
+						System.out.println("顶点数： " + polygon.getVertexCount() + 
+								"index" + i + ": " + "x: " + vector2.x + " y: " +
+								vector2.y);
+					}
+				}
 			}
 				
 			}
