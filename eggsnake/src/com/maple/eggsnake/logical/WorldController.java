@@ -35,8 +35,14 @@ public class WorldController {
 
 		@Override
 		public Object doWork(World world) {
-			if (world != null)
-				world.destroyBody(body);
+			if (world != null) {
+				try {
+					world.destroyBody(body);
+				} catch (Exception e) {
+					logger.logWithSignature(this, "摧毁物体失败:%1$s", e.getMessage());
+				}
+			}
+
 			if (judge != null)
 				judge.killOne();
 			return null;
@@ -82,7 +88,8 @@ public class WorldController {
 										"mouse被撞击速度：%1$f m/s", speed);
 								addTask(new DeleteBodyTask(mouse));
 							}
-						} else if("snake".equals(nameA) || "snake".equals("nameB")){
+						} else if ("snake".equals(nameA)
+								|| "snake".equals("nameB")) {
 							if (speed > 3) {
 								SoundManager.playContactSound();
 							}
@@ -263,7 +270,7 @@ public class WorldController {
 	public void update(float dt) {
 		if (!pause) {
 			if (world != null) {
-				world.step(dt, 10, 10);
+				world.step(dt, (int) (dt * 200), (int) (200 * dt));
 				while (!tasks.isEmpty()) {
 					Task<Object, World> task = tasks.pop();
 					task.doWork(world);
@@ -346,8 +353,9 @@ public class WorldController {
 			float mass = 4;
 			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
 			this.playFlySound();
-
+			this.judge.shot();
 		}
+		
 		return false;
 	}
 

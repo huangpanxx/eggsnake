@@ -37,7 +37,7 @@
                      "x" : "BD2EBA1D",
                      "y" : "BCCED3FE"
                   },
-                  "radius" : "4017F876"
+                  "radius" : 1
                },
                "density" : 1,
                "filter-groupIndex" : 1,
@@ -263,7 +263,7 @@
                      "x" : "3D1D172F",
                      "y" : "BD21ACCB"
                   },
-                  "radius" : "402FA8A1"
+                  "radius" : 1
                },
                "density" : 1,
                "filter-groupIndex" : 1,

@@ -205,4 +205,10 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onShotTimeChanged(int hitTime) {
+		// TODO Auto-generated method stub
+		
+	}
 }

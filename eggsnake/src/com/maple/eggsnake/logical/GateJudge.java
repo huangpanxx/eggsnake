@@ -3,13 +3,11 @@ package com.maple.eggsnake.logical;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
-import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.service.SoundManager;
 
 public class GateJudge {
@@ -19,6 +17,7 @@ public class GateJudge {
 	private boolean crossGateTimerAwake = false;
 
 	int mouseCounter = 0;
+	private int shotCounter = 0;
 	LogicalGameListener listener = null;
 
 	Loggable logger;
@@ -34,6 +33,15 @@ public class GateJudge {
 
 	}
 
+	public void shot() {
+		if (!this.isCrossed()) {
+			this.shotCounter++;
+			if (this.listener != null)
+				this.listener.onShotTimeChanged(this.shotCounter);
+			logger.logWithSignature(this, "发射次数:%1$d", this.shotCounter);
+		}
+	}
+
 	public GateJudge(World world, LogicalGameListener listener) {
 		this.initialize(world);
 		this.setListener(listener);
@@ -41,6 +49,7 @@ public class GateJudge {
 
 	public void initialize(World world) {
 		this.logger = DefaultLogger.getDefaultLogger();
+		this.shotCounter = 0;
 		this.setCrossed(false);
 		this.setCrossGateTimerAwake(false);
 		Iterator<Body> it = world.getBodies();

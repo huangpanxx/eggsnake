@@ -211,9 +211,9 @@ BodyPosition.getInstance().getRadius("snake"),
 					for(int i = 0; i < polygon.getVertexCount(); i++){
 						polygon.getVertex(i, vector2);
 						body.getWorldPoint(vector2);
-						System.out.println("顶点数： " + polygon.getVertexCount() + 
-								"index" + i + ": " + "x: " + vector2.x + " y: " +
-								vector2.y);
+//						System.out.println("顶点数： " + polygon.getVertexCount() + 
+//								"index" + i + ": " + "x: " + vector2.x + " y: " +
+//								vector2.y);
 					}
 				}
 			}
@@ -223,6 +223,12 @@ BodyPosition.getInstance().getRadius("snake"),
 
 	@Override
 	public void onCrossGate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onShotTimeChanged(int hitTime) {
 		// TODO Auto-generated method stub
 		
 	}
