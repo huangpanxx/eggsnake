@@ -294,11 +294,13 @@ public class WorldController {
 	}
 
 	public boolean touchDown(float x, float y) {
+		if (this.mouseJoint != null)
+			return false;
 		this.hitBody = null;
 		this.hitPoint.set(x, y);
-		world.QueryAABB(callback, this.hitPoint.x - 0.01f,
-				this.hitPoint.y - 0.01f, this.hitPoint.x + 0.01f,
-				this.hitPoint.y + 0.01f);
+		world.QueryAABB(callback, this.hitPoint.x - 1f,
+				this.hitPoint.y - 1f, this.hitPoint.x + 1f,
+				this.hitPoint.y + 1f);
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
 			String name = (String) this.hitBody.getUserData();
@@ -318,7 +320,6 @@ public class WorldController {
 			}
 		}
 		return false;
-
 	}
 
 	public boolean touchDragged(Vector2 pos) {
@@ -353,15 +354,15 @@ public class WorldController {
 
 			Vector2 mousePos = new Vector2(x, y);
 			Vector2 bodyPos = this.hitPoint;
-			
+
 			Vector2 v = new Vector2(mousePos.x - bodyPos.x, mousePos.y
 					- bodyPos.y);
 			float mass = 4;
 			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
-			
+
 			if (this.lastBody != null) {
 				logger.logWithSignature(this, "发射完成");
-				if(this.judge!=null)
+				if (this.judge != null)
 					this.judge.shot();
 			}
 			this.lastBody = null;
@@ -369,6 +370,5 @@ public class WorldController {
 
 		return false;
 	}
-
 
 }
