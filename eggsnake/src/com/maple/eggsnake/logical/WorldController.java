@@ -1,5 +1,6 @@
 package com.maple.eggsnake.logical;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -16,9 +17,11 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.service.ResourceLoader;
+import com.maple.eggsnake.service.SoundManager;
 import com.maple.eggsnake.task.Task;
 import com.maple.eggsnake.task.TaskContainer;
 import com.maple.eggsnake.task.TaskQueueContainer;
+import com.maple.eggsnake.util.MathHelper;
 
 public class WorldController {
 
@@ -62,31 +65,35 @@ public class WorldController {
 				if (bodyA != null && bodyB != null) {
 					String nameA = (String) bodyA.getUserData();
 					String nameB = (String) bodyB.getUserData();
-					double f_x = impulse.getTangentImpulses()[0];
-					double f_y = impulse.getTangentImpulses()[1];
-
-					double f = Math.sqrt(f_x * f_x + f_y * f_y);
-					logger.logWithSignature(this, "%1$f", f);
-					if (f > 0.05f) {
+					Vector2 speedA = bodyA.getLinearVelocity();
+					Vector2 speedB = bodyB.getLinearVelocity();
+					if (speedA != null && speedB != null) {
+						// 计算速度标量
+						float speed = this.getReletiveSpeed(speedA, speedB);
+						Body mouse = null;
 						if ("mouse".equals(nameA)) {
-							addTask(new DeleteBodyTask(bodyA));
-
+							mouse = bodyA;
 						} else if ("mouse".equals(nameB)) {
-							addTask(new DeleteBodyTask(bodyB));
-
+							mouse = bodyB;
+						}
+						if (mouse != null) {
+							if (speed > 0.5) {
+								logger.logWithSignature(this,
+										"mouse被撞击速度：%1$f m/s", speed);
+								addTask(new DeleteBodyTask(mouse));
+							}
+						} else if("snake".equals(nameA) || "snake".equals("nameB")){
+							if (speed > 3) {
+								SoundManager.playContactSound();
+							}
 						}
 					}
-
-					// if (nameA != null && nameB != null) {
-					// if (nameB.equals("mouse") && nameA.equals("snake")) {
-					// addTask(new DeleteBodyTask(bodyB));
-					// } else if (nameA.equals("mouse")
-					// && nameB.equals("snake")) {
-					// addTask(new DeleteBodyTask(bodyA));
-					// }
-					// }
 				}
 			}
+		}
+
+		private float getReletiveSpeed(Vector2 v1, Vector2 v2) {
+			return MathHelper.getDistance(v1.x, v1.y, v2.x, v2.y);
 		}
 
 		@Override
@@ -199,6 +206,12 @@ public class WorldController {
 			throw e;
 		}
 
+		try {
+			this.flySound = ResourceLoader.loadSound("fly_sound.ogg");
+		} catch (Exception e) {
+			logger.logWithSignature(this, "加载fly_sound失败:%1$s", e.getMessage());
+		}
+
 		this.setGameLogicalListener(listener);
 	}
 
@@ -248,12 +261,20 @@ public class WorldController {
 	}
 
 	public void update(float dt) {
-		if (!pause && world != null) {
-			world.step(dt, 10, 10);
-			while (!tasks.isEmpty()) {
-				Task<Object, World> task = tasks.pop();
-				task.doWork(world);
+		if (!pause) {
+			if (world != null) {
+				world.step(dt, 10, 10);
+				while (!tasks.isEmpty()) {
+					Task<Object, World> task = tasks.pop();
+					task.doWork(world);
+				}
 			}
+			if (this.judge != null) {
+				judge.tick();
+			}
+		}
+		if (this.judge != null) {
+
 		}
 	}
 
@@ -282,21 +303,18 @@ public class WorldController {
 				&& this.groundBody != null) {
 			String name = (String) this.hitBody.getUserData();
 			if (name != null && name.equals("snake")) {
-				Vector2 speed = hitBody.getLinearVelocity();
 				logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
 						this.hitBody.getLinearVelocity().x,
 						this.hitBody.getLinearVelocity().y);
-				if (true) {// speed.x < 0.01f && speed.y < 0.01f) {
-					MouseJointDef def = new MouseJointDef();
-					def.bodyA = this.groundBody;
-					def.bodyB = hitBody;
-					def.collideConnected = true;
-					def.target.set(this.hitBody.getPosition().x,
-							this.hitBody.getPosition().y);
-					def.maxForce = 1000.f * hitBody.getMass();
-					mouseJoint = (MouseJoint) world.createJoint(def);
-					hitBody.setAwake(true);
-				}
+				MouseJointDef def = new MouseJointDef();
+				def.bodyA = this.groundBody;
+				def.bodyB = hitBody;
+				def.collideConnected = true;
+				def.target.set(this.hitBody.getPosition().x,
+						this.hitBody.getPosition().y);
+				def.maxForce = 1000.f * hitBody.getMass();
+				mouseJoint = (MouseJoint) world.createJoint(def);
+				hitBody.setAwake(true);
 			}
 		}
 		return false;
@@ -327,7 +345,16 @@ public class WorldController {
 					- bodyPos.y);
 			float mass = 4;
 			this.hitBody.setLinearVelocity(v.x * mass, v.y * mass);
+			this.playFlySound();
+
 		}
 		return false;
+	}
+
+	Sound flySound = null;
+
+	void playFlySound() {
+		if (flySound != null)
+			this.flySound.play();
 	}
 }
