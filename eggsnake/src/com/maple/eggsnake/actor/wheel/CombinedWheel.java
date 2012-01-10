@@ -11,31 +11,36 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 
     private Image frontImage;
     
-	public CombinedWheel(String wheelName, Texture wheelTexture, 
-			String frontName, Texture frontTexture, Action action){
-		super(wheelName, wheelTexture, action);
-		this.loadFrontImage(frontName, frontTexture);
+	public CombinedWheel(Texture wheelTexture, Texture frontTexture, 
+			float x, float y,  Action action, Stage stage){
+		super(wheelTexture, x, y, action);
+		this.loadFrontImage("front", frontTexture);
+		this.setFrontImagePosition();
+		this.loadActor(stage);
 	}
 	
-	public CombinedWheel(String wheelName, TextureRegion wheelRegion, 
-			String frontName, TextureRegion frontRegion, 
-			Action action){
-		super(wheelName, wheelRegion, action);
-		this.loadFrontImage(frontName, frontRegion);
+	public CombinedWheel(TextureRegion wheelRegion, TextureRegion frontRegion, 
+			float x, float y, Action action, Stage stage){
+		super(wheelRegion, x, y, action);
+		this.loadFrontImage("front", frontRegion);
+		this.setFrontImagePosition();
+		this.loadActor(stage);
 	}
 	
-	public CombinedWheel(String wheelName, Texture wheelTexture, 
-			String frontName, Texture frontTexture, 
-			EnumRotateDirection direction) {
-		super(wheelName, wheelTexture, direction);
-		this.loadFrontImage(frontName, frontTexture);
+	public CombinedWheel(Texture wheelTexture, Texture frontTexture, 
+			float x, float y, EnumRotateDirection direction, Stage stage) {
+		super(wheelTexture, x, y, direction);
+		this.loadFrontImage("front", frontTexture);
+		this.setFrontImagePosition();
+		this.loadActor(stage);
 	}
 	
-	public CombinedWheel(String wheelName, TextureRegion wheelRegion, 
-			String frontName, TextureRegion frontRegion, 
-			EnumRotateDirection direction){
-		super(wheelName, wheelRegion, direction);
-		this.loadFrontImage(frontName, frontRegion);
+	public CombinedWheel(TextureRegion wheelRegion, TextureRegion frontRegion, 
+			float x, float y, EnumRotateDirection direction, Stage stage){
+		super(wheelRegion, x, y, direction);
+		this.loadFrontImage("front", frontRegion);
+		this.setFrontImagePosition();
+		this.loadActor(stage);
 	}
 
 	private void loadFrontImage(String frontName, Texture frontTexture){
@@ -44,11 +49,6 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 	
 	private void loadFrontImage(String frontName, TextureRegion frontRegion){
 		this.frontImage = new Image(frontName, frontRegion);
-	}
-	
-	public void setWheelPosition(float x, float y){
-		this.x = x;
-		this.y = y;
 	}
 	
 	public void setFrontImagePosition(){

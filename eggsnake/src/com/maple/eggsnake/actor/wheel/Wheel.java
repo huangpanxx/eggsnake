@@ -18,24 +18,30 @@ public class Wheel extends Image implements Dynamicable{
 	@SuppressWarnings("unused")
 	private EnumRotateDirection direction;
 	
-	public Wheel(String name, TextureRegion region, Action action) {
-		super(name, region);
+	public Wheel(TextureRegion region, float x, float y, Action action) {
+		super("wheel", region);
 		this.loadAction(action);
+		this.setWheelPosition(x, y);
 	}
 
-	public Wheel(String name, Texture texture, Action action) {
-		super(name, texture);
+	public Wheel(Texture texture, float x, float y, Action action) {
+		super("wheel", texture);
 		this.loadAction(action);
+		this.setWheelPosition(x, y);
 	}
 	
-	public Wheel(String name, TextureRegion region, EnumRotateDirection direction) {
-		super(name, region);
+	public Wheel(TextureRegion region, float x, float y, 
+			EnumRotateDirection direction) {
+		super("wheel", region);
 		this.loadDefaultAction(direction);
+		this.setWheelPosition(x, y);
 	}
 
-	public Wheel(String name, Texture texture, EnumRotateDirection direction) {
-		super(name, texture);
+	public Wheel(Texture texture, float x, float y, 
+			EnumRotateDirection direction) {
+		super("wheel", texture);
 		this.loadDefaultAction(direction);
+		this.setWheelPosition(x, y);
 	}
 
 	@Override
@@ -51,6 +57,11 @@ public class Wheel extends Image implements Dynamicable{
 		else
 			rotateAction = RotateBy.$(this.anclockWiseAngles, this.duration);
 		this.action(Forever.$(rotateAction));
+	}
+	
+	public void setWheelPosition(float x, float y){
+		this.x = x;
+		this.y = y;
 	}
 	
 	@Override

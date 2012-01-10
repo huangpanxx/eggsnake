@@ -156,11 +156,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private void loadRMouseWheelImage() {
 		/*ActorRegister.combineRegister(this, this.wheelTexture,
 				this.wheelMouseTexture, 352f, 100f, false);*/
-		this.combine = new CombinedWheel("wheel", this.wheelTexture, "front", 
-				this.wheelMouseTexture, EnumRotateDirection.ANTICLOCKWISE);
-		this.combine.setWheelPosition(352f, 100f);
-		this.combine.setFrontImagePosition();
-		combine.loadActor(this);
+		this.combine = new CombinedWheel(this.wheelTexture, 
+				this.wheelMouseTexture, 352f, 100f,EnumRotateDirection.ANTICLOCKWISE, this);
 	}
 
 	/**
