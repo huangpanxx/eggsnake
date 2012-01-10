@@ -50,14 +50,6 @@ public class PositionManager {
 						topRight.y = topRight.y * B2Const.CONVERTRATIO + center.y;
 						RectangleBodyPosition.getInstance().setRectangleBodyPosition(userData,
 								lowerLeft, topRight);
-						if("wood2".equals(userData)){
-							System.out.println("lowerLeft x:" + 
-						RectangleBodyPosition.getInstance().getLowerLeft("wood3").x + 
-						" y:" + RectangleBodyPosition.getInstance().getLowerLeft("wood3").y);
-							System.out.println("topRight x: " + 
-						RectangleBodyPosition.getInstance().getTopRight("wood3").x + 
-						" y:" + RectangleBodyPosition.getInstance().getTopRight("wood3").y);
-						}
 					}
 				}
 			}		
