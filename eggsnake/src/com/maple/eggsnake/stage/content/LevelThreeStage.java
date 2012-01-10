@@ -38,6 +38,7 @@ LogicalGameListener{
 	private Texture wood1Texture;
 	private Texture wood2Texture;
 	private Texture wood3Texture;
+	private Texture woodMouseTexture;
 	
 	private SpriteBatch spriteBach;
 	
@@ -63,6 +64,7 @@ LogicalGameListener{
 		this.wood1Texture = ResourceLoader.loadTexture("wood1_32_256.png");
 		this.wood2Texture = ResourceLoader.loadTexture("wood2_32_256.png");
 		this.wood3Texture = ResourceLoader.loadTexture("wood3_32_256.png");
+		this.woodMouseTexture = ResourceLoader.loadTexture("woodmouse_64_128");
 	}
 
 	@Override
@@ -123,6 +125,7 @@ LogicalGameListener{
 		this.controller.dispose();
 		this.wood2Texture.dispose();
 		this.wood3Texture.dispose();
+		this.woodMouseTexture.dispose();
 		this.snakeTexture.dispose();
 		super.dispose();
 	}
@@ -152,6 +155,10 @@ LogicalGameListener{
 		
 		Vector2 wood1 = RectangleBodyPosition.getInstance().getLowerLeft("wood1");
 		spriteBach.draw(this.wood1Texture, wood1.x, wood1.y);
+		
+		Vector2 woodMouse = RectangleBodyPosition.getInstance().getLowerLeft("mouse");
+		spriteBach.draw(woodMouseTexture, woodMouse.x, woodMouse.y);
+		
 		spriteBach.end();
 	}
 	

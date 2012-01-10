@@ -50,8 +50,10 @@ public class RectangleBodyPosition {
 	}
 	
 	public Vector2 getLowerLeft(String name){
-		
-		return this.rectangleBodyMap.get(name).getLowerLeft();
+		if(this.rectangleBodyMap.containsKey(name))
+			return this.rectangleBodyMap.get(name).getLowerLeft();
+		else
+			return null;
 	}
 	
 	public Vector2 getTopRight(String name){
