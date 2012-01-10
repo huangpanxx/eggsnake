@@ -10,18 +10,16 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.service.ResourceLoader;
+import com.maple.eggsnake.service.SoundManager;
 
 public class GateJudge {
 
 	private int crossGateTimer = 10;
-
-	private Sound crossGateSound = null;
-	private Sound killSound = null;
+	private boolean isCrossed = false;
+	private boolean crossGateTimerAwake = false;
 
 	int mouseCounter = 0;
 	LogicalGameListener listener = null;
-
-	private boolean isCrossed = false;
 
 	Loggable logger;
 
@@ -30,13 +28,8 @@ public class GateJudge {
 	}
 
 	public void tick() {
-		if (this.isCrossed() && this.getCrossGateTimer() > 0) {
-			--this.crossGateTimer;
-			if (this.getCrossGateTimer() <= 0) {
-				if (this.listener != null) {
-					this.listener.onAllMouseKilled();
-				}
-			}
+		if (this.isCrossGateTimerAwake()) {
+			this.setCrossGateTimer(this.getCrossGateTimer() - 1);
 		}
 
 	}
@@ -49,7 +42,7 @@ public class GateJudge {
 	public void initialize(World world) {
 		this.logger = DefaultLogger.getDefaultLogger();
 		this.setCrossed(false);
-		this.setCrossGateTimer(10);
+		this.setCrossGateTimerAwake(false);
 		Iterator<Body> it = world.getBodies();
 		while (it.hasNext()) {
 			Body body = it.next();
@@ -62,23 +55,14 @@ public class GateJudge {
 				}
 			}
 		}
-		try {
-			this.killSound = ResourceLoader.loadSound("kill_sound.ogg");
-			this.crossGateSound = ResourceLoader
-					.loadSound("cross_gate_sound.ogg");
-		} catch (Exception e) {
-			logger.logWithSignature(this, "加载声音出错:%1$s", e.getMessage());
-		}
 	}
 
 	void playKillSound() {
-		if (this.killSound != null)
-			this.killSound.play();
+		SoundManager.playKillSound();
 	}
 
 	void playCrossGateSound() {
-		if (this.crossGateSound != null)
-			this.crossGateSound.play();
+		SoundManager.playCrossGateSound();
 	}
 
 	public void setListener(LogicalGameListener listener) {
@@ -104,6 +88,13 @@ public class GateJudge {
 	public void setCrossed(boolean isCrossed) {
 		this.isCrossed = isCrossed;
 		this.playCrossGateSound();
+		if (isCrossed) {
+			if (this.listener != null) {
+				this.playCrossGateSound();
+				this.listener.onAllMouseKilled();
+			}
+			this.setCrossGateTimer(10);
+		}
 	}
 
 	public int getCrossGateTimer() {
@@ -112,5 +103,20 @@ public class GateJudge {
 
 	public void setCrossGateTimer(int crossGateTimer) {
 		this.crossGateTimer = crossGateTimer;
+		if (this.crossGateTimer <= 0) {
+			this.setCrossGateTimerAwake(false);
+			this.crossGateTimer = 0;
+			if (this.listener != null) {
+				this.listener.onCrossGate();
+			}
+		}
+	}
+
+	public boolean isCrossGateTimerAwake() {
+		return crossGateTimerAwake;
+	}
+
+	public void setCrossGateTimerAwake(boolean crossGateTimerAwake) {
+		this.crossGateTimerAwake = crossGateTimerAwake;
 	}
 }

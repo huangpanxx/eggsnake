@@ -10,7 +10,6 @@ import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
-import com.maple.eggsnake.service.ApplicationService;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
@@ -122,5 +121,11 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		} catch (Exception e) {
 			logger.logWithSignature(this, e.getMessage());
 		}
+	}
+
+	@Override
+	public void onCrossGate() {
+		// TODO Auto-generated method stub
+		
 	}
 }
