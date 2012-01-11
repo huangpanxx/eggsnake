@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
-public class ScoreLightLabel extends LightLabel{
+public class ScoreLightLabel extends LightLabel {
 
-	private int scores;//需要显示的玩家加当前关的得到的分数
-	
+	@SuppressWarnings("unused")
+	private int scores;// 需要显示的玩家加当前关的得到的分数
+
 	public ScoreLightLabel(String name, BitmapFont font, String text,
 			Action action, int scores) {
 		super(name, font, text, action);
@@ -15,15 +16,14 @@ public class ScoreLightLabel extends LightLabel{
 		this.loadScores(scores);
 	}
 
-	public ScoreLightLabel(String name, BitmapFont font, 
-			String text, int scores) {
+	public ScoreLightLabel(String name, BitmapFont font, String text, int scores) {
 		super(name, font, text);
 		this.setDisplayInfomation(scores);
 		this.loadScores(scores);
 	}
 
-	public ScoreLightLabel(String name, BitmapFont font, 
-			Action action, int scores) {
+	public ScoreLightLabel(String name, BitmapFont font, Action action,
+			int scores) {
 		super(name, font, action);
 		this.setDisplayInfomation(scores);
 		this.loadScores(scores);
@@ -34,13 +34,12 @@ public class ScoreLightLabel extends LightLabel{
 		this.setDisplayInfomation(scores);
 		this.loadScores(scores);
 	}
-	
-	private void setDisplayInfomation(int scores){
-		this.setWrappedText("" + scores, 
-				HAlignment.LEFT);
+
+	private void setDisplayInfomation(int scores) {
+		this.setWrappedText("" + scores, HAlignment.LEFT);
 	}
-	
-	private void loadScores(int scores){
+
+	private void loadScores(int scores) {
 		this.scores = scores;
 	}
 }

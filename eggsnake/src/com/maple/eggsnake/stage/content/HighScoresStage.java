@@ -6,6 +6,7 @@
 
 package com.maple.eggsnake.stage.content;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -110,13 +111,12 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	}
 	
 	private void loadScorelightLabel(int scores){
-		
-		
-		
-		this.scorelightLabel = new ScoreLightLabel("score", new BitmapFont(),
+		BitmapFont bitmapFont =new BitmapFont(Gdx.files.internal("data/fonts/bright.fnt"),
+				Gdx.files.internal("data/fonts/bright1.png"), false);
+		this.scorelightLabel = new ScoreLightLabel("score", bitmapFont,
 				scores);
 		this.scorelightLabel.x = 195f;
-		this.scorelightLabel.y = 160f;
+		this.scorelightLabel.y = 130f;
 		this.addActor(scorelightLabel);
 	}
 	

@@ -1,7 +1,9 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.maple.eggsnake.actor.setting.MusicSlider;
 import com.maple.eggsnake.actor.setting.SoundSlider;
 import com.maple.eggsnake.actor.ui.ActorRegister;
@@ -18,6 +20,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	private Texture fontEggSnake;
 	
 	private MusicSlider musicSlider;
+	@SuppressWarnings("unused")
 	private SoundSlider soundSlider;
 
 	private float generalTextureWidth; // 保存任意纹理宽度
@@ -105,14 +108,20 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	}
 
 	private void loadMusicSlider(){
-		this.musicSlider = new MusicSlider(0, 5, 1, new Skin());
-		this.musicSlider.x = 60;
+		
+		NinePatch sliderPatch = 
+				new NinePatch(new TextureRegion(ResourceLoader.loadTexture("soundslider.png.png")));
+		TextureRegion knobRegion = new TextureRegion(quitTexture);
+		SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
+		this.musicSlider = new MusicSlider(0, 5, 1, style);
+		this.musicSlider.x = 200;
 		this.musicSlider.y = 100;
+		this.addActor(musicSlider);
 	}
 	
 	private void loadSoundSlider(){
-		this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
+		/*this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
 		this.soundSlider.x = 60;
-		this.soundSlider.y = 150;
+		this.soundSlider.y = 150;*/
 	}
 }
