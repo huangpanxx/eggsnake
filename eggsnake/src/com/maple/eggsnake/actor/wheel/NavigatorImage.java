@@ -16,29 +16,28 @@ public class NavigatorImage extends Image {
 	
 	private EnumDestStage destStage; // 跳转的目标Stage枚举
 	
-	@SuppressWarnings("unused")
 	private BaseStage sourceStage;
 
 	private final float scaleSize = 10f;// 缩放幅度
 	private final float clockwiseAngles = 360f;// 顺时针旋转360度
 	private final float duration = 2f;// 间隔
 
-	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, String name,
-			TextureRegion region) {
-		super(name, region);
+	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, 
+			TextureRegion region, float x, float y) {
+		super("default", region);
 		this.contentScreen = screen;
 		this.destStage = destStage;
 		this.touchable = true;
 	}
 	
 
-	public NavigatorImage(String name, TextureRegion region) {
-		super(name, region);
+	public NavigatorImage(TextureRegion region, float x, float y) {
+		super("default", region);
 	}
 
-	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, String name,
-			Texture texture) {
-		super(name, texture);
+	public NavigatorImage(ContentScreen screen, EnumDestStage destStage,
+			Texture texture, float x, float y) {
+		super("default", texture);
 		this.contentScreen = screen;
 		this.destStage = destStage;
 		this.touchable = true;
@@ -46,17 +45,32 @@ public class NavigatorImage extends Image {
 	
 
 	public NavigatorImage(ContentScreen screen, BaseStage source,
-			EnumDestStage destStage, String name, Texture texture) {
-		super(name, texture);
+			EnumDestStage destStage, Texture texture, float x, float y) {
+		super("default", texture);
 		this.contentScreen = screen;
 		this.sourceStage = source;
 		this.destStage = destStage;
+		this.x = x;
+		this.y = y;
+		this.sourceStage.addActor(this);
+		this.touchable = true;
+	}
+	
+	public NavigatorImage(ContentScreen screen, BaseStage source,
+			EnumDestStage destStage, TextureRegion region, float x, float y) {
+		super("default", region);
+		this.contentScreen = screen;
+		this.sourceStage = source;
+		this.destStage = destStage;
+		this.x = x;
+		this.y = y;
+		this.sourceStage.addActor(this);
 		this.touchable = true;
 	}
 	
 
-	public NavigatorImage(String name, Texture texture) {
-		super(name, texture);
+	public NavigatorImage(Texture texture, float x, float y) {
+		super("default", texture);
 	}
 
 	@Override

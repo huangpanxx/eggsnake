@@ -150,7 +150,7 @@ public class GateRecord {
 				@Override
 				public int compare(GateRecordItem record1,
 						GateRecordItem record2) {
-					return record1.dateTime.compareTo(record2.dateTime);
+					return record2.score - record1.score;
 
 				}
 			});

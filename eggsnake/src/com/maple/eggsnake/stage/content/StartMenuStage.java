@@ -7,9 +7,10 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.wheel.CombinedWheel;
+import com.maple.eggsnake.actor.wheel.FlatImage;
+import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -17,34 +18,39 @@ import com.maple.eggsnake.stage.content.common.EnumDestStage;
 import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class StartMenuStage extends BaseStage implements ActorLoader {
-
-	private Texture titileTexture;// 标题纹理
-	private Texture wheelSnakeTexture;// 旋转轮子上的蛇图纹理
-	private Texture wheelMouseTexture;// 旋转轮子上的小老鼠纹理
-	private Texture quitTexture;// quit纹理
-	private Texture wheelTexture;// 旋转轮子纹理
-	private Texture newGameTexture;// new game文字纹理
-	private Texture settingTexture;// setting文字纹理
-	private Texture aboutUsTexture;// aboutUs文字纹理
-	private Texture startEggTexture;//
-	private Texture oneEyeMouseTexture;// 单只眼老鼠纹理
-	private Texture twoEyeMouseTexture;// 两只眼老鼠纹理
-	
 	@SuppressWarnings("unused")
-	private CombinedWheel combine;
-
-	private ContentScreen contentScreen;// 中间层的Screen
-
-	private float generalTextureWidth; // 保存任意纹理宽度
+	private Image quitImage;
 	@SuppressWarnings("unused")
-	private float generalTextureHeight; // 保存任意纹理高度
+	private Image newGameImage;
 	@SuppressWarnings("unused")
-	private TextureRegion generalTextureRegion;// 保存纹理的部分区域
+	private Image settingImage;
+	@SuppressWarnings("unused")
+	private Image aboutUsImage;
+	@SuppressWarnings("unused")
+	private Image titleImage;
+	@SuppressWarnings("unused")
+	private Image startEggImage;
+	@SuppressWarnings("unused")
+	private Image oneEyeMouseImage;
+	@SuppressWarnings("unused")
+	private Image twoEyeMouseImage;
+	@SuppressWarnings("unused")
+	private Image upMaskImage;
+	@SuppressWarnings("unused")
+	private Image downMaskImage;
+
+	@SuppressWarnings("unused")
+	private CombinedWheel combineRMouseWheel;
+	@SuppressWarnings("unused")
+	private CombinedWheel combineLSnakeWheel;
+
+	private ContentScreen contentScreen;
 
 	public StartMenuStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
 		this.loadContent(screen);
+		this.load();
 	}
 
 	/**
@@ -60,21 +66,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	@Override
 	public void loadTextures() {
-		titileTexture = ResourceLoader.loadTexture("fonteggsnake_512_128.png");
-		wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
-		wheelSnakeTexture = ResourceLoader
-				.loadTexture("halfeggsnake_128_128.png");
-		wheelMouseTexture = ResourceLoader
-				.loadTexture("mousequeue_128_128.png");
-		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
-		newGameTexture = ResourceLoader.loadTexture("newgamebtn_256_64.png");
-		settingTexture = ResourceLoader.loadTexture("settingsbtn_256_64.png");
-		aboutUsTexture = ResourceLoader.loadTexture("aboutusbtn_256_64.png");
-		startEggTexture = ResourceLoader.loadTexture("startegg_64_64.png");
-		oneEyeMouseTexture = ResourceLoader
-				.loadTexture("oneeyemouse_64_64.png");
-		twoEyeMouseTexture = ResourceLoader
-				.loadTexture("twoeyesmouse_64_64.png");
 	}
 
 	/**
@@ -82,6 +73,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 */
 	@Override
 	public void load() {
+		this.loadUpMaskImage();
+		this.loadDownMaskImage();
 		this.loadTextures();
 		this.loadTitleImage();
 		this.loadRMouseWheelImage();
@@ -120,60 +113,73 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void show() {
-		this.load();
 	}
 
 	@Override
 	public void dispose() {
-		this.newGameTexture.dispose();
-		this.settingTexture.dispose();
-		this.aboutUsTexture.dispose();
-		this.wheelMouseTexture.dispose();
-		this.wheelSnakeTexture.dispose();
-		this.wheelTexture.dispose();
 		super.dispose();
+	}
+
+	private void loadUpMaskImage() {
+		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
+		this.upMaskImage = new FlatImage(maskTexture, -16f, 242f, this);
+	}
+
+	private void loadDownMaskImage() {
+		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
+		this.downMaskImage = new FlatImage(maskTexture, -16f, -50f, this);
 	}
 
 	/**
 	 * @description 加载标题"EggSnake"
 	 */
 	private void loadTitleImage() {
-		generalTextureHeight = this.titileTexture.getHeight();
-		ActorRegister.singleRegister(this, titileTexture, 0f,
-				0.68f * this.height());// 待重构
+		Texture titileTexture = ResourceLoader
+				.loadTexture("fonteggsnake_512_128.png");
+		this.titleImage = new FlatImage(titileTexture, 0, 212f, this);
 	}
 
 	/**
 	 * @description 加载左边旋转轮子特效
 	 */
 	private void loadLSnakeWheelImage() {
-		ActorRegister.combineRegister(this, this.wheelTexture,
-				this.wheelSnakeTexture, 0f, 96f, true);
+		Texture wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
+		Texture wheelSnakeTexture = ResourceLoader
+				.loadTexture("halfeggsnake_128_128.png");
+		this.combineLSnakeWheel = new CombinedWheel(wheelTexture,
+				wheelSnakeTexture, 0f, 96f, EnumRotateDirection.ANTICLOCKWISE,
+				this);
 	}
 
 	/**
 	 * @description 加载右边旋转轮子
 	 */
 	private void loadRMouseWheelImage() {
-		this.combine = new CombinedWheel(this.wheelTexture, 
-				this.wheelMouseTexture, 352f, 100f,EnumRotateDirection.ANTICLOCKWISE, this);
+		Texture wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
+		Texture wheelMouseTexture = ResourceLoader
+				.loadTexture("mousequeue_128_128.png");
+		this.combineRMouseWheel = new CombinedWheel(wheelTexture,
+				wheelMouseTexture, 352f, 100f,
+				EnumRotateDirection.ANTICLOCKWISE, this);
 	}
 
 	/**
 	 * @description 加载退出按钮
 	 */
 	private void loadQuitImage() {
-		generalTextureWidth = this.quitTexture.getWidth();
-		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.DISPOSESTAGE, quitTexture, this.width
-						- generalTextureWidth, 0);
+		Texture quitTexture = ResourceLoader
+				.loadTexture("quitbutton_128_64.png");
+		this.quitImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.DISPOSESTAGE, quitTexture, 380f, 0f);
 	}
 
 	/**
 	 * @description 加载new game
 	 */
 	private void loadNewGameImage() {
-		ActorRegister.navigateRegister(contentScreen, this,
+		Texture newGameTexture = ResourceLoader
+				.loadTexture("newgamebtn_256_64.png");
+		this.newGameImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.SELECTLEVELSTAGE, newGameTexture, 105f, 180f);
 	}
 
@@ -181,7 +187,9 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * @description 加载Setting
 	 */
 	private void loadSettingImage() {
-		ActorRegister.navigateRegister(contentScreen, this,
+		Texture settingTexture = ResourceLoader
+				.loadTexture("settingsbtn_256_64.png");
+		this.settingImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.SETTINGSTAGE, settingTexture, 112f, 128f);
 	}
 
@@ -189,7 +197,9 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * @description 加载aboutus
 	 */
 	private void loadAboutUsImage() {
-		ActorRegister.navigateRegister(contentScreen, this,
+		Texture aboutUsTexture = ResourceLoader
+				.loadTexture("aboutusbtn_256_64.png");
+		this.aboutUsImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.ABOUTUSSTAGE, aboutUsTexture, 112f, 73f);
 	}
 
@@ -197,23 +207,22 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * @description 加载StartEgg
 	 */
 	private void loadStartEggImage() {
-		ActorRegister.singleRegister(this, this.startEggTexture, 0f, 0f);
+		Texture startEggTexture = ResourceLoader
+				.loadTexture("startegg_64_64.png");
+		this.startEggImage = new FlatImage(startEggTexture, 0f, 0f, this);
 	}
 
-	/**
-	 * 
-	 * 
-	 */
 	private void loadOneEyeMouseImage() {
-		ActorRegister.singleRegister(this, this.oneEyeMouseTexture, 128f, 0f);
+		Texture oneEyeMouseTexture = ResourceLoader
+				.loadTexture("oneeyemouse_64_64.png");
+		this.oneEyeMouseImage = new FlatImage(oneEyeMouseTexture, 128f, 0f,
+				this);
 	}
 
-	/**
-	 * 
-	 * 
-	 */
 	private void loadTwoEyeMouseImage() {
-		ActorRegister.singleRegister(this, this.twoEyeMouseTexture, 180f, 0f);
+		Texture twoEyeMouseTexture = ResourceLoader
+				.loadTexture("twoeyesmouse_64_64.png");
+		this.twoEyeMouseImage = new FlatImage(twoEyeMouseTexture, 180f, 0f,
+				this);
 	}
-
 }

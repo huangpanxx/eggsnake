@@ -10,31 +10,49 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.badlogic.gdx.scenes.scene2d.actors.Label;
 import com.maple.eggsnake.actor.lightlabel.ScoreLightLabel;
-import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.actor.wheel.CombinedWheel;
+import com.maple.eggsnake.actor.wheel.FlatImage;
+import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.common.EnumDestStage;
+import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class HighScoresStage extends BaseStage implements ActorLoader {
+	@SuppressWarnings("unused")
+	private Image menuImage;
+	@SuppressWarnings("unused")
+	private Image replayImage;
+	@SuppressWarnings("unused")
+	private Image nextImage;
+	@SuppressWarnings("unused")
+	private Image dottedUpLineImage;
+	@SuppressWarnings("unused")
+	private Image dottedDownLineImage;
+	@SuppressWarnings("unused")
+	private Image levelOneTitleImage;
+	@SuppressWarnings("unused")
+	private Image levelInformationImage;
+	@SuppressWarnings("unused")
+	private Image scoreMaskImage;
 
-	private Texture menuTexture; // 菜单纹理
-	private Texture replayTexture; // 重新开始纹理
-	private Texture nextTexture; // 下一关纹理
-	private Texture wheelTexture; // 旋转轮子纹理
-	private Texture successMouseTexture; // 过关成功老鼠纹理()
-	private Texture dottedLineTexture; // 虚线纹理
-	private Texture levelOneTitleTexture;// 第一关高分榜数字纹理
-	private Texture levelInformationTexure;
+	@SuppressWarnings("unused")
+	private Image scoreWheelImage;
 
 	@SuppressWarnings("unused")
 	private int currentLevel; // 当前所处关卡
 	@SuppressWarnings("unused")
 	private int scroes;// 撞击次数
 	private ContentScreen contentScreen;// 中间层的Screen
-	
-	private ScoreLightLabel scorelightLabel;
+
+	private Label currentScoreLabel;
+	@SuppressWarnings("unused")
+	private Label historyHighestScoreLabel;
+	private BitmapFont bitmapFontForLabel;
 
 	public HighScoresStage(ContentScreen screen, float width, float height,
 			boolean stretch, int hitTimes, int level) {
@@ -42,7 +60,8 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.loadContent(screen);
 		this.loadScroes(hitTimes);
 		this.loadCurrentLevel(level);
-		this.loadScorelightLabel(hitTimes);
+		this.loadCurrentScoreLabel(hitTimes);
+		this.loadHistoryHighestScoreLabel();
 		this.load();
 	}
 
@@ -53,84 +72,106 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void loadTextures() {
-		this.menuTexture = ResourceLoader.loadTexture("menu_128_64.png");
-		this.replayTexture = ResourceLoader.loadTexture("replay_128_64.png");
-		this.nextTexture = ResourceLoader.loadTexture("next_128_64.png");
-		this.wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
-		this.successMouseTexture = ResourceLoader
-				.loadTexture("successmouse_64_64.png");
-		this.dottedLineTexture = ResourceLoader
-				.loadTexture("dottedline_512_8.png");
-		this.levelOneTitleTexture = ResourceLoader
-				.loadTexture("1-1highscores_128_64.png");
-		this.levelInformationTexure = 
-				ResourceLoader.loadTexture("levelsucceed_256_128.png");
+
+	}
+
+	private void loadScoreMaskImage() {
+		Texture maskTextue = ResourceLoader
+				.loadTexture("scoremask_512_256.png");
+		this.scoreMaskImage = new FlatImage(maskTextue, 0f, 20f, this);
 	}
 
 	private void loadMenuImage() {
-		ActorRegister.navigateRegister(contentScreen, this,
+		Texture menuTexture = ResourceLoader.loadTexture("menu_128_64.png");
+		this.menuImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.STARTMENUSTAGE, menuTexture, 75f, 20f);
 	}
 
 	private void loadReplayImage() {
-		ActorRegister.navigateRegister(contentScreen, this,
+		Texture replayTexture = ResourceLoader.loadTexture("replay_128_64.png");
+		this.replayImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.REPLAYSTAGE, replayTexture, 195f, 20f);
 	}
 
 	private void loadNextImage() {
-			ActorRegister.navigateRegister(contentScreen, this,
-					EnumDestStage.NEXTLEVELSTAGE, nextTexture, 315f, 20f);
+		Texture nextTexture = ResourceLoader.loadTexture("next_128_64.png");
+		this.nextImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.NEXTLEVELSTAGE, nextTexture, 315f, 20f);
 	}
 
 	private void loadDottedLineImage() {
-		ActorRegister.singleRegister(this, new TextureRegion(dottedLineTexture,
-				0, 0, 430, 8), 10, 80);
-		ActorRegister.singleRegister(this, new TextureRegion(dottedLineTexture,
-				0, 0, 430, 8), 10, 250);
+		Texture dottedLineTexture = ResourceLoader
+				.loadTexture("dottedline_512_8.png");
+		this.dottedUpLineImage = new FlatImage(new TextureRegion(
+				dottedLineTexture, 0f, 0f, 430f, 8f), -5f, 200f, this);
+		this.dottedDownLineImage = new FlatImage(new TextureRegion(
+				dottedLineTexture, 0f, 0f, 430f, 8f), -5f, 30f, this);
 	}
 
 	private void loadScoreWheelImage() {
-		ActorRegister.combineRegister(this, this.wheelTexture,
-				this.successMouseTexture, 312f, 110f, 30f, 30f);
+		Texture wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
+		Texture successMouseTexture = ResourceLoader
+				.loadTexture("successmouse_64_64.png");
+		this.scoreWheelImage = new CombinedWheel(wheelTexture,
+				successMouseTexture, 312f, 110f,
+				EnumRotateDirection.ANTICLOCKWISE, this);
 	}
 
 	private void loadLevelOneTitleImage() {
-		ActorRegister.singleRegister(this, levelOneTitleTexture, 96, 256);
+		Texture levelOneTitleTexture = ResourceLoader
+				.loadTexture("1-1highscores_128_64.png");
+		this.levelOneTitleImage = new FlatImage(levelOneTitleTexture, 96f,
+				256f, this);
 	}
-	
-    private void loadLevelInformationImage(){
-		ActorRegister.singleRegister(this, levelInformationTexure, 55, 120);
+
+	private void loadLevelInformationImage() {
+		Texture levelInformationTexure = ResourceLoader
+				.loadTexture("levelsucceed_256_128.png");
+		this.levelInformationImage = new FlatImage(levelInformationTexure, 55f,
+				120f, this);
 	}
-	
-	private void loadScroes(int hitTimes){
+
+	private void loadScroes(int hitTimes) {
 		this.scroes = hitTimes;
 	}
 
-	private void loadCurrentLevel(int level){
+	private void loadCurrentLevel(int level) {
 		this.currentLevel = level;
 	}
-	
-	private void loadScorelightLabel(int scores){
-		BitmapFont bitmapFont =new BitmapFont(Gdx.files.internal("data/fonts/bright.fnt"),
+
+	private void loadCurrentScoreLabel(int scores) {
+		bitmapFontForLabel = new BitmapFont(
+				Gdx.files.internal("data/fonts/bright.fnt"),
 				Gdx.files.internal("data/fonts/bright1.png"), false);
-		this.scorelightLabel = new ScoreLightLabel("score", bitmapFont,
-				scores);
-		this.scorelightLabel.x = 195f;
-		this.scorelightLabel.y = 130f;
-		this.addActor(scorelightLabel);
+		this.currentScoreLabel = new ScoreLightLabel("score",
+				bitmapFontForLabel, scores);
+		this.currentScoreLabel.x = 195f;
+		this.currentScoreLabel.y = 130f;
+		this.addActor(currentScoreLabel);
 	}
-	
+
+	private void loadHistoryHighestScoreLabel() {
+		// int history =
+		// GateRecord.fetchGateRecord(currentLevel).getRecordItem(0).score;
+		/*
+		 * this.historyHighestScoreLabel = new ScoreLightLabel("history",
+		 * bitmapFontForLabel, history); this.historyHighestScoreLabel.x = 195f;
+		 * this.historyHighestScoreLabel.y = 60f;
+		 * this.addActor(historyHighestScoreLabel);
+		 */
+	}
+
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
+		this.loadScoreMaskImage();
 		this.loadTextures();
-		this.loadMenuImage();
-		this.loadReplayImage();
-		this.loadNextImage();
 		this.loadDottedLineImage();
 		this.loadScoreWheelImage();
 		this.loadLevelOneTitleImage();
 		this.loadLevelInformationImage();
+		this.loadMenuImage();
+		this.loadReplayImage();
+		this.loadNextImage();
 	}
 
 	@Override

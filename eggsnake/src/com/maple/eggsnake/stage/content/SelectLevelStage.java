@@ -4,28 +4,31 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.maple.eggsnake.actor.wheel.FlatImage;
+import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
-/**
- * @author Administrator
- *
- */
 public class SelectLevelStage extends BaseStage implements ActorLoader {
 	
-	private Texture selectTitleTexture;
-	private Texture levelOneTexture;
-	private Texture levelTwoTexture;
-	private Texture levelThreeTexture;
-	private Texture quitTexture;// quit纹理
+	@SuppressWarnings("unused")
+	private Image selectTitleImage;
+	@SuppressWarnings("unused")
+	private Image levelOneImage;
+	@SuppressWarnings("unused")
+	private Image levelTwoImage;
+	@SuppressWarnings("unused")
+	private Image levelThreeImage;
+	@SuppressWarnings("unused")
+	private Image quitImage;
 	
 	private ContentScreen contentScreen;
 
-	public SelectLevelStage(ContentScreen screen, float width, float height, boolean stretch) {
+	public SelectLevelStage(ContentScreen screen, float width, 
+			float height, boolean stretch) {
 		super(width, height, stretch);
 		this.loadContent(screen);
 		this.load();
@@ -40,38 +43,44 @@ public class SelectLevelStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void loadTextures() {
-		this.selectTitleTexture = ResourceLoader.loadTexture("selectleveltitle_512_64.png");
-		this.levelOneTexture = ResourceLoader.loadTexture("level1_128_256.png");
-		this.levelTwoTexture = ResourceLoader.loadTexture("level2_128_256.png");
-		this.levelThreeTexture = ResourceLoader.loadTexture("level3_128_256.png");
-		this.quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
+
 	}
 
 
 	private void loadSelectTiltleImage(){
-		ActorRegister.singleRegister(this, 
-				new TextureRegion(selectTitleTexture, 16, 0, 480, 64), 0, 256);
+		Texture selectTitleTexture = ResourceLoader.loadTexture(
+				"selectleveltitle_512_64.png");
+		this.selectTitleImage = new FlatImage(
+				selectTitleTexture, 0f, 256f, this);
 	}
 	
 	
 	private void loadLevelOneImage(){
-		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.LEVELONESTAGE, levelOneTexture, 64, 32);
+		Texture levelOneTexture = ResourceLoader.loadTexture(
+				"level1_128_256.png");
+		this.levelOneImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELONESTAGE, levelOneTexture, 64f, 32f);
 	}
 	
 	private void loadLevelTwoImage(){
-		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.LEVELTWOSTAGE, levelTwoTexture, 180, 32);
+		Texture levelTwoTexture = ResourceLoader.loadTexture("" +
+				"level2_128_256.png");
+		this.levelTwoImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELTWOSTAGE, levelTwoTexture, 180f, 32f);
 	}
 	
 	private void loadLevelThreeImage(){
-		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.LEVELTHREESTAGE, levelThreeTexture, 296, 32);
+		Texture levelThreeTexture = ResourceLoader.loadTexture(
+				"level3_128_256.png");
+		this.levelThreeImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELTHREESTAGE, levelThreeTexture, 296f, 32f);
 	}
 	
 	private void loadQuitImage() {
-		ActorRegister.navigateRegister(contentScreen, this, EnumDestStage.STARTMENUSTAGE,
-				quitTexture, 366, 0);
+		Texture quitTexture = ResourceLoader.loadTexture(
+				"quitbutton_128_64.png");
+		this.quitImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.STARTMENUSTAGE, quitTexture, 366f, 0f);
 	}
 	
 	@Override

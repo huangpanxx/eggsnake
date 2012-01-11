@@ -60,6 +60,7 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 		stage.addActor(this);
 		stage.addActor(frontImage);
 	}
+	
 	/**
 	 * @return the frontImage
 	 */

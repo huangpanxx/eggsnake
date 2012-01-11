@@ -1,12 +1,11 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.setting.MusicSlider;
 import com.maple.eggsnake.actor.setting.SoundSlider;
-import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.actor.wheel.FlatImage;
+import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -14,18 +13,25 @@ import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
 public class SettingStage extends BaseStage implements ActorLoader {
 
-	private ContentScreen contentScreen;
-	private Texture quitTexture;// quit纹理
-	private Texture titleTexture;// title纹理
-	private Texture fontEggSnake;
+	@SuppressWarnings("unused")
+	private Image quitImage;
+	@SuppressWarnings("unused")
+	private Image titileImage;
+	@SuppressWarnings("unused")
+	private Image fontEggSnakeImage;
+	@SuppressWarnings("unused")
+	private Image upMaskImage;
+	@SuppressWarnings("unused")
+	private Image downMaskImage;
+	@SuppressWarnings("unused")
+	private Image twoEyeMouseImage;
 	
+	@SuppressWarnings("unused")
 	private MusicSlider musicSlider;
 	@SuppressWarnings("unused")
 	private SoundSlider soundSlider;
 
-	private float generalTextureWidth; // 保存任意纹理宽度
-	@SuppressWarnings("unused")
-	private float generalTextureHeight; // 保存任意纹理高度
+	private ContentScreen contentScreen;
 
 	public SettingStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
@@ -71,57 +77,82 @@ public class SettingStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void loadTextures() {
-		titleTexture = ResourceLoader.loadTexture("titlesettings_256_64.png");
-		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
-		fontEggSnake = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
+
 	}
 
 	@Override
 	public void load() {
+		this.loadUpMaskImage();
+		this.loadDownMaskImage();
 		this.loadTextures();
 		this.loadTitleImage();
 		this.loadFontEggSnakeImage();
+		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
-		this.loadMusicSlider();
-		this.loadSoundSlider();
+//		this.loadMusicSlider();
+//		this.loadSoundSlider();
 	}
 
+	private void loadUpMaskImage() {
+		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
+		this.upMaskImage = new FlatImage(maskTexture, -16f, 212f, this);
+	}
+
+	private void loadDownMaskImage() {
+		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
+		this.downMaskImage = new FlatImage(maskTexture, -16f, -60f, this);
+	}
+	
 	/**
 	 * @description 加载setting标题
 	 */
 	private void loadTitleImage() {
-		ActorRegister.singleRegister(this, this.titleTexture, 112f, 256f);
+		Texture titleTexture = ResourceLoader
+				.loadTexture("titlesettings_256_64.png");
+		this.titileImage = new FlatImage(titleTexture, 92f, 246f, this);
 	}
 
 	/**
 	 * @description 加载退出按钮
 	 */
 	private void loadQuitImage() {
-		generalTextureWidth = this.quitTexture.getWidth();
-		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.STARTMENUSTAGE, quitTexture, this.width
-						- generalTextureWidth + 10f, 0);
-	}
-	
-	private void loadFontEggSnakeImage(){
-		ActorRegister.singleRegister(this, fontEggSnake, 112, 24);
+		Texture quitTexture = ResourceLoader
+				.loadTexture("quitbutton_128_64.png");
+		this.quitImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.STARTMENUSTAGE, quitTexture, 372f, 0f);
 	}
 
-	private void loadMusicSlider(){
-		
-		NinePatch sliderPatch = 
-				new NinePatch(new TextureRegion(ResourceLoader.loadTexture("soundslider.png.png")));
-		TextureRegion knobRegion = new TextureRegion(quitTexture);
-		SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
-		this.musicSlider = new MusicSlider(0, 5, 1, style);
-		this.musicSlider.x = 200;
-		this.musicSlider.y = 100;
-		this.addActor(musicSlider);
+	private void loadFontEggSnakeImage() {
+		Texture fontEggSnakeTexture = ResourceLoader
+				.loadTexture("titleeggsnake_128_32.png");
+		this.fontEggSnakeImage = new FlatImage(fontEggSnakeTexture, 112f, 24f, this);
 	}
 	
-	private void loadSoundSlider(){
-		/*this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
-		this.soundSlider.x = 60;
-		this.soundSlider.y = 150;*/
+	private void loadTwoEyeMouseImage() {
+		Texture twoEyeMouseTexture = ResourceLoader
+				.loadTexture("twoeyesmouse_64_64.png");
+		this.twoEyeMouseImage = new FlatImage(twoEyeMouseTexture, 400f, 190f,
+				this);
+	}
+
+	@SuppressWarnings("unused")
+	private void loadMusicSlider() {
+
+//		NinePatch sliderPatch = new NinePatch(new TextureRegion(
+//				ResourceLoader.loadTexture("soundslider.png.png")));
+//		TextureRegion knobRegion = new TextureRegion(quitTexture);
+//		SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
+//		this.musicSlider = new MusicSlider(0, 5, 1, style);
+//		this.musicSlider.x = 200;
+//		this.musicSlider.y = 100;
+//		this.addActor(musicSlider);
+	}
+
+	@SuppressWarnings("unused")
+	private void loadSoundSlider() {
+		/*
+		 * this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
+		 * this.soundSlider.x = 60; this.soundSlider.y = 150;
+		 */
 	}
 }
