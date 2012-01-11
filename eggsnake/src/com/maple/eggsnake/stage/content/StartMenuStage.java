@@ -9,10 +9,12 @@ package com.maple.eggsnake.stage.content;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.actor.wheel.CombinedWheel;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.common.EnumDestStage;
+import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class StartMenuStage extends BaseStage implements ActorLoader {
 
@@ -27,6 +29,8 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private Texture startEggTexture;//
 	private Texture oneEyeMouseTexture;// 单只眼老鼠纹理
 	private Texture twoEyeMouseTexture;// 两只眼老鼠纹理
+	
+	private CombinedWheel combine;
 
 	private ContentScreen contentScreen;// 中间层的Screen
 
@@ -150,8 +154,10 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * @description 加载右边旋转轮子
 	 */
 	private void loadRMouseWheelImage() {
-		ActorRegister.combineRegister(this, this.wheelTexture,
-				this.wheelMouseTexture, 352f, 100f, false);
+		/*ActorRegister.combineRegister(this, this.wheelTexture,
+				this.wheelMouseTexture, 352f, 100f, false);*/
+		this.combine = new CombinedWheel(this.wheelTexture, 
+				this.wheelMouseTexture, 352f, 100f,EnumRotateDirection.ANTICLOCKWISE, this);
 	}
 
 	/**

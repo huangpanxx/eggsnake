@@ -27,7 +27,7 @@ public class DestinationStage {
 			break;
 		}
 		case SETTINGSTAGE: {
-			destStage = new HighScoresStage(screen, false, screen.getWidth(),
+			destStage = new SettingStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}

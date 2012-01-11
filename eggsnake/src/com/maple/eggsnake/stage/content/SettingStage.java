@@ -1,11 +1,16 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.actors.Label;
 import com.maple.eggsnake.actor.ui.ActorRegister;
+import com.maple.eggsnake.actor.wheel.CombinedWheel;
+import com.maple.eggsnake.actor.wheel.Wheel;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.common.EnumDestStage;
+import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class SettingStage extends BaseStage implements ActorLoader{
 
@@ -14,11 +19,13 @@ public class SettingStage extends BaseStage implements ActorLoader{
 	@SuppressWarnings("unused")
 	private Texture titleTexture;//title纹理
 	
+//	private Wheel wheel;
+	private CombinedWheel combinedWheel;
+	
 	private float generalTextureWidth; // 保存任意纹理宽度
 	@SuppressWarnings("unused")
 	private float generalTextureHeight; // 保存任意纹理高度
-//	private Texture titileTexture;
-
+	
 	public SettingStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
@@ -63,7 +70,6 @@ public class SettingStage extends BaseStage implements ActorLoader{
 
 	@Override
 	public void loadTextures() {
-//		titleTexture = ResourceLoader.loadTexture("titlesettings_256_64.png");
 		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
 	}
 
