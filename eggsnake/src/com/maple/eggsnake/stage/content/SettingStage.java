@@ -25,7 +25,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	private Image downMaskImage;
 	@SuppressWarnings("unused")
 	private Image twoEyeMouseImage;
-	
+
 	@SuppressWarnings("unused")
 	private MusicSlider musicSlider;
 	@SuppressWarnings("unused")
@@ -76,21 +76,15 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	}
 
 	@Override
-	public void loadTextures() {
-
-	}
-
-	@Override
 	public void load() {
 		this.loadUpMaskImage();
 		this.loadDownMaskImage();
-		this.loadTextures();
 		this.loadTitleImage();
 		this.loadFontEggSnakeImage();
 		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
-//		this.loadMusicSlider();
-//		this.loadSoundSlider();
+		// this.loadMusicSlider();
+		// this.loadSoundSlider();
 	}
 
 	private void loadUpMaskImage() {
@@ -102,7 +96,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
 		this.downMaskImage = new FlatImage(maskTexture, -16f, -60f, this);
 	}
-	
+
 	/**
 	 * @description 加载setting标题
 	 */
@@ -125,9 +119,10 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	private void loadFontEggSnakeImage() {
 		Texture fontEggSnakeTexture = ResourceLoader
 				.loadTexture("titleeggsnake_128_32.png");
-		this.fontEggSnakeImage = new FlatImage(fontEggSnakeTexture, 112f, 24f, this);
+		this.fontEggSnakeImage = new FlatImage(fontEggSnakeTexture, 112f, 24f,
+				this);
 	}
-	
+
 	private void loadTwoEyeMouseImage() {
 		Texture twoEyeMouseTexture = ResourceLoader
 				.loadTexture("twoeyesmouse_64_64.png");
@@ -138,14 +133,14 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	@SuppressWarnings("unused")
 	private void loadMusicSlider() {
 
-//		NinePatch sliderPatch = new NinePatch(new TextureRegion(
-//				ResourceLoader.loadTexture("soundslider.png.png")));
-//		TextureRegion knobRegion = new TextureRegion(quitTexture);
-//		SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
-//		this.musicSlider = new MusicSlider(0, 5, 1, style);
-//		this.musicSlider.x = 200;
-//		this.musicSlider.y = 100;
-//		this.addActor(musicSlider);
+		// NinePatch sliderPatch = new NinePatch(new TextureRegion(
+		// ResourceLoader.loadTexture("soundslider.png.png")));
+		// TextureRegion knobRegion = new TextureRegion(quitTexture);
+		// SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
+		// this.musicSlider = new MusicSlider(0, 5, 1, style);
+		// this.musicSlider.x = 200;
+		// this.musicSlider.y = 100;
+		// this.addActor(musicSlider);
 	}
 
 	@SuppressWarnings("unused")

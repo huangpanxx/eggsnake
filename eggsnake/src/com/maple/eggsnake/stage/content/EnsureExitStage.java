@@ -10,19 +10,20 @@ import com.maple.eggsnake.stage.BaseStage;
 
 /**
  * @author Administrator
- *
+ * 
  */
 public class EnsureExitStage extends BaseStage implements ActorLoader {
 
 	@SuppressWarnings("unused")
 	private ContentScreen contentScreen;
-	
+
 	/**
 	 * @param width
 	 * @param height
 	 * @param stretch
 	 */
-	public EnsureExitStage(ContentScreen screen, float width, float height, boolean stretch) {
+	public EnsureExitStage(ContentScreen screen, float width, float height,
+			boolean stretch) {
 		super(width, height, stretch);
 		this.loadContent(screen);
 	}
@@ -30,12 +31,6 @@ public class EnsureExitStage extends BaseStage implements ActorLoader {
 	@Override
 	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
-	}
-
-	@Override
-	public void loadTextures() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

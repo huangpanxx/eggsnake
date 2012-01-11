@@ -39,7 +39,6 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	private Image levelInformationImage;
 	@SuppressWarnings("unused")
 	private Image scoreMaskImage;
-
 	@SuppressWarnings("unused")
 	private Image scoreWheelImage;
 
@@ -68,11 +67,6 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	@Override
 	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
-	}
-
-	@Override
-	public void loadTextures() {
-
 	}
 
 	private void loadScoreMaskImage() {
@@ -164,7 +158,6 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	@Override
 	public void load() {
 		this.loadScoreMaskImage();
-		this.loadTextures();
 		this.loadDottedLineImage();
 		this.loadScoreWheelImage();
 		this.loadLevelOneTitleImage();

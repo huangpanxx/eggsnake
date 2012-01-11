@@ -20,7 +20,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader {
 	@SuppressWarnings("unused")
 	private Image titleImage;
 	@SuppressWarnings("unused")
-	private Image snakeImage;
+	private Image snakeEggImage;
 	@SuppressWarnings("unused")
 	private Image snakeFontImage;
 	@SuppressWarnings("unused")
@@ -105,8 +105,8 @@ public class AboutUsStage extends BaseStage implements ActorLoader {
 
 	private void loadSnakeImage() {
 		Texture snakeImageTexture = ResourceLoader
-				.loadTexture("wholesnake_128_128.png");
-		this.snakeImage = new FlatImage(snakeImageTexture, 372f, 182f, this);
+				.loadTexture("snakeegg_128_128.png");
+		this.snakeEggImage = new FlatImage(snakeImageTexture, 372f, 182f, this);
 	}
 
 	private void loadSnakeFontImage() {

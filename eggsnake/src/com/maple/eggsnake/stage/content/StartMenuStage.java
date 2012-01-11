@@ -53,29 +53,15 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		this.load();
 	}
 
-	/**
-	 * 
-	 */
 	@Override
 	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 
-	/**
-	 * @description 初始化相关纹理
-	 */
-	@Override
-	public void loadTextures() {
-	}
-
-	/**
-	 * 
-	 */
 	@Override
 	public void load() {
 		this.loadUpMaskImage();
 		this.loadDownMaskImage();
-		this.loadTextures();
 		this.loadTitleImage();
 		this.loadRMouseWheelImage();
 		this.loadLSnakeWheelImage();
