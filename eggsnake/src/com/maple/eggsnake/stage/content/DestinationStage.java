@@ -22,7 +22,8 @@ public class DestinationStage {
 			break;
 		}
 		case ABOUTUSSTAGE: {
-			destStage = Box2DStage.getInstance(screen, 1);
+			destStage = new AboutUsStage(screen, screen.getWidth(),
+					screen.getHeight(), true);
 			break;
 		}
 		case SETTINGSTAGE: {

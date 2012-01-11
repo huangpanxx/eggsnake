@@ -1,4 +1,4 @@
-package com.maple.eggsnake.actor.ui;
+package com.maple.eggsnake.actor.wheel;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -10,7 +10,7 @@ import com.maple.eggsnake.stage.BaseStage;
 import com.maple.eggsnake.stage.content.DestinationStage;
 import com.maple.eggsnake.stage.content.common.EnumDestStage;
 
-public class ImageButtonActor extends Image {
+public class NavigatorImage extends Image {
 
 	private ContentScreen contentScreen; // 中间层屏幕
 	
@@ -23,7 +23,7 @@ public class ImageButtonActor extends Image {
 	private final float clockwiseAngles = 360f;// 顺时针旋转360度
 	private final float duration = 2f;// 间隔
 
-	public ImageButtonActor(ContentScreen screen, EnumDestStage destStage, String name,
+	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, String name,
 			TextureRegion region) {
 		super(name, region);
 		this.contentScreen = screen;
@@ -32,11 +32,11 @@ public class ImageButtonActor extends Image {
 	}
 	
 
-	public ImageButtonActor(String name, TextureRegion region) {
+	public NavigatorImage(String name, TextureRegion region) {
 		super(name, region);
 	}
 
-	public ImageButtonActor(ContentScreen screen, EnumDestStage destStage, String name,
+	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, String name,
 			Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
@@ -45,7 +45,7 @@ public class ImageButtonActor extends Image {
 	}
 	
 
-	public ImageButtonActor(ContentScreen screen, BaseStage source,
+	public NavigatorImage(ContentScreen screen, BaseStage source,
 			EnumDestStage destStage, String name, Texture texture) {
 		super(name, texture);
 		this.contentScreen = screen;
@@ -55,7 +55,7 @@ public class ImageButtonActor extends Image {
 	}
 	
 
-	public ImageButtonActor(String name, Texture texture) {
+	public NavigatorImage(String name, Texture texture) {
 		super(name, texture);
 	}
 
