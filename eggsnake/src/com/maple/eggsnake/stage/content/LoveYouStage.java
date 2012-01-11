@@ -212,8 +212,9 @@ public class LoveYouStage extends BaseStage implements LogicalGameListener{
 		
 	}
 
+
 	@Override
-	public void onMouseKilled(String mouseName) {
+	public void onMouseKilled(Body body) {
 		// TODO Auto-generated method stub
 		
 	}

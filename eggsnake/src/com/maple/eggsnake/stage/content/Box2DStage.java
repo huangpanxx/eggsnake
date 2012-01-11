@@ -1,19 +1,23 @@
 package com.maple.eggsnake.stage.content;
 
-
+import java.util.HashMap;
 import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.maple.eggsnake.actor.game.ActorFactory;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
+import com.maple.eggsnake.screen.NavigateScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
@@ -22,39 +26,67 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	WorldController controller;
 	private int gate = 0;
 
-	Vector3 pos_camera = new Vector3(0, 0, 0);
 	Box2DDebugRenderer render = new Box2DDebugRenderer();
+	public OrthographicCamera debugCamera = new OrthographicCamera();
 
-	float viewportWidth = 0;
-	float viewportHeight = 0;
+	private HashMap<Body, Actor> Map;
 
-	public Box2DStage(float width, float height, boolean stretch) {
+	static Box2DStage instance = null;
+
+	public static Box2DStage getInstance(NavigateScreen screen, int gate) {
+		if (instance == null) {
+			instance = new Box2DStage(Gdx.graphics.getWidth(),
+					Gdx.graphics.getHeight(), true, gate, screen);
+		} else {
+			try {
+				instance.gotoGate(gate);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return instance;
+	}
+
+	NavigateScreen screen;
+
+	private Box2DStage(float width, float height, boolean stretch, int gate,
+			NavigateScreen screen) {
 		super(width, height, stretch);
+		this.screen = screen;
 		logger = DefaultLogger.getDefaultLogger();
 		this.gate = 0;
+		this.Map = new HashMap<Body, Actor>();
 		this.initController();
 	}
 
 	private void initController() {
 		try {
-			this.controller = new WorldController(this.gate,this);
+			this.controller = new WorldController(this.gate, this);
 			this.initActors(controller.getWorld());
 		} catch (Exception e) {
 			logger.logWithSignature(this, "加载地图失失败:%1$s",
 					e.getLocalizedMessage());
 		}
 	}
-	
+
 	private void initActors(World world) {
+		this.Map.clear();
+		this.clear();
 		Iterator<Body> it = world.getBodies();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Body body = it.next();
+			Actor actor = ActorFactory.createActor(body, this);
+			if (actor != null) {
+				this.addActor(actor);
+				Map.put(body, actor);
+			}
 		}
-		
+
 	}
 
-	private void gotoGate(int index) throws Exception{
+	private void gotoGate(int index) throws Exception {
 		this.controller.reloadWorld(index);
+		this.initActors(this.controller.getWorld());
 	}
 
 	@Override
@@ -75,14 +107,13 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	@Override
 	public void show() {
-		logger.logWithSignature(this, "show");
-		viewportWidth = this.camera.viewportWidth;
-		viewportHeight = this.camera.viewportHeight;
-		this.pos_camera = new Vector3(this.camera.position);
 
-		this.camera.viewportWidth = 480 / B2Const.CONVERTRATIO;
-		this.camera.viewportHeight = 320 / B2Const.CONVERTRATIO;
-		this.camera.position.set(0, this.camera.viewportHeight / 2, 1);
+		logger.logWithSignature(this, "show");
+		this.debugCamera.viewportWidth = 480 / B2Const.CONVERTRATIO;
+		this.debugCamera.viewportHeight = 320 / B2Const.CONVERTRATIO;
+		this.debugCamera.position.set(new Vector3(
+				this.debugCamera.viewportWidth / 2,
+				this.debugCamera.viewportHeight / 2, 1));
 	}
 
 	@Override
@@ -91,7 +122,9 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		float dt = Gdx.graphics.getDeltaTime();
 		if (controller.getWorld() != null) {
 			controller.update(dt);
-			render.render(controller.getWorld(), this.camera.combined);
+			this.debugCamera.update();
+			render.render(controller.getWorld(), this.debugCamera.combined);
+			this.debugCamera.apply(Gdx.gl10);
 		}
 	}
 
@@ -103,7 +136,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	private Vector2 convertToWorld(int x, int y) {
 		Vector3 point = new Vector3(x, y, 0);
-		this.camera.unproject(point);
+		this.debugCamera.unproject(point);
 		return new Vector2(point.x, point.y);
 	}
 
@@ -129,28 +162,30 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	@Override
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关");
-		try {
-			this.gotoGate(++this.gate);
-		} catch (Exception e) {
-			logger.logWithSignature(this, e.getMessage());
-		}
+		// try {
+		// this.gotoGate(++this.gate);
+		// } catch (Exception e) {
+		// logger.logWithSignature(this, e.getMessage());
+		// }
 	}
+
+	int shotTime = 0;
 
 	@Override
 	public void onCrossGate() {
-		// TODO Auto-generated method stub
-		
+		this.screen.navigate(new HighScoresStage(screen, width(), height(),
+				true, hitTime, this.gate));
 	}
 
 	@Override
 	public void onShotTimeChanged(int hitTime) {
-		// TODO Auto-generated method stub
-		
+		this.shotTime = hitTime;
 	}
 
 	@Override
-	public void onMouseKilled(String mouseName) {
-		// TODO Auto-generated method stub
-		
+	public void onMouseKilled(Body body) {
+		Actor actor = this.Map.get(body);
+		this.removeActor(actor);
+
 	}
 }
