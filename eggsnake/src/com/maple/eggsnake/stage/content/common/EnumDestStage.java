@@ -12,6 +12,9 @@ public enum EnumDestStage {
 	SUCCESSSTAGE, // 过关成功
 	FAILEDSTAGE, // 过关失败
 	
+	NEXTLEVELSTAGE,//下一关
+	REPLAYSTAGE,
+	
 	LEVELONESTAGE, // 第一关
 	LEVELTWOSTAGE, // 第二关
 	LEVELTHREESTAGE// 第三关

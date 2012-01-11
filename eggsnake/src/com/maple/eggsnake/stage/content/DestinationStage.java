@@ -12,7 +12,8 @@ public class DestinationStage {
 	 * @param stage
 	 * @return
 	 */
-	public static BaseStage getDestnationStage(ContentScreen screen,EnumDestStage stage) 
+	public static BaseStage getDestnationStage(ContentScreen screen,
+			EnumDestStage stage) 
 	{
 		BaseStage destStage = null;
 		switch (stage) {
@@ -31,40 +32,41 @@ public class DestinationStage {
 					screen.getHeight(), true);
 			break;
 		}
-		case GAMESTAGE: {
-			destStage = new Box2DStage(screen.getWidth(), screen.getHeight(),
-					true);
-			break;
-		}
 		case SELECTLEVELSTAGE:{
 			destStage = new SelectLevelStage(screen, screen.getWidth(), 
 					screen.getHeight(), true);
 			break;
 		}
+		case REPLAYSTAGE:{
+			try{
+			destStage = Box2DStage.getInstance(screen, 
+					CurrentLevel.current);
+			}
+			catch(Exception e){
+				
+			}
+			break;
+		}
+		case NEXTLEVELSTAGE:{
+			int next = CurrentLevel.current + 1;
+			if(2 < next)
+				next = next % 3;
+			destStage = Box2DStage.getInstance(screen, next);
+			break;
+		}
 		case LEVELONESTAGE: {
-			destStage = new LevelOneStage(screen, screen.getWidth(),
-					screen.getHeight(), true);
+			destStage = Box2DStage.getInstance(screen, 0);
+			CurrentLevel.current = 0;
 			break;
 		}
 		case LEVELTWOSTAGE: {
-			destStage = new LevelTwoStage(screen, screen.getWidth(),
-					screen.getHeight(), true);
+			destStage = Box2DStage.getInstance(screen, 1);
+			CurrentLevel.current = 1;
 			break;
 		}
 		case LEVELTHREESTAGE: {
-			destStage = new LevelThreeStage(screen, screen.getWidth(),
-					screen.getHeight(), true);
-			break;
-		}
-
-		case SUCCESSSTAGE: {
-			destStage = new HighScoresStage(screen, true, screen.getWidth(),
-					screen.getHeight(), true);
-			break;
-		}
-		case FAILEDSTAGE: {
-			destStage = new HighScoresStage(screen, true, screen.getWidth(),
-					screen.getHeight(), false);
+			destStage = Box2DStage.getInstance(screen, 2);
+			CurrentLevel.current = 2;
 			break;
 		}
 		default: {

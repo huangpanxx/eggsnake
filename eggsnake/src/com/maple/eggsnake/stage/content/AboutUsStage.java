@@ -32,13 +32,13 @@ public class AboutUsStage extends BaseStage implements ActorLoader{
 	public AboutUsStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
-		this.initContent(screen);
+		this.loadContent(screen);
 	}
 
 	/**
 	 * 
 	 */
-	public void initContent(ContentScreen screen) {
+	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 	

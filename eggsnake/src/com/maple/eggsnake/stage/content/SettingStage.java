@@ -21,7 +21,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	public SettingStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
-		this.initContent(screen);
+		this.loadContent(screen);
 		this.load();
 	}
 
@@ -56,7 +56,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	}
 
 	@Override
-	public void initContent(ContentScreen screen) {
+	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 

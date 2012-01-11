@@ -21,24 +21,26 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	private Texture nextTexture; // 下一关纹理
 	private Texture wheelTexture; // 旋转轮子纹理
 	private Texture successMouseTexture; // 过关成功老鼠纹理()
-	private Texture failedMouseTexture; // 过关失败纹理
 	private Texture dottedLineTexture; // 虚线纹理
 	private Texture levelOneTitleTexture;// 第一关高分榜数字纹理
 
+	@SuppressWarnings("unused")
+	private int currentLevel; // 当前所处关卡
+	@SuppressWarnings("unused")
+	private int scroes;// 撞击次数
 	private ContentScreen contentScreen;// 中间层的Screen
 
-	private boolean isPassed;
-
-	public HighScoresStage(ContentScreen screen, boolean isPassed, float width,
-			float height, boolean stretch) {
+	public HighScoresStage(ContentScreen screen, float width, float height,
+			boolean stretch, int hitTimes, int level) {
 		super(width, height, stretch);
-		this.initContent(screen);
-		this.isPassed = isPassed;
+		this.loadContent(screen);
+		this.loadScroes(hitTimes);
+		this.loadCurrentLevel(level);
 		this.load();
 	}
 
 	@Override
-	public void initContent(ContentScreen screen) {
+	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 
@@ -50,7 +52,6 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
 		this.successMouseTexture = ResourceLoader
 				.loadTexture("successmouse_64_64.png");
-		this.failedMouseTexture = ResourceLoader.loadTexture("failedmouse_64_64.png");
 		this.dottedLineTexture = ResourceLoader
 				.loadTexture("dottedline_512_8.png");
 		this.levelOneTitleTexture = ResourceLoader
@@ -64,20 +65,12 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 
 	private void loadReplayImage() {
 		ActorRegister.navigateRegister(contentScreen, this,
-				EnumDestStage.GAMESTAGE, replayTexture, 195f, 20f);
+				EnumDestStage.REPLAYSTAGE, replayTexture, 195f, 20f);
 	}
 
 	private void loadNextImage() {
-		if (1 == CurrentLevel.getInstance().getLevel()) {
 			ActorRegister.navigateRegister(contentScreen, this,
-					EnumDestStage.LEVELTWOSTAGE, nextTexture, 315f, 20f);
-		} else if (2 == CurrentLevel.getInstance().getLevel()) {
-			ActorRegister.navigateRegister(contentScreen, this,
-					EnumDestStage.LEVELTHREESTAGE, nextTexture, 315f, 20f);
-		} else {
-			ActorRegister.navigateRegister(contentScreen, this,
-					EnumDestStage.LEVELONESTAGE, nextTexture, 315f, 20f);
-		}
+					EnumDestStage.NEXTLEVELSTAGE, nextTexture, 315f, 20f);
 	}
 
 	private void loadDottedLineImage() {
@@ -88,21 +81,23 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	}
 
 	private void loadScoreWheelImage() {
-		if(this.isPassed){
-			ActorRegister.combineRegister(this, this.wheelTexture,
-					this.successMouseTexture, 312f, 110f, 30f, 30f);
-		}
-		else
-		{
-			ActorRegister.combineRegister(this, this.wheelTexture,
-					this.failedMouseTexture, 312f, 110f, 30f, 30f);
-		}
+		ActorRegister.combineRegister(this, this.wheelTexture,
+				this.successMouseTexture, 312f, 110f, 30f, 30f);
 	}
 
 	private void loadLevelOneTitleImage() {
 		ActorRegister.singleRegister(this, levelOneTitleTexture, 96, 256);
 	}
+	
+	private void loadScroes(int hitTimes){
+		this.scroes = hitTimes;
+		System.out.println("scrores: " + hitTimes);
+	}
 
+	private void loadCurrentLevel(int level){
+		this.currentLevel = level;
+	}
+	
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub

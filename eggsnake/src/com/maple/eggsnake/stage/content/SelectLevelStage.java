@@ -27,13 +27,13 @@ public class SelectLevelStage extends BaseStage implements ActorLoader {
 
 	public SelectLevelStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
-		this.initContent(screen);
+		this.loadContent(screen);
 		this.load();
 	}
 
 
 	@Override
-	public void initContent(ContentScreen screen) {
+	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 

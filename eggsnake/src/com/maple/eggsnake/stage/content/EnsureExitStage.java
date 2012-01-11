@@ -24,11 +24,11 @@ public class EnsureExitStage extends BaseStage implements ActorLoader {
 	 */
 	public EnsureExitStage(ContentScreen screen, float width, float height, boolean stretch) {
 		super(width, height, stretch);
-		this.initContent(screen);
+		this.loadContent(screen);
 	}
 
 	@Override
-	public void initContent(ContentScreen screen) {
+	public void loadContent(ContentScreen screen) {
 		this.contentScreen = screen;
 	}
 

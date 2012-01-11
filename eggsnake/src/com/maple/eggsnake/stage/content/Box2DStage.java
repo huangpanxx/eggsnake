@@ -17,6 +17,7 @@ import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
+import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.screen.NavigateScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
@@ -34,7 +35,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	static Box2DStage instance = null;
 
 	public static Box2DStage getInstance(NavigateScreen screen, int gate) {
-		if (instance == null) {
+		if (true) {
 			instance = new Box2DStage(Gdx.graphics.getWidth(),
 					Gdx.graphics.getHeight(), true, gate, screen);
 		} else {
@@ -123,8 +124,8 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		if (controller.getWorld() != null) {
 			controller.update(dt);
 			this.debugCamera.update();
-			render.render(controller.getWorld(), this.debugCamera.combined);
-			this.debugCamera.apply(Gdx.gl10);
+			//render.render(controller.getWorld(), this.debugCamera.combined);
+		//	this.debugCamera.apply(Gdx.gl10);
 		}
 	}
 
@@ -167,14 +168,16 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		// } catch (Exception e) {
 		// logger.logWithSignature(this, e.getMessage());
 		// }
+		this.screen.navigate(new HighScoresStage((ContentScreen)screen, width(), height(),
+				true, this.shotTime, this.gate));
 	}
 
 	int shotTime = 0;
 
 	@Override
 	public void onCrossGate() {
-		this.screen.navigate(new HighScoresStage(screen, width(), height(),
-				true, hitTime, this.gate));
+		this.screen.navigate(new HighScoresStage((ContentScreen)screen, width(), height(),
+				true, this.shotTime, this.gate));
 	}
 
 	@Override
