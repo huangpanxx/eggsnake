@@ -333,7 +333,8 @@ public class WorldController {
 
 		if (this.hitBody != null) {
 			if (this.hitBody != this.lastBody) {
-				if ("CircleSnake".equals(this.hitBody.getUserData())) {
+				String name = (String) this.hitBody.getUserData();
+				if (name !=null && name.startsWith("CircleSnake")) {
 					if (this.judge != null)
 						this.judge.onAiming();
 				}

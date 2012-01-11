@@ -1,5 +1,6 @@
 package com.maple.eggsnake.service;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public class SoundManager {
@@ -21,7 +22,7 @@ public class SoundManager {
 		if (contactSound == null) {
 			contactSound = ResourceLoader.loadSound("contact_sound.ogg");
 		}
-		contactSound.play();
+		//contactSound.play();
 	}
 
 	public static void playCrossGateSound() {

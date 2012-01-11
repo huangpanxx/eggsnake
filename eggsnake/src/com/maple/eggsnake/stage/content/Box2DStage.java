@@ -38,13 +38,14 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		if (true) {
 			instance = new Box2DStage(Gdx.graphics.getWidth(),
 					Gdx.graphics.getHeight(), true, gate, screen);
-		} else {
-			try {
-				instance.gotoGate(gate);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
+//		else {
+//			try {
+//				instance.gotoGate(gate);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 		return instance;
 	}
 
@@ -53,6 +54,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	private Box2DStage(float width, float height, boolean stretch, int gate,
 			NavigateScreen screen) {
 		super(width, height, stretch);
+		this.debugCamera = new OrthographicCamera();
 		this.screen = screen;
 		logger = DefaultLogger.getDefaultLogger();
 		this.gate = 0;
@@ -124,8 +126,8 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		if (controller.getWorld() != null) {
 			controller.update(dt);
 			this.debugCamera.update();
-			//render.render(controller.getWorld(), this.debugCamera.combined);
-		//	this.debugCamera.apply(Gdx.gl10);
+//			render.render(controller.getWorld(), this.debugCamera.combined);
+//			this.debugCamera.apply(Gdx.gl10);
 		}
 	}
 
