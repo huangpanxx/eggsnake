@@ -3,7 +3,6 @@ package com.maple.eggsnake.actor.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -81,8 +80,8 @@ public class CircleSnakeActor extends BodyAttachedActor {
 					body.getPosition().y - r, 0);
 			float angle = this.body.getAngle();
 			this.sprite.setRotation((float) (angle * 180 / 3.14));
-			this.sprite.setPosition(pos.x * B2Const.CONVERTRATIO - 5, pos.y
-					* B2Const.CONVERTRATIO - 28);
+			this.sprite.setPosition(pos.x * B2Const.CONVERTRATIO , pos.y
+					* B2Const.CONVERTRATIO );
 			this.sprite.draw(batch);
 
 		} catch (Exception e) {
