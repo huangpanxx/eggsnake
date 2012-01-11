@@ -17,6 +17,7 @@ import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
 import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
+import com.maple.eggsnake.screen.NavigateScreen;
 import com.maple.eggsnake.stage.BaseStage;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
@@ -30,8 +31,28 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	private HashMap<Body, Actor> Map;
 
-	public Box2DStage(float width, float height, boolean stretch) {
+	static Box2DStage instance = null;
+
+	public static Box2DStage getInstance(NavigateScreen screen, int gate) {
+		if (instance == null) {
+			instance = new Box2DStage(Gdx.graphics.getWidth(),
+					Gdx.graphics.getHeight(), true, gate, screen);
+		} else {
+			try {
+				instance.gotoGate(gate);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return instance;
+	}
+
+	NavigateScreen screen;
+
+	private Box2DStage(float width, float height, boolean stretch, int gate,
+			NavigateScreen screen) {
 		super(width, height, stretch);
+		this.screen = screen;
 		logger = DefaultLogger.getDefaultLogger();
 		this.gate = 0;
 		this.Map = new HashMap<Body, Actor>();
@@ -141,25 +162,24 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	@Override
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关");
-		try {
-			this.gotoGate(++this.gate);
-		} catch (Exception e) {
-			logger.logWithSignature(this, e.getMessage());
-		}
+		// try {
+		// this.gotoGate(++this.gate);
+		// } catch (Exception e) {
+		// logger.logWithSignature(this, e.getMessage());
+		// }
 	}
+
+	int shotTime = 0;
 
 	@Override
 	public void onCrossGate() {
-		try {
-			this.gotoGate(++this.gate);
-		} catch (Exception e) {
-			logger.logWithSignature(this, e.getMessage());
-		}
+		this.screen.navigate(new HighScoresStage(screen, width(), height(),
+				true, hitTime, this.gate));
 	}
 
 	@Override
 	public void onShotTimeChanged(int hitTime) {
-
+		this.shotTime = hitTime;
 	}
 
 	@Override

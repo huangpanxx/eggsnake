@@ -62,8 +62,10 @@ public class CircleMouseActor extends BodyAttachedActor {
 
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("oneeyemouse_64_64.png");
+			this.texture = ResourceLoader.loadTexture("mouse_64_128.png");
 			this.sprite = new Sprite(texture);
+			this.sprite.setRegionX(4);
+			this.sprite.setRegionY(-20);
 		}
 	}
 
@@ -79,7 +81,7 @@ public class CircleMouseActor extends BodyAttachedActor {
 			this.sprite.rotate(this.body.getAngle());
 
 			this.batch.draw(this.sprite, pos.x * B2Const.CONVERTRATIO, pos.y
-					* B2Const.CONVERTRATIO);
+					* B2Const.CONVERTRATIO-40);
 
 			this.batch.end();
 

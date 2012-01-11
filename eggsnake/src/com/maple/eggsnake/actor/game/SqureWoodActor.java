@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -80,12 +81,13 @@ public class SqureWoodActor extends BodyAttachedActor {
 			width = MathHelper.getDistance(v1, v2) * B2Const.CONVERTRATIO;
 			height = MathHelper.getDistance(v1, v0) * B2Const.CONVERTRATIO;
 
-			this.texture= ResourceLoader.loadTexture("background_512_512.png");//, 0, 0,
+			this.texture= ResourceLoader.loadTexture("wood.png");//, 0, 0,
 //					width, height);
-			this.sprite = new Sprite(texture);
-			this.sprite.setRegionWidth(10);//(int) width);
-			this.sprite.setRegionHeight(10);//(int) height);
-			this.angle = 0;//MathUtils.atan2(v2.x - v1.x, v2.y - v1.y);
+			TextureRegion region = new TextureRegion(texture,0,0,(int)(width),(int)(height));//width,height);
+			this.sprite = new Sprite(region);
+//			this.sprite.setRegionWidth();//(int) width);
+//			this.sprite.setRegionHeight(10);//(int) height);
+			this.angle = (float) (MathUtils.atan2(v2.y - v1.y,v2.x - v1.x) * 180 / 3.14);
 
 		}
 	}
@@ -102,7 +104,7 @@ public class SqureWoodActor extends BodyAttachedActor {
 			sprite.setPosition(pos.x * B2Const.CONVERTRATIO - width
 					/ 2, pos.y * B2Const.CONVERTRATIO - height / 2);
 			
-			sprite.setRotation(-a);
+			sprite.setRotation(a);
 			
 			sprite.draw(this.batch);
 			
