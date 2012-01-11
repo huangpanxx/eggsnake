@@ -16,6 +16,7 @@ import com.maple.eggsnake.actor.lightlabel.ScoreLightLabel;
 import com.maple.eggsnake.actor.wheel.CombinedWheel;
 import com.maple.eggsnake.actor.wheel.FlatImage;
 import com.maple.eggsnake.actor.wheel.NavigatorImage;
+import com.maple.eggsnake.logical.GateRecord;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -50,18 +51,18 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 
 	private Label currentScoreLabel;
 	@SuppressWarnings("unused")
-	private Label historyHighestScoreLabel;
+	private Label historyScoreLabel;
 	private BitmapFont bitmapFontForLabel;
 
 	public HighScoresStage(ContentScreen screen, float width, float height,
-			boolean stretch, int hitTimes, int level) {
+			boolean stretch, int hitTimes, int level) throws Exception {
 		super(width, height, stretch);
 		this.loadContent(screen);
 		this.loadScroes(hitTimes);
 		this.loadCurrentLevel(level);
+		this.load();
 		this.loadCurrentScoreLabel(hitTimes);
 		this.loadHistoryHighestScoreLabel();
-		this.load();
 	}
 
 	@Override
@@ -144,15 +145,22 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.addActor(currentScoreLabel);
 	}
 
-	private void loadHistoryHighestScoreLabel() {
-		// int history =
-		// GateRecord.fetchGateRecord(currentLevel).getRecordItem(0).score;
-		/*
-		 * this.historyHighestScoreLabel = new ScoreLightLabel("history",
-		 * bitmapFontForLabel, history); this.historyHighestScoreLabel.x = 195f;
-		 * this.historyHighestScoreLabel.y = 60f;
-		 * this.addActor(historyHighestScoreLabel);
-		 */
+	private void loadHistoryHighestScoreLabel() throws Exception {
+		if(null == 
+				GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel))
+			GateRecord.fetchGateRecord(currentLevel).save();
+		try{
+			int history = 
+					GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel).score;
+		this.historyScoreLabel = new ScoreLightLabel("history",
+				bitmapFontForLabel, history);
+		this.historyScoreLabel.x = 195f;
+		this.historyScoreLabel.y = 60f;
+		this.addActor(historyScoreLabel);
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("历史记录为空！");
+		}
 	}
 
 	@Override

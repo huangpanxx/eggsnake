@@ -13,24 +13,37 @@ import com.maple.eggsnake.stage.content.common.EnumDestStage;
 public class NavigatorImage extends Image {
 
 	private ContentScreen contentScreen; // 中间层屏幕
-	
+
 	private EnumDestStage destStage; // 跳转的目标Stage枚举
-	
+
 	private BaseStage sourceStage;
 
 	private final float scaleSize = 10f;// 缩放幅度
 	private final float clockwiseAngles = 360f;// 顺时针旋转360度
 	private final float duration = 2f;// 间隔
 
-	public NavigatorImage(ContentScreen screen, EnumDestStage destStage, 
+	/**
+	 * 
+	 * @param screen
+	 * @param destStage
+	 * @param region
+	 * @param x
+	 * @param y
+	 */
+	public NavigatorImage(ContentScreen screen, EnumDestStage destStage,
 			TextureRegion region, float x, float y) {
 		super("default", region);
 		this.contentScreen = screen;
 		this.destStage = destStage;
 		this.touchable = true;
 	}
-	
 
+	/**
+	 * 
+	 * @param region
+	 * @param x
+	 * @param y
+	 */
 	public NavigatorImage(TextureRegion region, float x, float y) {
 		super("default", region);
 	}
@@ -42,8 +55,16 @@ public class NavigatorImage extends Image {
 		this.destStage = destStage;
 		this.touchable = true;
 	}
-	
 
+	/**
+	 * 
+	 * @param screen
+	 * @param source
+	 * @param destStage
+	 * @param texture
+	 * @param x
+	 * @param y
+	 */
 	public NavigatorImage(ContentScreen screen, BaseStage source,
 			EnumDestStage destStage, Texture texture, float x, float y) {
 		super("default", texture);
@@ -55,7 +76,16 @@ public class NavigatorImage extends Image {
 		this.sourceStage.addActor(this);
 		this.touchable = true;
 	}
-	
+
+	/**
+	 * 
+	 * @param screen
+	 * @param source
+	 * @param destStage
+	 * @param region
+	 * @param x
+	 * @param y
+	 */
 	public NavigatorImage(ContentScreen screen, BaseStage source,
 			EnumDestStage destStage, TextureRegion region, float x, float y) {
 		super("default", region);
@@ -67,10 +97,27 @@ public class NavigatorImage extends Image {
 		this.sourceStage.addActor(this);
 		this.touchable = true;
 	}
-	
 
+	/**
+	 * 
+	 * @param texture
+	 * @param x
+	 * @param y
+	 */
 	public NavigatorImage(Texture texture, float x, float y) {
 		super("default", texture);
+	}
+
+	/**
+	 * 
+	 * @param destStage
+	 */
+	private void navigate(EnumDestStage destStage) {
+		if (!(EnumDestStage.DISPOSESTAGE == this.destStage))
+			this.contentScreen.navigate(DestinationStage.getDestnationStage(
+					contentScreen, destStage));
+		else
+			ApplicationService.getInstance().exitGame();
 	}
 
 	@Override
@@ -91,12 +138,5 @@ public class NavigatorImage extends Image {
 	public void touchDragged(float x, float y, int pointer) {
 		this.navigate(destStage);
 	}
-	
-	private void navigate(EnumDestStage destStage){
-		if (!(EnumDestStage.DISPOSESTAGE == this.destStage))
-			this.contentScreen.navigate(DestinationStage.getDestnationStage(
-					contentScreen, destStage));
-		else
-			ApplicationService.getInstance().exitGame();
-	}	
+
 }

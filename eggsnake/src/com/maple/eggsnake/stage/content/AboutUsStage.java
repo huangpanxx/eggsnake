@@ -96,7 +96,7 @@ public class AboutUsStage extends BaseStage implements ActorLoader {
 		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
 		this.downMaskImage = new FlatImage(maskTexture, -16f, -60f, this);
 	}
-	
+
 	private void loadTitleImage() {
 		Texture titileTexture = ResourceLoader
 				.loadTexture("aboutusstage_256_64.png");
