@@ -10,7 +10,7 @@ import com.maple.eggsnake.service.SoundManager;
 
 public class GateJudge {
 
-	private int crossGateTimer = 10;
+	private int crossGateTimer = 60;
 	private boolean isCrossed = false;
 	private boolean crossGateTimerAwake = false;
 
@@ -113,13 +113,12 @@ public class GateJudge {
 
 	public void setCrossed(boolean isCrossed) {
 		this.isCrossed = isCrossed;
-		this.playCrossGateSound();
 		if (isCrossed) {
 			if (this.listener != null) {
 				this.playCrossGateSound();
-				this.listener.onAllMouseKilled();
+				this.setCrossGateTimerAwake(true);
 			}
-			this.setCrossGateTimer(10);
+			this.setCrossGateTimer(100);
 		}
 	}
 

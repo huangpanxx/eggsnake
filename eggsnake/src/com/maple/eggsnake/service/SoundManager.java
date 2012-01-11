@@ -1,6 +1,5 @@
 package com.maple.eggsnake.service;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 public class SoundManager {

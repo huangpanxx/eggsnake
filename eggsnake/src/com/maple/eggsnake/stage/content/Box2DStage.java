@@ -27,7 +27,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	WorldController controller;
 	private int gate = 0;
 
-	Box2DDebugRenderer render = new Box2DDebugRenderer();
+	Box2DDebugRenderer render;
 	public OrthographicCamera debugCamera = new OrthographicCamera();
 
 	private HashMap<Body, Actor> Map;
@@ -35,10 +35,12 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	static Box2DStage instance = null;
 
 	public static Box2DStage getInstance(NavigateScreen screen, int gate) {
-		if (true) {
-			instance = new Box2DStage(Gdx.graphics.getWidth(),
+//		if (instance!=null) {
+//			instance.dispose();
+//			
+//		}
+		instance = new Box2DStage(Gdx.graphics.getWidth(),
 					Gdx.graphics.getHeight(), true, gate, screen);
-		}
 //		else {
 //			try {
 //				instance.gotoGate(gate);
@@ -59,6 +61,7 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		logger = DefaultLogger.getDefaultLogger();
 		this.gate = 0;
 		this.Map = new HashMap<Body, Actor>();
+		this.render = new Box2DDebugRenderer();
 		this.initController();
 	}
 
