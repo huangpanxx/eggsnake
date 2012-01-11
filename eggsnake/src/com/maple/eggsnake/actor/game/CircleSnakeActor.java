@@ -3,6 +3,7 @@ package com.maple.eggsnake.actor.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -26,7 +27,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if (name.startsWith("CircleSnake_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						fixture = f;
@@ -41,7 +42,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 	public CircleShape getCircleShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if (name.startsWith("CircleSnake_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						return (CircleShape) f.getShape();
@@ -62,8 +63,14 @@ public class CircleSnakeActor extends BodyAttachedActor {
 
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("eggsnake_64_128.png");
-			this.sprite = new Sprite(texture);
+			String m = (String) body.getUserData();
+			m = m.substring("CircleSnake_".length());
+			this.texture = 	ResourceLoader.loadTexture(m);
+			TextureRegion region = new TextureRegion(texture,0,0,100,100);
+			this.sprite = new Sprite(region);
+//			this.sprite.setRegionWidth(30);
+//			this.sprite.setSize(50, 50);
+//			this.sprite.setSize(20, 20);
 		}
 	}
 
@@ -78,8 +85,8 @@ public class CircleSnakeActor extends BodyAttachedActor {
 					body.getPosition().y - r, 0);
 			float angle = this.body.getAngle();
 			this.sprite.setRotation((float) (angle * 180 / 3.14));
-			this.sprite.setPosition(pos.x * B2Const.CONVERTRATIO - 5, pos.y
-					* B2Const.CONVERTRATIO-28);
+			this.sprite.setPosition(pos.x * B2Const.CONVERTRATIO , pos.y
+					* B2Const.CONVERTRATIO );
 			this.sprite.draw(batch);
 
 		} catch (Exception e) {

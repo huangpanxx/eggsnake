@@ -163,6 +163,12 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	@Override
 	public void onAllMouseKilled() {
 		logger.logWithSignature(this, "过关");
+		try {
+			this.gotoGate(1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// try {
 		// this.gotoGate(++this.gate);
 		// } catch (Exception e) {

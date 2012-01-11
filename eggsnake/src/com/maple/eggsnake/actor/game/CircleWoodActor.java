@@ -26,7 +26,7 @@ public class CircleWoodActor extends BodyAttachedActor {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("CircleWood".equals(name)) {
+			if (name.startsWith("CircleWood_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						fixture = f;
@@ -41,7 +41,7 @@ public class CircleWoodActor extends BodyAttachedActor {
 	public CircleShape getCircleShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("CircleWood".equals(name)) {
+			if (name.startsWith("CircleWood_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						return (CircleShape) f.getShape();
@@ -62,7 +62,9 @@ public class CircleWoodActor extends BodyAttachedActor {
 			this.batch = new SpriteBatch();
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("wheel_128_128.png");
+			String m = (String) body.getUserData();
+			m = m.substring("CircleWood_".length());
+			this.texture = ResourceLoader.loadTexture(m);
 			this.sprite = new Sprite(texture);
 		}
 	}
@@ -77,7 +79,7 @@ public class CircleWoodActor extends BodyAttachedActor {
 					body.getPosition().y - r, 0);
 			sprite.setPosition(pos.x * B2Const.CONVERTRATIO, pos.y
 					* B2Const.CONVERTRATIO);
-			sprite.setRotation((float) (body.getAngle()*180/3.14));
+			sprite.setRotation((float) (body.getAngle() * 180 / 3.14));
 			sprite.draw(spriteBatch);
 
 		} catch (Exception e) {
