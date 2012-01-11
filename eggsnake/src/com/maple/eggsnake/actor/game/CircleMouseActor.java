@@ -26,7 +26,7 @@ public class CircleMouseActor extends BodyAttachedActor {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("CircleMouse".equals(name)) {
+			if (name.startsWith("CircleMouse_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						fixture = f;
@@ -41,7 +41,7 @@ public class CircleMouseActor extends BodyAttachedActor {
 	public CircleShape getCircleShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("CircleMouse".equals(name)) {
+			if (name.startsWith("CircleMouse_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						return (CircleShape) f.getShape();
@@ -62,7 +62,9 @@ public class CircleMouseActor extends BodyAttachedActor {
 
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("mouse_64_128.png");
+			String m = (String) body.getUserData();
+			m = m.substring("CircleMouse_".length());
+			this.texture = ResourceLoader.loadTexture(m);
 			this.sprite = new Sprite(texture);
 			this.sprite.setRegionX(4);
 			this.sprite.setRegionY(-20);

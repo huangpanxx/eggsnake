@@ -26,7 +26,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if (name.startsWith("CircleSnake_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						fixture = f;
@@ -41,7 +41,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 	public CircleShape getCircleShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("CircleSnake".equals(name)) {
+			if (name.startsWith("CircleSnake_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof CircleShape) {
 						return (CircleShape) f.getShape();
@@ -62,7 +62,9 @@ public class CircleSnakeActor extends BodyAttachedActor {
 
 			this.body = body;
 			this.shape = this.getCircleShape(body);
-			this.texture = ResourceLoader.loadTexture("eggsnake_64_128.png");
+			String m = (String) body.getUserData();
+			m = m.substring("CircleSnake_".length());
+			this.texture = ResourceLoader.loadTexture(m);
 			this.sprite = new Sprite(texture);
 		}
 	}

@@ -23,7 +23,7 @@ public class SqureWoodActor extends BodyAttachedActor {
 		String name = (String) body.getUserData();
 		Fixture fixture = null;
 		if (name != null) {
-			if ("SqureWood".equals(name)) {
+			if (name.startsWith("SqureWood_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof PolygonShape) {
 						fixture = f;
@@ -38,7 +38,7 @@ public class SqureWoodActor extends BodyAttachedActor {
 	private PolygonShape getPolygonShape(Body body) {
 		String name = (String) body.getUserData();
 		if (name != null) {
-			if ("SqureWood".equals(name)) {
+			if (name.startsWith("SqureWood_")) {
 				for (Fixture f : body.getFixtureList()) {
 					if (f.getShape() instanceof PolygonShape) {
 						return (PolygonShape) f.getShape();
@@ -80,8 +80,10 @@ public class SqureWoodActor extends BodyAttachedActor {
 
 			width = MathHelper.getDistance(v1, v2) * B2Const.CONVERTRATIO;
 			height = MathHelper.getDistance(v1, v0) * B2Const.CONVERTRATIO;
-
-			this.texture= ResourceLoader.loadTexture("wood.png");//, 0, 0,
+			String m = (String) body.getUserData();
+					
+			m = m.substring("SqureWood_".length());
+			this.texture= ResourceLoader.loadTexture(m);//, 0, 0,
 //					width, height);
 			TextureRegion region = new TextureRegion(texture,0,0,(int)(width),(int)(height));//width,height);
 			this.sprite = new Sprite(region);
