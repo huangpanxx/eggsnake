@@ -30,6 +30,7 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	private Texture oneEyeMouseTexture;// 单只眼老鼠纹理
 	private Texture twoEyeMouseTexture;// 两只眼老鼠纹理
 	
+	@SuppressWarnings("unused")
 	private CombinedWheel combine;
 
 	private ContentScreen contentScreen;// 中间层的Screen
