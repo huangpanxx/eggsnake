@@ -11,6 +11,15 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 
     private Image frontImage;
     
+    /**
+     * 
+     * @param wheelTexture
+     * @param frontTexture
+     * @param x
+     * @param y
+     * @param action
+     * @param stage
+     */
 	public CombinedWheel(Texture wheelTexture, Texture frontTexture, 
 			float x, float y,  Action action, Stage stage){
 		super(wheelTexture, x, y, action);
@@ -19,6 +28,15 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 		this.loadActor(stage);
 	}
 	
+	/**
+	 * 
+	 * @param wheelRegion
+	 * @param frontRegion
+	 * @param x
+	 * @param y
+	 * @param action
+	 * @param stage
+	 */
 	public CombinedWheel(TextureRegion wheelRegion, TextureRegion frontRegion, 
 			float x, float y, Action action, Stage stage){
 		super(wheelRegion, x, y, action);
@@ -27,6 +45,15 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 		this.loadActor(stage);
 	}
 	
+	/**
+	 * 
+	 * @param wheelTexture
+	 * @param frontTexture
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param stage
+	 */
 	public CombinedWheel(Texture wheelTexture, Texture frontTexture, 
 			float x, float y, EnumRotateDirection direction, Stage stage) {
 		super(wheelTexture, x, y, direction);
@@ -35,6 +62,15 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 		this.loadActor(stage);
 	}
 	
+	/**
+	 * 
+	 * @param wheelRegion
+	 * @param frontRegion
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param stage
+	 */
 	public CombinedWheel(TextureRegion wheelRegion, TextureRegion frontRegion, 
 			float x, float y, EnumRotateDirection direction, Stage stage){
 		super(wheelRegion, x, y, direction);
@@ -43,10 +79,20 @@ public class CombinedWheel extends Wheel implements Dynamicable{
 		this.loadActor(stage);
 	}
 
+	/**
+	 * 
+	 * @param frontName
+	 * @param frontTexture
+	 */
 	private void loadFrontImage(String frontName, Texture frontTexture){
 		this.frontImage = new Image(name, frontTexture);
 	}
 	
+	/**
+	 * 
+	 * @param frontName
+	 * @param frontRegion
+	 */
 	private void loadFrontImage(String frontName, TextureRegion frontRegion){
 		this.frontImage = new Image(frontName, frontRegion);
 	}

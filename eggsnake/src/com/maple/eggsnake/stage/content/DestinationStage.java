@@ -13,8 +13,7 @@ public class DestinationStage {
 	 * @return
 	 */
 	public static BaseStage getDestnationStage(ContentScreen screen,
-			EnumDestStage stage) 
-	{
+			EnumDestStage stage) {
 		BaseStage destStage = null;
 		switch (stage) {
 		case STARTMENUSTAGE: {
@@ -32,24 +31,23 @@ public class DestinationStage {
 					screen.getHeight(), true);
 			break;
 		}
-		case SELECTLEVELSTAGE:{
-			destStage = new SelectLevelStage(screen, screen.getWidth(), 
+		case SELECTLEVELSTAGE: {
+			destStage = new SelectLevelStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 			break;
 		}
-		case REPLAYSTAGE:{
-			try{
-			destStage = Box2DStage.getInstance(screen, 
-					CurrentLevel.current);
-			}
-			catch(Exception e){
-				
+		case REPLAYSTAGE: {
+			try {
+				destStage = Box2DStage
+						.getInstance(screen, CurrentLevel.current);
+			} catch (Exception e) {
+
 			}
 			break;
 		}
-		case NEXTLEVELSTAGE:{
+		case NEXTLEVELSTAGE: {
 			int next = CurrentLevel.current + 1;
-			if(2 < next)
+			if (2 < next)
 				next = next % 3;
 			destStage = Box2DStage.getInstance(screen, next);
 			break;
@@ -73,7 +71,7 @@ public class DestinationStage {
 			destStage = new StartMenuStage(screen, screen.getWidth(),
 					screen.getHeight(), true);
 		}
-	}
+		}
 		return destStage;
 	}
 }
