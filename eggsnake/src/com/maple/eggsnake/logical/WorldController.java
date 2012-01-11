@@ -75,9 +75,10 @@ public class WorldController {
 						// 计算速度标量
 						float speed = this.getReletiveSpeed(speedA, speedB);
 						Body mouse = null;
-						if ("CircleMouse".equals(nameA)) {
+						if (nameA != null && nameA.startsWith("CircleMouse")) {
 							mouse = bodyA;
-						} else if ("CircleMouse".equals(nameB)) {
+						} else if (nameB != null
+								&& nameB.startsWith("CircleMouse")) {
 							mouse = bodyB;
 						}
 						if (mouse != null) {
@@ -86,8 +87,10 @@ public class WorldController {
 										"mouse被撞击速度：%1$f m/s", speed);
 								addTask(new DeleteBodyTask(mouse));
 							}
-						} else if ("CircleSnake".equals(nameA)
-								|| "CircleSnake".equals(nameB)) {
+						} else if ((nameA != null && nameA
+								.startsWith("CircleSnake"))
+								|| (nameB != null && nameB
+										.startsWith("CircleSnake"))) {
 							if (speed > 3) {
 								SoundManager.playContactSound();
 							}
@@ -302,7 +305,7 @@ public class WorldController {
 		if (this.hitBody != null && hitBody.getType() == BodyType.DynamicBody
 				&& this.groundBody != null) {
 			String name = (String) this.hitBody.getUserData();
-			if (name != null && name.equals("CircleSnake")) {
+			if (name != null && name.startsWith("CircleSnake")) {
 				logger.logWithSignature(this, "hitBody speed:%1$f,%2$s",
 						this.hitBody.getLinearVelocity().x,
 						this.hitBody.getLinearVelocity().y);

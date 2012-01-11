@@ -22,8 +22,7 @@ public class DestinationStage {
 			break;
 		}
 		case ABOUTUSSTAGE: {
-			destStage = new Box2DStage(screen.getWidth(),
-					screen.getHeight(), true);
+			destStage = Box2DStage.getInstance(screen, 1);
 			break;
 		}
 		case SETTINGSTAGE: {
@@ -32,8 +31,7 @@ public class DestinationStage {
 			break;
 		}
 		case GAMESTAGE: {
-			destStage = new Box2DStage(screen.getWidth(), screen.getHeight(),
-					true);
+			destStage = Box2DStage.getInstance(screen, 1);
 			break;
 		}
 		case SELECTLEVELSTAGE:{

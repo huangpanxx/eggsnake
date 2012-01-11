@@ -66,17 +66,17 @@ public class GateJudge {
 		while (it.hasNext()) {
 			Body body = it.next();
 			String name = (String) body.getUserData();
-			if("CircleMouse".equals(name)){
-				this.mouseCounter ++;
+			if (name != null && name.startsWith("CircleMouse")) {
+				this.mouseCounter++;
 			}
-//			ArrayList<Fixture> fixtures = body.getFixtureList();
-//			for (Fixture fixture : fixtures) {
-//				int index = fixture.getFilterData().groupIndex;
-//				if (index == BodyGroup.MICE) {
-//					mouseCounter++;
-//					break;
-//				}
-//			}
+			// ArrayList<Fixture> fixtures = body.getFixtureList();
+			// for (Fixture fixture : fixtures) {
+			// int index = fixture.getFilterData().groupIndex;
+			// if (index == BodyGroup.MICE) {
+			// mouseCounter++;
+			// break;
+			// }
+			// }
 		}
 	}
 
