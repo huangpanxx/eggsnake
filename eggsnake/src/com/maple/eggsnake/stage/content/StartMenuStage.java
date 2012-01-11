@@ -155,8 +155,6 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 	 * @description 加载右边旋转轮子
 	 */
 	private void loadRMouseWheelImage() {
-		/*ActorRegister.combineRegister(this, this.wheelTexture,
-				this.wheelMouseTexture, 352f, 100f, false);*/
 		this.combine = new CombinedWheel(this.wheelTexture, 
 				this.wheelMouseTexture, 352f, 100f,EnumRotateDirection.ANTICLOCKWISE, this);
 	}

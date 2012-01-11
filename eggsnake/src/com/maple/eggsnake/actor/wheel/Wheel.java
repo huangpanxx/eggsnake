@@ -13,7 +13,7 @@ public class Wheel extends Image implements Dynamicable{
 	private final float clockWiseAngles = 360f;
 	private final float anclockWiseAngles = -360f;
 	
-	private final float duration = 4f;
+	private final float duration = 8f;
 	
 	@SuppressWarnings("unused")
 	private EnumRotateDirection direction;

@@ -1,6 +1,9 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.maple.eggsnake.actor.setting.MusicSlider;
+import com.maple.eggsnake.actor.setting.SoundSlider;
 import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
@@ -13,6 +16,9 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	private Texture quitTexture;// quit纹理
 	private Texture titleTexture;// title纹理
 	private Texture fontEggSnake;
+	
+	private MusicSlider musicSlider;
+	private SoundSlider soundSlider;
 
 	private float generalTextureWidth; // 保存任意纹理宽度
 	@SuppressWarnings("unused")
@@ -64,7 +70,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	public void loadTextures() {
 		titleTexture = ResourceLoader.loadTexture("titlesettings_256_64.png");
 		quitTexture = ResourceLoader.loadTexture("quitbutton_128_64.png");
-		this.fontEggSnake = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
+		fontEggSnake = ResourceLoader.loadTexture("titleeggsnake_128_32.png");
 	}
 
 	@Override
@@ -73,6 +79,8 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		this.loadTitleImage();
 		this.loadFontEggSnakeImage();
 		this.loadQuitImage();
+		this.loadMusicSlider();
+		this.loadSoundSlider();
 	}
 
 	/**
@@ -96,4 +104,15 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		ActorRegister.singleRegister(this, fontEggSnake, 112, 24);
 	}
 
+	private void loadMusicSlider(){
+		this.musicSlider = new MusicSlider(0, 5, 1, new Skin());
+		this.musicSlider.x = 60;
+		this.musicSlider.y = 100;
+	}
+	
+	private void loadSoundSlider(){
+		this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
+		this.soundSlider.x = 60;
+		this.soundSlider.y = 150;
+	}
 }

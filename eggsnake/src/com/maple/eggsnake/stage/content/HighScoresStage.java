@@ -7,7 +7,9 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.maple.eggsnake.actor.lightlabel.ScoreLightLabel;
 import com.maple.eggsnake.actor.ui.ActorRegister;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
@@ -23,12 +25,15 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	private Texture successMouseTexture; // 过关成功老鼠纹理()
 	private Texture dottedLineTexture; // 虚线纹理
 	private Texture levelOneTitleTexture;// 第一关高分榜数字纹理
+	private Texture levelInformationTexure;
 
 	@SuppressWarnings("unused")
 	private int currentLevel; // 当前所处关卡
 	@SuppressWarnings("unused")
 	private int scroes;// 撞击次数
 	private ContentScreen contentScreen;// 中间层的Screen
+	
+	private ScoreLightLabel scorelightLabel;
 
 	public HighScoresStage(ContentScreen screen, float width, float height,
 			boolean stretch, int hitTimes, int level) {
@@ -36,6 +41,7 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.loadContent(screen);
 		this.loadScroes(hitTimes);
 		this.loadCurrentLevel(level);
+		this.loadScorelightLabel(hitTimes);
 		this.load();
 	}
 
@@ -56,6 +62,8 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 				.loadTexture("dottedline_512_8.png");
 		this.levelOneTitleTexture = ResourceLoader
 				.loadTexture("1-1highscores_128_64.png");
+		this.levelInformationTexure = 
+				ResourceLoader.loadTexture("levelsucceed_256_128.png");
 	}
 
 	private void loadMenuImage() {
@@ -89,13 +97,27 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		ActorRegister.singleRegister(this, levelOneTitleTexture, 96, 256);
 	}
 	
+    private void loadLevelInformationImage(){
+		ActorRegister.singleRegister(this, levelInformationTexure, 55, 120);
+	}
+	
 	private void loadScroes(int hitTimes){
 		this.scroes = hitTimes;
-		System.out.println("scrores: " + hitTimes);
 	}
 
 	private void loadCurrentLevel(int level){
 		this.currentLevel = level;
+	}
+	
+	private void loadScorelightLabel(int scores){
+		
+		
+		
+		this.scorelightLabel = new ScoreLightLabel("score", new BitmapFont(),
+				scores);
+		this.scorelightLabel.x = 195f;
+		this.scorelightLabel.y = 160f;
+		this.addActor(scorelightLabel);
 	}
 	
 	@Override
@@ -108,6 +130,7 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.loadDottedLineImage();
 		this.loadScoreWheelImage();
 		this.loadLevelOneTitleImage();
+		this.loadLevelInformationImage();
 	}
 
 	@Override
