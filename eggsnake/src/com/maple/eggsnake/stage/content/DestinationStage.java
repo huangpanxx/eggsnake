@@ -53,9 +53,14 @@ public class DestinationStage {
 		}
 		case NEXTLEVELSTAGE: {
 			int next = CurrentLevel.current + 1;
+<<<<<<< HEAD
 			if (5 < next)
 				next = next % 6;
 			CurrentLevel.current = next;
+=======
+			if (2 < next)
+				next = next % 3;
+>>>>>>> origin/HEAD
 			destStage = Box2DStage.getInstance(screen, next);
 			break;
 		}
