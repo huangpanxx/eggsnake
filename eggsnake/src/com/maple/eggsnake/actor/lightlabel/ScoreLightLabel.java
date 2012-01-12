@@ -62,6 +62,17 @@ public class ScoreLightLabel extends LightLabel {
 		this.setDisplayInfomation(scores);
 		this.loadScores(scores);
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @param font
+	 * @param scores
+	 */
+	public ScoreLightLabel(String name, BitmapFont font, String information) {
+		super(name, font);
+		this.setInformation(information);
+	}
 
 	/**
 	 * 
@@ -69,6 +80,10 @@ public class ScoreLightLabel extends LightLabel {
 	 */
 	private void setDisplayInfomation(int scores) {
 		this.setWrappedText("" + scores, HAlignment.LEFT);
+	}
+	
+	private void setInformation(String text){
+		this.setWrappedText("" + text, HAlignment.LEFT);
 	}
 
 	/**

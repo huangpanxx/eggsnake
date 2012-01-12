@@ -1,7 +1,15 @@
 package com.maple.eggsnake.stage.content;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
+import com.badlogic.gdx.scenes.scene2d.actors.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
+import com.maple.eggsnake.actor.lightlabel.ScoreLightLabel;
 import com.maple.eggsnake.actor.setting.MusicSlider;
 import com.maple.eggsnake.actor.setting.SoundSlider;
 import com.maple.eggsnake.actor.wheel.FlatImage;
@@ -25,6 +33,10 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	private Image downMaskImage;
 	@SuppressWarnings("unused")
 	private Image twoEyeMouseImage;
+	
+	private Label musicLabel;
+	private Label soundLabel;
+	private BitmapFont bitmapFontForLabel;
 
 	@SuppressWarnings("unused")
 	private MusicSlider musicSlider;
@@ -38,6 +50,7 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		super(width, height, stretch);
 		this.loadContent(screen);
 		this.load();
+		
 	}
 
 	@Override
@@ -83,8 +96,9 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		this.loadFontEggSnakeImage();
 		this.loadTwoEyeMouseImage();
 		this.loadQuitImage();
-		// this.loadMusicSlider();
-		// this.loadSoundSlider();
+		this.loadMusicSlider();
+		this.loadSoundSlider();
+		//this.loadMusicLabel();
 	}
 
 	private void loadUpMaskImage() {
@@ -129,25 +143,71 @@ public class SettingStage extends BaseStage implements ActorLoader {
 		this.twoEyeMouseImage = new FlatImage(twoEyeMouseTexture, 400f, 190f,
 				this);
 	}
+	
+	private void loadMusicLabel(){
+		bitmapFontForLabel = new BitmapFont(
+				Gdx.files.internal("data/fonts/fax.fnt"),
+				Gdx.files.internal("data/fonts/fax.png"), false);
+		this.musicLabel = new ScoreLightLabel("score",
+				bitmapFontForLabel, "Music");
+		this.musicLabel.x = 0f;
+		this.musicLabel.y = 99f;
+		this.addActor(musicLabel);
+	}
+	
+	private void loadSoundLabel(){
+		
+	}
 
 	@SuppressWarnings("unused")
 	private void loadMusicSlider() {
 
-		// NinePatch sliderPatch = new NinePatch(new TextureRegion(
-		// ResourceLoader.loadTexture("soundslider.png.png")));
-		// TextureRegion knobRegion = new TextureRegion(quitTexture);
-		// SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
-		// this.musicSlider = new MusicSlider(0, 5, 1, style);
-		// this.musicSlider.x = 200;
-		// this.musicSlider.y = 100;
-		// this.addActor(musicSlider);
+		NinePatch sliderPatch = new NinePatch(new TextureRegion(
+		ResourceLoader.loadTexture("musicslider_256_64.png"), 0, 0, 200, 15));
+		
+		
+		TextureRegion knobRegion = new TextureRegion(
+				ResourceLoader.loadTexture("knob_32_64.png"), 0, 0, 20, 50);
+		
+		
+		 SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
+		 this.musicSlider = new MusicSlider(0, 5, 1, style);
+		 musicSlider.width = 200;
+		 musicSlider.height = 2;
+		 this.musicSlider.x = 130;
+		 this.musicSlider.y = 180;
+		 this.addActor(musicSlider);
+		 /*this.musicSlider.act(2f);
+		 
+		 this.addActor(new SliderImage(ResourceLoader.loadTexture("musicslider_256_64.png"),
+				 200, 15, this));*/
+		 
 	}
 
 	@SuppressWarnings("unused")
 	private void loadSoundSlider() {
-		/*
-		 * this.soundSlider = new SoundSlider(0, 5, 1, new Skin());
-		 * this.soundSlider.x = 60; this.soundSlider.y = 150;
-		 */
+		NinePatch sliderPatch = new NinePatch(new TextureRegion(
+				ResourceLoader.loadTexture("soundslider_256_64.png"), 0, 0, 200, 15));
+				
+		TextureRegion knobRegion = new TextureRegion(
+						ResourceLoader.loadTexture("knob_32_64.png"), 0, 0, 20, 50);
+				
+				
+		SliderStyle style = new SliderStyle(sliderPatch, knobRegion);
+		this.soundSlider = new SoundSlider(0, 5, 1, style);
+		soundSlider.width = 200;
+		soundSlider.height = 2;
+		this.soundSlider.x = 130;
+		this.soundSlider.y = 90;
+		this.soundSlider.setValueChangedListener(new Slider.ValueChangedListener() {
+			
+			@Override
+			public void changed(Slider arg0, float arg1) {
+				// TODO Auto-generated method stub
+				System.out.println("" + arg0.toString() + " " +
+				arg1);
+			}
+		});
+		this.addActor(soundSlider);
 	}
 }

@@ -11,7 +11,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.game.ActorFactory;
+import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
@@ -19,7 +21,10 @@ import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.screen.NavigateScreen;
+import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
+import com.maple.eggsnake.stage.content.common.EnumDestStage;
+import com.badlogic.gdx.graphics.Texture;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
 
@@ -35,19 +40,19 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 	static Box2DStage instance = null;
 
 	public static Box2DStage getInstance(NavigateScreen screen, int gate) {
-//		if (instance!=null) {
-//			instance.dispose();
-//			
-//		}
+		// if (instance!=null) {
+		// instance.dispose();
+		//
+		// }
 		instance = new Box2DStage(Gdx.graphics.getWidth(),
-					Gdx.graphics.getHeight(), true, gate, screen);
-//		else {
-//			try {
-//				instance.gotoGate(gate);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
+				Gdx.graphics.getHeight(), true, gate, screen);
+		// else {
+		// try {
+		// instance.gotoGate(gate);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
 		return instance;
 	}
 
@@ -58,11 +63,12 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		super(width, height, stretch);
 		this.debugCamera = new OrthographicCamera();
 		this.screen = screen;
+		this.gate = gate;
 		logger = DefaultLogger.getDefaultLogger();
-		this.gate = 0;
 		this.Map = new HashMap<Body, Actor>();
 		this.render = new Box2DDebugRenderer();
 		this.initController();
+//		this.loadBackImage();
 	}
 
 	private void initController() {
@@ -129,11 +135,18 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		if (controller.getWorld() != null) {
 			controller.update(dt);
 			this.debugCamera.update();
-//			render.render(controller.getWorld(), this.debugCamera.combined);
-//			this.debugCamera.apply(Gdx.gl10);
+//			 render.render(controller.getWorld(), this.debugCamera.combined);
+			// this.debugCamera.apply(Gdx.gl10);
 		}
 	}
 
+	private Image backImage;
+	private void loadBackImage(){
+		Texture texture = ResourceLoader.loadTexture("quitbutton_128_64.png");
+		backImage = new NavigatorImage((ContentScreen)screen, this,
+				EnumDestStage.STARTMENUSTAGE, texture, 0f, 250f);
+	}
+	
 	@Override
 	public void dispose() {
 		this.controller.dispose();
@@ -179,16 +192,18 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		// } catch (Exception e) {
 		// logger.logWithSignature(this, e.getMessage());
 		// }
-		this.screen.navigate(new HighScoresStage((ContentScreen)screen, width(), height(),
-				true, this.shotTime, this.gate));
+		// this.screen.navigate(new HighScoresStage((ContentScreen)screen,
+		// width(), height(),
+		// true, this.shotTime, this.gate));
 	}
 
 	int shotTime = 0;
 
 	@Override
 	public void onCrossGate() {
-		this.screen.navigate(new HighScoresStage((ContentScreen)screen, width(), height(),
-				true, this.shotTime, this.gate));
+		BaseStage stage = new HighScoresStage((ContentScreen) screen, width,
+				height, true, shotTime, gate);
+		this.screen.navigate(stage);
 	}
 
 	@Override

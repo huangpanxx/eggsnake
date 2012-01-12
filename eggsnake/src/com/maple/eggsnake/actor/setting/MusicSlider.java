@@ -1,5 +1,6 @@
 package com.maple.eggsnake.actor.setting;
 
+import com.badlogic.gdx.scenes.scene2d.actions.MoveTo;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 
@@ -41,4 +42,9 @@ public class MusicSlider extends Slider {
 		super(min, max, steps, skin);
 		// TODO Auto-generated constructor stub
 	}
+	
+	/*@Override
+	public void touchDragged(float x, float y, int pointer){
+		this.action(MoveTo.$(x, y, 2f));
+	}*/
 }

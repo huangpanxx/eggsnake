@@ -17,6 +17,7 @@ import com.maple.eggsnake.actor.wheel.CombinedWheel;
 import com.maple.eggsnake.actor.wheel.FlatImage;
 import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.logical.GateRecord;
+import com.maple.eggsnake.logical.GateRecordItem;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -24,45 +25,25 @@ import com.maple.eggsnake.stage.content.common.EnumDestStage;
 import com.maple.eggsnake.stage.content.common.EnumRotateDirection;
 
 public class HighScoresStage extends BaseStage implements ActorLoader {
-	@SuppressWarnings("unused")
-	private Image menuImage;
-	@SuppressWarnings("unused")
-	private Image replayImage;
-	@SuppressWarnings("unused")
-	private Image nextImage;
-	@SuppressWarnings("unused")
-	private Image dottedUpLineImage;
-	@SuppressWarnings("unused")
-	private Image dottedDownLineImage;
-	@SuppressWarnings("unused")
-	private Image levelOneTitleImage;
-	@SuppressWarnings("unused")
-	private Image levelInformationImage;
-	@SuppressWarnings("unused")
-	private Image scoreMaskImage;
-	@SuppressWarnings("unused")
-	private Image scoreWheelImage;
-
-	@SuppressWarnings("unused")
+	
 	private int currentLevel; // 当前所处关卡
-	@SuppressWarnings("unused")
 	private int scroes;// 撞击次数
 	private ContentScreen contentScreen;// 中间层的Screen
 
 	private Label currentScoreLabel;
-	@SuppressWarnings("unused")
 	private Label historyScoreLabel;
 	private BitmapFont bitmapFontForLabel;
 
 	public HighScoresStage(ContentScreen screen, float width, float height,
-			boolean stretch, int hitTimes, int level) throws Exception {
+			boolean stretch, int hitTimes, int level){
 		super(width, height, stretch);
 		this.loadContent(screen);
 		this.loadScroes(hitTimes);
 		this.loadCurrentLevel(level);
+		this.changeStartState();
 		this.load();
 		this.loadCurrentScoreLabel(hitTimes);
-		this.loadHistoryHighestScoreLabel();
+		//this.loadHistoryHighestScoreLabel();
 	}
 
 	@Override
@@ -70,30 +51,47 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.contentScreen = screen;
 	}
 
+	@SuppressWarnings("unused")
+	private Image scoreMaskImage;
+	
 	private void loadScoreMaskImage() {
 		Texture maskTextue = ResourceLoader
 				.loadTexture("scoremask_512_256.png");
 		this.scoreMaskImage = new FlatImage(maskTextue, 0f, 20f, this);
 	}
 
+	@SuppressWarnings("unused")
+	private Image menuImage;
+	
 	private void loadMenuImage() {
 		Texture menuTexture = ResourceLoader.loadTexture("menu_128_64.png");
 		this.menuImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.STARTMENUSTAGE, menuTexture, 75f, 20f);
 	}
 
+	@SuppressWarnings("unused")
+	private Image replayImage;
+	
 	private void loadReplayImage() {
 		Texture replayTexture = ResourceLoader.loadTexture("replay_128_64.png");
 		this.replayImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.REPLAYSTAGE, replayTexture, 195f, 20f);
 	}
 
+	@SuppressWarnings("unused")
+	private Image nextImage;
+	
 	private void loadNextImage() {
 		Texture nextTexture = ResourceLoader.loadTexture("next_128_64.png");
 		this.nextImage = new NavigatorImage(contentScreen, this,
 				EnumDestStage.NEXTLEVELSTAGE, nextTexture, 315f, 20f);
 	}
 
+	@SuppressWarnings("unused")
+	private Image dottedUpLineImage;
+	@SuppressWarnings("unused")
+	private Image dottedDownLineImage;
+	
 	private void loadDottedLineImage() {
 		Texture dottedLineTexture = ResourceLoader
 				.loadTexture("dottedline_512_8.png");
@@ -103,6 +101,9 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 				dottedLineTexture, 0f, 0f, 430f, 8f), -5f, 30f, this);
 	}
 
+	@SuppressWarnings("unused")
+	private Image scoreWheelImage;
+	
 	private void loadScoreWheelImage() {
 		Texture wheelTexture = ResourceLoader.loadTexture("wheel_128_128.png");
 		Texture successMouseTexture = ResourceLoader
@@ -112,6 +113,9 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 				EnumRotateDirection.ANTICLOCKWISE, this);
 	}
 
+	@SuppressWarnings("unused")
+	private Image levelOneTitleImage;
+	
 	private void loadLevelOneTitleImage() {
 		Texture levelOneTitleTexture = ResourceLoader
 				.loadTexture("1-1highscores_128_64.png");
@@ -119,6 +123,9 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 				256f, this);
 	}
 
+	@SuppressWarnings("unused")
+	private Image levelInformationImage;
+	
 	private void loadLevelInformationImage() {
 		Texture levelInformationTexure = ResourceLoader
 				.loadTexture("levelsucceed_256_128.png");
@@ -145,24 +152,30 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.addActor(currentScoreLabel);
 	}
 
-	private void loadHistoryHighestScoreLabel() throws Exception {
-		if(null == 
-				GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel))
-			GateRecord.fetchGateRecord(currentLevel).save();
-		try{
-			int history = 
-					GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel).score;
+	@SuppressWarnings("unused")
+	private int historyHightScore;
+	
+	@SuppressWarnings("unused")
+	private void loadHistoryHighestScoreLabel(){
+		int history = 0;;
+		if(!GameStartUp.isFirstStarted)
+			history = 
+				GateRecord.fetchGateRecord(currentLevel).getRecordItem(0).score;
 		this.historyScoreLabel = new ScoreLightLabel("history",
 				bitmapFontForLabel, history);
 		this.historyScoreLabel.x = 195f;
 		this.historyScoreLabel.y = 60f;
 		this.addActor(historyScoreLabel);
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("历史记录为空！");
-		}
 	}
 
+	private void changeStartState(){
+		if(GameStartUp.isFirstStarted){
+			GameStartUp.isFirstStarted = false;
+			GateRecord.fetchGateRecord(currentLevel).addRecordItem(
+					new GateRecordItem(scroes));
+		}
+	}
+	
 	@Override
 	public void load() {
 		this.loadScoreMaskImage();
@@ -174,6 +187,7 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.loadReplayImage();
 		this.loadNextImage();
 	}
+	
 
 	@Override
 	public void hide() {
