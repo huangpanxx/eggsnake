@@ -3,6 +3,7 @@ package com.maple.eggsnake.actor.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -74,13 +75,15 @@ public class CircleWoodActor extends BodyAttachedActor {
 
 		batch.begin();
 		try {
+			this.batch.setProjectionMatrix(this.stage.getCamera().combined);
 			float r = this.shape.getRadius();
-			Vector3 pos = new Vector3(body.getPosition().x - r,
-					body.getPosition().y - r, 0);
+			
+			Vector3 pos = new Vector3(body.getPosition().x  - 2*r,
+					body.getPosition().y - 2*r , 0);
 			sprite.setPosition(pos.x * B2Const.CONVERTRATIO, pos.y
 					* B2Const.CONVERTRATIO);
 			sprite.setRotation((float) (body.getAngle() * 180 / 3.14));
-			sprite.draw(spriteBatch);
+			sprite.draw(this.batch);
 
 		} catch (Exception e) {
 			this.stage.removeActor(this);

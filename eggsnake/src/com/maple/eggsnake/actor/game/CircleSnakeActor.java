@@ -1,5 +1,6 @@
 package com.maple.eggsnake.actor.game;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -74,7 +75,7 @@ public class CircleSnakeActor extends BodyAttachedActor {
 
 		this.batch.begin();
 		try {
-
+			this.batch.setProjectionMatrix(this.stage.getCamera().combined);
 			float r = this.shape.getRadius();
 			Vector3 pos = new Vector3(body.getPosition().x - r,
 					body.getPosition().y - r, 0);

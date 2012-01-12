@@ -75,6 +75,7 @@ public class CircleMouseActor extends BodyAttachedActor {
 	public void draw(SpriteBatch spriteBacth, float dt) {
 
 		try {
+			this.batch.setProjectionMatrix(this.stage.getCamera().combined);
 			float r = this.shape.getRadius();
 			Vector3 pos = new Vector3(body.getPosition().x - r,
 					body.getPosition().y - r, 0);

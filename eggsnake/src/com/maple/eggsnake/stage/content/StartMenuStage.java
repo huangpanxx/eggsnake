@@ -46,6 +46,13 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 
 	private ContentScreen contentScreen;
 
+	/**
+	 * @description 构造函数
+	 * @param screen
+	 * @param width
+	 * @param height
+	 * @param stretch
+	 */
 	public StartMenuStage(ContentScreen screen, float width, float height,
 			boolean stretch) {
 		super(width, height, stretch);
@@ -106,11 +113,17 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		super.dispose();
 	}
 
+	/**
+	 * @description 加载上层蒙版
+	 */
 	private void loadUpMaskImage() {
 		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
 		this.upMaskImage = new FlatImage(maskTexture, -16f, 242f, this);
 	}
 
+	/**
+	 * @description 加载下层蒙版
+	 */
 	private void loadDownMaskImage() {
 		Texture maskTexture = ResourceLoader.loadTexture("mask_512_128.png");
 		this.downMaskImage = new FlatImage(maskTexture, -16f, -50f, this);
@@ -198,6 +211,9 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 		this.startEggImage = new FlatImage(startEggTexture, 0f, 0f, this);
 	}
 
+	/**
+	 * @description 加载单只眼老鼠
+	 */
 	private void loadOneEyeMouseImage() {
 		Texture oneEyeMouseTexture = ResourceLoader
 				.loadTexture("oneeyemouse_64_64.png");
@@ -205,6 +221,9 @@ public class StartMenuStage extends BaseStage implements ActorLoader {
 				this);
 	}
 
+	/**
+	 * @description 加载两只眼老鼠
+	 */
 	private void loadTwoEyeMouseImage() {
 		Texture twoEyeMouseTexture = ResourceLoader
 				.loadTexture("twoeyesmouse_64_64.png");

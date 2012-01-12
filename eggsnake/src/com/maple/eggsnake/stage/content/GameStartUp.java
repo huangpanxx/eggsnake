@@ -1,3 +1,9 @@
+/** 
+ * @description	: StartMenuStage继承自BaseStage
+ * @author		: 王志伟
+ * @created		: 2012-1-7
+ */
+
 package com.maple.eggsnake.stage.content;
 
 public class GameStartUp {

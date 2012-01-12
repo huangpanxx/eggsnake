@@ -1,6 +1,9 @@
-/**
- * 
+/** 
+ * @description	: SelectLevelStage
+ * @author		: 王志伟
+ * @created		: 2012-1-8
  */
+
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +26,12 @@ public class SelectLevelStage extends BaseStage implements ActorLoader {
 	@SuppressWarnings("unused")
 	private Image levelThreeImage;
 	@SuppressWarnings("unused")
+	private Image levelFourImage;
+	@SuppressWarnings("unused")
+	private Image levelFiveImage;
+	@SuppressWarnings("unused")
+	private Image levelSixImage;
+	@SuppressWarnings("unused")
 	private Image quitImage;
 
 	private ContentScreen contentScreen;
@@ -39,32 +48,62 @@ public class SelectLevelStage extends BaseStage implements ActorLoader {
 		this.contentScreen = screen;
 	}
 
+	@SuppressWarnings("unused")
+	private Image selectMaskImage;
+	
+	private void loadSelectMaskImage() {
+		Texture maskTextue = ResourceLoader
+				.loadTexture("selectmask_512_256.png");
+		this.selectTitleImage = new FlatImage(maskTextue, 0f, 35f, this);
+	}
+	
 	private void loadSelectTiltleImage() {
 		Texture selectTitleTexture = ResourceLoader
 				.loadTexture("selectleveltitle_512_64.png");
-		this.selectTitleImage = new FlatImage(selectTitleTexture, 0f, 256f,
+		this.selectTitleImage = new FlatImage(selectTitleTexture, 5f, 256f,
 				this);
 	}
 
 	private void loadLevelOneImage() {
 		Texture levelOneTexture = ResourceLoader
-				.loadTexture("level1_128_256.png");
+				.loadTexture("onepink_128_128.png");
 		this.levelOneImage = new NavigatorImage(contentScreen, this,
-				EnumDestStage.LEVELONESTAGE, levelOneTexture, 64f, 32f);
+				EnumDestStage.LEVELONESTAGE, levelOneTexture, 64f, 150f);
 	}
 
 	private void loadLevelTwoImage() {
 		Texture levelTwoTexture = ResourceLoader.loadTexture(""
-				+ "level2_128_256.png");
+				+ "twoyellow_128_128.png");
 		this.levelTwoImage = new NavigatorImage(contentScreen, this,
-				EnumDestStage.LEVELTWOSTAGE, levelTwoTexture, 180f, 32f);
+				EnumDestStage.LEVELTWOSTAGE, levelTwoTexture, 180f, 150f);
 	}
 
 	private void loadLevelThreeImage() {
 		Texture levelThreeTexture = ResourceLoader
-				.loadTexture("level3_128_256.png");
+				.loadTexture("threeblue_128_128.png");
 		this.levelThreeImage = new NavigatorImage(contentScreen, this,
-				EnumDestStage.LEVELTHREESTAGE, levelThreeTexture, 296f, 32f);
+				EnumDestStage.LEVELTHREESTAGE, levelThreeTexture, 296f, 150f);
+	}
+	
+	private void loadLevelFourImage(){
+		Texture texture = ResourceLoader
+				.loadTexture("fourpink_128_128.png");
+		this.levelThreeImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELFOURSTAGE, texture, 64f, 32f);
+	}
+	
+	private void loadLevelFiveImage(){
+		Texture texture = ResourceLoader
+				.loadTexture("fiveyellow_128_128.png");
+		this.levelThreeImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELFIVESTAGE, texture, 180f, 32f);
+	}
+	
+	private void loadLevelSixImage(){
+		Texture texture = ResourceLoader
+				.loadTexture("sixblue_128_128.png");
+		this.levelThreeImage = new NavigatorImage(contentScreen, this,
+				EnumDestStage.LEVELSIXSTAGE, texture, 296f, 35f);
 	}
 
 	private void loadQuitImage() {
@@ -76,10 +115,14 @@ public class SelectLevelStage extends BaseStage implements ActorLoader {
 
 	@Override
 	public void load() {
+		this.loadSelectMaskImage();
 		this.loadSelectTiltleImage();
 		this.loadLevelOneImage();
 		this.loadLevelTwoImage();
 		this.loadLevelThreeImage();
+		this.loadLevelFourImage();
+		this.loadLevelFiveImage();
+		this.loadLevelSixImage();
 		this.loadQuitImage();
 	}
 

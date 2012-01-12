@@ -98,6 +98,7 @@ public class SqureWoodActor extends BodyAttachedActor {
 	public void draw(SpriteBatch spriteBatch, float dt) {
 		this.batch.begin();
 		try {
+			this.batch.setProjectionMatrix(this.stage.getCamera().combined);
 			float r = this.shape.getRadius();
 			Vector3 pos = new Vector3(body.getPosition().x - r,
 					body.getPosition().y - r, 0);

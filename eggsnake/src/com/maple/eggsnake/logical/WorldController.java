@@ -201,7 +201,7 @@ public class WorldController {
 			tasks = new TaskQueueContainer<Task<Object, World>>();
 		}
 		if (this.world != null) {
-			this.world.dispose();
+			//this.world.dispose();
 			this.world = null;
 		}
 		logger = DefaultLogger.getDefaultLogger();
@@ -288,7 +288,7 @@ public class WorldController {
 	}
 
 	public void dispose() {
-		world.dispose();
+//		world.dispose();
 	}
 
 	public boolean touchDown(Vector2 pos) {

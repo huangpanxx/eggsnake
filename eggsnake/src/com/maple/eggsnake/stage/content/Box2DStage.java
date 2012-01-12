@@ -1,3 +1,9 @@
+/** 
+ * @description	: Box2DStage
+ * @author		: 黄攀
+ * @created		: 2012-1-9
+ */
+
 package com.maple.eggsnake.stage.content;
 
 import java.util.HashMap;
@@ -11,9 +17,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.game.ActorFactory;
-import com.maple.eggsnake.actor.wheel.NavigatorImage;
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.LogicalGameListener;
@@ -21,10 +25,7 @@ import com.maple.eggsnake.logical.WorldController;
 import com.maple.eggsnake.physics.B2Const;
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.screen.NavigateScreen;
-import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
-import com.maple.eggsnake.stage.content.common.EnumDestStage;
-import com.badlogic.gdx.graphics.Texture;
 
 public class Box2DStage extends BaseStage implements LogicalGameListener {
 
@@ -68,7 +69,6 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		this.Map = new HashMap<Body, Actor>();
 		this.render = new Box2DDebugRenderer();
 		this.initController();
-//		this.loadBackImage();
 	}
 
 	private void initController() {
@@ -140,13 +140,6 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 		}
 	}
 
-	private Image backImage;
-	private void loadBackImage(){
-		Texture texture = ResourceLoader.loadTexture("quitbutton_128_64.png");
-		backImage = new NavigatorImage((ContentScreen)screen, this,
-				EnumDestStage.STARTMENUSTAGE, texture, 0f, 250f);
-	}
-	
 	@Override
 	public void dispose() {
 		this.controller.dispose();

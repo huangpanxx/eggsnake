@@ -79,7 +79,7 @@ public class ScoreLightLabel extends LightLabel {
 	 * @param scores
 	 */
 	private void setDisplayInfomation(int scores) {
-		this.setWrappedText("" + scores, HAlignment.LEFT);
+		this.setWrappedText("" + scores, HAlignment.CENTER);
 	}
 	
 	private void setInformation(String text){

@@ -1,3 +1,9 @@
+/** 
+ * @description	: StartMenuStage继承自BaseStage
+ * @author		: 王志伟
+ * @created		: 2012-1-8
+ */
+
 package com.maple.eggsnake.stage.content;
 
 import com.maple.eggsnake.screen.ContentScreen;
@@ -47,8 +53,8 @@ public class DestinationStage {
 		}
 		case NEXTLEVELSTAGE: {
 			int next = CurrentLevel.current + 1;
-			if (2 < next)
-				next = next % 3;
+			if (5 < next)
+				next = next % 6;
 			CurrentLevel.current = next;
 			destStage = Box2DStage.getInstance(screen, next);
 			break;
@@ -66,6 +72,21 @@ public class DestinationStage {
 		case LEVELTHREESTAGE: {
 			destStage = Box2DStage.getInstance(screen, 2);
 			CurrentLevel.current = 2;
+			break;
+		}
+		case LEVELFOURSTAGE: {
+			destStage = Box2DStage.getInstance(screen, 3);
+			CurrentLevel.current = 3;
+			break;
+		}
+		case LEVELFIVESTAGE: {
+			destStage = Box2DStage.getInstance(screen, 4);
+			CurrentLevel.current = 4;
+			break;
+		}
+		case LEVELSIXSTAGE: {
+			destStage = Box2DStage.getInstance(screen, 5);
+			CurrentLevel.current = 5;
 			break;
 		}
 		default: {
