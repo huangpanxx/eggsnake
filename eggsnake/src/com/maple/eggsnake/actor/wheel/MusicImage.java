@@ -7,8 +7,14 @@ import com.maple.eggsnake.service.MusicManager;
 
 public class MusicImage extends FlatImage {
 	
-	public MusicImage(TextureRegion region, float x, float y, Stage stage) {
-		super(region, x, y, stage);
+	private TextureRegion openedTextureRegion;
+	private TextureRegion closedTextureRegion;
+	
+	public MusicImage(TextureRegion openedRegion, TextureRegion closedRegion, 
+			float x, float y, Stage stage) {
+		super(openedRegion, x, y, stage);
+		this.openedTextureRegion = new TextureRegion(openedRegion);
+		this.closedTextureRegion = new TextureRegion(closedRegion);
 	}
 
 	public MusicImage(Texture texture, float x, float y, Stage stage) {
@@ -20,11 +26,21 @@ public class MusicImage extends FlatImage {
 		if (SettingState.musicOpened) {
 			MusicManager.stop();
 			SettingState.musicOpened = false;
+			this.region = closedTextureRegion;
 		} else {
 			MusicManager.play(true);
 			SettingState.musicOpened = true;
+			this.region = openedTextureRegion;
 		}
+		this.x += 10;
+		this.y += 10;
 		return touchable;
+	}
+	
+	@Override
+	public void touchUp(float x, float y, int pointer){
+		this.x -= 10;
+		this.y -= 10;
 	}
 	
 }

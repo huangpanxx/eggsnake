@@ -5,7 +5,7 @@ import com.badlogic.gdx.audio.Music;
 public class MusicManager {
 
 	static Music backgroundMusic;
-	private static float volume = 100;
+	private static float volume = 60;
 
 	public static void setBackgroundMusic(String name) {
 		backgroundMusic = ResourceLoader.loadMusic(name);

@@ -30,7 +30,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "420FA15A",
@@ -64,7 +64,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "420FA15A",
@@ -98,7 +98,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "41E3ADF7",
@@ -132,7 +132,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "41E298B7",
@@ -166,7 +166,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "41BD9732",
@@ -200,7 +200,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "4222A9D7",
@@ -234,7 +234,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "4221C2CD",
@@ -268,7 +268,7 @@
             "y" : "41285CAB"
          },
          "massData-mass" : 1,
-         "name" : "SqureWood_woodType1.png",
+         "name" : "SqureWood_woodType4.png",
          "position" : 
          {
             "x" : "41BD3AC7",
@@ -456,8 +456,8 @@
          ],
          "linearVelocity" : 
          {
-            "x" : "3C6678C4",
-            "y" : "B8BCEE35"
+            "x" : "3C6770F2",
+            "y" : "B91D712C"
          },
          "massData-I" : "40922FF0",
          "massData-center" : 
@@ -539,8 +539,8 @@
          ],
          "linearVelocity" : 
          {
-            "x" : "BE0171C8",
-            "y" : "BE2D38D7"
+            "x" : "BE2AF46E",
+            "y" : "BE7FEA34"
          },
          "massData-I" : "42B7729A",
          "massData-center" : 
@@ -624,7 +624,7 @@
          "lowerLimit" : 0,
          "maxMotorTorque" : 0,
          "motorSpeed" : 0,
-         "refAngle" : "35C00000",
+         "refAngle" : "36200000",
          "type" : "revolute",
          "upperLimit" : 0
       },
@@ -649,7 +649,7 @@
          "lowerLimit" : 0,
          "maxMotorTorque" : 0,
          "motorSpeed" : 0,
-         "refAngle" : "B5C00000",
+         "refAngle" : "B6200000",
          "type" : "revolute",
          "upperLimit" : 0
       },
@@ -724,7 +724,7 @@
          "lowerLimit" : 0,
          "maxMotorTorque" : 0,
          "motorSpeed" : 0,
-         "refAngle" : "35C00000",
+         "refAngle" : "36200000",
          "type" : "revolute",
          "upperLimit" : 0
       },
@@ -749,7 +749,7 @@
          "lowerLimit" : 0,
          "maxMotorTorque" : 0,
          "motorSpeed" : 0,
-         "refAngle" : "B5C00000",
+         "refAngle" : "B6200000",
          "type" : "revolute",
          "upperLimit" : 0
       },
@@ -774,7 +774,7 @@
          "lowerLimit" : 0,
          "maxMotorTorque" : 0,
          "motorSpeed" : 0,
-         "refAngle" : "340CCDE2",
+         "refAngle" : "346AAC7A",
          "type" : "revolute",
          "upperLimit" : 0
       },
@@ -796,8 +796,8 @@
          "enableMotor" : true,
          "jointSpeed" : "40061D76",
          "lowerLimit" : 0,
-         "maxMotorTorque" : "463B8000",
-         "motorSpeed" : "40060A92",
+         "maxMotorTorque" : "42F00000",
+         "motorSpeed" : "3F860A92",
          "refAngle" : 0,
          "type" : "revolute",
          "upperLimit" : 0

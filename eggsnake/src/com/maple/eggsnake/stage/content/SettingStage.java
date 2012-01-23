@@ -7,6 +7,7 @@
 package com.maple.eggsnake.stage.content;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actors.Image;
 import com.maple.eggsnake.actor.wheel.FlatImage;
 import com.maple.eggsnake.actor.wheel.MusicImage;
@@ -114,13 +115,21 @@ public class SettingStage extends BaseStage implements ActorLoader {
 	}
 
 	private void loadMusicImage(){
-		Texture texture = ResourceLoader.loadTexture("music.png");
-		this.musicImage = new MusicImage(texture, 100f, 50f, this);
+		TextureRegion openedRegion = new TextureRegion(
+				ResourceLoader.loadTexture("musicopened_128_128.png"));
+		TextureRegion closedRegion = new TextureRegion(
+				ResourceLoader.loadTexture("musicclosed_128_128.png"));
+		this.musicImage = new MusicImage(openedRegion, closedRegion,
+				250f, 100f, this);
 	}
 	
 	private void loadSoundImage(){
-		Texture texture = ResourceLoader.loadTexture("sound.png");
-		this.soundImage = new SoundImage(texture, 100f, 250f, this);
+		TextureRegion openedRegion = new TextureRegion(
+				ResourceLoader.loadTexture("soundopened_128_128.png"));
+		TextureRegion closedRegion = new TextureRegion(
+				ResourceLoader.loadTexture("soundclosed_128_128.png"));
+		this.soundImage = new SoundImage(openedRegion, closedRegion,
+				30f, 100f, this);
 	}
 	
 	/**

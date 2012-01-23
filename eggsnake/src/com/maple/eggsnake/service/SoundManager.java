@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 public class SoundManager {
 
 	private static Sound flySound = null;
+	@SuppressWarnings("unused")
 	private static Sound contactSound = null;
 	private static Sound crossGateSound = null;
 	private static Sound killSound = null;
@@ -19,9 +20,9 @@ public class SoundManager {
 	}
 
 	public static void playContactSound() {
-		if (contactSound == null) {
-			contactSound = ResourceLoader.loadSound("contact_sound.ogg");
-		}
+		//if (contactSound == null) {
+			//contactSound = ResourceLoader.loadSound("contact_sound.ogg");
+		//}
 		//contactSound.play();
 	}
 
@@ -40,8 +41,7 @@ public class SoundManager {
 	public static void playDragSound() {
 		if (dragSound == null) {
 			dragSound = ResourceLoader.loadSound("drag_sound.ogg");
-		}
-		dragSound.play(volume);
+		}		dragSound.play(volume);
 	}
 	
 	public static void setVolume(float volume) {
