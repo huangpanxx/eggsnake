@@ -194,9 +194,15 @@ public class Box2DStage extends BaseStage implements LogicalGameListener {
 
 	@Override
 	public void onCrossGate() {
-		BaseStage stage = new HighScoresStage((ContentScreen) screen, width,
-				height, true, shotTime, gate);
-		this.screen.navigate(stage);
+		try {
+			HighScoresStage stage = new HighScoresStage((ContentScreen) screen, width,
+					height, true, shotTime, gate);
+			this.screen.navigate(stage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

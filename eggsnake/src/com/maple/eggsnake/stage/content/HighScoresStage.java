@@ -15,14 +15,12 @@ import com.maple.eggsnake.actor.lightlabel.ScoreLightLabel;
 import com.maple.eggsnake.actor.wheel.CombinedWheel;
 import com.maple.eggsnake.actor.wheel.FlatImage;
 import com.maple.eggsnake.actor.wheel.NavigatorImage;
-<<<<<<< HEAD
+
 import com.maple.eggsnake.logger.DefaultLogger;
 import com.maple.eggsnake.logger.Loggable;
 import com.maple.eggsnake.logical.GateRecord;
 import com.maple.eggsnake.logical.GateRecordItem;
-=======
-import com.maple.eggsnake.logical.GateRecord;
->>>>>>> origin/HEAD
+
 import com.maple.eggsnake.screen.ContentScreen;
 import com.maple.eggsnake.service.ResourceLoader;
 import com.maple.eggsnake.stage.BaseStage;
@@ -36,10 +34,7 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 	private ContentScreen contentScreen;// 中间层的Screen
 
 	private Label currentScoreLabel;
-<<<<<<< HEAD
-=======
-	@SuppressWarnings("unused")
->>>>>>> origin/HEAD
+
 	private Label historyScoreLabel;
 	private BitmapFont bitmapFontForLabel;
 
@@ -51,10 +46,9 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.loadContent(screen);
 		this.loadScroes(hitTimes);
 		this.loadCurrentLevel(level);
-<<<<<<< HEAD
+
 		this.changeStartState();
-=======
->>>>>>> origin/HEAD
+
 		this.load();
 		this.loadCurrentScoreLabel(hitTimes);
 		this.logger = DefaultLogger.getDefaultLogger();
@@ -168,7 +162,7 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		this.addActor(currentScoreLabel);
 	}
 
-<<<<<<< HEAD
+
 	@SuppressWarnings("unused")
 	private int historyHightScore;
 
@@ -206,23 +200,6 @@ public class HighScoresStage extends BaseStage implements ActorLoader {
 		} catch (Exception e) {
 			logger.logWithSignature(this, "loadCurrentScoreLabel:%1$s",
 					e.getMessage());
-=======
-	private void loadHistoryHighestScoreLabel() throws Exception {
-		if(null == 
-				GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel))
-			GateRecord.fetchGateRecord(currentLevel).save();
-		try{
-			int history = 
-					GateRecord.fetchGateRecord(currentLevel).getRecordItem(currentLevel).score;
-		this.historyScoreLabel = new ScoreLightLabel("history",
-				bitmapFontForLabel, history);
-		this.historyScoreLabel.x = 195f;
-		this.historyScoreLabel.y = 60f;
-		this.addActor(historyScoreLabel);
-		}catch(Exception e){
-			e.printStackTrace();
-			System.out.println("历史记录为空！");
->>>>>>> origin/HEAD
 		}
 	}
 
